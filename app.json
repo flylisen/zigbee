@@ -1,12 +1,44 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/config/config",
+    "pages/areactr/areactr",
+    "pages/scenesctr/scenesctr",
+    "pages/devctr/devctr",
+    "pages/areaconfig/areaconfig",
+    "pages/scenesconfig/scenesconfig",
+    "pages/devconfig/devconfig",
+    "pages/monitor/monitor",
+    "pages/about/about"
+
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+
+    "color":"#666",
+    "selectedColor": "#56abe4",
+    "backgroundColor": "#ddd",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "控制"
+      },
+      {
+        "pagePath": "pages/config/config",
+        "text": "配置"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "text": "关于我"
+      }
+    ],
+    "position": "bottom"
   }
 }

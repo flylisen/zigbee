@@ -1,0 +1,6 @@
+<!--pages/config/config.wxml-->
+<view class="container">
+  <navigator url='/pages/areaconfig/areaconfig' open-type='redirect'>区域配置</navigator>
+  <navigator url='/pages/scenesconfig/scenesconfig' open-type='redirect'>场景配置</navigator>
+  <navigator url='/pages/devconfig/devconfig' open-type='redirect'>设备配置</navigator>
+</view>
