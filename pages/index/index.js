@@ -8,7 +8,7 @@ Page({
     
   },
   onLoad: function () {
-
+    //test
   },
   getUserInfo: function(e) {
     wx.request({
