@@ -1,5 +1,6 @@
 {
-  "pages":[
+  "pages": [
+    "pages/login/login",
     "pages/index/index",
     "pages/logs/logs",
     "pages/config/config",
@@ -11,34 +12,40 @@
     "pages/devconfig/devconfig",
     "pages/monitor/monitor",
     "pages/about/about"
-
   ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF7017",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
   },
-  "tabBar":{
-
-    "color":"#666",
+  "tabBar": {
+    "color": "#666",
     "selectedColor": "#56abe4",
     "backgroundColor": "#ddd",
     "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
+        "iconPath": "images/kongzhitaishouye.png",
+        "selectedIconPath": "images/kongzhitaishouye2.png",
         "text": "控制"
       },
       {
         "pagePath": "pages/config/config",
+        "iconPath": "images/dashujukeshihuaico-.png",
+        "selectedIconPath": "images/dashujukeshihuaico2-.png",
         "text": "配置"
       },
       {
         "pagePath": "pages/about/about",
+        "iconPath": "images/wode.png",
+        "selectedIconPath": "images/wode2.png",
         "text": "关于我"
       }
     ],
     "position": "bottom"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

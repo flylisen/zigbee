@@ -1,1 +1,12 @@
 /* pages/config/config.wxss */
+navigator text{
+   display: flex;
+  justify-content: center;
+}
+navigator image{
+  width: 100px;
+  height: 100px;
+}
+navigator{
+   padding-top: 40px;
+}

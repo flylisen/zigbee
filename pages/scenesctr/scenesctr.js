@@ -5,9 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showModal:false
   },
-
+  bindAdd: function () {
+    this.setData({
+      showModal: true
+    })
+  },
+  go: function () {
+    this.setData({
+      showModal: false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

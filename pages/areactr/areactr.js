@@ -5,9 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    showModal:false
   },
-
+  /**
+   * 区域1的点击事件
+   */
+  jumpPagePY1:function(){
+    
+    wx.switchTab({   
+    }) 
+  },
+  bindAdd: function () {
+     this.setData({
+       showModal:true
+     })
+  },
+  go:function(){
+    this.setData({
+      showModal:false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -54,13 +71,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+      
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+      
   }
 })

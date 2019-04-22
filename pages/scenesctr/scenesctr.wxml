@@ -1,2 +1,41 @@
 <!--pages/scenesctr/scenesctr.wxml-->
-<text>pages/scenesctr/scenesctr.wxml</text>
+<view>
+    <view class='viewh1'>
+     <h1>全部场景</h1>
+     <button class='btn' bindtap='bindAdd'>配置</button>
+     </view>
+     <view class='viewAN'>
+         <view class="list_l" bindtap='jumpPageCJ1'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景1</text>
+        </view>
+         <view class="list_l" bindtap='jumpPageCJ2'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景2</text>
+        </view>
+        <view class="list_l" bindtap='jumpPageCJ3'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景3</text>
+        </view>
+     </view>
+       <view class='viewAN'>
+         <view class="list_l" bindtap='jumpPageCJ4'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景3</text>
+        </view>
+         <view class="list_l" bindtap='jumpPageCJ5'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景4</text>
+        </view>
+         <view class="list_l" bindtap='jumpPageCJ6'>
+        <image src="../../images/scenesctr/changjing.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>场景5</text>
+        </view>
+     </view>
+     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+      <view class='modalDlg' wx:if="{{showModal}}">
+        <button bindtap="go">关闭</button>
+     </view>
+</view>
+
+

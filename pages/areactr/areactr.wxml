@@ -1,2 +1,40 @@
 <!--pages/areactr/areactr.wxml-->
-<text>pages/areactr/areactr.wxml</text>
+<view>
+    <view class='viewh1'>
+     <h1>全部区域</h1>
+     <button class='btn' bindtap='bindAdd'>配置</button>
+     </view>
+     <view class='viewAN'>
+         <view class="list_l" bindtap='jumpPagePY1' hover-class=''>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域1</text>
+        </view>
+         <view class="list_l" bindtap='jumpPagePY2'>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域2</text>
+        </view>
+        <view class="list_l" bindtap='jumpPagePY3'>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域3</text>
+        </view>
+     </view>
+       <view class='viewAN'>
+         <view class="list_l" bindtap='jumpPagePY4'>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域3</text>
+        </view>
+         <view class="list_l" bindtap='jumpPagePY5'>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域4</text>
+        </view>
+         <view class="list_l" bindtap='jumpPageP6'>
+        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
+        <text>区域5</text>
+        </view>
+     </view>
+     <!--模态框-->
+     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+      <view class='modalDlg' wx:if="{{showModal}}">
+        <button bindtap="go">关闭</button>
+     </view>
+</view>

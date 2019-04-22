@@ -12,13 +12,15 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.2",
-	"appid": "wx010902062ce4bf57",
-	"projectname": "zigbeedev",
+	"libVersion": "2.6.5",
+	"appid": "wx161d8cf9c6654a9e",
+	"projectname": "zigbee",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

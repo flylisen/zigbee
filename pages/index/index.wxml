@@ -1,6 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <navigator url='/pages/areactr/areactr'>区域控制</navigator>
-  <navigator url='/pages/scenesctr/scenesctr'>场景控制</navigator>
-  <navigator url='/pages/devctr/devctr'>设备控制</navigator>
+  <navigator url='/pages/areactr/areactr' hover-class="none">
+  <image src='../../images/index/changjingkongzhi.png'></image><text>区域控制</text></navigator>
+  <navigator url='/pages/scenesctr/scenesctr' hover-class="none">
+  <image src='../../images/index/quyukongzhi.png'></image><text>场景控制</text></navigator>
+  <navigator url='/pages/devctr/devctr' hover-class="none">
+  <image src='../../images/index/shebeikongzhi.png'></image><text>设备控制</text></navigator>
 </view>
