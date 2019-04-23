@@ -16,7 +16,6 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log(res);
         if (res.statusCode == 200) {
           if(res.data.code==1){
             if (res.data.error == true) {
@@ -27,9 +26,13 @@ Page({
               })
             } else {
               wx.setStorage({
-                key: 'user',
-                data: 'res.data.user',
-              });
+                key: "username",
+                data: e.detail.value.username,
+              })
+              wx.setStorage({
+                key: "pwd",
+                data: e.detail.value.pwd
+              })
               wx.showToast({
                 title: "登录成功",
                 icon: "Yes",
@@ -43,6 +46,12 @@ Page({
                 }
               })
             }
+          }else{
+            wx.showToast({
+              title: "登录失败",
+              icon: "No",
+              duration: 2000,
+            })
           }
         }
       }

@@ -6,11 +6,11 @@
     <form bindsubmit='submit'>
       <view class='username'>
         <text>用户名：</text>
-        <input placeholder='请输入用户名' name="username"></input>
+        <input placeholder='请输入用户名' name="username" value='4459'></input>
       </view>
       <view class='password'>
         <text>密  码：</text>
-        <input password='true' name="pwd" placeholder='请输入密码' ></input>
+        <input password='true' name="pwd" placeholder='请输入密码' value='09z4'></input>
       </view>
       <view>
         <button form-type='submit'>登录</button>

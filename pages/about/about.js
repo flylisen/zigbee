@@ -1,7 +1,15 @@
 var app=getApp();
 Page({
   data: {
-   username:'123'
-  }
- 
+  }, 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var username = wx.getStorageSync('username');
+    this.setData({
+      username: username
+    });
+  },
+      
 })

@@ -4,7 +4,11 @@
      <h1>全部设备</h1>
      <button class='btn' bindtap='bindAdd'>配置</button>
      </view>
-     
+      <view class="newsInfo">   
+      <block wx:for="{{Industry}}">    
+       <view>{{item.diId}}</view> 
+       </block>
+       </view>
       <!--模态框-->
      <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
       <view class='modalDlg' wx:if="{{showModal}}">
