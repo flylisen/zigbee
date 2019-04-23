@@ -4,34 +4,7 @@
      <h1>全部设备</h1>
      <button class='btn' bindtap='bindAdd'>配置</button>
      </view>
-     <view class='viewAN'>
-         <view class="list_l" bindtap='jumpPagePY1'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备1</text>
-        </view>
-         <view class="list_l" bindtap='jumpPagePY2'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备2</text>
-        </view>
-        <view class="list_l" bindtap='jumpPagePY3'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备3</text>
-        </view>
-     </view>
-       <view class='viewAN'>
-         <view class="list_l" bindtap='jumpPagePY4'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备3</text>
-        </view>
-         <view class="list_l" bindtap='jumpPagePY5'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备4</text>
-        </view>
-         <view class="list_l" bindtap='jumpPageP6'>
-        <image src="../../images/devctr/shebei.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>设备5</text>
-        </view>
-     </view>
+     
       <!--模态框-->
      <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
       <view class='modalDlg' wx:if="{{showModal}}">

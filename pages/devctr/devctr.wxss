@@ -14,19 +14,6 @@ view h1{
    margin-top: -30px;
    margin-right:20px;
 }
-.viewAN{
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-    
-}
-.list_l:active{
-  background:#ddd;
-  
-}
-.viewAN .list_l text{ padding: 20px; color: gray}
-.viewAN .list_l image{height: 50px;
- width: 50px; display: flex;padding: 10px; }
   .modalDlg{
     width: 580rpx;
     height: 720rpx;

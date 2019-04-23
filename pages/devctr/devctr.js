@@ -35,7 +35,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('onLoad')
+    var that = this   
+     wx.request({
+        url: 'https://www.100txy.com/weixin/getdownlist', //真实的接口地址      
+        data: {},      
+        header: {        
+          'content-type': 'application/json'      
+          },      
+          success: function (res) {         
+            console.log(res.data)        
+            that.setData({            
+              Industry: res.data //设置数据        
+              })        
+              },      
+              fail: function (err) {        
+                console.log(err)      
+                }    
+            })
   },
 
   /**

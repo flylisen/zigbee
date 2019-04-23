@@ -1,64 +1,25 @@
-.item{
-    flex-grow:1;
-    height: 30%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 96%;
-    padding: 0 2%;
-    margin-top: 100px;
+.main{
+  width: 100%;
+  background-color: #FF7017;
+  height: 555px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.login-item{
-    width: 90%;
-    margin-top: 30rpx;
-    border-bottom: 1px solid #eee;
-    flex-grow:1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 20rpx;
+.title{
+  color: white;
+  font-size: 30px;
 }
-
- .bottom{
-     border-bottom: 0px;
+input{
+  border: 1px solid white;
+  width: 300px;
+  height: 40px;
+  margin: 20px 0px;
 }
-
-.login-item-info{
-    font-size: 20px;
-    color: #888;
-     padding-bottom: 20rpx;
+button{
+  float: left;
+  font-size: 20px;
+  margin-left: 50px;
+  background-color: #FF7017;
+  color: white;
 }
-
-.login-pwd{
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    align-items: center;
-
-}
-
-.login-pwd text{
-    height: 100%;
-    font-size: 14px;
-    color: #888;
-    display: flex;
-
-}
-.login-btn{
-    width: 80%;
-    color: white;
-    background-color:#FF7017;
-    border-radius: 0;
-    font-size: 14px;
-
-}
-
-.login-btn:hover{
-    width: 80%;
-    color: white;
-    border-radius: 0;
-}
-

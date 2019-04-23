@@ -1,15 +1,21 @@
-<view class="item">
-      <view class="login-item">
-           <view class="login-item-info">用户名</view>
-           <view><input bindinput="usernameInput"/></view>
+<view class='main'>
+  <view class='header'>
+    <text class='title'>标题</text>
+  </view>
+  <view class='body'>
+    <form bindsubmit='submit'>
+      <view class='username'>
+        <text>用户名：</text>
+        <input placeholder='请输入用户名' name="username"></input>
       </view>
-      <view class="login-item">
-           <view class="login-item-info">密码</view>
-           <view class="login-pwd">
-           <input style="flex-grow:1" password="true" bindinput="passwordInput" />        
-           </view>
+      <view class='password'>
+        <text>密  码：</text>
+        <input password='true' name="pwd" placeholder='请输入密码' ></input>
       </view>
-      <view class="login-item bottom">
-           <button class="login-btn" bindtap="loginBtnClick">登录</button>
+      <view>
+        <button form-type='submit'>登录</button>
+        <button>注册</button>
       </view>
+    </form>
+  </view>
 </view>

@@ -1,49 +1,51 @@
 const app = getApp();
 Page({
+
   data: {
-     username:null,
-     password:null,
-     id_token:'',
-     response:''
+    
   },
-  usernameInput:function(event){
-     this.setData({
-       username:event.detail.value
-       })
-  },
-  passwordInput: function (event) {
-    this.setData({
-      password: event.detail.value
-      })
-  },
-  //登录
-  loginBtnClick:function(){
-    var that=this
-      wx.request({
-        url: 'https://dev.rishuncloud.com:8443/login',
-        data:{
-          username:this.data.username,
-          password:this.data.password,
-        },
-        method:'POST',
-        success:function(res){
-            this.setData({
-                id_token:res.data.id_token,
-                response:res                 
-            })
-            try{
-              wx.setStorageSync('id_token', res.data.id_token)
-            } catch (e){    
-            }    
-          wx.switchTab({
-            url: '../index/index'
-          })
-          console.log(res.data);
-          },
-          fail:function(res){
-            console.log(res.data);
-            console.log('is failed')
+  submit: function (e) {
+    wx.request({
+      url: 'https://localhost:8443/login',
+      data: {
+        loginName: e.detail.value.username,
+        loginPwd: e.detail.value.pwd
+      },
+      method: "POST",
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res);
+        if (res.statusCode == 200) {
+          if(res.data.code==1){
+            if (res.data.error == true) {
+              wx.showToast({
+                title: '网络错误',
+                icon: 'none',
+                duration: 2000
+              })
+            } else {
+              wx.setStorage({
+                key: 'user',
+                data: 'res.data.user',
+              });
+              wx.showToast({
+                title: "登录成功",
+                icon: "Yes",
+                duration: 2000,
+                success: function () {
+                  setTimeout(function () {
+                    wx.switchTab({
+                      url: '../index/index',
+                    }, 2000)
+                  })
+                }
+              })
+            }
           }
-        }) 
+        }
+      }
+    })
   }
 })
