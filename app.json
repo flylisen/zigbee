@@ -11,7 +11,8 @@
     "pages/scenesconfig/scenesconfig",
     "pages/devconfig/devconfig",
     "pages/monitor/monitor",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/devctr/chuanglian/chuanglian"
   ],
   "window": {
     "backgroundTextStyle": "dark",

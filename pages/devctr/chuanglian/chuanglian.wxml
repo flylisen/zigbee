@@ -1,0 +1,6 @@
+<view>
+      <h1>窗帘控制</h1>
+      <image src='/images/chuanglian/chuangliankai.png' wx:if="{{collected>0}}" ></image>
+       <image src='/images/chuanglian/chuanglianguan.png' wx:else="{{collected}}"></image>
+      <button></button>
+</view>

@@ -5,7 +5,7 @@
      <button class='btn' bindtap='bindAdd'>配置</button>
      </view>
      <view class='viewAN'>
-         <view class="list_l" bindtap='jumpPagePY1' hover-class=''>
+        <view class="list_l" bindtap='jumpPagePY1' hover-class=''>
         <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
         <text>区域1</text>
         </view>
@@ -16,20 +16,6 @@
         <view class="list_l" bindtap='jumpPagePY3'>
         <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
         <text>区域3</text>
-        </view>
-     </view>
-       <view class='viewAN'>
-         <view class="list_l" bindtap='jumpPagePY4'>
-        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>区域3</text>
-        </view>
-         <view class="list_l" bindtap='jumpPagePY5'>
-        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>区域4</text>
-        </view>
-         <view class="list_l" bindtap='jumpPageP6'>
-        <image src="../../images/areactr/jiedianleiquyu.png" bindload="imageLoad" mode='aspectFit'></image>
-        <text>区域5</text>
         </view>
      </view>
      <!--模态框-->

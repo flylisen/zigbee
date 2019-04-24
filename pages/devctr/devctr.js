@@ -5,13 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal: false
+    showModal: false,
+    Industry:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function (e) {
     console.log('onLoad')    
     var that = this 
     var username = wx.getStorageSync('username');
@@ -27,24 +28,24 @@ Page({
       'content-type': 'application/json'      
         },      
         success: function (res) {         
-          console.log(res.data)        
+          console.log(res.data)
+          console.log(res.data.devs[6].diOnoffStatu)       
           that.setData({            
-            Industry: res.data //设置数据        
-            })        
+            Industry: res.data.devs
+            })
+          wx.setStorage({
+            key: "diOnoffStatu",
+            data: res.data.devs[6].diOnoffStatu,
+          })         
             },      
             fail: function (err) {        
               console.log(err)      
               }    
             })
   },
-  bindAdd: function () {
-    this.setData({
-      showModal: true
-    })
-  },
-  go: function () {
-    this.setData({
-      showModal: false
+  chuangliandk: function () {
+    wx.navigateTo({
+      url:'chuanglian/chuanglian'
     })
   },
   /**

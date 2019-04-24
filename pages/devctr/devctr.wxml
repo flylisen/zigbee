@@ -1,13 +1,58 @@
 <!--pages/devctr/devctr.wxml-->
 <view>
     <view class='viewh1'>
-     <h1>全部设备</h1>
-     <button class='btn' bindtap='bindAdd'>配置</button>
-     </view>
-      <view class="newsInfo">   
-      <block wx:for="{{Industry}}">    
-       <view>{{item.diId}}</view> 
-       </block>
+     <h1>全部设备</h1> 
+      </view>
+       <view wx:for="{{Industry}}" wx:for-item="item" class='count'> 
+             <view wx:if="{{item.diId==133}}" bindtap='chuangliandk'>
+                 <image src='../../images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view>窗帘</view>
+           </view>
+            <view wx:if="{{item.diId==141}}">
+                 
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view>开关1</view>
+           </view>
+            <view wx:if="{{item.diId==142}}">
+                
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view>{{item.diName}}</view>
+           </view>
+            <view wx:if="{{item.diId==143}}">
+              
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view>开关3</view>
+           </view>
+            <view wx:if="{{item.diId==144}}">
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view>开关4</view>
+           </view>
        </view>
       <!--模态框-->
      <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
