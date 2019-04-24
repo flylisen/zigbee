@@ -12,9 +12,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (e) {
+  onLoad: function (options) {
     console.log('onLoad')    
-    var that = this 
+    var that = this; 
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');    
     wx.request({
@@ -28,14 +28,21 @@ Page({
       'content-type': 'application/json'      
         },      
         success: function (res) {         
-          console.log(res.data)
-          console.log(res.data.devs[6].diOnoffStatu)       
+          console.log(res.data)    
           that.setData({            
             Industry: res.data.devs
             })
           wx.setStorage({
             key: "diOnoffStatu",
             data: res.data.devs[6].diOnoffStatu,
+          })
+          wx.setStorage({
+            key: "diDeviceuid",
+            data: res.data.devs[6].diDeviceuid
+             })
+          wx.setStorage({
+            key: "diName",
+            data: res.data.devs[6].diName
           })         
             },      
             fail: function (err) {        
