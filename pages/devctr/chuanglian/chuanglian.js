@@ -46,7 +46,7 @@ Page({
         { 
           'content-type': 'application/json' // 默认值 
         }, 
-        success(res){ 
+        success:function(res){ 
           console.log(res.data)   
          }
         })

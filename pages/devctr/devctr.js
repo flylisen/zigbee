@@ -1,4 +1,7 @@
 // pages/devctr/devctr.js
+var devss=[]
+var values1=''
+var values2=''
 Page({
 
   /**
@@ -6,7 +9,9 @@ Page({
    */
   data: {
     showModal: false,
-    Industry:[]
+    Industry:[],
+    collected1: '',
+    collected2:''
   },
 
   /**
@@ -28,9 +33,14 @@ Page({
       'content-type': 'application/json'      
         },      
         success: function (res) {         
-          console.log(res.data)    
+          console.log(res.data)
+          devss = res.data.devs
+          values1 = devss[14].diOnoffStatu
+          values2 = devss[15].diOnoffStatu
           that.setData({            
-            Industry: res.data.devs
+            Industry: res.data.devs,
+            collected1: res.data.devs[14].diOnoffStatu,
+            collected2: res.data.devs[15].diOnoffStatu
             })
           wx.setStorage({
             key: "diOnoffStatu",
@@ -53,6 +63,70 @@ Page({
   chuangliandk: function () {
     wx.navigateTo({
       url:'chuanglian/chuanglian'
+    })
+  },
+  kaiguanguan1: function () {
+    var that = this
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    var deviceuid = devss[14].diDeviceuid; //开关Uid
+    if (values1 >= 1) {
+      values1 = 0
+    } else {
+      values1 = 1
+    }
+    this.setData({
+      collected1: values1
+    })
+    console.log(values1)
+    wx.request({
+      url: 'https://localhost:8443/ctrDev',
+      method: 'POST',
+      data: {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: deviceuid, value: values1 }]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success:function(res) {
+        console.log(res.data)
+      }
+    })
+  },
+  kaiguanguan2: function () {
+    var that = this
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    var deviceuid = devss[15].diDeviceuid; //开关Uid
+    if (values2 >= 1) {
+      values2 = 0
+    } else {
+      values2 = 1
+    }
+    this.setData({
+      collected2: values2
+    })
+    console.log(values2)
+    wx.request({
+      url: 'https://localhost:8443/ctrDev',
+      method: 'POST',
+      data: {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: deviceuid, value: values2 }]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
     })
   },
   /**

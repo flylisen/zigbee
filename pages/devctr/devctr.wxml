@@ -15,7 +15,8 @@
                  <view>窗帘</view>
            </view>
             <view wx:if="{{item.diId==141}}">
-                 
+                  <image src='../../images/devctr/kaiguanguan2.png' bindtap='kaiguanguan1'  wx:if="{{collected1>0}}" style="width:70px;height:70px;"></image>
+                  <image src='../../images/devctr/kaiguanguan.png' bindtap='kaiguanguan1'  wx:else style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.diOnlineStatu==0}}">
                  <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
                  </view>
@@ -24,8 +25,9 @@
                  </view>
                  <view>开关1</view>
            </view>
-            <view wx:if="{{item.diId==142}}">
-                
+          <view wx:if="{{item.diId==142}}">
+                           <image src='../../images/devctr/kaiguanguan2.png' bindtap='kaiguanguan2'  wx:if="{{collected2>0}}"style="width:70px;height:70px;"></image>
+                  <image src='../../images/devctr/kaiguanguan.png' bindtap='kaiguanguan2'  wx:else style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.diOnlineStatu==0}}">
                  <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
                  </view>
@@ -33,26 +35,7 @@
                  <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
                  <view>{{item.diName}}</view>
-           </view>
-            <view wx:if="{{item.diId==143}}">
-              
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view>开关3</view>
-           </view>
-            <view wx:if="{{item.diId==144}}">
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view>开关4</view>
-           </view>
+           </view>   
        </view>
       <!--模态框-->
      <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
