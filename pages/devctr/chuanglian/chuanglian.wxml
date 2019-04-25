@@ -1,22 +1,24 @@
 <view>
-      <h1>窗帘控制</h1>
-      <view class='block'>
-           <view wx:if="{{name==''}}">
-                  <text>名称 :窗帘</text>
+ <view>
+ <h1>窗帘控制</h1>
+ <view wx:for="{{Industry}}" wx:for-item="item">
+     <view wx:if="{{item.diDeviceid==514&&item.diZonetype==0}}">
+           <view wx:if="{{item.diName==''}}">
+               <text>名称 :窗帘</text>
            </view>
            <view wx:else>
-                  <text>名称 :{{name}}</text>
+                  <text>名称 :{{item.diName}}</text>
            </view>
-           <view wx:if="{{collected>0}}">
+           <view wx:if="{{chuanglians>0}}">
                   <text>状态 :开</text>
            </view>
             <view wx:else>
                   <text>状态 :关</text>
-           </view>
-     <view>
-</view>
-</view>
-      <image src='/images/chuanglian/chuangliankai.png' wx:if="{{collected>0}}" ></image>
+           </view> 
+      <image src='/images/chuanglian/chuangliankai.png' wx:if="{{chuanglians>0}}" ></image>
        <image src='/images/chuanglian/chuanglianguan.png' wx:else></image>
-      <button bindtap='chuangliang'>开关</button>
+       <button bindtap='chuangliang'>开关</button>
+    </view>    
+ </view>
+</view>
 </view>

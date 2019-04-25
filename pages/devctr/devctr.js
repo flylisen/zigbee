@@ -1,17 +1,14 @@
-// pages/devctr/devctr.js
-var devss=[]
-var values1=''
-var values2=''
+var deviceuid = '';
+var values = '';
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     showModal: false,
-    Industry:[],
-    collected1: '',
-    collected2:''
+    collected: '',
+    Industry:[]
+    
   },
 
   /**
@@ -34,26 +31,22 @@ Page({
         },      
         success: function (res) {         
           console.log(res.data)
-          devss = res.data.devs
-          values1 = devss[14].diOnoffStatu
-          values2 = devss[15].diOnoffStatu
           that.setData({            
-            Industry: res.data.devs,
-            collected1: res.data.devs[14].diOnoffStatu,
-            collected2: res.data.devs[15].diOnoffStatu
+            Industry: res.data.devs
             })
+          for(var index in res.data.devs) {
+            if (res.data.devs[index].diDeviceid == 2 && res.data.devs[index].diZonetype == 0) {
+              values = res.data.devs[index].diOnoffStatu
+              deviceuid= res.data.devs[index].diDeviceid
+            }
+          }
           wx.setStorage({
-            key: "diOnoffStatu",
-            data: res.data.devs[6].diOnoffStatu,
+            key: "Industry",
+            data: res.data.devs,
           })
-          wx.setStorage({
-            key: "diDeviceuid",
-            data: res.data.devs[6].diDeviceuid
-             })
-          wx.setStorage({
-            key: "diName",
-            data: res.data.devs[6].diName
-          })         
+          that.setData({
+            kaiguanguan: values
+          })       
             },      
             fail: function (err) {        
               console.log(err)      
@@ -65,69 +58,37 @@ Page({
       url:'chuanglian/chuanglian'
     })
   },
-  kaiguanguan1: function () {
+  //开关事件
+  kaiguanguan: function (e) {
     var that = this
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
-    var deviceuid = devss[14].diDeviceuid; //开关Uid
-    if (values1 >= 1) {
-      values1 = 0
+    if (values >= 1) {
+      values = 0
     } else {
-      values1 = 1
+      values = 1
     }
     this.setData({
-      collected1: values1
+      collected: values
     })
-    console.log(values1)
-    wx.request({
-      url: 'https://localhost:8443/ctrDev',
-      method: 'POST',
-      data: {
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: deviceuid, value: values1 }]
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success:function(res) {
-        console.log(res.data)
-      }
-    })
-  },
-  kaiguanguan2: function () {
-    var that = this
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
-    var deviceuid = devss[15].diDeviceuid; //开关Uid
-    if (values2 >= 1) {
-      values2 = 0
-    } else {
-      values2 = 1
-    }
-    this.setData({
-      collected2: values2
-    })
-    console.log(values2)
-    wx.request({
-      url: 'https://localhost:8443/ctrDev',
-      method: 'POST',
-      data: {
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: deviceuid, value: values2 }]
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
+    console.log(values)
+      wx.request({
+        url: 'https://localhost:8443/ctrDev',
+        method: 'POST',
+        data: {
+          bindid: username,
+          bindstr: pwd,
+          ctrType: 0,
+          devs: [{ deviceuid: deviceuid, value: values }]
+        },
+        header:
+        {
+          'content-type': 'application/json' // 默认值 
+        },
+        success: function (res) {
+          console.log(res.data)
+        }
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

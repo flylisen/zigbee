@@ -1,56 +1,65 @@
-
-var values = wx.getStorageSync('diOnoffStatu'); //窗帘类型
-var diName = wx.getStorageSync('diName'); //窗帘名称
+var Industrys = wx.getStorageSync('Industrys');
+var deviceuid='';
+var values='';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    collected: '',
-    name: diName
+    Industry:[],
+    chuanglians:''
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(Industrys)
     this.setData({
-      collected: values
+      Industry: Industrys
     })
-    console.log(diName)
+    for (var index in Industrys) {
+       console.log(Industrys[index])
+      if (Industrys[index].diDeviceid ==514 && Industrys[index].diZonetype==0){
+        values=Industrys[index].diOnoffStatu
+        deviceuid=Industrys[index].diDeviceid
+       }
+    }
+    this.setData({
+      chuanglians:values
+    })
   },
-  chuangliang:function(){
+  chuangliang: function () {
     var that = this
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
-    var deviceuid = wx.getStorageSync('diDeviceuid'); //开关Uid
-    if (values>=1){
-      values=0
-     }else{
-      values=1
-     }
+    if (values >= 1) {
+      values = 0
+    } else {
+      values = 1
+    }
+    console.log(values)
     this.setData({
-      collected: values
+      chuanglians: values
     })
-     wx.request({ 
-       url: 'https://localhost:8443/ctrDev', 
+    wx.request({
+      url: 'https://localhost:8443/ctrDev',
       method: 'POST',
       data: {
         bindid: username,
         bindstr: pwd,
-        ctrType:0,
-        devs: [{ deviceuid: deviceuid, value: values}]
-        }, 
-        header: 
-        { 
-          'content-type': 'application/json' // 默认值 
-        }, 
-        success:function(res){ 
-          console.log(res.data)   
-         }
-        })
-
+        ctrType: 0,
+        devs: [{ deviceuid: deviceuid, value: values }]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
