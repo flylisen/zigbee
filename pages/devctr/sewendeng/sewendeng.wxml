@@ -1,0 +1,13 @@
+<!--pages/devctr/sewendeng/sewendeng.wxml-->
+  <view wx:if="{{diNames==''}}">
+               <text>名称 :色温（CCT）灯</text>
+           </view>
+           <view wx:else>
+              <text>名称 :{{diNames}}</text>
+           </view>
+           <view wx:if="{{chuanglians>=0}}">
+                  <text>状态 :正常</text>
+           </view>
+            <view wx:else>
+            <text>状态 :异常</text>
+ </view> 

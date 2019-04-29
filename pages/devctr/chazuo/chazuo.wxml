@@ -1,0 +1,13 @@
+<!--pages/devctr/chazuo/chazuo.wxml-->
+ <view wx:if="{{diNames==''}}">
+               <text>名称 :开关/插座</text>
+           </view>
+           <view wx:else>
+              <text>名称 :{{diNames}}</text>
+           </view>
+           <view wx:if="{{chuanglians>=0}}">
+                  <text>状态 :正常</text>
+           </view>
+            <view wx:else>
+                  <text>状态 :异常</text>
+ </view> 

@@ -1,13 +1,11 @@
-var Industrys = wx.getStorageSync('Industrys');
-var deviceuid='';
-var values='';
+var Industrys;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    Industry:[],
+    diNames:'',
     chuanglians:''
   },
   
@@ -15,33 +13,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(Industrys)
+    var deviceuid = decodeURIComponent(options.deviceuid);
+    Industrys = JSON.parse(deviceuid);
     this.setData({
-      Industry: Industrys
-    })
-    for (var index in Industrys) {
-       console.log(Industrys[index])
-      if (Industrys[index].diDeviceid ==514 && Industrys[index].diZonetype==0){
-        values=Industrys[index].diOnoffStatu
-        deviceuid=Industrys[index].diDeviceid
-       }
-    }
-    this.setData({
-      chuanglians:values
+      diNames: Industrys.diName,
+      chuanglians: Industrys.diOnlineStatu
     })
   },
-  chuangliang: function () {
+  chuangliang: function (a) {
     var that = this
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
-    if (values >= 1) {
-      values = 0
+    if (Industrys.diOnoffStatu >= 1) {
+      Industrys.diOnoffStatu = 0
     } else {
-      values = 1
+      Industrys.diOnoffStatu = 1
     }
-    console.log(values)
+    console.log(Industrys.diOnoffStatu)
     this.setData({
-      chuanglians: values
+      chuanglians:Industrys.diOnoffStatu
     })
     wx.request({
       url: 'https://localhost:8443/ctrDev',
@@ -50,7 +40,7 @@ Page({
         bindid: username,
         bindstr: pwd,
         ctrType: 0,
-        devs: [{ deviceuid: deviceuid, value: values }]
+        devs: [{ deviceuid: Industrys.diDeviceuid, value: Industrys.diOnoffStatu}]
       },
       header:
       {
