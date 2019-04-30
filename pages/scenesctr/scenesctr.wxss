@@ -42,7 +42,7 @@ view h1{
     align-items: center;
 }
 .modalDlg button{
-  margin-top: 250px;
+  margin-top: 10px;
 }
 .mask{
     width: 100%;
@@ -55,3 +55,10 @@ view h1{
     opacity: 0.7;
 
 }
+.setting{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; 
+  margin-top: 160px;
+} 

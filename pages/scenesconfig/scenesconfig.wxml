@@ -1,11 +1,7 @@
 <!--pages/scenesconfig/scenesconfig.wxml-->
 <view>添加场景</view>
-        <text>场景名称：</text>
-        <input  name="scenename"></input>
-        <view>可以编辑设备</view>
-    <view class="sel-box">    
-    <view wx:for="{{repContent}}" class="multi-selection">
-    <text>{{item.message}}</text>   
-     <image src="{{selectIndex[index].sureid? hasSelect : noSelect}}" class="multi-img" data-selectIndex="{{index}}" bindtap="selectRep" />
-    </view>
-</view>
+        <text>名称：</text>
+        <input name="scenename" bindinput ="scenename"></input>
+ <button bindtap='submit'>添加场景</button>
+        
+        
