@@ -29,6 +29,10 @@ Page({
                 duration: 2000
               })
             } else {
+              //建立websocket连接 
+              if (res.data.gwId != -1) {
+                app.initWebSocket(res.data.gwId);
+              }
               wx.setStorage({
                 key: "username",
                 data: e.detail.value.username,
@@ -42,6 +46,7 @@ Page({
                 icon: "Yes",
                 duration: 2000,
                 success: function () {
+                                
                   setTimeout(function () {
                     wx.switchTab({
                       url: '../index/index',

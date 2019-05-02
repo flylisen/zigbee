@@ -1,4 +1,4 @@
-
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     var that = this; 
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');    
@@ -246,7 +247,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      var nodeType;
+      var deviceId;
+      var value;
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割 
+      nodeType = strs[0].split('=')[1];
+      deviceId = strs[1].split('=')[1];
+      value = strs[2].split('=')[1];
+      console.log('nodeType', nodeType);
+      console.log('deviceId', deviceId);
+      console.log('value', value);
+      //找到当前页面的page
+      var pageArray = getCurrentPages();
+      var curPage;
+      for (var j = 0; j < pageArray.length; j++) {
+        if (pageArray[j].route == 'pages/devctr/devctr') {
+          curPage = pageArray[j];
+        }
+      }
+      console.log('curPage', curPage);
+      if (nodeType == 4) {
+        //设备开关状态发生改变
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          console.log(curPage.data.sortedDevs[i].diDeviceuid);
+          if (deviceId == curPage.data.sortedDevs[i].diDeviceuid) {
+            console.log('i=' + i);
+            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+            curPage.setData({
+              [tmp]: value
+            })
+          }
+        }
+      } else if (nodeType == 2) {
+        //设备状态发生变化
+
+      }
+      console.log('当前页面在设备控制');
+
+    }
   },
 
   /**

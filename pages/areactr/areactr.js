@@ -29,14 +29,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      var nodeType;
+      var deviceId;
+      var value;
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割 
+      nodeType = strs[0].split('=')[1];
+      deviceId = strs[1].split('=')[1];
+      value = strs[2].split('=')[1];
 
+      if (noteType == 4) {
+        //区域删除
+        //触发重新加载本页面
+      }
+      console.log('当前页面在设备控制');
+
+    }
   },
 
   /**

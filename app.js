@@ -34,9 +34,40 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    localWebsocket: {},      //websocket对象
+    gwId: -1,
+    onReceiveWebsocketMessageCallback: function(){}                
   },
-  globalData: {
-    gwId: -1
+  //初始化websocket
+  initWebSocket: function (gwId) {
+    let that = this;
+    that.globalData.gwId = gwId;
+    //建立websocket连接
+    console.log('初始化建立websocket连接');
+    that.globalData.localWebsocket = wx.connectSocket({
+      url: 'wss://localhost:8443/websocket/' + that.globalData.gwId,
+    });
+    //websocket连接打开
+    that.globalData.localWebsocket.onOpen(function(res) {
+      console.log('websocket已建立连接');
+    });
+    //websocket连接出错
+    that.globalData.localWebsocket.onError(function(res) {
+      console.log('websocket连接出错');
+    });
+    //连接关闭 重连
+    that.globalData.localWebsocket.onClose(function(res) {
+      console.log('websocket连接关闭');
+      /**if (that.globalData.gwId != -1) {
+        console.log('执行websocket重连');
+        that.initWebSocket(that.globalData.gwId);
+      }**/
+    });
+    //websocket接收到信息
+    that.globalData.localWebsocket.onMessage(function(res) {
+      console.log('-------------------------');
+      that.globalData.onReceiveWebsocketMessageCallback(res);
+    }); 
   }
 })
