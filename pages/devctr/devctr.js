@@ -14,7 +14,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
     var that = this; 
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');    
@@ -208,7 +207,6 @@ Page({
   },
   //开关事件
   kaiguanguan: function (event) {
-    console.log(event.currentTarget.dataset['tp']);
     var tp = event.currentTarget.dataset['tp'];
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
@@ -219,7 +217,7 @@ Page({
       } else {
         temSet = 1;
       }
-    console.log(tp.diOnoffStatu);
+    console.log(temSet);
     var index = event.currentTarget.id;//获得下标
     var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
     this.setData({
@@ -232,7 +230,7 @@ Page({
           bindid: username,
           bindstr: pwd,
           ctrType: 0,
-          devs: [{ deviceuid: tp.diDeviceuid, value: tp.diOnoffStatu }]
+          devs: [{ deviceuid: tp.diDeviceuid, value: temSet }]
         },
         header:
         {
@@ -251,15 +249,15 @@ Page({
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
-      var deviceId;
+      var deviceuId;
       var value;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
-      deviceId = strs[1].split('=')[1];
+      deviceuId = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       console.log('nodeType', nodeType);
-      console.log('deviceId', deviceId);
+      console.log('deviceuId', deviceuId);
       console.log('value', value);
       //找到当前页面的page
       var pageArray = getCurrentPages();
@@ -274,7 +272,7 @@ Page({
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           console.log(curPage.data.sortedDevs[i].diDeviceuid);
-          if (deviceId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
             console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
@@ -282,12 +280,11 @@ Page({
             })
           }
         }
-      } else if (nodeType == 2) {
-        //设备状态发生变化
-
+      } else if (nodeType == 1) {
+        //设备新入网
+        
       }
       console.log('当前页面在设备控制');
-
     }
   },
 

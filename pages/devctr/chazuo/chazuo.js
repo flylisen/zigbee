@@ -1,4 +1,5 @@
 // pages/devctr/chazuo/chazuo.js
+var chazuos='';
 Page({
 
   /**
@@ -14,13 +15,92 @@ Page({
    */
   onLoad: function (options) {
     var chazuo = decodeURIComponent(options.chazuo);
-    var chazuos = JSON.parse(chazuo);
+     chazuos = JSON.parse(chazuo);
     this.setData({
       diNames: chazuos.diName,
       chuanglians: chazuos.diOnlineStatu
     })
   },
-
+  //修改设备名称
+  submit: function (e) {
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    if (e.detail.value.username == '') {
+      wx.showModal({
+        title: '提示',
+        content: '请输入名称'
+      })
+    } else {
+      wx.request({
+        url: 'https://localhost:8443/editDevName', //真实的接口地址           
+        data: {
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ deviceuid: chazuos.diDeviceuid, value: e.detail.value.username }]
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          wx.showToast({
+            title: '修改成功',
+            duration: 2000
+          });
+          wx.navigateTo({
+            url: '../../devctr/devctr'
+          });
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      })
+    }
+  },
+  //删除设备
+  qingjingsc: function () {
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          wx.request({
+            url: 'https://localhost:8443/editDevName', //真实的接口地址           
+            data: {
+              bindid: username,
+              bindstr: pwd,
+              ctrType: 0,
+              devs: [{ deviceuid: chazuos.diDeviceuid, value: chazuos.diIeee }]
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res.data)
+              wx.showToast({
+                title: '修改成功',
+                duration: 2000
+              });
+              wx.navigateTo({
+                url: '../../devctr/devctr'
+              })
+            },
+            fail: function (err) {
+              console.log(err)
+            }
+          })
+        } else if (sm.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
