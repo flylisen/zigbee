@@ -4,4 +4,13 @@ view h1{
   justify-content: center;
   margin-top: 20px;
 }
+.flex-wrp_one{
+ display: flex;
+ flex-flow: row wrap; 
+align-content: space-around;
+}
+.flex-wrp_one view{
+  padding: 15px;
+}
+
 
