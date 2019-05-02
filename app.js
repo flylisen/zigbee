@@ -36,5 +36,7 @@ App({
   globalData: {
     userInfo: null
   },
-  
+  globalData: {
+    gwId: -1
+  }
 })

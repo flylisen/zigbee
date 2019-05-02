@@ -16,6 +16,10 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
+        wx.setStorage({
+          key: "gwId",
+          data: res.data.gwId,
+        })
         if (res.statusCode == 200) {
           if(res.data.code==1){
             if (res.data.error == true) {
