@@ -6,7 +6,7 @@
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">
        <view>
-               <image src='../../images/areactr/jiedianleiquyu.png' data-tp="{{item}}" id="{{index}}"   bindtap='areainfo' style="width:70px;height:70px;"></image>
+               <image src='../../images/areactr/jiedianleiquyu.png' data-id="{{item}}"    bindtap='areainfo' style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.aiName==''}}">区域</view>
                 <view wx:else>{{item.aiName}}</view>
       </view>
