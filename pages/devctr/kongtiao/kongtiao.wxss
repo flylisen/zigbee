@@ -1,0 +1,17 @@
+/* pages/devctr/kongtiao/kongtiao.wxss */
+.count{
+  display: flex;
+  margin-top: 20px;
+}
+.count view{
+   margin: 20px; 
+}
+.kongtiao{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+.text{
+  display: flex;
+  justify-content: space-around;
+}

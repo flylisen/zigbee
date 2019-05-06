@@ -1,5 +1,5 @@
-// pages/devctr/mencichuanganqi/mencichuanganqi.js
-var mencichuanganqis='';
+// pages/devctr/chazuo/chazuo.js
+var chazuos='';
 Page({
 
   /**
@@ -14,11 +14,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var mencichuanganqi = decodeURIComponent(options.mencichuanganqi);
-     mencichuanganqis = JSON.parse(mencichuanganqi);
+    var chazuo = decodeURIComponent(options.chazuo);
+     chazuos = JSON.parse(chazuo);
     this.setData({
-      diNames: mencichuanganqis.diName,
-      chuanglians: mencichuanganqis.diOnlineStatu
+      diNames: chazuos.diName,
+      chuanglians: chazuos.diOnlineStatu
     })
   },
   //修改设备名称
@@ -37,7 +37,7 @@ Page({
         data: {
           bindid: username,
           bindstr: pwd,
-          devs: [{ deviceuid: mencichuanganqis.diDeviceuid, value: e.detail.value.username }]
+          devs: [{ deviceuid: chazuos.diDeviceuid, value: e.detail.value.username }]
         },
         method: 'POST',
         header: {
@@ -50,7 +50,7 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devctr/devctr'
+            url: '../../devconfig/devconfig'
           });
         },
         fail: function (err) {
@@ -75,7 +75,7 @@ Page({
               bindid: username,
               bindstr: pwd,
               ctrType: 0,
-              devs: [{ deviceuid: mencichuanganqis.diDeviceuid, value: mencichuanganqis.diIeee }]
+              devs: [{ deviceuid: chazuos.diDeviceuid, value: chazuos.diIeee }]
             },
             method: 'POST',
             header: {
@@ -88,7 +88,7 @@ Page({
                 duration: 2000
               });
               wx.navigateTo({
-                url: '../../devctr/devctr'
+                url: '../../devconfig/devconfig'
               })
             },
             fail: function (err) {

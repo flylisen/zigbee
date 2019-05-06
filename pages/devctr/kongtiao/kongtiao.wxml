@@ -1,0 +1,58 @@
+<!--pages/devctr/kongtiao/kongtiao.wxml-->
+<view class='count'>
+<image src='../../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
+  <view wx:if="{{diNames==''}}">
+               <text>名称 :温控器</text>
+           </view>
+           <view wx:else>
+        <text>名称 :{{diNames}}</text>
+    </view>
+    <view bindtap='kaiguan'>
+      <image src='../../../images/devctr/kaiguan.png' style="width:50px;height:50px;"></image>
+    </view>
+</view>
+<view>
+        <view>
+        <image src="../../../images/devctr/kongtiao.png"></image>
+        </view>
+        <view class='text'>
+              <view>设置温度:</view>
+              <view>室内温度:</view>
+         </view>
+         <view class='text'>
+              <view>模式:</view>
+              <view>风速:</view>
+         </view>
+         <view class='text'>
+              <view>横向风:</view>
+              <view>纵向风:</view>
+        </view>
+        <view class='kongtiao'>
+        <view>
+            <image src='../../../images/devctr/jia.png' style="width:50px;height:50px;"></image>
+            <view>升温</view>
+        </view>
+         <view>
+            <image src='../../../images/devctr/ju-icon-reduce.png' style="width:50px;height:50px;"></image>
+            <view>降温</view>
+        </view>
+        <view>
+            <image src='../../../images/devctr/icon-kongtiaomoshi-tongfeng.png' style="width:50px;height:50px;"></image>
+            <view>模式</view>
+        </view>
+    </view>
+    <view class='kongtiao'>
+            <view>
+            <image src='../../../images/devctr/zuoyoufengxiang.png' style="width:50px;height:50px;"></image>
+            <view>横向风</view>
+            </view>
+            <view>
+            <image src='../../../images/devctr/shangxiafengxiang.png' style="width:50px;height:50px;"></image>
+            <view>纵向风</view>
+            </view>
+             <view>
+            <image src='../../../images/devctr/fengsu.png' style="width:50px;height:50px;"></image>
+            <view>风速</view>
+            </view>
+    </view>
+</view>

@@ -1,23 +1,24 @@
-var jinjians='';
+// pages/devctr/deng/deng.js
+var dengs='';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    diNames:'',
-    chuanglians:''
+    diNames: '',
+    chuanglians: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var jinjian = decodeURIComponent(options.jinjian);
-    jinjians = JSON.parse(jinjian);
+    var deng = decodeURIComponent(options.deng);
+     dengs = JSON.parse(deng);
     this.setData({
-      diNames: jinjians.diName,
-      chuanglians: jinjians.diOnlineStatu
+      diNames: dengs.diName,
+      chuanglians: dengs.diOnlineStatu
     })
   },
   //修改设备名称
@@ -36,7 +37,7 @@ Page({
         data: {
           bindid: username,
           bindstr: pwd,
-          devs: [{ deviceuid: jinjians.diDeviceuid, value: e.detail.value.username }]
+          devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value.username }]
         },
         method: 'POST',
         header: {
@@ -49,7 +50,7 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devctr/devctr'
+            url: '../../devconfig/devconfig'
           });
         },
         fail: function (err) {
@@ -74,7 +75,7 @@ Page({
               bindid: username,
               bindstr: pwd,
               ctrType: 0,
-              devs: [{ deviceuid: jinjians.diDeviceuid, value: jinjians.diIeee }]
+              devs: [{ deviceuid: dengs.diDeviceuid, value: dengs.diIeee }]
             },
             method: 'POST',
             header: {
@@ -87,7 +88,7 @@ Page({
                 duration: 2000
               });
               wx.navigateTo({
-                url: '../../devctr/devctr'
+                url: '../../devconfig/devconfig'
               })
             },
             fail: function (err) {
@@ -104,48 +105,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })

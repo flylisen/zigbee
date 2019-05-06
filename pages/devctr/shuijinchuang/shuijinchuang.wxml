@@ -1,0 +1,10 @@
+<!--pages/devctr/shuijinchuang/shuijinchuang.wxml-->
+<view class='count'>
+<image src='../../../images/devctr/shuijinchuanganqiicon.png' style="width:70px;height:70px;"></image>
+  <view wx:if="{{diNames==''}}">
+               <text>名称 :温控器</text>
+           </view>
+           <view wx:else>
+        <text>名称 :{{diNames}}</text>
+    </view>
+</view>

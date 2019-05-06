@@ -1,5 +1,5 @@
-// pages/devctr/deng/deng.js
-var dengs='';
+// pages/devctr/mencichuanganqi/mencichuanganqi.js
+var mencichuanganqis='';
 Page({
 
   /**
@@ -14,11 +14,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var deng = decodeURIComponent(options.deng);
-     dengs = JSON.parse(deng);
+    var mencichuanganqi = decodeURIComponent(options.mencichuanganqi);
+     mencichuanganqis = JSON.parse(mencichuanganqi);
     this.setData({
-      diNames: dengs.diName,
-      chuanglians: dengs.diOnlineStatu
+      diNames: mencichuanganqis.diName,
+      chuanglians: mencichuanganqis.diOnlineStatu
     })
   },
   //修改设备名称
@@ -37,7 +37,7 @@ Page({
         data: {
           bindid: username,
           bindstr: pwd,
-          devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value.username }]
+          devs: [{ deviceuid: mencichuanganqis.diDeviceuid, value: e.detail.value.username }]
         },
         method: 'POST',
         header: {
@@ -50,7 +50,7 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devctr/devctr'
+            url: '../../devconfig/devconfig'
           });
         },
         fail: function (err) {
@@ -75,7 +75,7 @@ Page({
               bindid: username,
               bindstr: pwd,
               ctrType: 0,
-              devs: [{ deviceuid: dengs.diDeviceuid, value: dengs.diIeee }]
+              devs: [{ deviceuid: mencichuanganqis.diDeviceuid, value: mencichuanganqis.diIeee }]
             },
             method: 'POST',
             header: {
@@ -88,7 +88,7 @@ Page({
                 duration: 2000
               });
               wx.navigateTo({
-                url: '../../devctr/devctr'
+                url: '../../devconfig/devconfig'
               })
             },
             fail: function (err) {

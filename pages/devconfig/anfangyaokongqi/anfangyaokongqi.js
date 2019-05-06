@@ -49,7 +49,7 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devctr/devctr'
+            url: '../../devconfig/devconfig'
           });
         },
         fail: function (err) {
@@ -87,7 +87,7 @@ Page({
                 duration: 2000
               });
               wx.navigateTo({
-                url: '../../devctr/devctr'
+                url: '../../devconfig/devconfig'
               })
             },
             fail: function (err) {

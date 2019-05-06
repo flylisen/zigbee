@@ -1,5 +1,5 @@
-// pages/devctr/hongwaiyaokongqi/hongwaiyaokongqi.js
-var hongwaiyaokongqis='';
+// pages/devctr/keranqiti/keranqiti.js
+var keranqitis='';
 Page({
 
   /**
@@ -14,11 +14,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var hongwaiyaokongqi = decodeURIComponent(options.hongwaiyaokongqi);
-     hongwaiyaokongqis = JSON.parse(hongwaiyaokongqi);
+    var keranqiti = decodeURIComponent(options.keranqiti);
+     keranqitis = JSON.parse(keranqiti);
     this.setData({
-      diNames: hongwaiyaokongqis.diName,
-      chuanglians: hongwaiyaokongqis.diOnlineStatu
+      diNames: keranqitis.diName,
+      chuanglians: keranqitis.diOnlineStatu
     })
   },
   //修改设备名称
@@ -37,7 +37,7 @@ Page({
         data: {
           bindid: username,
           bindstr: pwd,
-          devs: [{ deviceuid: hongwaiyaokongqis.diDeviceuid, value: e.detail.value.username }]
+          devs: [{ deviceuid: keranqitis.diDeviceuid, value: e.detail.value.username }]
         },
         method: 'POST',
         header: {
@@ -50,7 +50,7 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devctr/devctr'
+            url: '../../devconfig/devconfig'
           });
         },
         fail: function (err) {
@@ -75,7 +75,7 @@ Page({
               bindid: username,
               bindstr: pwd,
               ctrType: 0,
-              devs: [{ deviceuid: hongwaiyaokongqis.diDeviceuid, value: hongwaiyaokongqis.diIeee }]
+              devs: [{ deviceuid: keranqitis.diDeviceuid, value: keranqitis.diIeee }]
             },
             method: 'POST',
             header: {
@@ -88,7 +88,7 @@ Page({
                 duration: 2000
               });
               wx.navigateTo({
-                url: '../../devctr/devctr'
+                url: '../../devconfig/devconfig'
               })
             },
             fail: function (err) {
@@ -100,7 +100,7 @@ Page({
         }
       }
     })
-  }, 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

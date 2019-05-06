@@ -1,2 +1,253 @@
 <!--pages/devconfig/devconfig.wxml-->
-<text>pages/devconfig/devconfig.wxml</text>
+ <view class='viewh1'>
+     <h1>全部设备</h1> 
+ </view>
+      <view class='flex-wrp_one'>
+   <block  wx:for="{{sortedDevs}}" wx:for-item="item">
+       <view wx:if="{{item.diDeviceid==2}}" class='view' data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+               <image src='../../images/devctr/kaiguanguan2.png' wx:if="{{item.diOnoffStatu > 0}}" style="width:70px;height:70px;"></image>
+              <image src='../../images/devctr/kaiguanguan.png' wx:else style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:else>
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                <text wx:if="{{item.diName==''}}">开关</text>
+                <text wx:else>{{item.diName}}</text>
+       </view>
+       <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}" data-shuijin="{{item}}" bindtap='shuijink'>
+         <image src='../../images/devctr/shuijinchuanganqiicon.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <text wx:if="{{item.diName==''}}">水浸传感器</text>
+                 <text wx:else>{{item.diName}}</text>
+         </view>
+           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==0}}" data-deviceuid="{{item}}" bindtap='chuangliandk'>
+              <image src='../../images/devctr/chuanglian.png' style="width:40px;height:40px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diName==''}}">窗帘</view>
+                 <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}" data-jinjian="{{item}}" bindtap='jinjian'>
+          <image src='../../images/devctr/jinjianniu.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">紧急按钮</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==277}}" data-anfangyaokongqi="{{item}}" bindtap='anfangyaokongqi'>
+          <image src='../../images/devctr/anfangyaokongqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">安防遥控器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+        <view wx:if="{{item.diDeviceid==528}}" data-deng="{{item}}" bindtap='deng'>
+                  <image src='../../images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.diOnoffStatu>0}}" data-deng="{{item}}"></image>
+  <image src='../../images/devctr/deng.png' wx:else style="width:70px;height:70px;"></image>
+                  <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">RGBW灯</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}" data-rentichuanganqi="{{item}}" bindtap='rentichuanganqi'>
+          <image src='../../images/devctr/rentichuanganqiicon.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">人体传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==32769}}" data-yiyanghuatanchuanganqi="{{item}}" bindtap='yiyanghuatanchuanganqi'>
+          <image src='../../images/devctr/yiyanghuatanchuanganqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">一氧化碳传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==21}}" data-mencichuanganqi="{{item}}" bindtap='mencichuanganqi'>
+          <image src='../../images/devctr/mencichuanganqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">门磁传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" data-wenshiduchuanganqi="{{item}}" bindtap='wenshiduchuanganqi'>
+          <image src='../../images/devctr/wenshiduchuanganqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">温湿度传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" data-qingjingkaiguan="{{item}}" bindtap='qingjingkaiguan'>
+          <image src='../../images/devctr/qingjingkaiguan.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">情景开关</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+         <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" data-hongwaiyaokongqi="{{item}}" bindtap='hongwaiyaokongqi'>
+          <image src='../../images/devctr/hongwaiyaokongqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">红外宝</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+         <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==40}}" data-yanwubaojingqi="{{item}}" bindtap='yanwubaojingqi'>
+          <image src='../../images/devctr/yanwubaojingqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">烟雾传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==255}}" data-wenkongqi="{{item}}" bindtap='wenkongqi'>
+          <image src='../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">温控器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" data-shuibiao="{{item}}" bindtap='shuibiao'>
+          <image src='../../images/devctr/shuibiao.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">水表</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" data-mensuo="{{item}}" bindtap='mensuo'>
+          <image src='../../images/devctr/mensuo.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">门锁</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+            <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}" data-shengguangbaojingqi="{{item}}" bindtap='shengguangbaojingqi'>
+          <image src='../../images/devctr/shengguangbaojingqi.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">声光报警器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==43}}"  data-keranqiti="{{item}}" bindtap='keranqiti'>
+          <image src='../../images/devctr/keranqiti.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">可燃气体传感器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" data-mianban="{{item}}" bindtap='mianban'>
+          <image src='../../images/devctr/mianban.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">新风面板</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" data-chazuo="{{item}}" bindtap='chazuo'>
+          <image src='../../images/devctr/chazuo.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">开关/插座</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+         <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" data-zhongjiqizhongwen="{{item}}" bindtap='zhongjiqizhongwen'>
+          <image src='../../images/devctr/zhongjiqizhongwen.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">PA中继器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}"  data-sewendeng="{{item}}" bindtap='sewendeng'>
+          <image src='../../images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                  <view wx:if="{{item.diName==''}}">色温（CCT）灯</view>
+                <view wx:else>{{item.diName}}</view>
+           </view> 
+    </block>
+</view>
+  

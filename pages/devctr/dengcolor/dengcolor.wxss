@@ -1,0 +1,12 @@
+/* pages/devctr/dengcolor/dengcolor.wxss */
+.count{
+  display: flex;
+  margin-top: 20px;
+}
+.count view{
+   margin: 30px; 
+}
+.color-picker{
+  display: flex;
+  justify-content: center;
+}
