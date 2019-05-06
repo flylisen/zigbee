@@ -8,6 +8,7 @@
     "pages/scenesctr/scenesctr",
     "pages/devctr/devctr",
     "pages/areaconfig/areaconfig",
+    "pages/areaconfig/areaadd/areaadd",
     "pages/devconfig/devconfig",
     "pages/scenesconfig/scenesconfig",
     "pages/monitor/monitor",

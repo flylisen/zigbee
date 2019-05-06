@@ -1,2 +1,6 @@
-<!--pages/areaconfig/areaconfig.wxml-->
-<text>pages/areaconfig/areaconfig.wxml</text>
+<!--pages/areaconfig/areaconfig.wxml--> 
+<view class='viewh1'> 
+     <h1>全部区域</h1>  
+     <button class='btn' bindtap='bindAdd'>新增</button> 
+     
+    </view> 
