@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    sortedAreas: '',
   },
 
   /**
@@ -43,7 +43,28 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
-        
+          var tmp = {};
+          for (var index in res.data.areas) {
+            var tag = res.data.areas[index].aiId + res.data.areas[index].aiName + '';
+            if (tmp[tag] == null || tmp[tag] == undefined) {
+              tmp[tag] = new Array();
+            }
+            tmp[tag].push(res.data.areas[index]);
+          };
+          var sortResult = [];
+          for (var key in tmp) {
+            for (var j = 0; j < tmp[key].length; j++) {
+              sortResult.push(tmp[key][j]);
+            }
+          }
+          console.log(sortResult)
+          wx.setStorage({
+            key: "sortResult",
+            data: sortResult
+          });
+          that.setData({
+            sortedAreas: sortResult
+          });
       },
       fail: function (err) {
         console.log(err)
@@ -61,5 +82,10 @@ Page({
    */ 
   onShareAppMessage: function () {
 
+  },
+  areainfo:function(){
+    wx.redirectTo({
+      url: '../areaconfig/areainfo/areainfo',
+    }, 2000)
   }
 })

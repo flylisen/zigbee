@@ -9,6 +9,7 @@
     "pages/devctr/devctr",
     "pages/areaconfig/areaconfig",
     "pages/areaconfig/areaadd/areaadd",
+    "pages/areaconfig/areainfo/areainfo",
     "pages/devconfig/devconfig",
     "pages/scenesconfig/scenesconfig",
     "pages/monitor/monitor",

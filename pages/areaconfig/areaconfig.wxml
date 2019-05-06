@@ -2,5 +2,13 @@
 <view class='viewh1'> 
      <h1>全部区域</h1>  
      <button class='btn' bindtap='bindAdd'>新增</button> 
-     
+     </view>
+      <view class='flex-wrp_one'>
+   <block  wx:for="{{sortedAreas}}" wx:for-item="item">
+       <view>
+               <image src='../../images/areactr/jiedianleiquyu.png' data-tp="{{item}}" id="{{index}}"   bindtap='areainfo' style="width:70px;height:70px;"></image>
+                <view wx:if="{{item.aiName==''}}">区域</view>
+                <view wx:else>{{item.aiName}}</view>
+      </view>
+    </block>
     </view> 
