@@ -1,13 +1,13 @@
-<!--pages/areaconfig/areaadd/areaadd.wxml-->
+<!--pages/scenesconfig/scenesadd/scenesadd.wxml-->
 <view class='main'>
   <view class='header'>
-    <text class='title'>新增区域</text>
+    <text class='title'>新增场景</text>
   </view>
   <view class='body'>
     <form bindsubmit='submit'>
       <view>
-        <text>区域名称：</text>
-        <input placeholder='区域名称' name="areaname" ></input>
+        <text>场景名称：</text>
+        <input placeholder='场景名称' name="areaname" ></input>
       </view>
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">

@@ -1,24 +1,54 @@
-// pages/devctr/mianban/mianban.js
-var mianbans='';
+var Industrys;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    diNames: '',
-    chuanglians: ''
+    diNames:'',
+    chuanglians:''
   },
-
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var mianban = decodeURIComponent(options.mianban);
-     mianbans = JSON.parse(mianban);
+    var deviceuid = decodeURIComponent(options.deviceuid);
+    Industrys = JSON.parse(deviceuid);
     this.setData({
-      diNames: mianbans.diName,
-      chuanglians: mianbans.diOnlineStatu
+      diNames: Industrys.diName,
+      chuanglians: Industrys.diOnoffStatu
+    })
+  },
+  chuangliang: function (a) {
+    var that = this
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    if (Industrys.diOnoffStatu >= 1) {
+      Industrys.diOnoffStatu = 0
+    } else {
+      Industrys.diOnoffStatu = 1
+    }
+    console.log(Industrys.diOnoffStatu)
+    this.setData({
+      chuanglians:Industrys.diOnoffStatu
+    })
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
+      method: 'POST',
+      data: {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: Industrys.diDeviceuid, value: Industrys.diOnoffStatu}]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
     })
   },
   //修改设备名称
@@ -37,7 +67,7 @@ Page({
         data: {
           bindid: username,
           bindstr: pwd,
-          devs: [{ deviceuid: mianbans.diDeviceuid, value: e.detail.value.username }]
+          devs: [{ deviceuid: Industrys.diDeviceuid, value: e.detail.value.username }]
         },
         method: 'POST',
         header: {
@@ -49,9 +79,9 @@ Page({
             title: '修改成功',
             duration: 2000
           });
-          wx.navigateTo({
-            url: '../../devconfig/devconfig'
-          });
+          wx.redirectTo({
+            url: '../devconfig',
+          }, 2000)
         },
         fail: function (err) {
           console.log(err)
@@ -75,7 +105,7 @@ Page({
               bindid: username,
               bindstr: pwd,
               ctrType: 0,
-              devs: [{ deviceuid: mianbans.diDeviceuid, value: mianbans.diIeee }]
+              devs: [{ deviceuid: Industrys.diDeviceuid, value: Industrys.diIeee }]
             },
             method: 'POST',
             header: {
@@ -105,48 +135,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    
   }
 })

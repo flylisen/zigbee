@@ -50,6 +50,35 @@ Page({
           rpxRatio: res.screenWidth/750
         })
       }
+    });
+    console.log(dengs.diDeviceuid);
+    //获取彩灯开关，亮度，颜色，饱和度
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/getDevMenage',
+      method: 'POST',
+      data: {
+        act: "getrgbw",
+        code: "212",
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        ver:"1",
+        devs: [
+          {
+            deviceuid:dengs.diDeviceuid
+          }
+        ]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
     })
   },
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
@@ -108,11 +137,11 @@ Page({
     }) 
   },
 picker:function(){
- console.log(dengs);
+    console.log(dengs);
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     wx.request({
-      url: 'https://localhost:8443/ctrLightColor',
+      url: 'https://dev.rishuncloud.com:8443/ctrLightColor',
       method: 'POST',
       data: {
         act:"controlhue",
@@ -135,18 +164,17 @@ picker:function(){
   },
   listenerSlider:function(e){
     //获取滑动后的值
-    console.log(e.detail.value);
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     wx.request({
-      url: 'https://localhost:8443/ctrDev',
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
       method: 'POST',
       data: {
         actCode:"102",
         bindid: username,
         bindstr: pwd,
         ctrType: 1,
-        devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value }]
+        devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value }],
       },
       header:
       {
@@ -160,8 +188,7 @@ picker:function(){
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function () {  
   },
 
   /**

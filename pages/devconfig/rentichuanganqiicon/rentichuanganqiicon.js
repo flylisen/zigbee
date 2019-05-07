@@ -1,4 +1,5 @@
 // pages/devctr/rentichuanganqiicon/rentichuanganqiicon.js
+var rentichuanganqis='';
 Page({
 
   /**
@@ -14,13 +15,120 @@ Page({
    */
   onLoad: function (options) {
     var rentichuanganqi = decodeURIComponent(options.rentichuanganqi);
-    var rentichuanganqis = JSON.parse(rentichuanganqi);
+     rentichuanganqis = JSON.parse(rentichuanganqi);
     this.setData({
       diNames: rentichuanganqis.diName,
       chuanglians: rentichuanganqis.diOnlineStatu
     })
+    //获得获取传感器属性值
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/getSensorAttrValue', //真实的接口地址       
+      data: {
+        actCode: "110",
+        bindid: username,
+        bindstr: pwd,
+        deviceuid: rentichuanganqis.diDeviceuid,
+        ver: "1"
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        console.log(res.data.points)
+        that.setData({
+          points: res.data.points
+        });
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   },
-
+  //修改设备名称
+  submit: function (e) {
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    if (e.detail.value.username == '') {
+      wx.showModal({
+        title: '提示',
+        content: '请输入名称'
+      })
+    } else {
+      wx.request({
+        url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
+        data: {
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ deviceuid: rentichuanganqis.diDeviceuid, value: e.detail.value.username }]
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          console.log(res.data)
+          wx.showToast({
+            title: '修改成功',
+            duration: 2000
+          });
+          wx.navigateTo({
+            url: '../../devconfig/devconfig'
+          });
+        },
+        fail: function (err) {
+          console.log(err)
+        }
+      })
+    }
+  },
+  //删除设备
+  qingjingsc: function () {
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          wx.request({
+            url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
+            data: {
+              bindid: username,
+              bindstr: pwd,
+              ctrType: 0,
+              devs: [{ deviceuid: rentichuanganqis.diDeviceuid, value: rentichuanganqis.diIeee }]
+            },
+            method: 'POST',
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log(res.data)
+              wx.showToast({
+                title: '修改成功',
+                duration: 2000
+              });
+              wx.navigateTo({
+                url: '../../devconfig/devconfig'
+              })
+            },
+            fail: function (err) {
+              console.log(err)
+            }
+          })
+        } else if (sm.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

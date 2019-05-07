@@ -1,8 +1,0 @@
-/* pages/devctr/shuijinchuang/shuijinchuang.wxss */
-.count{
-  display: flex;
-  margin-top: 20px;
-}
-.count view{
-   margin: 20px; 
-}

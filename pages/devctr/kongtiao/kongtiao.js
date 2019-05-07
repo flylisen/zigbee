@@ -33,7 +33,7 @@ Page({
      }
     console.log(temSet)
     wx.request({
-      url: 'https://localhost:8443/ctrDev',
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
       method: 'POST',
       data: {
         bindid: username,

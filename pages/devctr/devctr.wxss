@@ -8,9 +8,11 @@ view h1{
  display: flex;
  flex-flow: row wrap; 
 align-content: space-around;
+justify-content: center;
 }
+
 .flex-wrp_one view{
-  padding: 15px;
+  padding: 7px;
 }
 .btn{
    width: 70px;

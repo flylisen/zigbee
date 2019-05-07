@@ -6,7 +6,7 @@ Page({
   },
   submit: function (e) {
     wx.request({
-      url: 'https://localhost:8443/login',
+      url: 'https://dev.rishuncloud.com:8443/login',
       data: {
         loginName: e.detail.value.username,
         loginPwd: e.detail.value.pwd
@@ -29,6 +29,7 @@ Page({
                 duration: 2000
               })
             } else {
+              console.log(123);
               //建立websocket连接 
               if (res.data.gwId != -1) {
                 app.initWebSocket(res.data.gwId);

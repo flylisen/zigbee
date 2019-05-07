@@ -12,7 +12,7 @@
  <button bindtap="picker">确定</button> 
   <view>
   <view class="section__title">亮度</view>
-  <slider name="slider" show-value bindchange="listenerSlider"></slider>
+  <slider name="slider" show-value bindchange="listenerSlider" value=""></slider>
   </view>
 
 

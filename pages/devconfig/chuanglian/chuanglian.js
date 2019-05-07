@@ -17,7 +17,7 @@ Page({
     Industrys = JSON.parse(deviceuid);
     this.setData({
       diNames: Industrys.diName,
-      chuanglians: Industrys.diOnlineStatu
+      chuanglians: Industrys.diOnoffStatu
     })
   },
   chuangliang: function (a) {
@@ -34,7 +34,7 @@ Page({
       chuanglians:Industrys.diOnoffStatu
     })
     wx.request({
-      url: 'https://localhost:8443/ctrDev',
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
       method: 'POST',
       data: {
         bindid: username,
@@ -63,7 +63,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://localhost:8443/editDevName', //真实的接口地址           
+        url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
         data: {
           bindid: username,
           bindstr: pwd,
@@ -80,8 +80,8 @@ Page({
             duration: 2000
           });
           wx.navigateTo({
-            url: '../../devconfig/devconfig'
-          });
+            url: '../devconfig',
+          }, 2000)
         },
         fail: function (err) {
           console.log(err)
@@ -100,7 +100,7 @@ Page({
       success: function (sm) {
         if (sm.confirm) {
           wx.request({
-            url: 'https://localhost:8443/editDevName', //真实的接口地址           
+            url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
             data: {
               bindid: username,
               bindstr: pwd,

@@ -1,4 +1,4 @@
-// pages/areaconfig/areaadd/areaadd.js
+// pages/scenesconfig/scenesadd/scenesadd.js
 Page({
 
   /**
@@ -9,55 +9,76 @@ Page({
     choseImg: '/images/check-circle2.png',
     unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
-    arr:'',
+    arr: '',
   },
   submit: function (e) {
     var that = this
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     var name = e.detail.value.areaname;
-    let arr1=that.data.arr;
+    let arr1 = that.data.arr;
+    console.log(arr1);
     if (name == '' || arr1==''){
       wx.showModal({
         title: '提示',
-        content: '请输入区域名称或者选择设备'
+        content: '请输入场景名称或者选择设备'
       })
     }else{
-      let arr2 = [];
+      let deviceuid = [];//diDeviceuid
+      let diId = [];//diId
+      let diOnoffStatu = [];//diOnoffStatu
       for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diDeviceuid
-        arr2.push(arr1[i].diDeviceuid);
+        deviceuid.push(arr1[i].diDeviceuid);
+        diId.push(arr1[i].diId);
+        diOnoffStatu.push(arr1[i].diOnoffStatu);
       }
-      console.log(arr2);
-      console.log(arr1);
+      console.log(deviceuid);
+      console.log(diId);
+      console.log(diOnoffStatu);
       console.log(e.detail.value.areaname);
       wx.request({
-        url: 'https://dev.rishuncloud.com:8443/addArea',
-        method: "POST",
+        url: 'https://dev.rishuncloud.com:8443/addScene',
+        method: 'POST',
         data: {
-          actCode: "106",
+          act: "setscene",
+          code: "253",
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
           bindid: username,
-          areaName: e.detail.value.areaname,
-          devs: arr2,
-          ver: "1"
+          bindstr: pwd,
+          ver: "1",
+          scene: [{
+            scenename: e.detail.value.areaname,
+            scenemem: [{
+              deviceuid: deviceuid,
+              deviceid: diId,
+              data1: diOnoffStatu,
+              data2: 0,
+              data3: 0,
+              data4: 0,
+              IRID: 0,
+              delaytime: 0
+            }]
+          }]
         },
-        header: {
-          'Content-Type': 'application/json'
+        header:
+        {
+          'content-type': 'application/json' // 默认值 
         },
         success: function (res) {
           console.log(res.data)
           wx.redirectTo({
-            url: '../areaconfig',
+            url: '../scenesconfig',
           }, 2000)
         }
-      })
+      });
     }
   },
-  go: function(){
+  go: function () {
     wx.redirectTo({
-      url: '../areaconfig',
+      url: '../scenesconfig',
     }, 2000)
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -95,10 +116,10 @@ Page({
           key: "sortResult",
           data: sortResult
         });
-        var arr3=[];
-        for(var i=0;i<sortResult.length;i++){   //显示区域添加设备
-          if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)){
-              arr3.push(sortResult[i]);
+        var arr3 = [];
+        for (var i = 0; i < sortResult.length; i++) {   //显示区域添加设备
+          if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)) {
+            arr3.push(sortResult[i]);
           }
         }
         console.log(arr3)
@@ -112,7 +133,29 @@ Page({
     })
     this.addTag();
   },
-
+  addTag() {//若是从服务器取来的数据，则需增加一个变量isSelect用来判断是否选中
+    for (var i = 0; i < this.data.sortedDevs.length; i++) {
+      this.data.sortedDevs[i].isSelect = false;
+    }
+  },
+  chooseTap(e) {//单击选中或取消按钮
+    let index = e.currentTarget.dataset.index;  //当前点击列表的index
+    console.log(e.currentTarget.dataset.index);
+    let infoArray = this.data.sortedDevs;
+    let arr = [];
+    infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
+    console.log(infoArray[index]);
+    for (var i = 0; i < infoArray.length; i++) { //获取选中信息
+      if (infoArray[i].isSelect) {
+        arr.push(infoArray[i]);
+        console.log(arr);
+      }
+    }
+    this.setData({
+      sortedDevs: infoArray,
+      arr
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -160,29 +203,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  addTag() {//若是从服务器取来的数据，则需增加一个变量isSelect用来判断是否选中
-    for (var i = 0; i < this.data.sortedDevs.length; i++) {
-      this.data.sortedDevs[i].isSelect = false;
-    }
-  },
-
-  chooseTap(e) {//单击选中或取消按钮
-    let index = e.currentTarget.dataset.index;  //当前点击列表的index
-    console.log(e.currentTarget.dataset.index);
-    let infoArray = this.data.sortedDevs;
-    let arr=[];
-    infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
-    console.log(infoArray[index]);
-    for (var i = 0; i < infoArray.length; i++) { //获取选中信息
-      if(infoArray[i].isSelect){
-          arr.push(infoArray[i]);
-          console.log(arr);
-      }
-    }
-    this.setData({
-      sortedDevs: infoArray,
-      arr
-    })
-  },
+  }
 })

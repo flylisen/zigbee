@@ -12,7 +12,6 @@
     "pages/areaconfig/areainfo/areainfo",
     "pages/devconfig/devconfig",
     "pages/scenesconfig/scenesconfig",
-    "pages/monitor/monitor",
     "pages/about/about",
     "pages/devconfig/chuanglian/chuanglian",
     "pages/devconfig/shuijin/shuijin",
@@ -37,7 +36,9 @@
     "pages/devconfig/kaiguanguan/kaiguanguan",
     "pages/devctr/dengcolor/dengcolor",
     "pages/devctr/kongtiao/kongtiao",
-    "pages/devctr/shuijinchuang/shuijinchuang"
+    "pages/scenesconfig/scenesadd/scenesadd",
+    "pages/devctr/sewendeng/sewendeng",
+    "pages/areactr/areainfo/areainfo"
       ],
   "window": {
     "backgroundTextStyle": "dark",

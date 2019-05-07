@@ -46,7 +46,7 @@ App({
     //建立websocket连接
     console.log('初始化建立websocket连接');
     that.globalData.localWebsocket = wx.connectSocket({
-      url: 'wss://localhost:8443/websocket/' + that.globalData.gwId,
+      url: 'wss://dev.rishuncloud.com:8443/websocket/' + that.globalData.gwId,
     });
     //websocket连接打开
     that.globalData.localWebsocket.onOpen(function(res) {

@@ -63,7 +63,87 @@ Page({
       }
     })
   },
-
+  //开关事件
+  kaiguanguan: function (event) {
+    var tp = event.currentTarget.dataset['tp'];
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    var temSet;
+    var dd = tp.diOnoffStatu;
+    if (tp.diOnoffStatu >= 1) {
+      temSet = 0;
+    } else {
+      temSet = 1;
+    }
+    console.log(temSet);
+    var index = event.currentTarget.id;//获得下标
+    var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
+    this.setData({
+      [tmp]: temSet
+    })
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
+      method: 'POST',
+      data: {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: tp.diDeviceuid, value: temSet }]
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+  },
+  //灯事件
+  deng: function (event) {
+    var deng = event.currentTarget.dataset['deng'];
+    console.log(deng)
+    var username = wx.getStorageSync('username');//网关账号
+    var pwd = wx.getStorageSync('pwd'); //网关密码
+    var temSet;
+    if (deng.diOnoffStatu >= 1) {
+      temSet = 0;
+    } else {
+      temSet = 1;
+    }
+    console.log(temSet);
+    var index = event.currentTarget.id;//获得下标
+    var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
+    this.setData({
+      [tmp]: temSet
+    })
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/ctrDev',
+      method: 'POST',
+      data: {
+        actCode: "102",
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: deng.diDeviceuid, value: temSet }],
+        ver: "1"
+      },
+      header:
+      {
+        'content-type': 'application/json' // 默认值 
+      },
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+  },
+  chuangliandk: function (event) {
+    console.log(event.currentTarget.dataset['deviceuid']);
+    var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deviceuid']));//函数可把字符串作为 URI
+    wx.navigateTo({
+      url: '../../devctr/chuanglian/chuanglian?deviceuid=' + deviceuid
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

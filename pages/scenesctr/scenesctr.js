@@ -30,7 +30,7 @@ Page({
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
     wx.request({
-      url: 'https://localhost:8443/getSceneInfo', //真实的接口地址           
+      url: 'https://dev.rishuncloud.com:8443/getSceneInfo', //真实的接口地址           
       data: {
         act: "getscenes",
         code: "251",

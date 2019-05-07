@@ -7,7 +7,8 @@ Page({
    */
   data: {
     diNames: '',
-    chuanglians: ''
+    chuanglians: '',
+    points:''
   },
 
   /**
@@ -19,6 +20,34 @@ Page({
     this.setData({
       diNames: mencichuanganqis.diName,
       chuanglians: mencichuanganqis.diOnlineStatu
+    })
+    //获得获取传感器属性值
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    wx.request({
+      url: 'https://dev.rishuncloud.com:8443/getSensorAttrValue', //真实的接口地址       
+      data: {
+        actCode: "110",
+        bindid: username,
+        bindstr: pwd,
+        deviceuid: mencichuanganqis.diDeviceuid,
+        ver: "1"
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res.data)
+        console.log(res.data.points)
+        that.setData({
+          points: res.data.points
+        });
+      },
+      fail: function (err) {
+        console.log(err)
+      }
     })
   },
   //修改设备名称
@@ -33,7 +62,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://localhost:8443/editDevName', //真实的接口地址           
+        url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
         data: {
           bindid: username,
           bindstr: pwd,
@@ -70,7 +99,7 @@ Page({
       success: function (sm) {
         if (sm.confirm) {
           wx.request({
-            url: 'https://localhost:8443/editDevName', //真实的接口地址           
+            url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
             data: {
               bindid: username,
               bindstr: pwd,

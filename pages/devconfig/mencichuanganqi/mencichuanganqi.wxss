@@ -1,1 +1,7 @@
 /* pages/devctr/mencichuanganqi/mencichuanganqi.wxss */
+.count{
+  display: flex;
+}
+.count view{
+   padding-left: 10px;
+}

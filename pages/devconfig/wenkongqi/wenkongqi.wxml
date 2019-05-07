@@ -11,3 +11,17 @@
             <view wx:else>
                   <text>状态 :异常</text>
  </view>
+   <view>
+   <view>修改信息</view> 
+  <form bindsubmit='submit'>
+        <text>名称:</text>
+        <input name="username" style=' border: 1px solid gray;'></input>
+       <view>
+        <button form-type='submit'>确定</button>
+      </view>
+    </form>
+ </view>
+ <view>
+      <button bindtap='qingjingsc'>删除</button>
+ </view>  
+

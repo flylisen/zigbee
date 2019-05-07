@@ -1,5 +1,5 @@
-// pages/devctr/shuijinchuang/shuijinchuang.js
-var shuijinchuangs='';
+// pages/devctr/sewendeng/sewendeng.js
+var sewendengs = '';
 Page({
 
   /**
@@ -7,51 +7,60 @@ Page({
    */
   data: {
     diNames: '',
+    chuanglians: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var shuijinchuang = decodeURIComponent(options.shuijinchuang);
-    shuijinchuangs = JSON.parse(shuijinchuang);
+    var sewendeng = decodeURIComponent(options.sewendeng);
+    sewendengs = JSON.parse(sewendeng);
     this.setData({
-      diNames: shuijinchuangs.diName,
+      diNames: sewendengs.diName,
+      chuanglians: sewendengs.diOnlineStatu
     });
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
+    //获取色温灯的色温值、开关值
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
     wx.request({
-      url: 'https://localhost:8443/getSensorAttrValue', 
-      method: 'POST',
+      url: 'https://dev.rishuncloud.com:8443/getColorTempInfo', //真实的接口地址            
       data: {
-        actCode:"110",
+        act: "gettemperature",
+        code: "213",
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
         bindid: username,
         bindstr: pwd,
-        deviceuid: shuijinchuangs.diDeviceuid,
-        ver:"1"
+        ver: '1',
+        devs: [{ deviceuid: sewendengs.diDeviceuid }]
       },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
+      method: 'POST',
+      header: {
+        'content-type': 'application/json'
       },
       success: function (res) {
         console.log(res.data)
+      },
+      fail: function (err) {
+        console.log(err)
       }
-    })
+    }) 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+       
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      
+
   },
 
   /**

@@ -1,0 +1,10 @@
+<!--pages/devctr/sewendeng/sewendeng.wxml-->
+<view class='count'>
+<image src='../../../images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
+  <view wx:if="{{diNames==''}}">
+               <text>名称 :色温（CCT）灯</text>
+           </view>
+           <view wx:else>
+        <text>名称 :{{diNames}}</text>
+        </view>
+</view>

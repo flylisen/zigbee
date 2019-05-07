@@ -1,12 +1,15 @@
 /* pages/config/config.wxss */
 navigator text{
    display: flex;
-  justify-content: center;
+   justify-content: center;
 }
 navigator image{
   width: 100px;
   height: 100px;
 }
 navigator{
-   padding-top: 40px;
+  padding-top: 30px;
+}
+.container{
+   margin-top: -100px;
 }

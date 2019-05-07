@@ -1,7 +1,16 @@
 <!--pages/scenesconfig/scenesconfig.wxml-->
-<view>添加场景</view>
-        <text>名称：</text>
-        <input name="scenename" bindinput ="scenename"></input>
- <button bindtap='submit'>添加场景</button>
+<view class='viewh1'> 
+     <h1>全部场景</h1>  
+     <button class='btn' bindtap='bindAdd'>新增</button> 
+     </view>
+      <view class='flex-wrp_one'>
+   <block  wx:for="{{sortedAreas}}" wx:for-item="item">
+       <view>
+               <image src='../../images/areactr/jiedianleiquyu.png' data-tp="{{item}}" id="{{index}}"   bindtap='areainfo' style="width:70px;height:70px;"></image>
+                <view wx:if="{{item.aiName==''}}">场景</view>
+                <view wx:else>{{item.aiName}}</view>
+      </view>
+    </block>
+    </view>
         
         

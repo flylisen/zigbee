@@ -32,7 +32,7 @@ Page({
       })
     } else {
       wx.request({
-        url: 'https://localhost:8443/editDevName', //真实的接口地址           
+        url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
         data: {
           bindid: username,
           bindstr: pwd,
@@ -69,7 +69,7 @@ Page({
       success: function (sm) {
         if (sm.confirm) {
           wx.request({
-            url: 'https://localhost:8443/editDevName', //真实的接口地址           
+            url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
             data: {
               bindid: username,
               bindstr: pwd,

@@ -7,8 +7,9 @@ view h1{
 .flex-wrp_one{
  display: flex;
  flex-flow: row wrap; 
+ justify-content: center;
 align-content: space-around;
 }
 .flex-wrp_one view{
-  padding: 15px;
+  padding: 7px;
 }
