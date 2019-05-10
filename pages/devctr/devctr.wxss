@@ -24,6 +24,16 @@ justify-content: center;
    margin-top: -30px;
    margin-right:20px;
 }
+.fbtn{
+   width: 70px;
+   height: 50px;
+   justify-content: center;
+   background:gray;
+   display: flex;
+   color: aliceblue;
+   margin-top: -50px;
+   margin-left: 20px;
+}
  .modalDlg{
     width: 580rpx;
     height: 720rpx;

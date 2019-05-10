@@ -1,4 +1,5 @@
 // pages/areaconfig/areaadd/areaadd.js
+var app=getApp();
 Page({
 
   /**
@@ -30,26 +31,26 @@ Page({
       console.log(arr2);
       console.log(arr1);
       console.log(e.detail.value.areaname);
-      wx.request({
-        url: 'https://dev.rishuncloud.com:8443/addArea',
-        method: "POST",
-        data: {
-          actCode: "106",
-          bindid: username,
-          areaName: e.detail.value.areaname,
-          devs: arr2,
-          ver: "1"
-        },
-        header: {
-          'Content-Type': 'application/json'
-        },
-        success: function (res) {
-          console.log(res.data)
+      let url = app.globalData.URL + 'addArea';
+      let data = {
+        actCode: "106",
+        bindid: username,
+        areaName: e.detail.value.areaname,
+        devs: arr2,
+        ver: "1"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data!=null){
           wx.redirectTo({
             url: '../areaconfig',
           }, 2000)
         }
-      })
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
     }
   },
   go: function(){
@@ -65,51 +66,46 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getDev', //真实的接口地址           
-      data: {
-        bindid: username,
-        bindstr: pwd
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        var tmp = {};
-        for (var index in res.data.devs) {
-          var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
-          if (tmp[tag] == null || tmp[tag] == undefined) {
-            tmp[tag] = new Array();
-          }
-          tmp[tag].push(res.data.devs[index]);
-        };
-        var sortResult = [];
-        for (var key in tmp) {
-          for (var j = 0; j < tmp[key].length; j++) {
-            sortResult.push(tmp[key][j]);
-          }
+    let url = app.globalData.URL + 'getDev';
+    let data = {
+      bindid: username,
+      bindstr: pwd
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      var tmp = {};
+      for (var index in res.data.devs) {
+        var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
         }
-        console.log(sortResult)
-        wx.setStorage({
-          key: "sortResult",
-          data: sortResult
-        });
-        var arr3=[];
-        for(var i=0;i<sortResult.length;i++){   //显示区域添加设备
-          if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)){
-              arr3.push(sortResult[i]);
-          }
+        tmp[tag].push(res.data.devs[index]);
+      };
+      var sortResult = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          sortResult.push(tmp[key][j]);
         }
-        console.log(arr3)
-        that.setData({
-          sortedDevs: arr3
-        });
-      },
-      fail: function (err) {
-        console.log(err)
       }
-    })
+      console.log(sortResult)
+      wx.setStorage({
+        key: "sortResult",
+        data: sortResult
+      });
+      var arr3 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域添加设备
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)) {
+          arr3.push(sortResult[i]);
+        }
+      }
+      console.log(arr3)
+      that.setData({
+        sortedDevs: arr3
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
     this.addTag();
   },
 

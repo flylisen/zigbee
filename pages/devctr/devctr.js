@@ -18,9 +18,8 @@ Page({
     this.setData({
       showModal: false
     })
-    wx.redirectTo({
-      url: '../devctr/devctr',
-    }, 2000)
+    var that=this
+     that.onReady();
   },
   scenesctr: function () {
     wx.navigateTo({
@@ -31,21 +30,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this; 
+    var that=this;
+    let url = app.globalData.URL + 'getDev';
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');    
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getDev', //真实的接口地址           
-      data: {
-        bindid:username,
-        bindstr:pwd
-      },
-      method:'POST',      
-    header: {        
-      'content-type': 'application/jsoFn'      
-        },      
-        success: function (res) {         
-          var tmp = {};
+    let data = {
+      bindid: username,
+      bindstr: pwd
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      var tmp = {};
           for(var index in res.data.devs) {         
               var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
               if (tmp[tag] == null || tmp[tag] == undefined) {
@@ -53,6 +47,7 @@ Page({
               }
               tmp[tag].push(res.data.devs[index]);
            };
+          var sortResult = [];
           for (var key in tmp) {
             for (var j = 0; j < tmp[key].length; j++) {
               sortResult.push(tmp[key][j]);
@@ -62,18 +57,16 @@ Page({
             //这里需要截取的内容
             item.diName = item.diName.substring(0,3)
           })
-          wx.setStorage({
-            key: "sortResult",
-            data: sortResult
-          }); 
+          console.log(sortResult);
+
           that.setData({
             sortedDevs: sortResult
-            });
-            },      
-            fail: function (err) {        
-              console.log(err)      
-              }    
-            })
+            });  
+        },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //开关事件
   kaiguanguan: function (event) {
@@ -93,24 +86,21 @@ Page({
     var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
     this.setData({
       [tmp] : temSet
-    })
-      wx.request({
-        url: 'https://dev.rishuncloud.com:8443/ctrDev',
-        method: 'POST',
-        data: {
-          bindid: username,
-          bindstr: pwd,
-          ctrType: 0,
-          devs: [{ deviceuid: tp.diDeviceuid, value: temSet }]
-        },
-        header:
-        {
-          'content-type': 'application/json' // 默认值 
-        },
-        success: function (res) {
-          console.log(res.data)
-        }
-      })
+     })  
+    let url = app.globalData.URL + 'ctrDev';
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: tp.diDeviceuid, value: temSet }]
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+     },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //灯事件
   deng: function (event){
@@ -130,25 +120,22 @@ Page({
     this.setData({
       [tmp]: temSet
     })
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/ctrDev',
-      method: 'POST',
-      data: {
-        actCode:102,
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: deng.diDeviceuid, value: temSet }],
-        ver:"1"
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
+    let url = app.globalData.URL + 'ctrDev';
+    let data = {
+      actCode: 102,
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: deng.diDeviceuid, value: temSet }],
+      ver: "1"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
       }
-    })
+    )
   },
   xia: function (event){
     console.log(event.currentTarget.dataset['deng']);
@@ -189,6 +176,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     //回调
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
@@ -212,106 +205,92 @@ Page({
         }
       }
       console.log('curPage', curPage);
-        if (nodeType == 4) {
-          //设备开关状态发生改变
-          for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-            if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
-              var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-              curPage.setData({
-                [tmp]: value
-              })
-            }
+      if (nodeType == 4) {
+        //设备开关状态发生改变
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+            curPage.setData({
+              [tmp]: value
+            })
           }
-        } else if (nodeType == 1) {
-          //设备新入网
-          if (getCurrentPages().length != 0) {
-            //刷新当前页面的数据
-            getCurrentPages()[getCurrentPages().length - 1].onLoad()
-          }
-        } else if (nodeType == 2) {
-          //判断设备是否在线
+        }
+      } else if (nodeType == 1) {
+        //设备新入网
+
+        //刷新当前页面
+        /*
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
+        */
+      } else if (nodeType == 2) {
+        //判断设备是否在线
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
             curPage.setData({
               [tmp]: 1
             })
           }
-        } else if (nodeType == 5) {
-          //修改名称
-          for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-            console.log(curPage.data.sortedDevs[i].diDeviceuid);
-            if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
-              console.log('i=' + i);
-              var tmp = 'sortedDevs[' + i + '].diName';
-              curPage.setData({
-                [tmp]: value
-              })
-            }
-          }
-        } else if (nodeType == 3) {
-          //删除设备
-          //刷新当前页面的数据
-          if (getCurrentPages().length != 0) {
-            getCurrentPages()[getCurrentPages().length - 1].onLoad()
-          }
-        } else if (nodeType == 6) {
-          var that = this;
-          var username = wx.getStorageSync('username');
-          var pwd = wx.getStorageSync('pwd');
-          wx.request({
-            url: 'https://dev.rishuncloud.com:8443/getSensorAttrValue', //真实的接口地址       
-            data: {
-              actCode: "110",
-              bindid: username,
-              bindstr: pwd,
-              deviceuid: deviceuId,
-              ver: "1"
-            },
-            method: 'POST',
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              console.log(res.data)
-            },
-            fail: function (err) {
-              console.log(err)
-            }
-          })
         }
+      } else if (nodeType == 5) {
+        //修改名称
+        console.log(curPage.data.sortedDevs);
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+            console.log('i=' + i);
+            var tmp = 'sortedDevs[' + i + '].diName';
+            curPage.setData({
+              [tmp]: value
+            })
+          }
+        }
+      } else if (nodeType == 3) {
+        //删除设备
+        //刷新当前页面
+      } else if (nodeType == 6) {
+        var that = this;
+        var username = wx.getStorageSync('username');
+        var pwd = wx.getStorageSync('pwd');
+        let url = app.globalData.URL + 'getSensorAttrValue';
+        let data = {
+          actCode: "110",
+          bindid: username,
+          bindstr: pwd,
+          deviceuid: deviceuId,
+          ver: "1"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
       }
       console.log('当前页面在设备控制');
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
+    } 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+   
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-          
-  },
 
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-         wx.showLoading({
-           title: '加载中',
-         })
-     wx.stopPullDownRefresh();//刷新完成停止刷新
+       
   },
 
   /**

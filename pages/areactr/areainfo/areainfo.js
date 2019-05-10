@@ -1,5 +1,6 @@
 // pages/areaconfig/areainfo/areainfo.js
 var Industrys;
+var app=getApp();
 Page({
 
   /**
@@ -24,44 +25,38 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getAreaDev', //真实的接口地址            
-      data: {
-        actCode:"108",
-        bindid: username,
-        areaId: Industrys.aiId,
-        ver: "1"
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data);
-        var tmp = {};
-        for (var index in res.data.devs) {
-          var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
-          if (tmp[tag] == null || tmp[tag] == undefined) {
-            tmp[tag] = new Array();
-          }
-          tmp[tag].push(res.data.devs[index]);
-        };
-        var sortResult = [];
-        for (var key in tmp) {
-          for (var j = 0; j < tmp[key].length; j++) {
-            sortResult.push(tmp[key][j]);
-          }
+    let url = app.globalData.URL + 'getAreaDev';
+    let data = {
+      actCode: "108",
+      bindid: username,
+      areaId: Industrys.aiId,
+      ver: "1"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
+      var tmp = {};
+      for (var index in res.data.devs) {
+        var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
         }
-        console.log(sortResult);
-        that.setData({
-          sortedDevs: sortResult
-        });
-       
-      },
-      fail: function (err) {
-        console.log(err)
+        tmp[tag].push(res.data.devs[index]);
+      };
+      var sortResult = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          sortResult.push(tmp[key][j]);
+        }
       }
-    })
+      console.log(sortResult);
+      that.setData({
+        sortedDevs: sortResult
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //开关事件
   kaiguanguan: function (event) {

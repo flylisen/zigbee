@@ -1,4 +1,5 @@
 // pages/scenesconfig/scenesadd/scenesadd.js
+const app = getApp();
 Page({
 
   /**
@@ -36,42 +37,41 @@ Page({
       console.log(diId);
       console.log(diOnoffStatu);
       console.log(e.detail.value.areaname);
-      wx.request({
-        url: 'https://dev.rishuncloud.com:8443/addScene',
-        method: 'POST',
-        data: {
-          act: "setscene",
-          code: "253",
-          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-          key: "bq6wqzasjwtkl0i21pi9fbeq4",
-          bindid: username,
-          bindstr: pwd,
-          ver: "1",
-          scene: [{
-            scenename: e.detail.value.areaname,
-            scenemem: [{
-              deviceuid: deviceuid,
-              deviceid: diId,
-              data1: diOnoffStatu,
-              data2: 0,
-              data3: 0,
-              data4: 0,
-              IRID: 0,
-              delaytime: 0
-            }]
+      let url = app.globalData.URL + 'addScene';
+      let data = {
+        act: "setscene",
+        code: "253",
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        ver: "1",
+        scene: [{
+          scenename: e.detail.value.areaname,
+          scenemem: [{
+            deviceuid: deviceuid,
+            deviceid: diId,
+            data1: diOnoffStatu,
+            data2: 0,
+            data3: 0,
+            data4: 0,
+            IRID: 0,
+            delaytime: 0
           }]
-        },
-        header:
-        {
-          'content-type': 'application/json' // 默认值 
-        },
-        success: function (res) {
-          console.log(res.data)
+        }]
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data!=null){
           wx.redirectTo({
             url: '../scenesconfig',
           }, 2000)
         }
-      });
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
     }
   },
   go: function () {
@@ -86,51 +86,47 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getDev', //真实的接口地址           
-      data: {
-        bindid: username,
-        bindstr: pwd
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        var tmp = {};
-        for (var index in res.data.devs) {
-          var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
-          if (tmp[tag] == null || tmp[tag] == undefined) {
-            tmp[tag] = new Array();
-          }
-          tmp[tag].push(res.data.devs[index]);
-        };
-        var sortResult = [];
-        for (var key in tmp) {
-          for (var j = 0; j < tmp[key].length; j++) {
-            sortResult.push(tmp[key][j]);
-          }
+    let url = app.globalData.URL + 'getDev';
+    let data = {
+      bindid: username,
+      bindstr: pwd
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+      var tmp = {};
+      for (var index in res.data.devs) {
+        var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
         }
-        console.log(sortResult)
-        wx.setStorage({
-          key: "sortResult",
-          data: sortResult
-        });
-        var arr3 = [];
-        for (var i = 0; i < sortResult.length; i++) {   //显示区域添加设备
-          if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)) {
-            arr3.push(sortResult[i]);
-          }
+        tmp[tag].push(res.data.devs[index]);
+      };
+      var sortResult = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          sortResult.push(tmp[key][j]);
         }
-        console.log(arr3)
-        that.setData({
-          sortedDevs: arr3
-        });
-      },
-      fail: function (err) {
-        console.log(err)
       }
-    })
+      console.log(sortResult)
+      wx.setStorage({
+        key: "sortResult",
+        data: sortResult
+      });
+      var arr3 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示场景添加设备
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 528 && (sortResult[i].diZonetype == 0 || sortResult[i].diZonetype == 2)) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255)) {
+          arr3.push(sortResult[i]);
+        }
+      }
+      console.log(arr3)
+      that.setData({
+        sortedDevs: arr3
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
     this.addTag();
   },
   addTag() {//若是从服务器取来的数据，则需增加一个变量isSelect用来判断是否选中

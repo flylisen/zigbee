@@ -5,66 +5,37 @@ Page({
     
   },
   submit: function (e) {
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/login',
-      data: {
-        loginName: e.detail.value.username,
-        loginPwd: e.detail.value.pwd
-      },
-      method: "POST",
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        wx.setStorage({
-          key: "gwId",
-          data: res.data.gwId,
-        })
-        if (res.statusCode == 200) {
-          if(res.data.code==1){
-            if (res.data.error == true) {
-              wx.showToast({
-                title: '网络错误',
-                icon: 'none',
-                duration: 2000
-              })
-            } else {
-              console.log(123);
-              //建立websocket连接 
-              if (res.data.gwId != -1) {
-                app.initWebSocket(res.data.gwId);
-              }
-              wx.setStorage({
-                key: "username",
-                data: e.detail.value.username,
-              })
-              wx.setStorage({
-                key: "pwd",
-                data: e.detail.value.pwd
-              })
-              wx.showToast({
-                title: "登录成功",
-                icon: "Yes",
-                duration: 2000,
-                success: function () {
-                                
-                  setTimeout(function () {
-                    wx.switchTab({
-                      url: '../index/index',
-                    }, 2000)
-                  })
-                }
-              })
-            }
-          }else{
-            wx.showToast({
-              title: "登录失败",
-              icon: "No",
-              duration: 2000,
-            })
-          }
-        }
+    let url = app.globalData.URL + 'login';
+    let data = {
+      loginName: e.detail.value.username,
+      loginPwd: e.detail.value.pwd 
+      }; 
+    wx.setStorageSync('username', e.detail.value.username);
+    wx.setStorageSync('pwd', e.detail.value.pwd);
+     app.wxRequest('POST', url, data, (res) => { 
+       console.log(res.data)
+       //建立websocket连接 
+       if (res.data.gwId != -1) {
+         app.initWebSocket(res.data.gwId);
+       }
+       if (res.data!=null){
+         wx.showToast({
+           title: "登录成功",
+           icon: "Yes",
+           duration: 2000,
+           success: function () {
+             setTimeout(function () {
+               wx.switchTab({
+                 url: '../index/index',
+               }, 2000)
+             })
+           }
+         })
+        } 
+    }, 
+     (err) => { 
+       console.log(err.errMsg) 
       }
-    })
+     )
   }
 })

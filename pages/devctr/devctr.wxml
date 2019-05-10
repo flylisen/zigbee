@@ -1,7 +1,7 @@
 <!--pages/devctr/devctr.wxml-->
   <view class='viewh1'>
      <h1>全部设备</h1>
-     <button class='btn' bindtap='bindAdd'>配置</button> 
+     <button class='btn' bindtap='bindAdd'>配置</button>
  </view>
   <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
       <view class='modalDlg' wx:if="{{showModal}}">
@@ -56,7 +56,7 @@
                  <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
                   <view wx:if="{{item.diName==''}}">紧急按钮</view>
-                <view wx:else>{{item.diName}}</view>
+                  <view wx:else>{{item.diName}}</view>
          </view>
           <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==277}}">
           <image src='../../images/devctr/anfangyaokongqi.png' style="width:70px;height:70px;"></image>

@@ -1,7 +1,10 @@
 // pages/devctr/dengcolor/dengcolor.js
+const app = getApp();
 var dengs = '';
 var S=0;
 var H=0;
+var username = wx.getStorageSync('username');//网关账号
+var pwd = wx.getStorageSync('pwd'); //网关密码
 Page({
 
   /**
@@ -53,33 +56,28 @@ Page({
     });
     console.log(dengs.diDeviceuid);
     //获取彩灯开关，亮度，颜色，饱和度
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getDevMenage',
-      method: 'POST',
-      data: {
-        act: "getrgbw",
-        code: "212",
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver:"1",
-        devs: [
-          {
-            deviceuid:dengs.diDeviceuid
-          }
-        ]
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
+    let url = app.globalData.URL + 'getDevMenage';
+    let data = {
+      act: "getrgbw",
+      code: "212",
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      ver: "1",
+      devs: [
+        {
+          deviceuid: dengs.diDeviceuid
+        }
+      ]
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
       }
-    })
+    )
   },
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
   onChangeColor(e) {
@@ -137,53 +135,42 @@ Page({
     }) 
   },
 picker:function(){
-    console.log(dengs);
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/ctrLightColor',
-      method: 'POST',
-      data: {
-        act:"controlhue",
-        code:"214", 
-        AccessID:"vlvgt9vecxti7zqy9xu0yyy7e",
-        key : "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver:"1",
-        devs: [{ deviceuid: dengs.diDeviceuid, valueother: S, value: H}]
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
-      }
-    })
+  let url = app.globalData.URL + 'ctrLightColor';
+  let data = {
+    act: "controlhue",
+    code: "214",
+    AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+    key: "bq6wqzasjwtkl0i21pi9fbeq4",
+    bindid: username,
+    bindstr: pwd,
+    ver: "1",
+    devs: [{ deviceuid: dengs.diDeviceuid, valueother: S, value: H }]
+  };
+  app.wxRequest('POST', url, data, (res) => {
+    console.log(res.data)
+  },
+    (err) => {
+      console.log(err.errMsg)
+    }
+  )
   },
   listenerSlider:function(e){
     //获取滑动后的值
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/ctrDev',
-      method: 'POST',
-      data: {
-        actCode:"102",
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 1,
-        devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value }],
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
+    let url = app.globalData.URL + 'ctrDev';
+    let data = {
+      actCode: "102",
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 1,
+      devs: [{ deviceuid: dengs.diDeviceuid, value: e.detail.value }],
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
       }
-    })   
+    )  
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -195,7 +182,11 @@ picker:function(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在dengcolor');
+    }
   },
 
   /**

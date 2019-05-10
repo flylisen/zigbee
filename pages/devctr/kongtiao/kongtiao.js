@@ -1,5 +1,6 @@
 // pages/devctr/kongtiao/kongtiao.js
 var kongtiaos='';
+const app = getApp();
 Page({
 
   /**
@@ -32,23 +33,20 @@ Page({
       temSet =1
      }
     console.log(temSet)
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/ctrDev',
-      method: 'POST',
-      data: {
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: kongtiaos.diDeviceuid, value: temSet}]
-      },
-      header:
-      {
-        'content-type': 'application/json' // 默认值 
-      },
-      success: function (res) {
-        console.log(res.data)
+    let url = app.globalData.URL + 'ctrDev';
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: kongtiaos.diDeviceuid, value: temSet }]
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
       }
-    })
+    )
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

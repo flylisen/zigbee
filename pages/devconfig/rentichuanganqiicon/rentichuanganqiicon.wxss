@@ -1,7 +1,0 @@
-/* pages/devctr/rentichuanganqiicon/rentichuanganqiicon.wxss */
-.count{
-  display: flex;
-}
-.count view{
-   padding-left: 10px;
-}

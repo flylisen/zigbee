@@ -1,4 +1,5 @@
 // pages/config/config.js
+const app = getApp()
 Page({
 
   /**
@@ -19,14 +20,18 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+  
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在config');
+    }
   },
 
   /**

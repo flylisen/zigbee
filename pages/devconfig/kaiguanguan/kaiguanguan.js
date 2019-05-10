@@ -1,5 +1,6 @@
 // pages/devconfig/kaiguanguan/kaiguanguan.js
 var kaiguanguans=null;
+var app=getApp();
 Page({
 
   /**
@@ -20,6 +21,29 @@ Page({
       diNames: kaiguanguans.diName,
       chuanglians: kaiguanguans.diOnlineStatu
     })
+    //获得获取传感器属性值
+    var that = this;
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    let url = app.globalData.URL + 'getSensorAttrValue';
+    let data = {
+      actCode: "110",
+      bindid: username,
+      bindstr: pwd,
+      deviceuid: kaiguanguans.diDeviceuid,
+      ver: "1"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+      console.log(res.data.points)
+      that.setData({
+        points: res.data.points
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //修改设备名称
   submit: function (e) {
@@ -32,31 +56,32 @@ Page({
         content: '请输入名称'
       })
     } else {
-      wx.request({
-        url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
-        data: {
-          bindid: username,
-          bindstr: pwd,
-          devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: e.detail.value.username }]
-        },
-        method: 'POST',
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          console.log(res.data)
+      let url = app.globalData.URL + 'editDevName';
+      let data = {
+        bindid: username,
+        bindstr: pwd,
+        devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: e.detail.value.username }]
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data!=null){
           wx.showToast({
             title: '修改成功',
             duration: 2000
           });
-          wx.navigateTo({
-            url: '../../devconfig/devconfig'
+          var pages = getCurrentPages(); // 当前页面 
+          var beforePage = pages[pages.length - 2]; // 前一个页面  
+          wx.navigateBack({
+            success: function () {
+              beforePage.onShow(); // 执行前一个页面的方法     
+            }
           });
-        },
-        fail: function (err) {
-          console.log(err)
+        } 
+      },
+        (err) => {
+          console.log(err.errMsg)
         }
-      })
+      )
     }
   },
   //删除设备
@@ -69,32 +94,31 @@ Page({
       content: '确定要删除吗？',
       success: function (sm) {
         if (sm.confirm) {
-          wx.request({
-            url: 'https://dev.rishuncloud.com:8443/editDevName', //真实的接口地址           
-            data: {
-              bindid: username,
-              bindstr: pwd,
-              ctrType: 0,
-              devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: kaiguanguans.diIeee }]
-            },
-            method: 'POST',
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              console.log(res.data)
-              wx.showToast({
-                title: '修改成功',
-                duration: 2000
-              });
-              wx.navigateTo({
-                url: '../../devconfig/devconfig'
-              })
-            },
-            fail: function (err) {
-              console.log(err)
+          let url = app.globalData.URL + 'editDevName';
+          let data = {
+            bindid: username,
+            bindstr: pwd,
+            ctrType: 0,
+            devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: kaiguanguans.diIeee }]
+          };
+          app.wxRequest('POST', url, data, (res) => {
+            console.log(res.data)
+            wx.showToast({
+              title: '删除成功',
+              duration: 2000
+            });
+            var pages = getCurrentPages(); // 当前页面 
+            var beforePage = pages[pages.length - 2]; // 前一个页面  
+            wx.navigateBack({
+              success: function () {
+                beforePage.onShow(); // 执行前一个页面的方法     
+              }
+            });
+          },
+            (err) => {
+              console.log(err.errMsg)
             }
-          })
+          )
         } else if (sm.cancel) {
           console.log('用户点击取消')
         }

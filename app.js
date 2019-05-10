@@ -1,43 +1,13 @@
 //app.js
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        }
-      }
-    })
-  },
+ 
+ //设置全局对象  
   globalData: {
     userInfo: null,
     localWebsocket: {},      //websocket对象
+    URL: 'https://dev.rishuncloud.com:8443/',  
     gwId: -1,
-    onReceiveWebsocketMessageCallback: function(){}                
+    onReceiveWebsocketMessageCallback: function () { }
   },
   //初始化websocket
   initWebSocket: function (gwId) {
@@ -49,15 +19,15 @@ App({
       url: 'wss://dev.rishuncloud.com:8443/websocket/' + that.globalData.gwId,
     });
     //websocket连接打开
-    that.globalData.localWebsocket.onOpen(function(res) {
+    that.globalData.localWebsocket.onOpen(function (res) {
       console.log('websocket已建立连接');
     });
     //websocket连接出错
-    that.globalData.localWebsocket.onError(function(res) {
+    that.globalData.localWebsocket.onError(function (res) {
       console.log('websocket连接出错');
     });
     //连接关闭 重连
-    that.globalData.localWebsocket.onClose(function(res) {
+    that.globalData.localWebsocket.onClose(function (res) {
       console.log('websocket连接关闭');
       /**if (that.globalData.gwId != -1) {
         console.log('执行websocket重连');
@@ -65,9 +35,34 @@ App({
       }**/
     });
     //websocket接收到信息
-    that.globalData.localWebsocket.onMessage(function(res) {
-      console.log('-------------------------');
-      that.globalData.onReceiveWebsocketMessageCallback(res);
-    }); 
+    that.globalData.localWebsocket.onMessage(function (res) {
+        console.log('-------------------------');
+        that.globalData.onReceiveWebsocketMessageCallback(res);
+    });
+  },   
+  /**  
+   * 
+   * 封装wx.request请求  
+   * method： 请求方式  
+   * url: 请求地址  
+   * data： 要传递的参数  
+   * callback： 请求成功回调函数  
+   * errFun： 请求失败回调函数  
+   **/
+  wxRequest(method, url, data, callback, errFun) {
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        callback(res);
+      },
+      fail: function (err) {
+        errFun(res);
+      }
+    })
   }
 })

@@ -1,4 +1,4 @@
-
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -19,27 +19,22 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    wx.request({
-      url: 'https://dev.rishuncloud.com:8443/getSceneInfo', //真实的接口地址           
-      data: {
-        act: "getscenes",
-        code: "251",
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver: "1"
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        console.log(res.data)
-      },
-      fail: function (err) {
-        console.log(err)
+    let url = app.globalData.URL + 'getSceneInfo';
+    let data = {
+      act: "getscenes",
+      code: "251",
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      ver: "1"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
       }
-    })
+    )
   },
 })
