@@ -18,8 +18,9 @@ Page({
     this.setData({
       showModal: false
     })
-    var that=this
-     that.onReady();
+    wx.navigateTo({
+      url: '../devctr/devctr'
+    })
   },
   scenesctr: function () {
     wx.navigateTo({
@@ -72,6 +73,7 @@ Page({
   kaiguanguan: function (event) {
     var tp = event.currentTarget.dataset['tp'];
     console.log(tp)
+    if (tp.diOnlineStatu > 0) {
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     var temSet;
@@ -86,25 +88,33 @@ Page({
     var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
     this.setData({
       [tmp] : temSet
-     })  
-    let url = app.globalData.URL + 'ctrDev';
-    let data = {
-      bindid: username,
-      bindstr: pwd,
-      ctrType: 0,
-      devs: [{ deviceuid: tp.diDeviceuid, value: temSet }]
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-     },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+     })
+      let url = app.globalData.URL + 'ctrDev';
+      let data = {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: tp.deviceuid, uuid: tp.diUuid,value: temSet }],
+        var:"2.0"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+     }else{
+      wx.showToast({
+        title: '设备不在线',
+        icon:'none'
+      })
+     }  
   },
   //灯事件
   deng: function (event){
     var deng = event.currentTarget.dataset['deng'];
+    if (deng.diOnlineStatu > 0) {
     console.log(deng)
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
@@ -126,7 +136,7 @@ Page({
       bindid: username,
       bindstr: pwd,
       ctrType: 0,
-      devs: [{ deviceuid: deng.diDeviceuid, value: temSet }],
+      devs: [{ deviceuid: deng.deviceuid, uuid: deng.diUuid,value: temSet }],
       ver: "1"
     };
     app.wxRequest('POST', url, data, (res) => {
@@ -136,6 +146,12 @@ Page({
         console.log(err.errMsg)
       }
     )
+    } else {
+      wx.showToast({
+        title: '设备不在线',
+        icon: 'none'
+      })
+    }
   },
   xia: function (event){
     console.log(event.currentTarget.dataset['deng']);
@@ -186,15 +202,15 @@ Page({
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
-      var deviceuId;
+      var diUuid;
       var value;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
-      deviceuId = strs[1].split('=')[1];
+      diUuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       console.log('nodeType', nodeType);
-      console.log('deviceuId', deviceuId);
+      console.log('diUuid', diUuid);
       console.log('value', value);
       //找到当前页面的page
       var pageArray = getCurrentPages();
@@ -208,7 +224,7 @@ Page({
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
               [tmp]: value
@@ -217,9 +233,8 @@ Page({
         }
       } else if (nodeType == 1) {
         //设备新入网
-
-        //刷新当前页面
         /*
+        //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
@@ -228,7 +243,7 @@ Page({
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
             curPage.setData({
               [tmp]: 1
@@ -239,7 +254,7 @@ Page({
         //修改名称
         console.log(curPage.data.sortedDevs);
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
             console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diName';
             curPage.setData({
@@ -249,7 +264,13 @@ Page({
         }
       } else if (nodeType == 3) {
         //删除设备
+        /*
         //刷新当前页面
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
+        */
       } else if (nodeType == 6) {
         var that = this;
         var username = wx.getStorageSync('username');
@@ -259,7 +280,7 @@ Page({
           actCode: "110",
           bindid: username,
           bindstr: pwd,
-          deviceuid: deviceuId,
+          uuid: diUuid,
           ver: "1"
         };
         app.wxRequest('POST', url, data, (res) => {

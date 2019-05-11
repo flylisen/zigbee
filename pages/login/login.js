@@ -18,7 +18,7 @@ Page({
        if (res.data.gwId != -1) {
          app.initWebSocket(res.data.gwId);
        }
-       if (res.data!=null){
+       if (res.data.gwId=1){
          wx.showToast({
            title: "登录成功",
            icon: "Yes",

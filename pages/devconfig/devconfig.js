@@ -52,15 +52,29 @@ Page({
     )
   },
   kaiguanguan: function (event){
-    console.log(event.currentTarget.dataset['kaiguanguan']);
-    var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kaiguanguan']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
-    })
+    if (event.currentTarget.dataset['kaiguanguan'].diOnlineStatu>0){
+      console.log(event.currentTarget.dataset['kaiguanguan']);
+      var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kaiguanguan']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
+      })
+    }else{
+      wx.showToast({
+        title: '设备不在线',
+        icon: 'none'
+      })
+    }
+   
   },
-
+  //新设备入网
   bindAdd:function(){
-    
+    wx.showLoading({
+      title: '入网中',
+    })
+    setTimeout(function () {
+         wx.hideLoading()
+    }, 2000)
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -77,15 +91,15 @@ Page({
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
-      var deviceuId;
+      var uuid;
       var value;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
-      deviceuId = strs[1].split('=')[1];
+      uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       console.log('nodeType', nodeType);
-      console.log('deviceuId', deviceuId);
+      console.log('uuid', uuid);
       console.log('value', value);
       //找到当前页面的page
       var pageArray = getCurrentPages();
@@ -99,7 +113,7 @@ Page({
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
               [tmp]: value
@@ -117,7 +131,7 @@ Page({
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
             curPage.setData({
               [tmp]: 1
@@ -127,7 +141,7 @@ Page({
       } else if (nodeType == 5) {
         //修改名称
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (deviceuId == curPage.data.sortedDevs[i].diDeviceuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diName';
             curPage.setData({
@@ -143,11 +157,12 @@ Page({
         var username = wx.getStorageSync('username');
         var pwd = wx.getStorageSync('pwd');
         let url = app.globalData.URL + 'getSensorAttrValue';
+        
         let data = {
           actCode: "110",
           bindid: username,
           bindstr: pwd,
-          deviceuid: deviceuId,
+          uuid: uuid ,
           ver: "1"
         };
         app.wxRequest('POST', url, data, (res) => {

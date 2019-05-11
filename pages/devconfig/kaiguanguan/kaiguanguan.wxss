@@ -1,1 +1,21 @@
 /* pages/devconfig/kaiguanguan/kaiguanguan.wxss */
+.view2{
+    margin-top: 40px;
+    
+}
+.view2 view{
+  display: flex;
+  justify-content: center;
+}
+.view1{
+   display: flex;
+}
+.btn{
+   width: 70px;
+   height: 50px;
+   justify-content: center;
+   background:gray;
+   display: flex;
+   color: aliceblue;
+   margin-left: 150px;
+}

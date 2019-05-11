@@ -13,21 +13,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onLoad: function (options) {
-
     console.log('onLoad')
     var that = this;
     var username = wx.getStorageSync('username');
@@ -71,6 +56,24 @@ Page({
     wx.redirectTo({
       url: '../areaconfig/areaadd/areaadd',
     }, 2000)
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function (options) {
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在areaconfig');
+    }
   },
 
   /** 

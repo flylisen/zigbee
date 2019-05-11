@@ -1,18 +1,22 @@
 <!--pages/devctr/dengcolor/dengcolor.wxml-->
 <view class='count'>
-<image src='../../../images/devctr/deng.png' style="width:70px;height:70px;"></image>
+ <image src='../../../images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{diOnoffStatu>0}}"></image>
+  <image src='../../../images/devctr/deng.png' wx:else style="width:70px;height:70px;"></image>
   <view wx:if="{{diNames==''}}">
                <text>名称 :RGBW灯</text>
            </view>
            <view wx:else>
         <text>名称 :{{diNames}}</text>
         </view>
+        <view>
+         <button  bindtap='deng'>开关</button>
+        </view>
 </view>
 <color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
  <button bindtap="picker">确定</button> 
   <view>
   <view class="section__title">亮度</view>
-  <slider name="slider" show-value bindchange="listenerSlider" value=""></slider>
+  <slider name="slider" show-value bindchange="listenerSlider" value="" max='255'></slider>
   </view>
 
 

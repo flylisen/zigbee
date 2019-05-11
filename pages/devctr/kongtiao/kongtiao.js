@@ -38,7 +38,7 @@ Page({
       bindid: username,
       bindstr: pwd,
       ctrType: 0,
-      devs: [{ deviceuid: kongtiaos.diDeviceuid, value: temSet }]
+      devs: [{ deviceuid: kongtiaos.diDeviceuid, uuid: kongtiaos.diUuid, value: temSet }]
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)

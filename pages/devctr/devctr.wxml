@@ -22,7 +22,7 @@
                  <view wx:else>
                  <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                <text wx:if="{{item.diName==''}}">开关</text>
+                <text wx:if="{{item.diName==''}}">开关{{item.diZonetype}}</text>
                 <text wx:else>{{item.diName}}</text>
        </view>
        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}">
@@ -36,8 +36,8 @@
                  <text wx:if="{{item.diName==''}}">水浸传感器</text>
                  <text wx:else>{{item.diName}}</text>
          </view>
-           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==0}}" data-deviceuid="{{item}}" bindtap='chuangliandk'>
-              <image src='../../images/devctr/chuanglian.png' style="width:40px;height:40px;"></image>
+           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" data-deviceuid="{{item}}" bindtap='chuangliandk'>
+              <image src='../../images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.diOnlineStatu==0}}">
                  <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
                  </view>
@@ -45,6 +45,17 @@
                  <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
                  <view wx:if="{{item.diName==''}}">窗帘</view>
+                 <view wx:else>{{item.diName}}</view>
+         </view>
+            <view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}" data-deviceuid="{{item}}" bindtap='chuangliandk'>
+              <image src='../../images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.diOnlineStatu==0}}">
+                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diOnlineStatu>0}}">
+                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
+                 </view>
+                 <view wx:if="{{item.diName==''}}">浴帘</view>
                  <view wx:else>{{item.diName}}</view>
          </view>
           <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}">
@@ -159,7 +170,7 @@
                   <view wx:if="{{item.diName==''}}">烟雾传感器</view>
                 <view wx:else>{{item.diName}}</view>
          </view>
-           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==255}}" bindtap='kongtiao' data-kongtiao="{{item}}">
+           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" bindtap='kongtiao' data-kongtiao="{{item}}">
           <image src='../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.diOnlineStatu==0}}">
                  <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>

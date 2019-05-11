@@ -43,23 +43,20 @@
                           <text>电池电量:电池电压低</text>
                      </view>
                      <view wx:if="{{item.spAttrType==203}}">
-                          <text>温度:{{203/100}}</text>
+                          <text>温度:{{item.spAttrValue/100}}</text>
                      </view>
                      <view wx:if="{{item.spAttrType==204}}">
-                          <text>湿度:{{204/100}}%</text>
+                          <text>湿度:{{item.spAttrValue/100}}%</text>
                      </view>
             </view>
-           
-  <view>
-   <view>修改信息</view> 
+            <view>
+            <button bindtap='qingjingsc'>删除</button>
+           </view>         
+  <view class='view2'>
+  <view>修改信息</view> 
   <form bindsubmit='submit'>
-        <text>名称:</text>
-        <input name="username" style=' border: 1px solid gray;' maxlength='7'></input>
-       <view>
+      <text>名称:</text>
+      <input name="username" style=' border: 1px solid gray;' maxlength='7'></input>
         <button form-type='submit'>确定</button>
-      </view>
     </form>
- </view>
- <view>
-      <button bindtap='qingjingsc'>删除</button>
  </view>

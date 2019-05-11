@@ -30,8 +30,8 @@ Page({
       actCode: "110",
       bindid: username,
       bindstr: pwd,
-      deviceuid: kaiguanguans.diDeviceuid,
-      ver: "1"
+      uuid: kaiguanguans.diUuid,
+      ver: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
@@ -58,9 +58,14 @@ Page({
     } else {
       let url = app.globalData.URL + 'editDevName';
       let data = {
+        act:"alterdevname",
+        code:202,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
         bindid: username,
         bindstr: pwd,
-        devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: e.detail.value.username }]
+        devs: [{ uuid: kaiguanguans.diUuid, value: e.detail.value.username }],
+        ver:"2.0"
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
@@ -99,7 +104,7 @@ Page({
             bindid: username,
             bindstr: pwd,
             ctrType: 0,
-            devs: [{ deviceuid: kaiguanguans.diDeviceuid, value: kaiguanguans.diIeee }]
+            devs: [{ deviceuid: kaiguanguans.diUuid, value: kaiguanguans.diIeee }]
           };
           app.wxRequest('POST', url, data, (res) => {
             console.log(res.data)
@@ -136,7 +141,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+       
   },
 
   /**
