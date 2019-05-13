@@ -91,3 +91,8 @@ align-content: space-around;
   font-size: 24rpx;
   text-align: center;
 }
+.view1{
+  display: flex;
+  margin-top: 20px;
+  justify-content:space-around;
+}

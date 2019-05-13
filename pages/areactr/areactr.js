@@ -58,10 +58,6 @@ Page({
         }
       }
       console.log(sortResult)
-      wx.setStorage({
-        key: "sortResult",
-        data: sortResult
-      });
       that.setData({
         sortedAreas: sortResult
       });

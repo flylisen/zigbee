@@ -33,19 +33,15 @@ Page({
         }
         tmp[tag].push(res.data.areas[index]);
       };
-      var sortResult = [];
+      var areaResult = [];
       for (var key in tmp) {
         for (var j = 0; j < tmp[key].length; j++) {
-          sortResult.push(tmp[key][j]);
+          areaResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult)
-      wx.setStorage({
-        key: "sortResult",
-        data: sortResult
-      });
+      console.log(areaResult);
       that.setData({
-        sortedAreas: sortResult
+        sortedAreas: areaResult
       });
     },
       (err) => {
