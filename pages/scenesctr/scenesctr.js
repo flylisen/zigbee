@@ -32,13 +32,14 @@ Page({
     var pwd = wx.getStorageSync('pwd');
     let url = app.globalData.URL + 'getSceneInfo';
     let data = {
-      act: "getscenes",
-      code: "251",
+      act: "getScenes",
+      code: 601,
       AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
       bindstr: pwd,
-      ver: "1"
+      option:2,
+      ver: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
@@ -72,7 +73,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在scenesctr');
+    }
   },
 
   /**

@@ -14,23 +14,23 @@ Page({
     wx.setStorageSync('pwd', e.detail.value.pwd);
      app.wxRequest('POST', url, data, (res) => { 
        console.log(res.data)
-       //建立websocket连接 
-       if (res.data.gwId != -1) {
-         app.initWebSocket(res.data.gwId);
-       }
-       if (res.data.gwId=1){
+       if (res.data.giOnlineStatus == 1 && res.data.code==1){
          wx.showToast({
            title: "登录成功",
            icon: "Yes",
            duration: 2000,
            success: function () {
+             //建立websocket连接 
+             if (res.data.gwId != -1) {
+               app.initWebSocket(res.data.gwId);
+             }
              setTimeout(function () {
                wx.switchTab({
                  url: '../index/index',
                }, 2000)
              })
            }
-         })
+          })
         } 
     }, 
      (err) => { 

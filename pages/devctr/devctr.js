@@ -7,7 +7,7 @@ Page({
   data: {
     showModal: false,
     chuanglians: '',
-    sortedDevs: ''
+    sortedDevs: '',
   },
   bindAdd: function () {
     this.setData({
@@ -31,43 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    let url = app.globalData.URL + 'getDev';
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');    
-    let data = {
-      bindid: username,
-      bindstr: pwd
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      var tmp = {};
-          for(var index in res.data.devs) {         
-              var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
-              if (tmp[tag] == null || tmp[tag] == undefined) {
-                tmp[tag] = new Array();
-              }
-              tmp[tag].push(res.data.devs[index]);
-           };
-          var sortResult = [];
-          for (var key in tmp) {
-            for (var j = 0; j < tmp[key].length; j++) {
-              sortResult.push(tmp[key][j]);
-            }
-          }
-          sortResult.forEach((item) => {
-            //这里需要截取的内容
-            item.diName = item.diName.substring(0,3)
-          })
-          console.log(sortResult);
-
-          that.setData({
-            sortedDevs: sortResult
-            });  
-        },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+   
   },
   //开关事件
   kaiguanguan: function (event) {
@@ -192,7 +156,43 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    var that = this;
+    let url = app.globalData.URL + 'getDev';
+    var username = wx.getStorageSync('username');
+    var pwd = wx.getStorageSync('pwd');
+    let data = {
+      bindid: username,
+      bindstr: pwd
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      var tmp = {};
+      for (var index in res.data.devs) {
+        var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
+        }
+        tmp[tag].push(res.data.devs[index]);
+      };
+      var sortResult = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          sortResult.push(tmp[key][j]);
+        }
+      }
+      sortResult.forEach((item) => {
+        //这里需要截取的内容
+        item.diName = item.diName.substring(0, 3)
+      })
+      console.log(sortResult);
+
+      that.setData({
+        sortedDevs: sortResult
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   /**
    * 生命周期函数--监听页面显示
@@ -277,7 +277,7 @@ Page({
           bindid: username,
           bindstr: pwd,
           uuid: diUuid,
-          ver: "1"
+          ver: "2.0"
         };
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data)

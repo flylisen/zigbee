@@ -1,5 +1,6 @@
 // pages/scenesconfig/scenesadd/scenesadd.js
 const app = getApp();
+var sceneVisible='';
 Page({
 
   /**
@@ -11,53 +12,58 @@ Page({
     unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
     arr: '',
+    items: [
+      { name: 0, value: '不可见'},
+      { name: 1, value: '可见'},
+    ],
+    sceneArray : []
+  },
+  radioChange(e) {
+    sceneVisible = e.detail.value;
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
   submit: function (e) {
+    console.log(sceneVisible);
     var that = this
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     var name = e.detail.value.areaname;
+    var delayTime = e.detail.value.delayTime; 
+    console.log(name);
+    console.log(delayTime);
     let arr1 = that.data.arr;
     console.log(arr1);
-    if (name == '' || arr1==''){
+    if (name == '' || arr1 == '' || sceneVisible==''){
       wx.showModal({
         title: '提示',
-        content: '请输入场景名称或者选择设备'
+        content: '请输入场景名称和选择设备与是否可见'
       })
     }else{
-      let deviceuid = [];//diDeviceuid
-      let diId = [];//diId
-      let diOnoffStatu = [];//diOnoffStatu
       for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diDeviceuid
-        deviceuid.push(arr1[i].diDeviceuid);
-        diId.push(arr1[i].diId);
-        diOnoffStatu.push(arr1[i].diOnoffStatu);
+        var sceneDev = {};
+        if (arr1[i].diDeviceid==2){
+          sceneDev.uuid = arr1[i].diUuid;
+          sceneDev.deviceid = arr1[i].diId
+          sceneDev.status = arr1[i].diOnoffStatu;
+        } else if (arr1[i].diDeviceid == 514 && arr1[i].diZonetype == 2){
+           
+        }
+        sceneDev.delayTime =delayTime;
+        this.data.sceneArray.push(sceneDev);
       }
-      console.log(deviceuid);
-      console.log(diId);
-      console.log(diOnoffStatu);
-      console.log(e.detail.value.areaname);
       let url = app.globalData.URL + 'addScene';
       let data = {
-        act: "setscene",
-        code: "253",
+        act: "setScenes",
+        code: 603,
         AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
         key: "bq6wqzasjwtkl0i21pi9fbeq4",
         bindid: username,
         bindstr: pwd,
-        ver: "1",
-        scene: [{
-          scenename: e.detail.value.areaname,
-          scenemem: [{
-            deviceuid: deviceuid,
-            deviceid: diId,
-            data1: diOnoffStatu,
-            data2: 0,
-            data3: 0,
-            data4: 0,
-            IRID: 0,
-            delaytime: 0
-          }]
+        ver: "2.0",
+        scenes: [{
+          sceneName: name,
+          sceneVisible:sceneVisible,
+          sceneMembers: this.data.sceneArray
         }]
       };
       app.wxRequest('POST', url, data, (res) => {

@@ -8,8 +8,8 @@ Page({
    */
   data: {
     allSelect: false,
-    choseImg: '/images/devctr/yuandian2.png',
-    unchoseImg: '/images/devctr/yuandian.png',
+    choseImg: '/images/check-circle2.png',
+    unchoseImg: '/images/check-circle2.png',
     sortedDevs: '',
     arr: '',
     sortedDevs: '',

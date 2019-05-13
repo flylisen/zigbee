@@ -33,7 +33,7 @@ Page({
       barY: 0,
     },
     rpxRatio: 1, //此值为你的屏幕CSS像素宽度/750，单位rpx实际像素
-    sortedDevs: ''
+    sortedDevs: '',
   },
 
   /**
@@ -48,7 +48,6 @@ Page({
     }); 
     this.setData({
       diNames: dengs.diName,
-      chuanglians: dengs.diOnlineStatu,
       diOnoffStatu: dengs.diOnlineStatu
     });
     //设置rpxRatio
@@ -64,7 +63,7 @@ Page({
     let url = app.globalData.URL + 'getDevMenage';
     let data = {
       act: "getrgbw",
-      code: "212",
+      code: 212,
       AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
@@ -78,7 +77,6 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
-
     },
       (err) => {
         console.log(err.errMsg)
@@ -91,35 +89,20 @@ Page({
     var R = e.detail.colorData.pickerData.red;
     var G = e.detail.colorData.pickerData.green;
     var B = e.detail.colorData.pickerData.blue;
-    var max='';
-    var min='';
-    if (R>G) {
-       if(R>B){
-            max=R;
-       }else{
-           max=B;
-       }
-    }else{
-       if(G>B){
-          max=G;
-       }else{
-          max=B;
-       }
+    var max=R;
+    var min=R;
+    if (G < min) {
+      min = G;
     }
-    if(R<G){
-       if(R<B){
-          min=R;
-       }else{
-          min=B;
-       }
-    }else{
-      if(G>B){
-         min=B
-      }else{
-        min=G
-      }
+    if (B < min) {
+      min = B;
     }
-    var H=0;
+    if (G > max) {
+      max = G;
+    }
+    if (B > max) {
+      max = B;
+    }
     if (R == max) {
       H = (G - B) / (max - min);
     }
@@ -133,9 +116,7 @@ Page({
     if (H < 0) {
       H = (H / 360 + 1);
     }
-     S = (max - min) / max;
-     S=(S * 255).toFixed(0),
-     H=(H * 255).toFixed(0)
+    S = (max - min) / max;
     this.setData({
       colorData: e.detail.colorData,
     }) 

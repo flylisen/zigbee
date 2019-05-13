@@ -27,7 +27,7 @@ Page({
     let url = app.globalData.URL + 'getColorTempInfo';
     let data = {
       act: "gettemperature",
-      code: "213",
+      code: 213,
       AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,

@@ -8,7 +8,9 @@ Page({
    */
   data: {
     diNames: '',
-    chuanglians: ''
+    chuanglians: '',
+    diDeviceid:'',
+    diZonetype:''
   },
 
   /**
@@ -19,7 +21,9 @@ Page({
     kaiguanguans = JSON.parse(kaiguanguan);
     this.setData({
       diNames: kaiguanguans.diName,
-      chuanglians: kaiguanguans.diOnlineStatu
+      chuanglians: kaiguanguans.diOnlineStatu,
+      diDeviceid: kaiguanguans.diDeviceid,
+      diZonetype: kaiguanguans.diZonetype
     })
     //获得获取传感器属性值
     var that = this;
@@ -145,7 +149,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-       
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在kaiguanguan');
+    } 
   },
 
   /**

@@ -6,7 +6,7 @@
      </view>
      <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
       <view class='modalDlg' wx:if="{{showModal}}">
-    <view class='setting' bindtap='scenesctr'>
+       <view class='setting' bindtap='scenesctr'>
         <image class='btnImg' src='../../images/dashujukeshihuaico-.png' style="width:200rpx;height:200rpx;"></image>
         <text style="font-size:1rem;">场景配置</text> 
     </view>
