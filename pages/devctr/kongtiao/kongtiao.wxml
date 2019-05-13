@@ -16,43 +16,82 @@
         <image src="../../../images/devctr/kongtiao.png"></image>
         </view>
         <view class='text'>
-              <view>设置温度:</view>
-              <view>室内温度:</view>
+              <view class='windspeed'>
+               <view>本地温度:</view>
+               <view><text>{{airAllState.localTemperature/100}}C</text></view>
+               <view>空调温度:</view>
+               <view><text>{{airAllState.currentTemperature/100}}C</text></view>
+              </view>
          </view>
          <view class='text'>
-              <view>模式:</view>
+              <view class='windspeed'>
+                <view>模式:</view>
+                <view wx:if="{{airAllState.mode==0}}">
+                 <text>关闭</text>
+                </view>
+                <view wx:if="{{airAllState.mode==3}}">
+                 <text>制冷</text>
+                </view>
+                <view wx:if="{{airAllState.mode==4}}">
+                 <text>制热</text>
+                </view>
+                <view wx:if="{{airAllState.mode==5}}">
+                 <text>打开</text>
+                </view>
+              </view>
+              <view class='windspeed'>
               <view>风速:</view>
+              <view wx:if="{{airAllState.windspeed==1}}">
+                  <text>低速</text>
+              </view>
+               <view wx:if="{{airAllState.windspeed==2}}">
+                  <text>中速</text>
+              </view>
+               <view wx:if="{{airAllState.windspeed==3}}">
+                  <text>高速</text>
+              </view>
+               <view wx:if="{{airAllState.windspeed==5}}">
+                  <text>自动</text>
+              </view>
+              </view>
          </view>
          <view class='text'>
-              <view>横向风:</view>
-              <view>纵向风:</view>
+              <view class='windspeed'>
+                   <view>锁定状态:</view>
+                  <view wx:if="{{airAllState.lockedState==0}}">
+                    <text>锁定</text>
+                  </view>
+                  <view wx:if="{{airAllState.lockedState==1}}">
+                    <text>解锁</text>
+                  </view>
+              </view>
         </view>
-        <view class='kongtiao'>
-        <view>
-            <image src='../../../images/devctr/jia.png' style="width:50px;height:50px;"></image>
-            <view>升温</view>
-        </view>
-         <view>
-            <image src='../../../images/devctr/ju-icon-reduce.png' style="width:50px;height:50px;"></image>
-            <view>降温</view>
-        </view>
-        <view>
-            <image src='../../../images/devctr/icon-kongtiaomoshi-tongfeng.png' style="width:50px;height:50px;"></image>
-            <view>模式</view>
-        </view>
-    </view>
     <view class='kongtiao'>
-            <view>
-            <image src='../../../images/devctr/zuoyoufengxiang.png' style="width:50px;height:50px;"></image>
-            <view>横向风</view>
+            <view bindtap='showDialogBtn'>
+            <image src='../../../images/devctr/wendu.png' style="width:50px;height:50px;"></image>
+            <view>温度</view>
             </view>
-            <view>
-            <image src='../../../images/devctr/shangxiafengxiang.png' style="width:50px;height:50px;"></image>
-            <view>纵向风</view>
+            <view bindtap='tongfeng'>
+            <image src='../../../images/devctr/moshi.png' style="width:50px;height:50px;"></image>
+            <view>模式</view>
             </view>
-             <view>
+             <view bindtap='actioncnt'>
             <image src='../../../images/devctr/fengsu.png' style="width:50px;height:50px;"></image>
-            <view>风速</view>
+             <view>风速</view>
             </view>
     </view>
+</view>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">温度</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <input placeholder-class="input-holder" type="digit" maxlength="10" bindinput="wendu" class="input" placeholder="请输入温度"></input>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
 </view>

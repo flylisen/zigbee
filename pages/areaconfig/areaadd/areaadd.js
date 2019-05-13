@@ -26,14 +26,14 @@ Page({
     }else{
       let arr2 = [];
       for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diDeviceuid
-        arr2.push(arr1[i].diDeviceuid);
+        arr2.push(arr1[i].diUuid);
       }
       console.log(arr2);
       console.log(arr1);
       console.log(e.detail.value.areaname);
       let url = app.globalData.URL + 'addArea';
       let data = {
-        actCode: "106",
+        actCode: 106,
         bindid: username,
         areaName: e.detail.value.areaname,
         devs: arr2,

@@ -1,6 +1,8 @@
 // pages/devconfig/devconfig.js
 const app = getApp();
 var sortResult = [];
+var username = wx.getStorageSync('username');//网关账号
+var pwd = wx.getStorageSync('pwd'); //网关密码
 Page({
 
   /**
@@ -72,7 +74,26 @@ Page({
       title: '入网中',
     })
     setTimeout(function () {
-         wx.hideLoading()
+      let url = app.globalData.URL + 'addDev';
+      let data = {
+        act: "adddevs",
+        code: 200,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        ver: "2.0"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data.code= 1) {
+          wx.hideLoading()
+        }
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )   
     }, 2000)
 
   },
@@ -121,13 +142,12 @@ Page({
           }
         }
       } else if (nodeType == 1) {
-        //设备新入网
-        /*
+         //设备新入网
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
+
         }
-        */
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -152,6 +172,11 @@ Page({
       } else if (nodeType == 3) {
         //删除设备
         console.log("删除")
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+
+        }
       } else if (nodeType == 6) {
         var that = this;
         var username = wx.getStorageSync('username');
@@ -162,8 +187,8 @@ Page({
           actCode: "110",
           bindid: username,
           bindstr: pwd,
-          uuid: uuid ,
-          ver: "1"
+          uuid: uuid,
+          ver: "2.0"
         };
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data) 

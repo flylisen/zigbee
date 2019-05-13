@@ -99,12 +99,16 @@ Page({
       content: '确定要删除吗？',
       success: function (sm) {
         if (sm.confirm) {
-          let url = app.globalData.URL + 'editDevName';
+          let url = app.globalData.URL + 'delDev';
           let data = {
+            act:"deletedev",
+            code:'201',
+            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+            key: "bq6wqzasjwtkl0i21pi9fbeq4",
             bindid: username,
             bindstr: pwd,
-            ctrType: 0,
-            devs: [{ deviceuid: kaiguanguans.diUuid, value: kaiguanguans.diIeee }]
+            devs: [{ uuid: kaiguanguans.diUuid, value: kaiguanguans.diIeee }],
+            ver:"2.0"
           };
           app.wxRequest('POST', url, data, (res) => {
             console.log(res.data)

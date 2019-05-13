@@ -1,6 +1,8 @@
 // pages/devctr/kongtiao/kongtiao.js
 var kongtiaos='';
 const app = getApp();
+var username = wx.getStorageSync('username');//网关账号
+var pwd = wx.getStorageSync('pwd'); //网关密码
 Page({
 
   /**
@@ -9,8 +11,15 @@ Page({
   data: {
     diNames: '',
     chuanglians: '',
+    airAllState:'',
+    showModal: false,
+    wendu:'',
   },
-
+  wendu:function(e){
+    this.setData({
+      wendu: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -21,10 +30,151 @@ Page({
       diNames: kongtiaos.diName,
       chuanglians: kongtiaos.diOnlineStatu
     });
+    //获取获取温控器全部状态
+    let url = app.globalData.URL + 'getAirAllState';
+    let data = {
+      act: "getthermostatallstate",
+      code:275,
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      uuid: kongtiaos.diUuid,
+      ver:'2.0'
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+      this.setData({
+        airAllState: res.data.airAllState
+      })
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+  },
+  reduce:function(){
+     
+  },
+  /**
+    * 弹窗
+    */
+  showDialogBtn: function () {
+    this.setData({
+      showModal: true
+    })
+  },
+  /**
+   * 隐藏模态对话框
+   */
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+  /**
+ * 对话框确认按钮点击事件
+ */
+  onConfirm: function (e) {
+    let url = app.globalData.URL + 'ariControlMode';
+    let data = {
+      act: "setthermostattemperature",
+      code: 276,
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      devs: [{ uuid: kongtiaos.diUuid, value:this.data.wendu*100}],
+      ver: "2"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+    this.hideModal();
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.hideModal();
+  },
+  actioncnt: function () {
+    wx.showActionSheet({
+      itemList: ['...', '低速', '中速', '高速', '...', '自动'] ,
+     success: function (res) { 
+       console.log(res.tapIndex)
+       if (res.tapIndex == 0 || res.tapIndex == 4){
+         wx.showToast({
+           title: '请选择风速',
+           icon: 'none',
+         });
+       }else{
+         let url = app.globalData.URL + 'ariControlSpeed';
+         let data = {
+           act: "setthermostatwindspeed",
+           code: 278,
+           AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+           key: "bq6wqzasjwtkl0i21pi9fbeq4",
+           bindid: username,
+           bindstr: pwd,
+           devs: [{ uuid: kongtiaos.diUuid, value: res.tapIndex }],
+           ver: "2"
+         };
+         app.wxRequest('POST', url, data, (res) => {
+              console.log(res.data)
+         },
+           (err) => {
+             console.log(err.errMsg)
+           }
+         )
+        }
+       },
+      fail: function (res) { 
+       console.log(res.errMsg) 
+      }
+      }) 
+     },
+  tongfeng: function () {
+    wx.showActionSheet({
+      itemList: ['关闭','...','...', '制冷', '制热', '打开'],
+      success: function (res) {
+        console.log(res.tapIndex)
+        if(res.tapIndex==1||res.tapIndex==2){
+          wx.showToast({
+            title: '请选择模式',
+            icon: 'none',
+          });   
+        }else{
+          let url = app.globalData.URL + 'ariControlTemp';
+          let data = {
+            act: "setthermostatmode",
+            code: 277,
+            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+            key: "bq6wqzasjwtkl0i21pi9fbeq4",
+            bindid: username,
+            bindstr: pwd,
+            devs: [{ uuid: kongtiaos.diUuid, value: res.tapIndex }],
+            ver: "2"
+          };
+          app.wxRequest('POST', url, data, (res) => {
+            console.log(res.data)
+          },
+            (err) => {
+              console.log(err.errMsg)
+            }
+          )
+        }
+      },
+      fail: function (res) {
+        console.log(res.errMsg)
+      }
+    })
   },
   kaiguan:function(){
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
     var diOnoffStatu = kongtiaos.diOnoffStatu;
     var temSet='';
     if (diOnoffStatu>=1){

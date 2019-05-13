@@ -37,6 +37,7 @@ Page({
     var pwd = wx.getStorageSync('pwd');
     let url = app.globalData.URL + 'areaList';
     let data = {
+      actCode:107,
       bindid: username,
       bindstr: pwd
     };

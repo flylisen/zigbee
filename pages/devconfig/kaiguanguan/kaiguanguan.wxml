@@ -18,16 +18,16 @@
                      <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='1'}}">
                           <text>门磁检测:开门</text>
                      </view>
-                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
+                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
                           <text>人体红外检测:有人</text>
                      </view>
-                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
+                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
                           <text>人体红外检测:无人</text>
                      </view>
-                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
+                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
                           <text>烟雾检测:有泄露</text>
                      </view>
-                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
+                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
                           <text>烟雾检测:无泄露</text>
                      </view>
                      <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='0'}}">

@@ -233,13 +233,11 @@ Page({
         }
       } else if (nodeType == 1) {
         //设备新入网
-        /*
         //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
         }
-        */
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -264,13 +262,11 @@ Page({
         }
       } else if (nodeType == 3) {
         //删除设备
-        /*
         //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
         }
-        */
       } else if (nodeType == 6) {
         var that = this;
         var username = wx.getStorageSync('username');
