@@ -1,6 +1,8 @@
 // pages/areaconfig/areainfo/areainfo.js
 var Industrys;
 var app=getApp();
+var username = wx.getStorageSync('username');//网关账号
+var pwd = wx.getStorageSync('pwd'); //网关密码
 Page({
 
   /**
@@ -9,7 +11,7 @@ Page({
   data: {
     allSelect: false,
     choseImg: '/images/check-circle2.png',
-    unchoseImg: '/images/check-circle2.png',
+    unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
     arr: '',
     sortedDevs: '',
@@ -17,8 +19,6 @@ Page({
   },
   submit: function (e) {  //删除设备
     var that = this
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
     var areaId = Industrys.aiId;
     let arr1 = that.data.arr;
     let arr2 = [];
@@ -36,34 +36,29 @@ Page({
         content: '确定删除该设备吗？',
         success: function (msg) {
           if (msg.confirm) {
-            wx.request({
-              url: 'https://dev.rishuncloud.com:8443/getAreaDev', //删除接口
-              method: "POST",
-              data: {
-                actCode: "109",
-                bindid: username,
-                areaId: areaId,
-                devId: arr2,
-                ver: "2"
-              },
-              header: {
-                'Content-Type': 'application/json'
-              },
-              success: function (res) {
-                console.log(res.data);
-                wx.showToast({
-                  title: '删除成功',
-                  duration: 2000
-                });
-                that.data.arr = [];  //抛弃之前选中设备数组
-                that.setData({  //删除后更新页面数据
-                  sortedDevs: res.data.devs,
-                });
-              },
-              fail: function (err) {
-                console.log(err)
+            let url = app.globalData.URL + 'getAreaDev';
+            let data = {
+              actCode: "109",
+              bindid: username,
+              areaId: areaId,
+              devId: arr2,
+              ver: "2"
+            };
+            app.wxRequest('POST', url, data, (res) => {
+              console.log(res.data)
+              wx.showToast({
+                title: '删除成功',
+                duration: 2000
+              });
+              that.data.arr = [];  //抛弃之前选中设备数组
+              that.setData({  //删除后更新页面数据
+                sortedDevs: res.data.devs,
+              });
+            },
+              (err) => {
+                console.log(err.errMsg)
               }
-            })
+            )
           } else if (msg.cancel) {
             console.log('用户点击取消')
           }
@@ -282,32 +277,27 @@ Page({
       content: '确定删除该区域吗？',
       success: function (msg) {
         if (msg.confirm) {
-          wx.request({
-            url: 'https://dev.rishuncloud.com:8443/delArea', //删除区域接口地址           
-            data: {
-              actCode: "108",
-              bindid: username,
-              areaId: Industrys.aiId,
-              ver: "2"
-            },
-            method: 'POST',
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              console.log(res.data);
-              wx.showToast({
-                title: '删除成功',
-                duration: 2000
-              });
-              wx.navigateTo({
-                url: '../../areaconfig/areaconfig'
-              })
-            },
-            fail: function (err) {
-              console.log(err)
+          let url = app.globalData.URL + 'delArea';
+          let data = {
+            actCode: "108",
+            bindid: username,
+            areaId: Industrys.aiId,
+            ver: "2"
+          };
+          app.wxRequest('POST', url, data, (res) => {
+            console.log(res.data)
+            wx.showToast({
+              title: '删除成功',
+              duration: 2000
+            });
+            wx.navigateTo({
+              url: '../../areaconfig/areaconfig'
+            })
+          },
+            (err) => {
+              console.log(err.errMsg)
             }
-          })
+          ) 
         } else if (msg.cancel) {
           console.log('用户点击取消')
         }

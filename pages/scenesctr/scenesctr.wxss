@@ -24,6 +24,14 @@ view h1{
   background:#ddd;
   
 }
+.flex-wrp_one{
+ display: flex;
+ flex-flow: row wrap; 
+align-content: space-around;
+}
+.flex-wrp_one view{
+  padding: 15px;
+}
 .viewAN .list_l text{ padding: 20px; color: gray}
 .viewAN .list_l image{height: 50px;
  width: 50px; display: flex;padding: 10px; }

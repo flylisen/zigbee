@@ -18,7 +18,12 @@
     "pages/devctr/kongtiao/kongtiao",
     "pages/scenesconfig/scenesadd/scenesadd",
     "pages/devctr/sewendeng/sewendeng",
-    "pages/areactr/areainfo/areainfo"
+    "pages/areactr/areainfo/areainfo",
+    "pages/scenesconfig/changjing/changjing",
+    "pages/scenesconfig/scenesadd/dengcolor/dengcolor",
+    "pages/scenesconfig/scenesadd/kongtiao/kongtiao",
+    "pages/scenesconfig/scenesadd/sewendeng/sewendeng",
+    "pages/scenesconfig/scenesadd/chuanglian/chuanglian"
       ],
   "window": {
     "backgroundTextStyle": "dark",

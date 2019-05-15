@@ -1,0 +1,60 @@
+<!--pages/scenesconfig/changjing/changjing.wxml-->
+ <view class='view1'>
+    <view wx:if="{{aiNames==''}}">
+               <text>场景设备</text>
+           </view>
+           <view wx:else>
+              <text>{{aiNames}}场景</text>
+           </view>       
+  </view>
+  <view class='view2'>
+  <view>修改名称</view> 
+  <form bindsubmit='aiNames'>
+      <text>名称:</text>
+      <input name="aiNames" style=' border: 1px solid gray;' maxlength='7'></input>
+      <button form-type='submit'>确定</button>
+</form>
+ </view> 
+    <form bindsubmit='submit'>
+  <view class='button1'>
+        <view><button class='button2' form-type='submit'>删除设备</button></view>
+        <view><button  bindtap='delete'>删除场景</button></view>
+   </view>
+   <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
+   <view class="con-wrapper">
+   <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+       <view wx:if="{{item.deviceid==2}}">
+               <image src='/images/devctr/kaiguanguan.png'  id="{{index}}"  style="width:70px;height:70px;"></image>
+                <view wx:if="{{item.deviceName==''}}">开关</view>
+                <view wx:else>{{item.deviceName}}</view>
+      </view>
+           <view wx:if="{{item.deviceid==514&&item.zonetype==2}}">
+              <image src='/images/devctr/chuanglian.png' style="width:40px;height:40px;"></image>
+              
+                 <view wx:if="{{item.deviceName==''}}">窗帘</view>
+                 <view wx:else>{{item.deviceName}}</view>
+         </view>
+         <view wx:if="{{item.deviceid==514&&item.zonetype==1}}" data-deviceuid="{{item}}" >
+              <image src='/images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
+                 <view wx:if="{{item.deviceName==''}}">浴帘</view>
+                 <view wx:else>{{item.deviceName}}</view>
+         </view>
+          <view wx:if="{{item.deviceid==528}}" data-deng="{{item}}" >
+          <image src='/images/devctr/deng.png' style="width:70px;height:70px;"></image>
+                  <view wx:if="{{item.deviceName==''}}">RGBW灯</view>
+                <view wx:else>{{item.deviceName}}</view>
+         </view>
+          <view wx:if="{{item.deviceid==769&&item.zonetype==1}}"  data-kongtiao="{{item}}">
+          <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
+                  <view wx:if="{{item.deviceName==''}}">温控器</view>
+                <view wx:else>{{item.deviceName}}</view>
+         </view>
+          <view wx:if="{{item.deviceid==544&&item.zonetype==255}}" data-sewendeng="{{item}}">
+          <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
+                  <view wx:if="{{item.deviceName==''}}">色温（CCT）灯</view>
+                <view wx:else>{{item.deviceName}}</view>
+           </view>
+         </view>
+    </block>    
+    </form> 
+

@@ -1,0 +1,20 @@
+<!--pages/scenesconfig/scenesadd/dengcolor/dengcolor.wxml-->
+<view>
+ <form bindsubmit='submit'>
+      <view class='valueother'>
+        <text>饱和度：</text>
+        <input name="valueother" placeholder='请输入饱和度值'></input>
+      </view>
+      <view class='value'>
+        <text>色 调：</text>
+        <input name="value" placeholder='色调值'></input>
+      </view>
+      <view>
+        <button form-type='submit'>提交</button>
+      </view>
+  </form>
+  </view>
+  <view>
+       <slider name="slider" show-value bindchange="listenerSlider" value="" max='255'></slider>   
+  </view>
+
