@@ -1,7 +1,10 @@
 // pages/scenesctr/scenesctr.js
 const app = getApp();
-var username = wx.getStorageSync('username');
-var pwd = wx.getStorageSync('pwd');
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -34,7 +37,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    let url = app.globalData.URL + 'getSceneInfo';
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getScenes",
       code: 601,
@@ -61,7 +69,7 @@ Page({
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
     var that = this;
-    let url = app.globalData.URL + 'triggerScene';
+    let url = app.globalData.URL + 'triggerScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "triggerScene",
       code: 604,

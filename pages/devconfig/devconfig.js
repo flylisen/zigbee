@@ -1,8 +1,11 @@
 // pages/devconfig/devconfig.js
 const app = getApp();
 var sortResult = [];
-var username = wx.getStorageSync('username');//网关账号
-var pwd = wx.getStorageSync('pwd'); //网关密码
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -18,9 +21,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getDev';
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd
@@ -55,19 +61,11 @@ Page({
     )
   },
   kaiguanguan: function (event){
-    if (event.currentTarget.dataset['kaiguanguan'].diOnlineStatu>0){
       console.log(event.currentTarget.dataset['kaiguanguan']);
       var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kaiguanguan']));//函数可把字符串作为 URI
       wx.navigateTo({
         url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
       })
-    }else{
-      wx.showToast({
-        title: '设备不在线',
-        icon: 'none'
-      })
-    }
-   
   },
   //新设备入网
   bindAdd:function(){
@@ -75,7 +73,7 @@ Page({
       title: '入网中',
     })
     setTimeout(function () {
-      let url = app.globalData.URL + 'addDev';
+      let url = app.globalData.URL + 'addDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act: "adddevs",
         code: 200,

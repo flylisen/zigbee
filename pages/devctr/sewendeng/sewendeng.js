@@ -1,5 +1,10 @@
 // pages/devctr/sewendeng/sewendeng.js
 var sewendengs = '';
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -14,6 +19,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var sewendeng = decodeURIComponent(options.sewendeng);
     sewendengs = JSON.parse(sewendeng);
     this.setData({
@@ -22,9 +32,7 @@ Page({
     });
     //获取色温灯的色温值、开关值
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getColorTempInfo';
+    let url = app.globalData.URL + 'getColorTempInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "gettemperature",
       code: 213,

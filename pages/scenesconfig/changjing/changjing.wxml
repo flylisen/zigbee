@@ -24,18 +24,20 @@
    <view class="con-wrapper">
    <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
        <view wx:if="{{item.deviceid==2}}">
-               <image src='/images/devctr/kaiguanguan.png'  id="{{index}}"  style="width:70px;height:70px;"></image>
+               <image src='/images/devctr/kaiguanguan2.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
+              <image src='/images/devctr/kaiguanguan.png' wx:else style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.deviceName==''}}">开关</view>
                 <view wx:else>{{item.deviceName}}</view>
       </view>
            <view wx:if="{{item.deviceid==514&&item.zonetype==2}}">
-              <image src='/images/devctr/chuanglian.png' style="width:40px;height:40px;"></image>
-              
+               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.deviceName==''}}">窗帘</view>
                  <view wx:else>{{item.deviceName}}</view>
          </view>
          <view wx:if="{{item.deviceid==514&&item.zonetype==1}}" data-deviceuid="{{item}}" >
-              <image src='/images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
+               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else style="width:70px;height:70px;"></image>
                  <view wx:if="{{item.deviceName==''}}">浴帘</view>
                  <view wx:else>{{item.deviceName}}</view>
          </view>

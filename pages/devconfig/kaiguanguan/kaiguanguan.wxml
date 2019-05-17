@@ -3,8 +3,8 @@
                      <view wx:if="{{diDeviceid==2}}"><text>名称:开关</text></view>
                      <view wx:elif="{{diDeviceid==1026&&diZonetype==42}}"><text>名称:水浸传感器</text></view>
                      <view wx:elif="{{diDeviceid==514&&diZonetype==2}}"><text>名称:窗帘</text></view>
-                     <view wx:elif="{{item.diDeviceid==514&&diZonetype==1}}"><text>名称:浴帘</text></view>
-                     <view wx:elif="{{item.diDeviceid==1026&&diZonetype==44}}"><text>名称:紧急按钮</text></view>
+                     <view wx:elif="{{diDeviceid==514&&diZonetype==1}}"><text>名称:浴帘</text></view>
+                     <view wx:elif="{{diDeviceid==1026&&diZonetype==44}}"><text>名称:紧急按钮</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==277}}"><text>名称:安防遥控器</text></view>
                     <view wx:elif="{{diDeviceid==528}}"><text>名称:RGBW灯</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==13}}"><text>名称:人体传感器</text></view>

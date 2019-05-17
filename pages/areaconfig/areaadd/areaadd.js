@@ -42,10 +42,12 @@ Page({
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        if (res.data!=null){
+        if (res.data.code=1){
           wx.redirectTo({
             url: '../areaconfig',
           }, 2000)
+        }else{
+          
         }
       },
         (err) => {

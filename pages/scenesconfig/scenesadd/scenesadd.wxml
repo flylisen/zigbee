@@ -19,46 +19,46 @@
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
 <view class="con-wrapper">
 <view wx:if="{{item.diDeviceid==2}}">
-   <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-               <image src='/images/devctr/kaiguanguan2.png' wx:if="{{item.diOnoffStatu > 0}}" data-tp="{{item}}" id="{{index}}"   bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
+ <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+               <image src='/images/devctr/kaiguanguan2.png' wx:if="{{item.diOnoffStatu> 0}}" data-tp="{{item}}" id="{{index}}"   bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
               <image src='/images/devctr/kaiguanguan.png' wx:else  bindtap='kaiguanguan' data-tp="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.diName==''}}">开关</view>
                 <view wx:else>{{item.diName}}</view>
 </view>
-        <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
-         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-              <image src='/images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
-      <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-deviceuid="{{item}}" bindtap='chuangliandk'></image>   
-                 <view wx:if="{{item.diName==''}}">窗帘</view>
-                 <view wx:else>{{item.diName}}</view>
+<view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.diOnoffStatu> 0}}" data-chuangliand="{{item}}" id="{{index}}"   bindtap='chuangliand' style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else  bindtap='chuangliand' data-chuangliand="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
+              <view wx:if="{{item.diName==''}}">浴帘</view>
+              <view wx:else>{{item.diName}}</view>
+</view>
+<view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+     <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.diOnoffStatu> 0}}" data-chuangliand="{{item}}" id="{{index}}"   bindtap='chuangliand' style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else  bindtap='chuangliand' data-chuangliand="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
+                <view wx:if="{{item.diName==''}}">窗帘</view>
+                <view wx:else>{{item.diName}}</view>
          </view>
-           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}">
-           <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-              <image src='/images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
-               <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-deviceuid="{{item}}" bindtap='chuangliandk'></image>
-                 <view wx:if="{{item.diName==''}}">浴帘</view>
-                 <view wx:else>{{item.diName}}</view>
-          </view>
-   <view wx:if="{{item.diDeviceid==528}}">
-   <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-          <image src='/images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.diOnoffStatu>0}}" data-deng="{{item}}" id="{{index}}" bindtap='deng'></image>
-  <image src='/images/devctr/deng.png' wx:else  bindtap='deng' data-deng="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
-      <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-deng="{{item}}" bindtap='xia' ></image>  
-                  <view wx:if="{{item.diName==''}}">RGBW灯</view>
+<view wx:if="{{item.diDeviceid==528}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+           <image src='images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.diOnoffStatu>0}}" data-deng="{{item}}" id="{{index}}" bindtap='deng'></image>
+  <image src='images/devctr/deng.png' wx:else  bindtap='deng' data-deng="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
+              <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-deng="{{item}}" bindtap='dengxia'></image>  
+                <view wx:if="{{item.diName==''}}">RGBW灯</view>
                 <view wx:else>{{item.diName}}</view>
          </view>
 
-           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}">
-           <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-           <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
-            <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-kongtiao="{{item}}" bindtap='kongtiao'></image> 
-                  <view wx:if="{{item.diName==''}}">温控器</view>
+<view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}">
+ <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap" data-index="{{index}}"></image>
+              <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
+              <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-kongtiao="{{item}}" bindtap='kongtiao'></image> 
+                <view wx:if="{{item.diName==''}}">温控器</view>
                 <view wx:else>{{item.diName}}</view>
          </view>
-          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
-          <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-          <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
-           <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-sewendeng="{{item}}" bindtap='sewendeng'></image> 
+<view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap" data-index="{{index}}"></image>
+              <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
+              <image src='/images/devctr/xia.png' style="width:20px;height:20px;" data-sewendeng="{{item}}" bindtap='sewendeng'></image> 
                   <view wx:if="{{item.diName==''}}">色温（CCT）灯</view>
                   <view wx:else>{{item.diName}}</view>
           </view>
@@ -71,4 +71,45 @@
       </view>
     </form>
   </view>
+ <!--空调弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">控制</view>
+  <view class="modal-content">
+     <view wx:if="{{diDeviceid==769&&diZonetype==1}}">
+         <view>
+          <input  placeholder='请输入温度' placeholder-class="input-holder" type="number" maxlength="10" bindinput="temperature" class="input"></input>   
+        </view>
+         <view>
+           <view>请选择模式:</view>
+           <radio-group bindchange="checkboxChange">
+	         <label class="checkbox" wx:for="{{ConditionMode}}">
+	         <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+	        </label>
+          </radio-group>  
+        </view>
+         <view>
+          <view>请选择风速:</view>
+          <radio-group bindchange="checkboxChangeWindMode">
+	        <label class="checkbox" wx:for="{{WindMode}}">
+	       <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+	       </label>
+         </radio-group>  
+        </view>
+</view>
+<view wx:if="{{diDeviceid==528}}">
+<input  placeholder='请输入亮度' placeholder-class="input-holder" type="number" maxlength="10" bindinput="brightness" class="input"></input>
+ <input  placeholder='请输入色调' placeholder-class="input-holder" type="number" maxlength="10" bindinput="hue" class="input"></input> 
+ <input  placeholder='请输入饱和度' placeholder-class="input-holder" type="number" maxlength="10" bindinput="saturation" class="input"></input> 
+</view>
+<view wx:if="{{diDeviceid==544&&diZonetype==255}}">
+<input  placeholder='请输入亮度' placeholder-class="input-holder" type="number" maxlength="10" bindinput="CCT" class="input"></input> 
+</view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+  </view>
+</view>
+
 </view>

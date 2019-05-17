@@ -1,8 +1,11 @@
 // pages/devctr/kongtiao/kongtiao.js
 var kongtiaos='';
 const app = getApp();
-var username = wx.getStorageSync('username');//网关账号
-var pwd = wx.getStorageSync('pwd'); //网关密码
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -15,16 +18,48 @@ Page({
     showModal: false,
     wendu:'',
     sortedDevs:'',
+    index:'',
+    ConditionMode: [
+      { name: 0, value: '关' },
+      { name: 3, value: '制冷' },
+      { name: 4, value: '制热' },
+      { name: 5, value: '开' },
+    ],
+    WindMode: [
+      { name: 1, value: '低' },
+      { name: 2, value: '中' },
+      { name: 3, value: '高' },
+      { name: 5, value: '自动'},
+    ],
+    centralairConditionMode:'',
+    centralairConditionWindMode:'',
   },
   wendu:function(e){
     this.setData({
       wendu: e.detail.value
     })
   },
+  checkboxChange: function (e) {
+    console.log('模式：', e.detail.value)
+    this.setData({
+      centralairConditionMode: e.detail.value
+    })
+  },
+  checkboxChangeWindMode: function (e) {
+    console.log('风速：', e.detail.value)
+    this.setData({
+      centralairConditionWindMode: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var kongtiao = decodeURIComponent(options.kongtiao);
     kongtiaos = JSON.parse(kongtiao);
     this.setData({
@@ -33,7 +68,7 @@ Page({
       sortedDevs: kongtiaos 
     });
     //获取获取温控器全部状态
-    let url = app.globalData.URL + 'getAirAllState';
+    let url = app.globalData.URL + 'getAirAllState?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getthermostatallstate",
       code:275,
@@ -63,7 +98,20 @@ Page({
     */
   showDialogBtn: function () {
     this.setData({
-      showModal: true
+      showModal: true,
+      index:1
+    })
+  },
+  tongfeng: function () {
+    this.setData({
+      showModal: true,
+      index:2
+    })
+  },
+  actioncnt:function(){
+    this.setData({
+      showModal: true,
+      index:3
     })
   },
   /**
@@ -75,27 +123,68 @@ Page({
     });
   },
   /**
- * 对话框确认按钮点击事件
+ * 对话框确认按钮点击事件(温度)
  */
   onConfirm: function (e) {
-    let url = app.globalData.URL + 'ariControlMode';
-    let data = {
-      act: "setthermostattemperature",
-      code: 276,
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: username,
-      bindstr: pwd,
-      devs: [{ uuid: kongtiaos.diUuid, value:this.data.wendu*100}],
-      ver: "2"
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+    if (this.data.wendu!=''){
+      let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        act: "setthermostattemperature",
+        code: 276,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        devs: [{ uuid: kongtiaos.diUuid, value: this.data.wendu * 100 }],
+        ver: "2"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    } else if (this.data.centralairConditionMode!=''){
+      let url = app.globalData.URL + 'ariControlSpeed?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        act: "setthermostatwindspeed",
+        code: 278,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        devs: [{ uuid: kongtiaos.diUuid, value: this.data.centralairConditionMode}],
+        ver: "2"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    } else if (this.data.centralairConditionWindMode!=''){
+      let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        act: "setthermostatmode",
+        code: 277,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        devs: [{ uuid: kongtiaos.diUuid, value: this.data.centralairConditionWindMode }],
+        ver: "2"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }
     this.hideModal();
   },
   /**
@@ -103,103 +192,6 @@ Page({
    */
   onCancel: function () {
     this.hideModal();
-  },
-  actioncnt: function () {
-    wx.showActionSheet({
-      itemList: ['...', '低速', '中速', '高速', '...', '自动'] ,
-     success: function (res) { 
-       console.log(res.tapIndex)
-       if (res.tapIndex == 0 || res.tapIndex == 4){
-         wx.showToast({
-           title: '请选择风速',
-           icon: 'none',
-         });
-       }else{
-         let url = app.globalData.URL + 'ariControlSpeed';
-         let data = {
-           act: "setthermostatwindspeed",
-           code: 278,
-           AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-           key: "bq6wqzasjwtkl0i21pi9fbeq4",
-           bindid: username,
-           bindstr: pwd,
-           devs: [{ uuid: kongtiaos.diUuid, value: res.tapIndex }],
-           ver: "2"
-         };
-         app.wxRequest('POST', url, data, (res) => {
-              console.log(res.data)
-         },
-           (err) => {
-             console.log(err.errMsg)
-           }
-         )
-        }
-       },
-      fail: function (res) { 
-       console.log(res.errMsg) 
-      }
-      }) 
-     },
-  tongfeng: function () {
-    wx.showActionSheet({
-      itemList: ['关闭','...','...', '制冷', '制热', '打开'],
-      success: function (res) {
-        console.log(res.tapIndex)
-        if(res.tapIndex==1||res.tapIndex==2){
-          wx.showToast({
-            title: '请选择模式',
-            icon: 'none',
-          });   
-        }else{
-          let url = app.globalData.URL + 'ariControlTemp';
-          let data = {
-            act: "setthermostatmode",
-            code: 277,
-            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-            key: "bq6wqzasjwtkl0i21pi9fbeq4",
-            bindid: username,
-            bindstr: pwd,
-            devs: [{ uuid: kongtiaos.diUuid, value: res.tapIndex }],
-            ver: "2"
-          };
-          app.wxRequest('POST', url, data, (res) => {
-            console.log(res.data)
-          },
-            (err) => {
-              console.log(err.errMsg)
-            }
-          )
-        }
-      },
-      fail: function (res) {
-        console.log(res.errMsg)
-      }
-    })
-  },
-  //开关
-  kaiguan:function(){
-    var diOnoffStatu = kongtiaos.diOnoffStatu;
-    var temSet='';
-    if (diOnoffStatu>=1){
-      temSet=0
-     }else{
-      temSet =1
-     }
-    console.log(temSet)
-    let url = app.globalData.URL + 'ctrDev';
-    let data = {
-      bindid: username,
-      bindstr: pwd,
-      ctrType: 0,
-      devs: [{ deviceuid: kongtiaos.diDeviceuid, uuid: kongtiaos.diUuid, value: temSet }]
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -229,28 +221,54 @@ Page({
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
-      for (var j = 0; j < pageArray.length; j++) {
+      for (var j = 0; j < pageArray.length; j++){
         if (pageArray[j].route == 'pages/devctr/kongtiao/kongtiao') {
           curPage = pageArray[j];
         }
       }
       console.log('curPage', curPage); 
-      if (nodeType == 4) {
-        //设备开关状态发生改变
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType==100){
-        console.log(模式);
+       if (nodeType==100){
         for (var i = 0; i < curPage.data.airAllState.length;i++){
-              
-          }
+          var tmp = 'airAllState[' + i + '].mode';
+          curPage.setData({
+            [tmp]: value
+          })   
+        }
+      }
+      if (nodeType==101){
+        for (var i = 0; i < curPage.data.airAllState.length; i++) {
+          var tmp = 'airAllState[' + i + '].windspeed';
+          curPage.setData({
+            [tmp]: value
+          })
+        }
+      }
+      if (nodeType == 101) {
+        for (var i = 0; i < curPage.data.airAllState.length; i++) {
+          var tmp = 'airAllState[' + i + '].windspeed';
+          curPage.setData({
+            [tmp]: value
+          })
+        }
       } 
+      if (nodeType == 102) {
+        for (var i = 0; i < curPage.data.airAllState.length; i++) {
+          var tmp = 'airAllState[' + i + '].currentTemperature';
+          curPage.setData({
+            [tmp/100]: value
+          })
+        }
+      }
+      if (nodeType == 103) {
+        for (var i = 0; i < curPage.data.airAllState.length; i++) {
+          var tmp = 'airAllState[' + i + '].localTemperature';
+          curPage.setData({
+            [tmp / 100]: value
+          })
+        }
+      }
+        
+
       console.log('当前页面在空调');
     } 
   },

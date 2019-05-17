@@ -1,6 +1,11 @@
 // pages/devconfig/kaiguanguan/kaiguanguan.js
 var kaiguanguans=null;
 var app=getApp();
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -17,6 +22,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var kaiguanguan = decodeURIComponent(options.kaiguanguan);
     kaiguanguans = JSON.parse(kaiguanguan);
     this.setData({
@@ -29,7 +39,7 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getSensorAttrValue';
+    let url = app.globalData.URL + 'getSensorAttrValue?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "110",
       bindid: username,
@@ -60,7 +70,7 @@ Page({
         content: '请输入名称'
       })
     } else {
-      let url = app.globalData.URL + 'editDevName';
+      let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act:"alterdevname",
         code:202,
@@ -103,7 +113,7 @@ Page({
       content: '确定要删除吗？',
       success: function (sm) {
         if (sm.confirm) {
-          let url = app.globalData.URL + 'delDev';
+          let url = app.globalData.URL + 'delDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
           let data = {
             act:"deletedev",
             code:'201',

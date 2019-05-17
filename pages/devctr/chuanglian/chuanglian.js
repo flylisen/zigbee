@@ -1,5 +1,10 @@
 var Industrys;
 const app = getApp();
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -14,6 +19,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var deviceuid = decodeURIComponent(options.deviceuid);
     Industrys = JSON.parse(deviceuid);
     this.setData({
@@ -34,7 +44,7 @@ Page({
     this.setData({
       chuanglians:Industrys.diOnoffStatu
     })
-    let url = app.globalData.URL + 'ctrDev';
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd,
@@ -154,7 +164,7 @@ Page({
           }
         )
       }
-      console.log('当前页面在设备详情');
+      console.log('当前页面在窗帘控制');
     } 
   },
 

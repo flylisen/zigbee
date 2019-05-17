@@ -22,7 +22,7 @@
                  <view wx:else>
                  <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                <text wx:if="{{item.diName==''}}">开关{{item.diZonetype}}</text>
+                <text wx:if="{{item.diName==''}}">开关</text>
                 <text wx:else>{{item.diName}}</text>
        </view>
        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}">

@@ -1,8 +1,11 @@
 // pages/scenesconfig/changjing/changjing.js
 var changjing;
 var app=getApp();
-var username = wx.getStorageSync('username');//网关账号
-var pwd = wx.getStorageSync('pwd'); //网关密码
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -21,12 +24,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var changjings = decodeURIComponent(options.changjing);
     changjing = JSON.parse(changjings);
     this.setData({
       aiNames: changjing.siName
     })
-    let url = app.globalData.URL + 'gerSceneMem';
+    let url = app.globalData.URL + 'gerSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getscenemembersbydetail",
       code: 602,
@@ -78,38 +86,49 @@ Page({
       title: '提示',
       content: '确定删除该场景的设备吗？',
       success: function (msg) {
-        if (msg.confirm) {
-          let url = app.globalData.URL + 'delSceneMem';
-          console.log(that.data.uidarry);
-          let data = {
-            act: "deleteScenemembers",
-            code: 605,
-            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-            key: "bq6wqzasjwtkl0i21pi9fbeq4",
-            bindid: username,
-            bindstr: pwd,
-            ver: "2",
-            scenes: [{
-              sceneID: changjing.siSceneId, sceneName: changjing.siName, 
-              sceneMembers: that.data.uidarry
-            }] 
-          };
-          app.wxRequest('POST', url, data, (res) => {
-            console.log(res.data)
-            wx.showToast({
-              title: '删除成功',
-              duration: 2000
-            });
-            wx.redirectTo({
-              url: '../../scenesconfig/scenesconfig'
+          if (that.data.uidarry.length ===0){
+            wx.showModal({
+              title: '提示',
+              content: '请选择你要删除的设备'
             })
-          },
-            (err) => {
-              console.log(err.errMsg)
-            }
-          )
-        } else if (msg.cancel) {
-          console.log('用户点击取消')
+          }else{
+            if (msg.confirm) {
+            let url = app.globalData.URL + 'delSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+             console.log(that.data.uidarry);
+            let data = {
+              act: "deleteScenemembers",
+              code: 605,
+              AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+              key: "bq6wqzasjwtkl0i21pi9fbeq4",
+              bindid: username,
+              bindstr: pwd,
+              ver: "2",
+              scenes: [{
+                sceneID: changjing.siSceneId, sceneName: changjing.siName,
+                sceneMembers: that.data.uidarry
+              }]
+            };
+            app.wxRequest('POST', url, data, (res) => {
+              console.log(res.data)
+              wx.showToast({
+                title: '删除成功',
+                duration: 2000
+              });
+              var pages = getCurrentPages(); // 当前页面 
+              var beforePage = pages[pages.length - 2]; // 前一个页面  
+              wx.navigateBack({
+                success: function () {
+                  beforePage.onLoad(); // 执行前一个页面的方法     
+                }
+              });
+            },
+              (err) => {
+                console.log(err.errMsg)
+              }
+            )
+          }else if (msg.cancel) {
+            console.log('用户点击取消')
+          }
         }
       }
     })
@@ -140,10 +159,14 @@ Page({
               title: '删除成功',
               duration: 2000
             });
-            wx.redirectTo({
-              url: '../../scenesconfig/scenesconfig'
-            })
-          },
+            var pages = getCurrentPages(); // 当前页面 
+            var beforePage = pages[pages.length - 2]; // 前一个页面  
+            wx.navigateBack({
+              success: function () {
+                beforePage.onLoad(); // 执行前一个页面的方法     
+                }
+              });
+            },
             (err) => {
               console.log(err.errMsg)
             }
@@ -157,10 +180,10 @@ Page({
   //修改场景名称
   aiNames:function(e){
     console.log(e.detail.value.aiNames);
-    let url = app.globalData.URL + 'alterSceneName';
+    let url = app.globalData.URL + 'alterSceneName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "resetSceneName",
-      code:256,
+      code: 606,
       AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
@@ -171,6 +194,9 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
+      wx.redirectTo({
+        url: "../scenesconfig"
+      })
     },
       (err) => {
         console.log(err.errMsg)

@@ -3,8 +3,11 @@ const app = getApp();
 var dengs = '';
 var S=0;
 var H=0;
-var username = wx.getStorageSync('username');//网关账号
-var pwd = wx.getStorageSync('pwd'); //网关密码
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -41,6 +44,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
     var deng = decodeURIComponent(options.deng);
     dengs = JSON.parse(deng);
     that.setData({
@@ -60,7 +68,7 @@ Page({
     });
     console.log(dengs.diDeviceuid);
     //获取彩灯开关，亮度，颜色，饱和度
-    let url = app.globalData.URL + 'getDevMenage';
+    let url = app.globalData.URL + 'getDevMenage?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getrgbw",
       code: 212,
@@ -122,7 +130,7 @@ Page({
     }) 
   },
 picker:function(){
-  let url = app.globalData.URL + 'ctrLightColor';
+  let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
   let data = {
     act: "controlhue",
     code: "214",
@@ -143,7 +151,7 @@ picker:function(){
   },
   listenerSlider:function(e){
     //获取滑动后的值
-    let url = app.globalData.URL + 'ctrDev';
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "102",
       bindid: username,
@@ -172,7 +180,7 @@ picker:function(){
         temSet = 1;
       }
       console.log(temSet);
-      let url = app.globalData.URL + 'ctrDev';
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         actCode: 102,
         bindid: username,

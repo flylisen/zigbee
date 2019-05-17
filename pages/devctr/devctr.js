@@ -1,5 +1,10 @@
 const app = getApp();
 var sortResult = [];
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
 Page({
   /**
    * 页面的初始数据
@@ -31,10 +36,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    let url = app.globalData.URL + 'getDev';
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+     var that = this;
+     username = app.globalData.username;
+     pwd = app.globalData.pwd;
+     timestamp = app.globalData.timestamp;
+     token = app.globalData.token;
+     sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getDev?timestamp='+timestamp +'&token='+token+'&sign='+sign;
+    console.log(url);
     let data = {
       bindid: username,
       bindstr: pwd
@@ -74,8 +83,6 @@ Page({
     var tp = event.currentTarget.dataset['tp'];
     console.log(tp)
     if (tp.diOnlineStatu > 0) {
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
     var temSet;
     var dd = tp.diOnoffStatu;
     if (tp.diOnoffStatu >= 1) {
@@ -89,7 +96,8 @@ Page({
     this.setData({
       [tmp] : temSet
      })
-      let url = app.globalData.URL + 'ctrDev';
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      console.log(url);
       let data = {
         bindid: username,
         bindstr: pwd,
@@ -130,7 +138,7 @@ Page({
     this.setData({
       [tmp]: temSet
     })
-    let url = app.globalData.URL + 'ctrDev';
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: 102,
       bindid: username,

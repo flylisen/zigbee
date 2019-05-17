@@ -5,7 +5,7 @@
 </view>
       <view class='flex-wrp_one'>
     <block  wx:for="{{scenes}}" wx:for-item="item">
-           <view data-id="{{item}}" bindtap='changjing'>
+           <view wx:if="{{item.siSceneVisibal==1}}" data-id="{{item}}" bindtap='changjing'>
                <image src='../../images/config/changjingpeizhi.png'  style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.siName==''}}">场景</view>
                 <view wx:else>{{item.siName}}</view>

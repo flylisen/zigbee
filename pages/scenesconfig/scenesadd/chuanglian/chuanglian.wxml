@@ -1,5 +1,0 @@
-<!--pages/scenesconfig/scenesadd/chuanglian/chuanglian.wxml-->
-       <image src='/images/chuanglian/chuangliankai.png' wx:if="{{chuanglians>0}}" ></image>
-       <image src='/images/chuanglian/chuanglianguan.png' wx:else></image>
-       <button bindtap='chuangliang'>开关</button>  
-

@@ -1,13 +1,31 @@
 //app.js
 App({
- 
  //设置全局对象  
   globalData: {
     userInfo: null,
+    username:'',
+    pwd:'',
+    timestamp:'',
+    token:'',
+    sign:'',
+    data:'',
     localWebsocket: {},      //websocket对象
     URL: 'https://dev.rishuncloud.com:8443/',  
     gwId: -1,
     onReceiveWebsocketMessageCallback: function () { }
+  },
+  //获取用户名与密码
+  user: function (username, pwd){
+    let that = this;
+    that.globalData.username=username;
+    that.globalData.pwd=pwd;
+  },
+  //获取timestamp(时间戳)，token(令牌)，sign（签名）
+  safety: function (timestamp,token,sign){
+    let that = this;
+    that.globalData.timestamp = timestamp;
+    that.globalData.token = token;
+    that.globalData.sign = sign;
   },
   //初始化websocket
   initWebSocket: function (gwId) {

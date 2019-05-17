@@ -1,6 +1,14 @@
 // pages/scenesconfig/scenesadd/scenesadd.js
 const app = getApp();
 var sceneVisible='';
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
+var temSet;
+var tp;
+var thermostatControlType;
 Page({
 
   /**
@@ -11,118 +19,83 @@ Page({
     choseImg: '/images/check-circle2.png',
     unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
-    arr: '',
+    showModal: false,
+    diDeviceid:'',
+    diZonetype:'',
+    arry:[],
     items: [
       { name: 0, value: '不可见'},
       { name: 1, value: '可见'},
     ],
-    sceneArray : []
+    ConditionMode: [
+      { name: 0, value: '关' },
+      { name: 3, value: '制冷' },
+      { name: 4, value: '制热' },
+      { name: 5, value: '开' },
+    ],
+    WindMode:[
+      { name: 1, value: '低' },
+      { name: 2, value: '中' },
+      { name: 3, value: '高' },
+      { name: 5, value: '自动' },
+    ],
+    sceneMemberArray:[],
+    realsceneMemberArray :[],
+    temperature:'',
+    centralairConditionMode:'',
+    centralairConditionWindMode:'',
+    brightness:'',
+    hue:'',
+    saturation:'',
+    CCT:'',
   },
-  radioChange(e) {
-    sceneVisible = e.detail.value;
-    console.log('radio发生change事件，携带value值为：', e.detail.value)
+  //温度
+  temperature: function (e) {
+    this.setData({
+      temperature: e.detail.value
+    })
   },
-  submit: function (e) {
-    var that = this
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
-    var name = e.detail.value.areaname;
-    console.log(name);
-    let arr1 = that.data.arr;
-    console.log(arr1);
-    if (name == '' || arr1 == '' || sceneVisible==''){
-      wx.showModal({
-        title: '提示',
-        content: '请输入场景名称和选择设备与是否可见'
-      })
-    }else{
-      for (let i = 0; i < arr1.length; i++) { 
-        var sceneDev = {};
-        if (arr1[i].diDeviceid==2){//开关
-          console.log(arr1[i].diUuid);
-          console.log(arr1[i].diDeviceid);
-          console.log(arr1[i].diOnoffStatu);
-          sceneDev.uuid = arr1[i].diUuid;
-          sceneDev.deviceid = arr1[i].diDeviceid;
-          sceneDev.status = arr1[i].diOnoffStatu;
-          sceneDev.brightness = 0;
-          sceneDev.hue = 0;
-          sceneDev.saturation = 0;
-          sceneDev.IRID = 0;  
-        }
-         if (arr1[i].diDeviceid = 514){ //窗帘
-           console.log(arr1[i].diUuid);
-           console.log(arr1[i].diDeviceid);
-           console.log(arr1[i].diOnoffStatu);
-           sceneDev.uuid = arr1[i].diUuid;
-           sceneDev.deviceid = arr1[i].diDeviceid;
-           sceneDev.status = arr1[i].diOnoffStatu;
-           sceneDev.brightness = 0;
-           sceneDev.hue = 0;
-           sceneDev.saturation = 0;
-         }
-        if (arr1[i].diDeviceid =528){   //灯
-          console.log(arr1[i].diUuid);
-          console.log(arr1[i].diDeviceid);
-          console.log(arr1[i].diOnoffStatu);
-          sceneDev.uuid = arr1[i].diUuid;
-          sceneDev.deviceid = arr1[i].diDeviceid;
-          sceneDev.status = arr1[i].diOnoffStatu;
-          sceneDev.brightness = 0;
-          sceneDev.hue = 0;
-          sceneDev.saturation = 0;
-         }
-        if (arr1[i].diDeviceid == 769 && arr1[i].diZonetype == 1){//空调
-          sceneDev.uuid = arr1[i].diUuid;
-          sceneDev.deviceid = arr1[i].diDeviceid;
-          sceneDev.status = arr1[i].diOnoffStatu;
-          sceneDev.brightness = 0;
-          sceneDev.hue = 0;
-          sceneDev.saturation = 0;
-          
-         }
-        if (arr1[i].diDeviceid == 544 && arr1[i].diZonetype == 255) {//色温（CCT）灯
-          sceneDev.uuid = arr1[i].diUuid;
-          sceneDev.deviceid = arr1[i].diDeviceid;
-          sceneDev.status = arr1[i].diOnoffStatu;
-          sceneDev.brightness = 0;
-          sceneDev.hue = 0;
-          sceneDev.saturation = 0;
-         }
-        sceneDev.IRID = 0;
-        sceneDev.delayTime = 0;
-        this.data.sceneArray.push(sceneDev);
-      }  
-      
-      let url = app.globalData.URL + 'addScene';
-      let data = {
-        act: "setScenes",
-        code: 603,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver: "2.0",
-        scenes: [{
-          sceneName: name,
-          sceneVisible:sceneVisible,
-          sceneMembers: this.data.sceneArray
-        }]
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-        if (res.data!=null){
-          wx.redirectTo({
-            url: '../scenesconfig',
-          }, 2000)
-        }
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    }
+  //亮度
+  brightness:function(e){
+    this.setData({
+      brightness: e.detail.value
+    })
   },
+  //色调
+  hue: function (e) {
+    this.setData({
+      hue: e.detail.value
+    })
+  },
+  //饱和度
+  saturation: function (e) {
+    this.setData({
+      saturation: e.detail.value
+    })
+  },
+  //灯温
+  CCT: function (e) {
+    this.setData({
+      CCT: e.detail.value
+    })
+  },
+  radioChange: function (e) {
+    sceneVisible=e.detail.value
+    console.log('可见值:', e.detail.value)
+  },
+  checkboxChange: function (e) {
+    console.log('模式：', e.detail.value)
+    this.setData({
+      centralairConditionMode: e.detail.value
+    })
+  },
+  checkboxChangeWindMode:function(e){
+    console.log('风速：', e.detail.value)
+    this.setData({
+      centralairConditionWindMode: e.detail.value
+    })
+  },
+  //关闭
   go: function () {
     wx.redirectTo({
       url: '../scenesconfig',
@@ -133,9 +106,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getDev';
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd
@@ -184,129 +160,250 @@ Page({
   },
   chooseTap(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
-    console.log(e.currentTarget.dataset.index);
-    let infoArray = this.data.sortedDevs;
-    let arr = [];
-    infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
-    console.log(infoArray[index]);
-    for (var i = 0; i < infoArray.length; i++) { //获取选中信息
-      if (infoArray[i].isSelect) {
-        arr.push(infoArray[i]);
-        console.log(arr);
-      }
-    }
-    this.setData({
-      sortedDevs: infoArray,
-      arr
-    })
+     let infoArray = this.data.sortedDevs;
+      let arr = [];
+      infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
+        for (var i = 0; i < infoArray.length; i++) { //获取选中信息
+          if (infoArray[i].isSelect) {
+            arr.push(infoArray[i]);
+            console.log(arr);
+          }
+        }
+        this.setData({
+          sortedDevs: infoArray,
+          arry:arr
+        })
+    this.data.sceneMemberArray = arr;
+
   },
   //开关事件
   kaiguanguan: function (event) {
-    var tp = event.currentTarget.dataset['tp'];
-    console.log(tp)
-    if (tp.diOnlineStatu > 0) {
-      var username = wx.getStorageSync('username');//网关账号
-      var pwd = wx.getStorageSync('pwd'); //网关密码
-      var temSet;
-      var dd = tp.diOnoffStatu;
+     var that=this;
+     tp = event.currentTarget.dataset['tp'];
+     console.log(tp)
+     temSet = '';
       if (tp.diOnoffStatu >= 1) {
         temSet = 0;
       } else {
         temSet = 1;
       }
-      console.log(temSet);
       var index = event.currentTarget.id;//获得下标
       var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
       this.setData({
-        [tmp]: temSet
+        [tmp]: temSet,
       })
-      let url = app.globalData.URL + 'ctrDev';
-      let data = {
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: tp.deviceuid, uuid: tp.diUuid, value: temSet }],
-        var: "2.0"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    } else {
-      wx.showToast({
-        title: '设备不在线',
-        icon: 'none'
-      })
-    }
+      console.log(temSet);
+      that.chufa(tp);
   },
-  //灯事件
+  /**
+    * 空调弹窗
+    */
+  kongtiao: function (event) {
+    tp = event.currentTarget.dataset['kongtiao'];
+    this.setData({
+      showModal: true,
+      diDeviceid: tp.diDeviceid,
+      diZonetype: tp.diZonetype
+    })
+  },
+  /**
+   * 灯弹窗
+   */
+  dengxia: function (event) {
+    tp = event.currentTarget.dataset['deng'];
+    this.setData({
+      showModal: true,
+      diDeviceid: tp.diDeviceid,
+      diZonetype: tp.diZonetype
+    })
+  },
+  /**
+   * 色温灯
+   */
+  sewendeng: function (event) {
+    tp = event.currentTarget.dataset['sewendeng'];
+    this.setData({
+      showModal: true,
+      diDeviceid: tp.diDeviceid,
+      diZonetype: tp.diZonetype
+    })
+  },
+  /**
+   * 隐藏模态对话框
+   */
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+  /**
+   * 对话框取消按钮点击事件
+   */
+  onCancel: function () {
+    this.hideModal();
+  },
+  /**
+   * 对话框确认按钮点击事件
+   */
+  onConfirm: function () {
+    console.log(tp);
+    var that=this;
+    console.log(this.data.temperature);//温度
+    console.log(this.data.centralairConditionMode);//模式
+    console.log(this.data.centralairConditionWindMode);//风速
+    console.log(this.data.brightness);//亮度
+    console.log(this.data.hue);//色调
+    console.log(this.data.saturation);//饱和度
+    console.log(this.data.CCT);//灯温
+    that.chufa(tp);
+    this.hideModal();
+  },
+  //窗帘开关
+  chuangliand: function (event) {
+    var that = this;
+    tp = event.currentTarget.dataset['chuangliand'];
+    console.log(tp)
+    temSet = '';
+    if (tp.diOnoffStatu >= 1) {
+      temSet = 0;
+    } else {
+      temSet = 1;
+    }
+    var index = event.currentTarget.id;//获得下标
+    var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
+    this.setData({
+      [tmp]: temSet,
+    })
+    console.log(temSet);
+    that.chufa(tp);
+  },
+  //灯开关
   deng: function (event) {
+    var that=this;
     var deng = event.currentTarget.dataset['deng'];
-    if (deng.diOnlineStatu > 0) {
-      console.log(deng)
-      var username = wx.getStorageSync('username');//网关账号
-      var pwd = wx.getStorageSync('pwd'); //网关密码
-      var temSet;
+    var temSet='';
       if (deng.diOnoffStatu >= 1) {
         temSet = 0;
       } else {
         temSet = 1;
       }
-      console.log(temSet);
       var index = event.currentTarget.id;//获得下标
       var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
       this.setData({
         [tmp]: temSet
       })
-      let url = app.globalData.URL + 'ctrDev';
+    console.log(temSet);
+    that.chufa(tp);
+  },
+  chufa: function (tp) {
+    var that = this;
+    for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
+      if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
+        if (tp.diDeviceid == 2) {//开关
+          that.data.sceneMemberArray[i].status = temSet;
+        }
+        if (tp.diDeviceid ==514){//窗帘
+          that.data.sceneMemberArray[i].status = temSet;
+        }
+        if (tp.diDeviceid=528){//灯
+          that.data.sceneMemberArray[i].status = temSet;
+        }
+      }
+    }
+  },
+  submit: function (e) {
+    let Array = this.data.sceneMemberArray;
+    console.log(Array);
+    let sceneMemberArray=[];
+    for (var i = 0; i < Array.length; i++) {
+      var o = {};
+      o.uuid = Array[i].diUuid;
+      o.deviceid = Array[i].diDeviceid;
+      o.status = Array[i].diOnoffStatu;
+      if (Array[i].diDeviceid == 514){
+        o.brightness =0;//窗帘的开关程度
+      }
+      if (Array[i].diDeviceid == 769 && Array[i].diZonetype==1){ //空调
+        if (this.data.centralairConditionMode != ''){
+          o.thermostatMode = this.data.centralairConditionMode;
+          o.thermostatcontroltype=1;
+        }else{
+          o.thermostatMode = 0;
+          o.thermostatcontroltype = 1;
+        }
+        if (this.data.centralairConditionWindMode!=''){
+          o.thermostatWindMode = this.data.centralairConditionWindMode;
+          o.thermostatcontroltype = 2;
+        }else{
+          o.thermostatWindMode =0;
+          o.thermostatcontroltype = 2;
+        }
+        if (this.data.temperature!=''){
+          o.temperature = this.data.temperature;
+          o.thermostatcontroltype = 3;
+        }else{
+          o.temperature=0;
+          o.thermostatcontroltype =3;
+        } 
+      }
+      if (Array[i].diDeviceid ==528){//灯
+        if (this.data.brightness!=''){
+          o.brightness = this.data.brightness; //亮度
+        }else{
+          o.brightness=0;
+        }
+        if (this.data.hue!=''){
+          o.hue = this.data.hue;//色调
+        }else{
+          o.hue=0;
+        }
+        if (this.data.saturation!=''){
+        o.saturation = this.data.saturation;//饱和度
+        }else{
+          o.saturation=0;
+        } 
+      }
+      if (Array[i].diDeviceid == 544 && Array[i].diZonetype ==255){//色温灯
+          o.CCT = this.data.CCT;
+      }
+      this.data.realsceneMemberArray.push(o);
+    }
+    var that = this
+    var name = e.detail.value.areaname;
+    if (name != '' && Array != '' && sceneVisible!=''){
+      let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
-        actCode: 102,
+        act: "setScenes",
+        code: 603,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
         bindid: username,
         bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: deng.deviceuid, uuid: deng.diUuid, value: temSet }],
-        ver: "1"
+        ver: "2.0",
+        scenes: [{
+          sceneName: name,
+          sceneVisible: sceneVisible,
+          sceneMembers: this.data.realsceneMemberArray
+        }]
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
+        if (res.data != null) {
+          wx.navigateTo({
+            url: '../scenesconfig',
+          }, 2000)
+        }
       },
         (err) => {
           console.log(err.errMsg)
         }
       )
-    } else {
-      wx.showToast({
-        title: '设备不在线',
-        icon: 'none'
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '请输入场景名称或者选择设备和是否可见'
       })
     }
-  },
-  xia: function (event) {
-    var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'dengcolor/dengcolor?deng=' + deng
-    })
-  },
-  kongtiao: function (event) {
-    var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'kongtiao/kongtiao?kongtiao=' + kongtiao
-    })
-  },
-  sewendeng: function (event) {
-    var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'sewendeng/sewendeng?sewendeng=' + sewendeng
-    })
-  },
-  chuangliandk: function (event) {
-    var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deviceuid']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'chuanglian/chuanglian?deviceuid=' + deviceuid
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -319,99 +416,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //回调
-    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
-      console.log('接收到服务器信息', res);
-      var nodeType;
-      var diUuid;
-      var value;
-      var strs = new Array();
-      strs = res.data.split(","); //字符分割 
-      nodeType = strs[0].split('=')[1];
-      diUuid = strs[1].split('=')[1];
-      value = strs[2].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('diUuid', diUuid);
-      console.log('value', value);
-      //找到当前页面的page
-      var pageArray = getCurrentPages();
-      var curPage;
-      for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/scenesconfig/scenesadd/scenesadd') {
-          curPage = pageArray[j];
-        }
-      }
-      console.log('curPage', curPage);
-      if (nodeType == 4) {
-        //设备开关状态发生改变
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 1) {
-        //设备新入网
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-      } else if (nodeType == 2) {
-        //判断设备是否在线
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
-            curPage.setData({
-              [tmp]: 1
-            })
-          }
-        }
-      } else if (nodeType == 5) {
-        //修改名称
-        console.log(curPage.data.sortedDevs);
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 3) {
-        //删除设备
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-      } else if (nodeType == 6) {
-        var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
-        let url = app.globalData.URL + 'getSensorAttrValue';
-        let data = {
-          actCode: "110",
-          bindid: username,
-          bindstr: pwd,
-          uuid: diUuid,
-          ver: "2.0"
-        };
-        app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
-        },
-          (err) => {
-            console.log(err.errMsg)
-          }
-        )
-      }
-      console.log('当前页面在设备控制');
-    } 
+      console.log('当前新增场景');
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -447,3 +453,4 @@ Page({
 
   }
 })
+
