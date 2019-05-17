@@ -231,7 +231,7 @@ picker:function(){
       var pageArray = getCurrentPages();
       var curPage;
       for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/devctr/devctr') {
+        if (pageArray[j].route == 'pages/devctr/dengcolor/dengcolor') {
           curPage = pageArray[j];
         }
       }
@@ -306,7 +306,7 @@ picker:function(){
           }
         )
       }
-      console.log('当前页面在设备控制');
+      console.log('当前页面在彩灯色调控制');
     } 
   },
 

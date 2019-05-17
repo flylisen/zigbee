@@ -82,9 +82,7 @@ Page({
   },
   areainfo:function(event){
     // var aiId = event.currentTarget.id;
-    console.log(event.currentTarget.dataset['id']);
     var aiid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['id']));//函数可把字符串作为 URI
-    console.log(aiid)
     wx.navigateTo({
       url: 'areainfo/areainfo?aiid=' + aiid
     })

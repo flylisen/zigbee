@@ -264,7 +264,6 @@ Page({
 
   chooseTap(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
-    console.log(e.currentTarget.dataset.index);
     let infoArray = this.data.sortedDevs;
     let arr=[];
     infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
