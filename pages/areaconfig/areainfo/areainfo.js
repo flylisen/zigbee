@@ -3,6 +3,9 @@ var Industrys;
 var app=getApp();
 var username = wx.getStorageSync('username');//网关账号
 var pwd = wx.getStorageSync('pwd'); //网关密码
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -20,40 +23,40 @@ Page({
   submit: function (e) {  //删除设备
     var that = this
     var areaId = Industrys.aiId;
-    let arr1 = that.data.arr;
-    let arr2 = [];
-    for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diId
-      arr2.push(arr1[i].diId);
-    }
-    if (arr2.length == 0) {
+    var arr1 = that.data.arr;
+    if (arr1 == ''){
       wx.showToast({
-        title: '请选择删除设备'
+        title: '请选择设备！'
       });
-      return false;
-    } else {
+    }else {
       wx.showModal({
         title: '提示',
         content: '确定删除该设备吗？',
         success: function (msg) {
           if (msg.confirm) {
-            let url = app.globalData.URL + 'getAreaDev';
+            let arr2 = [];
+            for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diId
+              arr2.push(arr1[i].diId);
+            }
+            console.log(arr1);
+            console.log(arr2);
+            let url = app.globalData.URL + 'delDevFromArea?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
             let data = {
               actCode: "109",
               bindid: username,
               areaId: areaId,
-              devId: arr2,
+              devIds: arr2,
               ver: "2"
             };
             app.wxRequest('POST', url, data, (res) => {
-              console.log(res.data)
+              console.log(res.data);
               wx.showToast({
                 title: '删除成功',
                 duration: 2000
               });
-              that.data.arr = [];  //抛弃之前选中设备数组
-              that.setData({  //删除后更新页面数据
-                sortedDevs: res.data.devs,
-              });
+              wx.navigateTo({
+                url: '../../areaconfig/areaconfig'
+              })
             },
               (err) => {
                 console.log(err.errMsg)
@@ -73,15 +76,13 @@ Page({
   onLoad: function (options) {
     var aiid = decodeURIComponent(options.aiid);
     Industrys = JSON.parse(aiid);
-    console.log("id="+Industrys)
      this.setData({
        aiNames: Industrys.aiName
      })
-    console.log('onLoad')
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getAreaDev';
+    let url = app.globalData.URL + 'getAreaDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "108",
       bindid: username,
@@ -89,7 +90,6 @@ Page({
       ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -104,7 +104,6 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult);
       that.setData({
         sortedDevs: sortResult
       });
@@ -277,7 +276,7 @@ Page({
       content: '确定删除该区域吗？',
       success: function (msg) {
         if (msg.confirm) {
-          let url = app.globalData.URL + 'delArea';
+          let url = app.globalData.URL + 'delArea?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
           let data = {
             actCode: "108",
             bindid: username,
@@ -285,7 +284,6 @@ Page({
             ver: "2"
           };
           app.wxRequest('POST', url, data, (res) => {
-            console.log(res.data)
             wx.showToast({
               title: '删除成功',
               duration: 2000

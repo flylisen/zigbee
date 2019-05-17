@@ -154,7 +154,7 @@ Page({
           bindid: username,
           bindstr: pwd,
           uuid: diUuid,
-          ver: "1"
+          ver: "2"
         };
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data)

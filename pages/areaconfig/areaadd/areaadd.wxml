@@ -15,38 +15,47 @@
       </view>
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
    <view class="con-wrapper">
-   <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
        <view wx:if="{{item.diDeviceid==2}}">
-               <image src='/images/devctr/kaiguanguan.png'  id="{{index}}"  style="width:70px;height:70px;"></image>
+ <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+               <image src='/images/devctr/kaiguanguan2.png' wx:if="{{item.diOnoffStatu> 0}}" data-tp="{{item}}" id="{{index}}"    style="width:70px;height:70px;"></image>
+              <image src='/images/devctr/kaiguanguan.png' wx:else   data-tp="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.diName==''}}">开关</view>
                 <view wx:else>{{item.diName}}</view>
-      </view>
-           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
-              <image src='/images/devctr/chuanglian.png' style="width:40px;height:40px;"></image>
-              
-                 <view wx:if="{{item.diName==''}}">窗帘</view>
-                 <view wx:else>{{item.diName}}</view>
-         </view>
-         <view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}" data-deviceuid="{{item}}" >
-              <image src='/images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diName==''}}">浴帘</view>
-                 <view wx:else>{{item.diName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==528}}" data-deng="{{item}}" >
-          <image src='/images/devctr/deng.png' style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.diName==''}}">RGBW灯</view>
+</view>
+<view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.diOnoffStatu> 0}}" data-chuangliand="{{item}}" id="{{index}}"    style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else   data-chuangliand="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
+              <view wx:if="{{item.diName==''}}">浴帘</view>
+              <view wx:else>{{item.diName}}</view>
+</view>
+<view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+     <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.diOnoffStatu> 0}}" data-chuangliand="{{item}}" id="{{index}}"    style="width:70px;height:70px;"></image>
+              <image src='/images/chuanglian/chuanglianguan.png' wx:else   data-chuangliand="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>
+                <view wx:if="{{item.diName==''}}">窗帘</view>
                 <view wx:else>{{item.diName}}</view>
          </view>
-          <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}"  data-kongtiao="{{item}}">
-          <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.diName==''}}">温控器</view>
+<view wx:if="{{item.diDeviceid==528}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+           <image src='/images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.diOnoffStatu>0}}" data-deng="{{item}}" id="{{index}}"></image>
+  <image src='/images/devctr/deng.png' wx:else   data-deng="{{item}}" id="{{index}}"  style="width:70px;height:70px;"></image>  
+                <view wx:if="{{item.diName==''}}">RGBW灯</view>
                 <view wx:else>{{item.diName}}</view>
          </view>
-          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" data-sewendeng="{{item}}">
-          <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
+
+<view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}">
+ <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap" data-index="{{index}}"></image>
+              <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image> 
+                <view wx:if="{{item.diName==''}}">温控器</view>
+                <view wx:else>{{item.diName}}</view>
+         </view>
+<view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
+<image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap" data-index="{{index}}"></image>
+              <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
                   <view wx:if="{{item.diName==''}}">色温（CCT）灯</view>
-                <view wx:else>{{item.diName}}</view>
-           </view>
+                  <view wx:else>{{item.diName}}</view>
+         </view>
          </view>
     </block>
     </form>

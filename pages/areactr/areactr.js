@@ -1,5 +1,8 @@
 // pages/areactr/areactr.js
 const app = getApp();
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -35,7 +38,7 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'areaList';
+    let url = app.globalData.URL + 'areaList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode:107,
       bindid: username,

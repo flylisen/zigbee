@@ -145,7 +145,7 @@ Page({
       bindstr: pwd,
       ctrType: 0,
       devs: [{ deviceuid: deng.deviceuid, uuid: deng.diUuid,value: temSet }],
-      ver: "1"
+      ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)

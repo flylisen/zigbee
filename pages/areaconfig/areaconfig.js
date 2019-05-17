@@ -1,5 +1,8 @@
 // pages/areaconfig/areaconfig.js
 var app=getApp();
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -13,18 +16,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('onLoad')
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'areaList';
+    let url = app.globalData.URL + 'areaList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode:107,
       bindid: username,
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
       var tmp = {};
       for (var index in res.data.areas) {
         var tag = res.data.areas[index].aiId + res.data.areas[index].aiName + '';
@@ -39,7 +40,7 @@ Page({
           areaResult.push(tmp[key][j]);
         }
       }
-      console.log(areaResult);
+      wx.setStorageSync('areaResult',areaResult);
       that.setData({
         sortedAreas: areaResult
       });

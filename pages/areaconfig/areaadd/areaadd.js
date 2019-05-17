@@ -1,5 +1,8 @@
 // pages/areaconfig/areaadd/areaadd.js
 var app=getApp();
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -18,21 +21,31 @@ Page({
     var pwd = wx.getStorageSync('pwd'); //网关密码
     var name = e.detail.value.areaname;
     let arr1=that.data.arr;
+    var areainfo=[];
+    areainfo=wx.getStorageSync('areaResult');  //获取区域缓存信息
+    for(var i=0;i<areainfo.length;i++){
+      if(name == areainfo[i].aiName){
+        var j = 1;
+      }
+    }
     if (name == '' || arr1==''){
       wx.showModal({
         title: '提示',
         content: '请输入区域名称或者选择设备'
       })
     }
+    else if(j==1){
+      wx.showToast({
+        title: '该区域已存在！'
+      });
+    }
     else{
       let arr2 = [];
       for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diUuid
         arr2.push(arr1[i].diUuid);
       }
-      console.log(arr2);
-      console.log(arr1);
       console.log(e.detail.value.areaname);
-      let url = app.globalData.URL + 'addArea';
+      let url = app.globalData.URL + 'addArea?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         actCode: 106,
         bindid: username,
@@ -41,7 +54,6 @@ Page({
         ver: "2"
       };
       app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
         if (res.data.code=1){
           wx.redirectTo({
             url: '../areaconfig',
@@ -69,7 +81,7 @@ Page({
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getDev';
+    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd
@@ -89,14 +101,12 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       };
-      console.log(sortResult)
       var arr3 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示区域添加设备
         if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1) || (sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1)|| (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
           arr3.push(sortResult[i]);
         }
       };
-      console.log(arr3)
       that.setData({
         sortedDevs: arr3
       });
@@ -258,11 +268,9 @@ Page({
     let infoArray = this.data.sortedDevs;
     let arr=[];
     infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
-    console.log(infoArray[index]);
     for (var i = 0; i < infoArray.length; i++) { //获取选中信息
       if(infoArray[i].isSelect){
           arr.push(infoArray[i]);
-          console.log(arr);
       }
     }
     this.setData({

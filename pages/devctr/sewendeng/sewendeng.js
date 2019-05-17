@@ -40,7 +40,7 @@ Page({
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
       bindstr: pwd,
-      ver: '1',
+      ver: '2',
       devs: [{ deviceuid: sewendengs.diDeviceuid }]
     };
     app.wxRequest('POST', url, data, (res) => {

@@ -1,6 +1,9 @@
 // pages/areaconfig/areainfo/areainfo.js
 var Industrys;
 var app=getApp();
+var timestamp;
+var token;
+var sign;
 Page({
 
   /**
@@ -17,15 +20,13 @@ Page({
   onLoad: function (options) {
     var aiid = decodeURIComponent(options.aiid);
     Industrys = JSON.parse(aiid);
-    console.log("id="+Industrys)
      this.setData({
        aiNames: Industrys.aiName
      })
-    console.log('onLoad')
     var that = this;
     var username = wx.getStorageSync('username');
     var pwd = wx.getStorageSync('pwd');
-    let url = app.globalData.URL + 'getAreaDev';
+    let url = app.globalData.URL + 'getAreaDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "108",
       bindid: username,
@@ -33,7 +34,6 @@ Page({
       ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -48,7 +48,6 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult);
       that.setData({
         sortedDevs: sortResult
       });
@@ -61,7 +60,6 @@ Page({
   //开关事件
   kaiguanguan: function (event) {
     var tp = event.currentTarget.dataset['tp'];
-    console.log(tp)
     if (tp.diOnlineStatu > 0) {
       var username = wx.getStorageSync('username');//网关账号
       var pwd = wx.getStorageSync('pwd'); //网关密码
@@ -72,13 +70,12 @@ Page({
       } else {
         temSet = 1;
       }
-      console.log(temSet);
       var index = event.currentTarget.id;//获得下标
       var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
       this.setData({
         [tmp]: temSet
       })
-      let url = app.globalData.URL + 'ctrDev';
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         bindid: username,
         bindstr: pwd,
@@ -87,7 +84,6 @@ Page({
         var: "2.0"
       };
       app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
       },
         (err) => {
           console.log(err.errMsg)
@@ -104,7 +100,6 @@ Page({
   deng: function (event) {
     var deng = event.currentTarget.dataset['deng'];
     if (deng.diOnlineStatu > 0) {
-      console.log(deng)
       var username = wx.getStorageSync('username');//网关账号
       var pwd = wx.getStorageSync('pwd'); //网关密码
       var temSet;
@@ -119,17 +114,16 @@ Page({
       this.setData({
         [tmp]: temSet
       })
-      let url = app.globalData.URL + 'ctrDev';
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         actCode: 102,
         bindid: username,
         bindstr: pwd,
         ctrType: 0,
         devs: [{ deviceuid: deng.deviceuid, uuid: deng.diUuid, value: temSet }],
-        ver: "1"
+        ver: "2"
       };
       app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
       },
         (err) => {
           console.log(err.errMsg)
@@ -165,7 +159,6 @@ Page({
   },
   chuangliandk: function (event) {
     var curtain = event.currentTarget.dataset['curtain'];
-    console.log(curtain)
     var username = wx.getStorageSync('username');//网关账号
     var pwd = wx.getStorageSync('pwd'); //网关密码
     var temSet;
@@ -181,7 +174,7 @@ Page({
     this.setData({
       [tmp]: temSet
     })
-    let url = app.globalData.URL + 'ctrDev';
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd,

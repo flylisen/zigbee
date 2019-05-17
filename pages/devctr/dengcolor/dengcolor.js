@@ -76,7 +76,7 @@ Page({
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
       bindstr: pwd,
-      ver: "1",
+      ver: "2",
       devs: [
         {
           deviceuid: dengs.diDeviceuid
@@ -187,7 +187,7 @@ picker:function(){
         bindstr: pwd,
         ctrType: 0,
         devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: temSet }],
-        ver: "1"
+        ver: "2"
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
@@ -296,7 +296,7 @@ picker:function(){
           bindid: username,
           bindstr: pwd,
           uuid: diUuid,
-          ver: "1"
+          ver: "2"
         };
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data)
