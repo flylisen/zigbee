@@ -63,7 +63,7 @@ Page({
     var kongtiao = decodeURIComponent(options.kongtiao);
     kongtiaos = JSON.parse(kongtiao);
     this.setData({
-      diNames: kongtiaos.diName,
+      diNames: kongtiaos.diShowName,
       chuanglians: kongtiaos.diOnlineStatu,
       sortedDevs: kongtiaos 
     });
@@ -140,7 +140,7 @@ Page({
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-
+        
       },
         (err) => {
           console.log(err.errMsg)
@@ -235,14 +235,6 @@ Page({
           })   
         }
       }
-      if (nodeType==101){
-        for (var i = 0; i < curPage.data.airAllState.length; i++) {
-          var tmp = 'airAllState[' + i + '].windspeed';
-          curPage.setData({
-            [tmp]: value
-          })
-        }
-      }
       if (nodeType == 101) {
         for (var i = 0; i < curPage.data.airAllState.length; i++) {
           var tmp = 'airAllState[' + i + '].windspeed';
@@ -267,8 +259,6 @@ Page({
           })
         }
       }
-        
-
       console.log('当前页面在空调');
     } 
   },

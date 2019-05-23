@@ -14,7 +14,6 @@
       </view>
       <view>
         <button form-type='submit'>登录</button>
-        <button>注册</button>
       </view>
     </form>
   </view>

@@ -4,6 +4,7 @@ App({
   globalData: {
     userInfo: null,
     username:'',
+    list:[],
     pwd:'',
     timestamp:'',
     token:'',
@@ -12,7 +13,35 @@ App({
     localWebsocket: {},      //websocket对象
     URL: 'https://dev.rishuncloud.com:8443/',  
     gwId: -1,
-    onReceiveWebsocketMessageCallback: function () { }
+    onReceiveWebsocketMessageCallback: function () { },
+  },
+  onLaunch:function(){
+
+  },
+  /**  
+  * 
+  * 封装wx.request请求  
+  * method： 请求方式  
+  * url: 请求地址  
+  * data： 要传递的参数  
+  * callback： 请求成功回调函数  
+  * errFun： 请求失败回调函数  
+  **/
+  wxRequest(method, url, data, callback, errFun) {
+    wx.request({
+      url: url,
+      data: data,
+      method: method,
+      header: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        callback(res);
+      },
+      fail: function (err) {
+        errFun(res);
+      }
+    })
   },
   //获取用户名与密码
   user: function (username, pwd){
@@ -57,30 +86,5 @@ App({
         console.log('-------------------------');
         that.globalData.onReceiveWebsocketMessageCallback(res);
     });
-  },   
-  /**  
-   * 
-   * 封装wx.request请求  
-   * method： 请求方式  
-   * url: 请求地址  
-   * data： 要传递的参数  
-   * callback： 请求成功回调函数  
-   * errFun： 请求失败回调函数  
-   **/
-  wxRequest(method, url, data, callback, errFun) {
-    wx.request({
-      url: url,
-      data: data,
-      method: method,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        callback(res);
-      },
-      fail: function (err) {
-        errFun(res);
-      }
-    })
   }
 })

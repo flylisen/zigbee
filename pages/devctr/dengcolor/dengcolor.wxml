@@ -8,9 +8,6 @@
            <view wx:else>
         <text>名称 :{{diNames}}</text>
         </view>
-        <view>
-         <button  bindtap='deng'>开关</button>
-        </view>
 </view>
 <color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
  <button bindtap="picker">确定</button> 

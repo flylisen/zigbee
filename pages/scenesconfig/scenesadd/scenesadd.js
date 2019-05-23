@@ -8,7 +8,6 @@ var token;
 var sign;
 var temSet;
 var tp;
-var thermostatControlType;
 Page({
 
   /**
@@ -48,6 +47,8 @@ Page({
     hue:'',
     saturation:'',
     CCT:'',
+    index:'',
+    airTempArray:[],
   },
   //温度
   temperature: function (e) {
@@ -97,9 +98,13 @@ Page({
   },
   //关闭
   go: function () {
-    wx.redirectTo({
-      url: '../scenesconfig',
-    }, 2000)
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面  
+    wx.navigateBack({
+      success: function () {
+        beforePage.onLoad(); // 执行前一个页面的方法     
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -203,7 +208,8 @@ Page({
     this.setData({
       showModal: true,
       diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype
+      diZonetype: tp.diZonetype,
+      index:1
     })
   },
   /**
@@ -214,7 +220,8 @@ Page({
     this.setData({
       showModal: true,
       diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype
+      diZonetype: tp.diZonetype,
+      index: 2
     })
   },
   /**
@@ -225,7 +232,8 @@ Page({
     this.setData({
       showModal: true,
       diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype
+      diZonetype: tp.diZonetype,
+      index:3
     })
   },
   /**
@@ -255,8 +263,35 @@ Page({
     console.log(this.data.hue);//色调
     console.log(this.data.saturation);//饱和度
     console.log(this.data.CCT);//灯温
-    that.chufa(tp);
-    this.hideModal();
+    console.log(this.data.index);//下标
+    if (this.data.index==1){//空调
+      if (this.data.temperature == '' && this.data.centralairConditionMode == '' && this.data.centralairConditionWindMode == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请选择你要的空调控制'
+        });
+      }else{
+        this.hideModal();
+      }
+    } else if (this.data.index == 2){
+      if (this.data.brightness == '' && this.data.hue == '' && this.data.saturation == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请选择你要的彩灯控制'
+        })
+        }else{
+        this.hideModal();
+        }
+    } else if (this.data.index == 3){
+      if (this.data.brightness == '' && this.data.hue == '' && this.data.saturation == ''){
+        wx.showModal({
+          title: '提示',
+          content: '请选择你要的色温控制'
+        }) 
+      }else{
+        this.hideModal();
+      }
+    }
   },
   //窗帘开关
   chuangliand: function (event) {
@@ -279,10 +314,10 @@ Page({
   },
   //灯开关
   deng: function (event) {
-    var that=this;
-    var deng = event.currentTarget.dataset['deng'];
-    var temSet='';
-      if (deng.diOnoffStatu >= 1) {
+     var that=this;
+    tp = event.currentTarget.dataset['dengs'];
+      temSet='';
+      if (tp.diOnoffStatu >= 1) {
         temSet = 0;
       } else {
         temSet = 1;
@@ -321,30 +356,45 @@ Page({
       o.deviceid = Array[i].diDeviceid;
       o.status = Array[i].diOnoffStatu;
       if (Array[i].diDeviceid == 514){
-        o.brightness =0;//窗帘的开关程度
+        o.brightness =10;//窗帘的开关程度
       }
       if (Array[i].diDeviceid == 769 && Array[i].diZonetype==1){ //空调
-        if (this.data.centralairConditionMode != ''){
-          o.thermostatMode = this.data.centralairConditionMode;
-          o.thermostatcontroltype=1;
-        }else{
-          o.thermostatMode = 0;
-          o.thermostatcontroltype = 1;
+        let airTempArray = [];//清空
+        var funId=0;
+        var nid=0;
+        var type1={};
+        var type2={};
+        var type3={};
+        if (this.data.centralairConditionMode!=''){
+          type1.uuid = Array[i].diUuid;
+          type1.deviceid = Array[i].diDeviceid;
+          type1.status = Array[i].diOnoffStatu;
+          type1.thermostatMode = this.data.centralairConditionMode;
+          type1.thermostatcontroltype = 1;
+          type1.sceneFunctionID = funId++;
+          type1.defenseID = nid++;
+          this.data.airTempArray.push(type1); 
         }
         if (this.data.centralairConditionWindMode!=''){
-          o.thermostatWindMode = this.data.centralairConditionWindMode;
-          o.thermostatcontroltype = 2;
-        }else{
-          o.thermostatWindMode =0;
-          o.thermostatcontroltype = 2;
+          type2.uuid = Array[i].diUuid;
+          type2.deviceid = Array[i].diDeviceid;
+          type2.status = Array[i].diOnoffStatu;
+          type2.thermostatWindMode = this.data.centralairConditionWindMode;
+          type2.thermostatcontroltype = 2;
+          type2.sceneFunctionID = funId++;
+          type2.defenseID = nid++;
+          this.data.airTempArray.push(type2);
         }
         if (this.data.temperature!=''){
-          o.temperature = this.data.temperature;
-          o.thermostatcontroltype = 3;
-        }else{
-          o.temperature=0;
-          o.thermostatcontroltype =3;
-        } 
+          type3.uuid = Array[i].diUuid;
+          type3.deviceid = Array[i].diDeviceid;
+          type3.status = Array[i].diOnoffStatu;
+          type3.temperature = this.data.temperature;
+          type3.thermostatcontroltype = 3;
+          type3.sceneFunctionID = funId++;
+          type3.defenseID = nid++;
+          this.data.airTempArray.push(type3);
+        }
       }
       if (Array[i].diDeviceid ==528){//灯
         if (this.data.brightness!=''){
@@ -361,12 +411,33 @@ Page({
         o.saturation = this.data.saturation;//饱和度
         }else{
           o.saturation=0;
-        } 
+        }
       }
       if (Array[i].diDeviceid == 544 && Array[i].diZonetype ==255){//色温灯
+        if (this.data.CCT!=''){
           o.CCT = this.data.CCT;
+          }else{
+          o.CCT=0;
+          }
       }
-      this.data.realsceneMemberArray.push(o);
+      if (Array[i].diDeviceid == 769 && Array[i].diZonetype == 1) {
+        if (this.data.airTempArray.length==0){
+          var type={};
+          type.uuid = Array[i].diUuid;
+          type.deviceid = Array[i].diDeviceid;
+          type.status = Array[i].diOnoffStatu;
+          type.thermostatMode = this.data.centralairConditionMode;
+          type.thermostatcontroltype = 1;
+          this.data.realsceneMemberArray.push(type);       
+        }else{
+          for (var j = 0; j < this.data.airTempArray.length; j++) {
+            this.data.realsceneMemberArray.push(this.data.airTempArray[j]);
+          }
+        }
+      }else{
+        this.data.realsceneMemberArray.push(o);
+      }
+      console.log(this.data.realsceneMemberArray);
     }
     var that = this
     var name = e.detail.value.areaname;
@@ -388,11 +459,15 @@ Page({
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        if (res.data != null) {
-          wx.navigateTo({
-            url: '../scenesconfig',
-          }, 2000)
-        }
+        if (res.data.code==1) {
+          var pages = getCurrentPages(); // 当前页面 
+          var beforePage = pages[pages.length - 2]; // 前一个页面  
+          wx.navigateBack({
+            success: function () {
+              beforePage.onLoad(); // 执行前一个页面的方法     
+            }
+           })
+         }
       },
         (err) => {
           console.log(err.errMsg)

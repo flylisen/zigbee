@@ -19,17 +19,17 @@ Page({
     colorData: {
       //基础色相，即左侧色盘右上顶点的颜色，由右侧的色相条控制
       hueData: {
-        colorStopRed: 255,
+        colorStopRed: 254,
         colorStopGreen: 0,
         colorStopBlue: 0,
       },
       //选择点的信息（左侧色盘上的小圆点，即你选择的颜色）
       pickerData: {
-        x: 0, //选择点x轴偏移量
+        x: 1, //选择点x轴偏移量
         y: 480, //选择点y轴偏移量
-        red: 0,
-        green: 0,
-        blue: 0,
+        red: 1,
+        green:1,
+        blue:1,
         hex: '#000000'
       },
       //色相控制条的位置
@@ -37,6 +37,7 @@ Page({
     },
     rpxRatio: 1, //此值为你的屏幕CSS像素宽度/750，单位rpx实际像素
     sortedDevs: '',
+    hex:'',
   },
 
   /**
@@ -55,8 +56,8 @@ Page({
       sortedDevs: dengs
     }); 
     this.setData({
-      diNames: dengs.diName,
-      diOnoffStatu: dengs.diOnlineStatu
+      diNames: dengs.diShowName,
+      diOnoffStatu: dengs.diOnoffStatu
     });
     //设置rpxRatio
     wx.getSystemInfo({
@@ -66,7 +67,6 @@ Page({
         })
       }
     });
-    console.log(dengs.diDeviceuid);
     //获取彩灯开关，亮度，颜色，饱和度
     let url = app.globalData.URL + 'getDevMenage?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
@@ -79,7 +79,7 @@ Page({
       ver: "2",
       devs: [
         {
-          deviceuid: dengs.diDeviceuid
+          uuid: dengs.diUuid
         }
       ]
     };
@@ -97,8 +97,11 @@ Page({
     var R = e.detail.colorData.pickerData.red;
     var G = e.detail.colorData.pickerData.green;
     var B = e.detail.colorData.pickerData.blue;
-    var max=R;
-    var min=R;
+   this.setData({
+     hex:e.detail.colorData.pickerData.hex
+    })
+    var min = R; // 定义变量min 用来存储最小值 初始值a
+    var max = R; // 定义变量max 用来存储最大值 初始值a
     if (G < min) {
       min = G;
     }
@@ -120,34 +123,43 @@ Page({
     if (B == max) {
       H = 4 + (R - G) / (max - min);
     }
-    H = (H / 6);
-    if (H < 0) {
-      H = (H / 360 + 1);
+    H = (H*60);
+    if (H < 0) 
+    {
+      H = (H +360);
     }
-    S = (max - min) / max;
-    this.setData({
-      colorData: e.detail.colorData,
-    }) 
+    H=(H/360)*255;
+    //饱和度
+    S = ((max - min) / max)*254;
+    console.log(parseInt(S));
+    console.log(parseInt(H));
   },
-picker:function(){
-  let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-  let data = {
-    act: "controlhue",
-    code: "214",
-    AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-    key: "bq6wqzasjwtkl0i21pi9fbeq4",
-    bindid: username,
-    bindstr: pwd,
-    ver: "1",
-    devs: [{ deviceuid: dengs.diDeviceuid, valueother: S, value: H }]
-  };
-  app.wxRequest('POST', url, data, (res) => {
-    console.log(res.data)
-  },
-    (err) => {
-      console.log(err.errMsg)
-    }
-  )
+picker:function(e){
+  if(this.data.hex=='#111110'){
+    wx.showToast({
+      title: '请选择正确的颜色',
+      icon: 'none'
+    })
+  }else{
+    let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      act: "controlhue",
+      code: "214",
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      ver: "1",
+      devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+  }
   },
   listenerSlider:function(e){
     //获取滑动后的值
@@ -167,149 +179,19 @@ picker:function(){
       }
     )  
   },
-  //灯事件
-  deng: function (event) {
-    if (dengs.diOnlineStatu > 0) {
-      console.log(dengs)
-      var username = wx.getStorageSync('username');//网关账号
-      var pwd = wx.getStorageSync('pwd'); //网关密码
-      var temSet;
-      if (dengs.diOnoffStatu >= 1) {
-        temSet = 0;
-      } else {
-        temSet = 1;
-      }
-      console.log(temSet);
-      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        actCode: 102,
-        bindid: username,
-        bindstr: pwd,
-        ctrType: 0,
-        devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: temSet }],
-        ver: "2"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    } else {
-      wx.showToast({
-        title: '设备不在线',
-        icon: 'none'
-      })
-    }
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {  
+  onReady: function () {
+      
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //回调
-    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
-      console.log('接收到服务器信息', res);
-      var nodeType;
-      var diUuid;
-      var value;
-      var strs = new Array();
-      strs = res.data.split(","); //字符分割 
-      nodeType = strs[0].split('=')[1];
-      diUuid = strs[1].split('=')[1];
-      value = strs[2].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('diUuid', diUuid);
-      console.log('value', value);
-      //找到当前页面的page
-      var pageArray = getCurrentPages();
-      var curPage;
-      for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/devctr/dengcolor/dengcolor') {
-          curPage = pageArray[j];
-        }
-      }
-      console.log('curPage', curPage);
-      if (nodeType == 4) {
-        //设备开关状态发生改变
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 1) {
-        //设备新入网
-        /*
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-        */
-      } else if (nodeType == 2) {
-        //判断设备是否在线
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
-            curPage.setData({
-              [tmp]: 1
-            })
-          }
-        }
-      } else if (nodeType == 5) {
-        //修改名称
-        console.log(curPage.data.sortedDevs);
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 3) {
-        //删除设备
-        /*
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-        */
-      } else if (nodeType == 6) {
-        var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
-        let url = app.globalData.URL + 'getSensorAttrValue';
-        let data = {
-          actCode: "110",
-          bindid: username,
-          bindstr: pwd,
-          uuid: diUuid,
-          ver: "2"
-        };
-        app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
-        },
-          (err) => {
-            console.log(err.errMsg)
-          }
-        )
-      }
-      console.log('当前页面在彩灯色调控制');
-    } 
-  },
 
+    },
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -27,7 +27,7 @@ Page({
     var deviceuid = decodeURIComponent(options.deviceuid);
     Industrys = JSON.parse(deviceuid);
     this.setData({
-      diNames: Industrys.diName,
+      diNames: Industrys.diShowName,
       chuanglians: Industrys.diOnoffStatu
     })
   },

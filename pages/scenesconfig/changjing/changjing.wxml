@@ -42,7 +42,8 @@
                  <view wx:else>{{item.deviceName}}</view>
          </view>
           <view wx:if="{{item.deviceid==528}}" data-deng="{{item}}" >
-          <image src='/images/devctr/deng.png' style="width:70px;height:70px;"></image>
+                    <image src='/images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.status>0}}" data-deng="{{item}}" id="{{index}}" bindtap='deng'></image>
+  <image src='/images/devctr/deng.png' wx:else  bindtap='deng' style="width:70px;height:70px;"></image>
                   <view wx:if="{{item.deviceName==''}}">RGBW灯</view>
                 <view wx:else>{{item.deviceName}}</view>
          </view>

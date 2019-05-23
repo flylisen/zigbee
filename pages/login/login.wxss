@@ -16,10 +16,3 @@ input{
   height: 40px;
   margin: 20px 0px;
 }
-button{
-  float: left;
-  font-size: 20px;
-  margin-left: 50px;
-  background-color: #FF7017;
-  color: white;
-}

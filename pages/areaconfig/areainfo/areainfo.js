@@ -104,6 +104,7 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
+      console.log(sortResult);
       that.setData({
         sortedDevs: sortResult
       });

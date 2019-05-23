@@ -26,13 +26,13 @@
                 <view wx:if="{{airAllState.mode==0}}">
                  <text>关闭</text>
                 </view>
-                <view wx:if="{{airAllState.mode==3}}">
+                <view wx:elif="{{airAllState.mode==3}}">
                  <text>制冷</text>
                 </view>
-                <view wx:if="{{airAllState.mode==4}}">
+                <view wx:elif="{{airAllState.mode==4}}">
                  <text>制热</text>
                 </view>
-                <view wx:if="{{airAllState.mode==5}}">
+                <view wx:elif="{{airAllState.mode==5}}">
                  <text>打开</text>
                 </view>
               </view>
@@ -41,13 +41,13 @@
               <view wx:if="{{airAllState.windspeed==1}}">
                   <text>低速</text>
               </view>
-               <view wx:if="{{airAllState.windspeed==2}}">
+               <view wx:elif="{{airAllState.windspeed==2}}">
                   <text>中速</text>
               </view>
-               <view wx:if="{{airAllState.windspeed==3}}">
+               <view wx:elif="{{airAllState.windspeed==3}}">
                   <text>高速</text>
               </view>
-               <view wx:if="{{airAllState.windspeed==5}}">
+               <view wx:elif="{{airAllState.windspeed==5}}">
                   <text>自动</text>
               </view>
               </view>
@@ -58,8 +58,11 @@
                   <view wx:if="{{airAllState.lockedState==0}}">
                     <text>锁定</text>
                   </view>
-                  <view wx:if="{{airAllState.lockedState==1}}">
+                  <view wx:elif="{{airAllState.lockedState==1}}">
                     <text>解锁</text>
+                  </view>
+                  <view wx:elif="{{airAllState.lockedState==-1}}">
+                    <text>未知</text>
                   </view>
               </view>
         </view>

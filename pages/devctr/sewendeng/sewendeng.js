@@ -27,7 +27,7 @@ Page({
     var sewendeng = decodeURIComponent(options.sewendeng);
     sewendengs = JSON.parse(sewendeng);
     this.setData({
-      diNames: sewendengs.diName,
+      diNames: sewendengs.diShowName,
       chuanglians: sewendengs.diOnlineStatu
     });
     //获取色温灯的色温值、开关值

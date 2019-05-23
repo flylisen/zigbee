@@ -49,6 +49,7 @@ Page({
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -77,6 +78,13 @@ Page({
         console.log(err.errMsg)
       }
     )
+  },
+  device: function (event) {
+    console.log(event.currentTarget.dataset['device']);
+    var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
+    wx.navigateTo({
+      url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
+    })
   },
   //开关事件
   kaiguanguan: function (event) {
@@ -270,8 +278,6 @@ Page({
         }
       } else if (nodeType == 6) {
         var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
         let url = app.globalData.URL + 'getSensorAttrValue';
         let data = {
           actCode: "110",

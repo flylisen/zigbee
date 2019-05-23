@@ -180,28 +180,35 @@ Page({
   //修改场景名称
   aiNames:function(e){
     console.log(e.detail.value.aiNames);
-    let url = app.globalData.URL + 'alterSceneName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      act: "resetSceneName",
-      code: 606,
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: username,
-      bindstr: pwd,
-      ver: "2.0",
-      scenes: [{ sceneID: changjing.siSceneId,sceneName: e.detail.value.aiNames}]
-
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-      wx.redirectTo({
-        url: "../scenesconfig"
+    if (e.detail.value.aiNames==''){
+      wx.showModal({
+        title: '提示',
+        content: '请输入你要修改的名称'
       })
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+    }else{
+      let url = app.globalData.URL + 'alterSceneName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        act: "resetSceneName",
+        code: 606,
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        ver: "2.0",
+        scenes: [{ sceneID: changjing.siSceneId, sceneName: e.detail.value.aiNames }]
+
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        wx.redirectTo({
+          url: "../scenesconfig"
+        })
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    } 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

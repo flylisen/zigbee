@@ -28,6 +28,7 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "custom": true,
     "color": "#666",
     "selectedColor": "#56abe4",
     "backgroundColor": "#ddd",
@@ -35,25 +36,25 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/kongzhitaishouye.png",
-        "selectedIconPath": "images/kongzhitaishouye2.png",
+        "iconPath": "/images/kongzhitaishouye.png",
+        "selectedIconPath": "/images/kongzhitaishouye2.png",
         "text": "控制"
       },
       {
         "pagePath": "pages/config/config",
-        "iconPath": "images/dashujukeshihuaico-.png",
-        "selectedIconPath": "images/dashujukeshihuaico2-.png",
+        "iconPath": "/images/dashujukeshihuaico-.png",
+        "selectedIconPath": "/images/dashujukeshihuaico2-.png",
         "text": "配置"
       },
       {
         "pagePath": "pages/about/about",
-        "iconPath": "images/wode.png",
-        "selectedIconPath": "images/wode2.png",
+        "iconPath": "/images/wode.png",
+        "selectedIconPath": "/images/wode2.png",
         "text": "关于我"
-      }
+       }
     ],
+    "usingComponents": {},
     "position": "bottom"
   },
   "sitemapLocation": "sitemap.json"
-  
 }

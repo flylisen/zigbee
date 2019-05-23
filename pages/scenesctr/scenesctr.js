@@ -19,19 +19,6 @@ Page({
       showModal: true
     })
   },
-  go: function () {
-    this.setData({
-      showModal: false
-    })
-    wx.redirectTo({
-      url: '../scenesctr/scenesctr',
-    }, 2000)
-  },
-  scenesctr:function(){
-    wx.navigateTo({
-      url: '../scenesconfig/scenesconfig'
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
