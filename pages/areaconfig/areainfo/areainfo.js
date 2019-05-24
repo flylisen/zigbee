@@ -1,8 +1,8 @@
 // pages/areaconfig/areainfo/areainfo.js
+var app = getApp();
 var Industrys;
-var app=getApp();
-var username = wx.getStorageSync('username');//网关账号
-var pwd = wx.getStorageSync('pwd'); //网关密码
+var username //网关账号
+var pwd  //网关密码
 var timestamp;
 var token;
 var sign;
@@ -22,13 +22,15 @@ Page({
   },
   submit: function (e) {  //删除设备
     var that = this
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     var areaId = Industrys.aiId;
     var arr1 = that.data.arr;
-    if (arr1 == ''){
+    if (arr1 == '') {
       wx.showToast({
         title: '请选择设备！'
       });
-    }else {
+    } else {
       wx.showModal({
         title: '提示',
         content: '确定删除该设备吗？',
@@ -54,7 +56,7 @@ Page({
                 title: '删除成功',
                 duration: 2000
               });
-              wx.navigateTo({
+              wx.redirectTo({
                 url: '../../areaconfig/areaconfig'
               })
             },
@@ -76,12 +78,12 @@ Page({
   onLoad: function (options) {
     var aiid = decodeURIComponent(options.aiid);
     Industrys = JSON.parse(aiid);
-     this.setData({
-       aiNames: Industrys.aiName
-     })
+    this.setData({
+      aiNames: Industrys.aiName
+    })
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     let url = app.globalData.URL + 'getAreaDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "108",
@@ -90,6 +92,7 @@ Page({
       ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -104,7 +107,6 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult);
       that.setData({
         sortedDevs: sortResult
       });
@@ -197,8 +199,8 @@ Page({
         }
       } else if (nodeType == 6) {
         var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
+        username = app.globalData.username;  //网关账号 
+        pwd = app.globalData.pwd;  //网关密码 
         let url = app.globalData.URL + 'getSensorAttrValue';
         let data = {
           actCode: "110",
@@ -270,8 +272,8 @@ Page({
   },
   delete: function (e) {  //删除区域
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     wx.showModal({
       title: '提示',
       content: '确定删除该区域吗？',
@@ -289,14 +291,14 @@ Page({
               title: '删除成功',
               duration: 2000
             });
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../../areaconfig/areaconfig'
             })
           },
             (err) => {
               console.log(err.errMsg)
             }
-          ) 
+          )
         } else if (msg.cancel) {
           console.log('用户点击取消')
         }

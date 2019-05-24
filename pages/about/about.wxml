@@ -13,9 +13,10 @@
   <text>开发时间：2019年03月</text>
   </view>
   <view class="about aboutme">
-    <text class="title">日顺官网</text>
-    <text>网站：http://www.gzrishun.com/</text>
-    <text class="title">邮箱：rishun@gzrishun.com</text>
+    <text class="title">日顺官网：http://www.gzrishun.com/</text>
+    <text>邮箱：rishun@gzrishun.com</text>
     <text>联系我们：020 - 6682 3969</text>
     <text class="title">地址：广州市番禺区洛溪新城恒达工业园A2栋4层</text>
+    <button bindtap='logout'>退出登录</button>
   </view>
+  

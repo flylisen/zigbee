@@ -1,5 +1,7 @@
 // pages/areaconfig/areaconfig.js
-var app=getApp();
+var app = getApp();
+var username;
+var pwd;
 var timestamp;
 var token;
 var sign;
@@ -17,11 +19,11 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     let url = app.globalData.URL + 'areaList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
-      actCode:107,
+      actCode: 107,
       bindid: username,
       bindstr: pwd
     };
@@ -40,7 +42,6 @@ Page({
           areaResult.push(tmp[key][j]);
         }
       }
-      wx.setStorageSync('areaResult',areaResult);
       that.setData({
         sortedAreas: areaResult
       });
@@ -76,14 +77,14 @@ Page({
 
   /** 
    * 生命周期函数--监听页面初次渲染完成 
-   */ 
+   */
   onShareAppMessage: function () {
 
   },
-  areainfo:function(event){
+  areainfo: function (event) {
     // var aiId = event.currentTarget.id;
     var aiid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['id']));//函数可把字符串作为 URI
-    wx.navigateTo({
+    wx.redirectTo({
       url: 'areainfo/areainfo?aiid=' + aiid
     })
   }

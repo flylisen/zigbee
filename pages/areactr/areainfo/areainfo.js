@@ -1,6 +1,8 @@
 // pages/areaconfig/areainfo/areainfo.js
 var Industrys;
-var app=getApp();
+var app = getApp();
+var username;
+var pwd;
 var timestamp;
 var token;
 var sign;
@@ -11,7 +13,7 @@ Page({
    */
   data: {
     sortedDevs: '',
-    aiNames:''
+    aiNames: ''
   },
 
   /**
@@ -20,12 +22,12 @@ Page({
   onLoad: function (options) {
     var aiid = decodeURIComponent(options.aiid);
     Industrys = JSON.parse(aiid);
-     this.setData({
-       aiNames: Industrys.aiName
-     })
+    this.setData({
+      aiNames: Industrys.aiName
+    })
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     let url = app.globalData.URL + 'getAreaDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "108",
@@ -34,6 +36,7 @@ Page({
       ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -61,8 +64,8 @@ Page({
   kaiguanguan: function (event) {
     var tp = event.currentTarget.dataset['tp'];
     if (tp.diOnlineStatu > 0) {
-      var username = wx.getStorageSync('username');//网关账号
-      var pwd = wx.getStorageSync('pwd'); //网关密码
+      username = app.globalData.username;  //网关账号 
+      pwd = app.globalData.pwd;  //网关密码 
       var temSet;
       var dd = tp.diOnoffStatu;
       if (tp.diOnoffStatu >= 1) {
@@ -100,8 +103,8 @@ Page({
   deng: function (event) {
     var deng = event.currentTarget.dataset['deng'];
     if (deng.diOnlineStatu > 0) {
-      var username = wx.getStorageSync('username');//网关账号
-      var pwd = wx.getStorageSync('pwd'); //网关密码
+      username = app.globalData.username;  //网关账号 
+      pwd = app.globalData.pwd;  //网关密码 
       var temSet;
       if (deng.diOnoffStatu >= 1) {
         temSet = 0;
@@ -159,8 +162,8 @@ Page({
   },
   chuangliandk: function (event) {
     var curtain = event.currentTarget.dataset['curtain'];
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     var temSet;
     var dd = curtain.diOnoffStatu;
     if (curtain.diOnoffStatu >= 1) {
@@ -272,8 +275,8 @@ Page({
         }
       } else if (nodeType == 6) {
         var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
+        username = app.globalData.username;  //网关账号 
+        pwd = app.globalData.pwd;  //网关密码 
         let url = app.globalData.URL + 'getSensorAttrValue';
         let data = {
           actCode: "110",

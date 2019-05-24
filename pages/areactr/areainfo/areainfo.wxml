@@ -20,7 +20,7 @@
                  <view wx:else>
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                <text wx:if="{{item.diShowName==''}}">开关{{item.diZonetype}}</text>
+                <text wx:if="{{item.diShowName==''||item.diShowName==null}}">开关{{item.diZonetype}}</text>
                 <text wx:else>{{item.diShowName}}</text>
        </view>
            <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" >
@@ -32,7 +32,7 @@
                  <view wx:if="{{item.diOnlineStatu>0}}">
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                 <view wx:if="{{item.diShowName==''}}">窗帘</view>
+                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}">窗帘</view>
                  <view wx:else>{{item.diShowName}}</view>
          </view>
             <view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}" >
@@ -44,7 +44,7 @@
                  <view wx:if="{{item.diOnlineStatu>0}}">
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                 <view wx:if="{{item.diShowName==''}}">浴帘</view>
+                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}">浴帘</view>
                  <view wx:else>{{item.diShowName}}</view>
          </view>
         <view wx:if="{{item.diDeviceid==528}}">
@@ -57,7 +57,7 @@
                  <view wx:if="{{item.diOnlineStatu>0}}">
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                  <view wx:if="{{item.diShowName==''}}">RGBW灯</view>
+                  <view wx:if="{{item.diShowName==''||item.diShowName==null}}">RGBW灯</view>
                 <view wx:else>{{item.diShowName}}</view>
          </view>
            <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" bindtap='kongtiao' data-kongtiao="{{item}}">
@@ -68,7 +68,7 @@
                  <view wx:if="{{item.diOnlineStatu>0}}">
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                  <view wx:if="{{item.diShowName==''}}">温控器</view>
+                  <view wx:if="{{item.diShowName==''||item.diShowName==null}}">温控器</view>
                 <view wx:else>{{item.diShowName}}</view>
          </view>
           <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" bindtap='sewendeng' data-sewendeng="{{item}}">
@@ -79,7 +79,7 @@
                  <view wx:if="{{item.diOnlineStatu>0}}">
                  <image src='/images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
                  </view>
-                  <view wx:if="{{item.diShowName==''}}">色温（CCT）灯</view>
+                  <view wx:if="{{item.diShowName==''||item.diShowName==null}}">色温（CCT）灯</view>
                 <view wx:else>{{item.diShowName}}</view>
            </view>
     </block>

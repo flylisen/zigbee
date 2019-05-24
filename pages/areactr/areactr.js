@@ -1,5 +1,7 @@
 // pages/areactr/areactr.js
 const app = getApp();
+var username;
+var pwd;
 var timestamp;
 var token;
 var sign;
@@ -9,16 +11,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal:false
+    showModal: false
   },
   bindAdd: function () {
-     this.setData({
-       showModal:true
-     })
-  },
-  go:function(){
     this.setData({
-      showModal:false
+      showModal: true
+    })
+  },
+  go: function () {
+    this.setData({
+      showModal: false
     });
     wx.redirectTo({
       url: '../areactr/areactr',
@@ -36,11 +38,11 @@ Page({
   onLoad: function (options) {
     console.log('onLoad')
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
     let url = app.globalData.URL + 'areaList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
-      actCode:107,
+      actCode: 107,
       bindid: username,
       bindstr: pwd
     };
@@ -75,7 +77,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
   areainfo: function (event) {
     // var aiId = event.currentTarget.id;
@@ -122,13 +124,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-      
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-      
+
   }
 })
