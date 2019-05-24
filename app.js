@@ -6,6 +6,7 @@ App({
     username:'',
     list:[],
     pwd:'',
+    rommid:'',
     timestamp:'',
     token:'',
     sign:'',
@@ -48,6 +49,10 @@ App({
     let that = this;
     that.globalData.username=username;
     that.globalData.pwd=pwd;
+  },
+  room: function(roomid){
+    let that = this;
+    that.globalData.rommid = roomid;
   },
   //获取timestamp(时间戳)，token(令牌)，sign（签名）
   safety: function (timestamp,token,sign){

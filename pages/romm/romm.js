@@ -22,6 +22,9 @@ Page({
         roomName: this.data.rommid,
         var: "2.0"
       }
+      var roomid = this.data.rommid
+      console.log(roomid)
+      app.room(roomid)
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
         var username = res.data.gwLoginName;
@@ -64,7 +67,7 @@ Page({
                   "text": "关于我"
                 }
               ]
-              wx.switchTab({
+              wx.reLaunch({
                 url: '../index/index',
               })
             } else {

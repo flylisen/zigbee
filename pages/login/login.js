@@ -54,7 +54,7 @@ Page({
               "text": "关于我"
             }
           ]
-          wx.switchTab({
+          wx.reLaunch({
             url: '../index/index',
           })
         }else{
