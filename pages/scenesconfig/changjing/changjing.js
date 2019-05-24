@@ -49,8 +49,13 @@ Page({
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
       for (var i in res.data.scenes){
+        var sceneMembers = res.data.scenes[i].sceneMembers;
+        console.log(sceneMembers);
+
+        const filterListResult = sceneMembers.filter((item, index, self) => index === self.findIndex((t) => (t.uuid === item.uuid)));
+        console.log(filterListResult);//去重复的数据
         this.setData({
-          sortedDevs: res.data.scenes[i].sceneMembers
+          sortedDevs: filterListResult
         })
       }
     },

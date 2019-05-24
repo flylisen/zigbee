@@ -24,12 +24,15 @@ Page({
       }
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        if (res.data.gwLoginName != '' && res.data.gwLoginPwd != '') {  //客人
+        var username = res.data.gwLoginName;
+        var pwd = res.data.gwLoginPwd;
+        app.user(username, pwd);
+        if (username != '' && pwd != '') {  //客人
           let url = app.globalData.URL + 'login';
           let data = {
             actCode: 100,
-            loginName: res.data.gwLoginName,
-            loginPwd: res.data.gwLoginPwd,
+            loginName: username,
+            loginPwd: pwd,
             var: "2.0"
           };
           app.wxRequest('POST', url, data, (res) => {

@@ -426,7 +426,7 @@ Page({
           type.uuid = Array[i].diUuid;
           type.deviceid = Array[i].diDeviceid;
           type.status = Array[i].diOnoffStatu;
-          type.thermostatMode = this.data.centralairConditionMode;
+          type.thermostatMode = 5;
           type.thermostatcontroltype = 1;
           this.data.realsceneMemberArray.push(type);       
         }else{
