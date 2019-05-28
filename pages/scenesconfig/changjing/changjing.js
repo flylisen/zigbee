@@ -147,7 +147,7 @@ Page({
       content: '确定删除该场景吗？',
       success: function (msg) {
         if (msg.confirm) {
-          let url = app.globalData.URL + 'delSceneMem';
+          let url = app.globalData.URL + 'delSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
           let data = {
             act:"deleteScenemembers",
             code: 605,

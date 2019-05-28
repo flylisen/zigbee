@@ -1,8 +1,0 @@
-<!--pages/romm/romm.wxml-->
-     <view class='roomID'>
-        <text>房间号:</text>
-        <input placeholder='请输入房间号' bindinput="rommid"></input>
-       </view>
-       <view>   
-        <button bindtap='romm'>确定</button>
-</view>

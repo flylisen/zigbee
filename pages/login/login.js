@@ -104,6 +104,7 @@ Page({
                 "text": "关于我"
               }
             ]
+            app.globalData.index = 1;
             wx.reLaunch({
               url: '../index/index',
             })
@@ -179,8 +180,9 @@ Page({
                   "text": "关于我"
                 }
               ]
+              app.globalData.index=2;
               wx.reLaunch({
-                url: '../index/index',
+                url: '../index/index', 
               })
             } else {
               wx.showModal({

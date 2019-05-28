@@ -67,29 +67,6 @@ Page({
         })
       }
     });
-    //获取彩灯开关，亮度，颜色，饱和度
-    let url = app.globalData.URL + 'getDevMenage?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      act: "getrgbw",
-      code: 212,
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: username,
-      bindstr: pwd,
-      ver: "2",
-      devs: [
-        {
-          uuid: dengs.diUuid
-        }
-      ]
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
   },
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
   onChangeColor(e) {

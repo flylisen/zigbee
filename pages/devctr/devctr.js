@@ -39,6 +39,8 @@ Page({
      var that = this;
      username = app.globalData.username;
      pwd = app.globalData.pwd;
+    console.log(username);
+    console.log(pwd);
      timestamp = app.globalData.timestamp;
      token = app.globalData.token;
      sign = app.globalData.sign;
@@ -66,7 +68,7 @@ Page({
       }
       sortResult.forEach((item) => {
         //这里需要截取的内容
-        item.diName = item.diName.substring(0, 3)
+        item.diShowName = item.diShowName.substring(0, 3)
       })
       console.log(sortResult);
 
@@ -132,8 +134,6 @@ Page({
     var deng = event.currentTarget.dataset['deng'];
     if (deng.diOnlineStatu > 0) {
     console.log(deng)
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
     var temSet;
     if (deng.diOnoffStatu >= 1) {
       temSet = 0;
@@ -228,7 +228,7 @@ Page({
       var pageArray = getCurrentPages();
       var curPage;
       for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/devconfig/devconfig') {
+        if (pageArray[j].route == 'pages/devctr/devctr') {
           curPage = pageArray[j];
         }
       }

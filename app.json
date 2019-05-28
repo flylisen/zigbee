@@ -4,7 +4,6 @@
     "pages/index/index",
     "pages/config/config",
     "pages/areactr/areactr",
-    "pages/logs/logs",
     "pages/scenesctr/scenesctr",
     "pages/devctr/devctr",
     "pages/areaconfig/areaconfig",
