@@ -23,6 +23,8 @@ Page({
     var that = this;
     username = app.globalData.username;
     pwd = app.globalData.pwd;
+    console.log(username);
+    console.log(pwd);
     timestamp = app.globalData.timestamp;
     token = app.globalData.token;
     sign = app.globalData.sign;
@@ -32,6 +34,7 @@ Page({
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -48,12 +51,13 @@ Page({
       }
       sortResult.forEach((item) => {
         //这里需要截取的内容
-        item.diName = item.diName.substring(0, 3)
+        item.diShowName = item.diShowName.substring(0, 3)
       })
+      console.log(sortResult);
+
       that.setData({
         sortedDevs: sortResult
       });
-      console.log(sortResult)
     },
       (err) => {
         console.log(err.errMsg)

@@ -5,6 +5,7 @@ App({
     userInfo: null,
     username:'',
     list:[],
+    index:0,
     pwd:'',
     rommid:'',
     timestamp:'',
