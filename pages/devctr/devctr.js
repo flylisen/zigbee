@@ -211,21 +211,24 @@ Page({
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
-      var diUuid;
+      var uuid;
       var value;
+      var showname;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
-      diUuid = strs[1].split('=')[1];
+      uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
       console.log('nodeType', nodeType);
-      console.log('diUuid', diUuid);
+      console.log('uuid', uuid);
       console.log('value', value);
+      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
       for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/devctr/devctr') {
+        if (pageArray[j].route == 'pages/devconfig/devconfig') {
           curPage = pageArray[j];
         }
       }
@@ -233,7 +236,7 @@ Page({
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
               [tmp]: value
@@ -242,7 +245,6 @@ Page({
         }
       } else if (nodeType == 1) {
         //设备新入网
-        //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
@@ -250,7 +252,7 @@ Page({
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
             curPage.setData({
               [tmp]: 1
@@ -259,19 +261,19 @@ Page({
         }
       } else if (nodeType == 5) {
         //修改名称
-        console.log(curPage.data.sortedDevs);
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
+            var tmp = 'sortedDevs[' + i + '].diShowName';
+            var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({
-              [tmp]: value
+              [dname]: value,
+              [tmp]: showname
             })
           }
         }
       } else if (nodeType == 3) {
         //删除设备
-        //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
@@ -283,7 +285,7 @@ Page({
           actCode: "110",
           bindid: username,
           bindstr: pwd,
-          uuid: diUuid,
+          uuid: uuid,
           ver: "2.0"
         };
         app.wxRequest('POST', url, data, (res) => {
@@ -294,8 +296,8 @@ Page({
           }
         )
       }
-      console.log('当前页面在设备控制');
-    } 
+      console.log('当前页面在设备配置');
+    }
   },
 
   /**

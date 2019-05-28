@@ -5,6 +5,8 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var username;
+var pwd;
 Page({
 
   /**

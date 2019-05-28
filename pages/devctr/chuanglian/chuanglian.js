@@ -33,8 +33,6 @@ Page({
   },
   chuangliang: function (a) {
     var that = this
-    var username = wx.getStorageSync('username');//网关账号
-    var pwd = wx.getStorageSync('pwd'); //网关密码
     if (Industrys.diOnoffStatu >= 1) {
       Industrys.diOnoffStatu = 0
     } else {
@@ -146,8 +144,6 @@ Page({
         */
       } else if (nodeType == 6) {
         var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
         let url = app.globalData.URL + 'getSensorAttrValue';
         let data = {
           actCode: "110",

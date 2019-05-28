@@ -37,8 +37,6 @@ Page({
     })
     //获得获取传感器属性值
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
     let url = app.globalData.URL + 'getSensorAttrValue?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "110",
@@ -62,8 +60,6 @@ Page({
   //修改设备名称
   submit: function (e) {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
     if (e.detail.value.username == '') {
       wx.showModal({
         title: '提示',
@@ -106,8 +102,6 @@ Page({
   //删除设备
   qingjingsc: function () {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',

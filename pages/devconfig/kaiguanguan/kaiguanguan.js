@@ -15,9 +15,8 @@ Page({
     diNames: '',
     chuanglians: '',
     diDeviceid:'',
-    diZonetype:''
+    diZonetype:'',
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -29,6 +28,7 @@ Page({
     sign = app.globalData.sign;
     var kaiguanguan = decodeURIComponent(options.kaiguanguan);
     kaiguanguans = JSON.parse(kaiguanguan);
+    //console.log(kaiguanguans);
     this.setData({
       diNames: kaiguanguans.diShowName,
       chuanglians: kaiguanguans.diOnlineStatu,
@@ -37,8 +37,6 @@ Page({
     })
     //获得获取传感器属性值
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
     let url = app.globalData.URL + 'getSensorAttrValue?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: "110",
@@ -62,14 +60,16 @@ Page({
   //修改设备名称
   submit: function (e) {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
-    if (e.detail.value.username == '') {
+    console.log(e.detail.value.showname);
+    console.log(e.detail.value.name);  
+    var name = e.detail.value.name;
+    var showname = e.detail.value.showname;
+    if (showname == '' || name=='') {
       wx.showModal({
         title: '提示',
-        content: '请输入名称'
+        content: '请输入内存名或者展示名称'
       })
-    } else {
+    }else {
       let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act:"alterdevname",
@@ -78,12 +78,12 @@ Page({
         key: "bq6wqzasjwtkl0i21pi9fbeq4",
         bindid: username,
         bindstr: pwd,
-        devs: [{ uuid: kaiguanguans.diUuid, value: e.detail.value.username }],
+        devs: [{ uuid: kaiguanguans.diUuid, devShowName:showname, value:name}],
         ver:"2.0"
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        if (res.data!=null){
+        if (res.data.code==1){
           wx.showToast({
             title: '修改成功',
             duration: 2000
@@ -106,8 +106,6 @@ Page({
   //删除设备
   qingjingsc: function () {
     var that = this;
-    var username = wx.getStorageSync('username');
-    var pwd = wx.getStorageSync('pwd');
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',

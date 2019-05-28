@@ -77,8 +77,10 @@
   <view class='view2'>
   <view>修改信息</view> 
   <form bindsubmit='submit'>
-      <text>名称:</text>
-      <input name="username" style=' border: 1px solid gray;' maxlength='7'></input>
-        <button form-type='submit'>确定</button>
+       <text>展示名称:</text>
+       <input name="showname" style=' border: 1px solid gray;' maxlength='7'></input>
+        <text>内存名称:</text>
+       <input name="name" style=' border: 1px solid gray;' maxlength='7'></input>
+      <button form-type='submit'>确定</button>
     </form>
  </view>

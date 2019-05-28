@@ -1,20 +1,31 @@
-<view class='main'>
-  <view class='header'>
-    <text class='title'>标题</text>
-  </view>
-  <view class='body'>
-    <form bindsubmit='submit'>
+<view class='mian'>
+   <button bindtap='glz' class='btn'>管理者</button>
+   <button bindtap='kh' class='btn'>客户</button>
+</view>
+<!--弹窗-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">登录</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <view wx:if="{{index==1}}">
       <view class='username'>
         <text>用户名：</text>
-        <input placeholder='请输入用户名' name="username" value='4459'></input>
+        <input placeholder='请输入用户名' bindinput="username" placeholder-class="input-holder" class="input"></input>
       </view>
       <view class='password'>
         <text>密  码：</text>
-        <input password='true' name="pwd" placeholder='请输入密码' value='09z4'></input>
+        <input password='true' bindinput="pwd" placeholder='请输入密码'  placeholder-class="input-holder" class="input"></input>
       </view>
-      <view>
-        <button form-type='submit'>登录</button>
+    </view>
+    <view wx:if="{{index==2}}">
+        <text>房间号:</text>
+        <input placeholder='请输入房间号' bindinput="rommid"></input>
       </view>
-    </form>
+  </view>
+ </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
   </view>
 </view>

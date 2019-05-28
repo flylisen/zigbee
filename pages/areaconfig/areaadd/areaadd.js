@@ -4,6 +4,8 @@ var username;
 var pwd;
 var timestamp;
 var token;
+var username;
+var pwd;
 var sign;
 Page({
 
@@ -70,8 +72,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    username = app.globalData.username;  //网关账号 
-    pwd = app.globalData.pwd;  //网关密码 
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
     let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,

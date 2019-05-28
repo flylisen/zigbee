@@ -113,14 +113,17 @@ Page({
       var nodeType;
       var uuid;
       var value;
+      var showname;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
       console.log('nodeType', nodeType);
       console.log('uuid', uuid);
       console.log('value', value);
+      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -161,9 +164,11 @@ Page({
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
+            var tmp = 'sortedDevs[' + i + '].diShowName';
+            var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({
-              [tmp]: value
+              [dname]: value,
+              [tmp]: showname
             })
           }
         }
@@ -175,10 +180,7 @@ Page({
         } 
       } else if (nodeType == 6) {
         var that = this;
-        var username = wx.getStorageSync('username');
-        var pwd = wx.getStorageSync('pwd');
         let url = app.globalData.URL + 'getSensorAttrValue';
-        
         let data = {
           actCode: "110",
           bindid: username,
