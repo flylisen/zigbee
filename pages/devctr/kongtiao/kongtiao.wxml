@@ -2,10 +2,14 @@
 <view class='count'>
 <image src='../../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
   <view wx:if="{{diNames==''}}">
-               <text>名称 :温控器</text>
+               <text>名称 :温控器{{btn}}</text>
            </view>
            <view wx:else>
         <text>名称 :{{diNames}}</text>
+    </view>
+    <view>
+     <image src='../../../images/devctr/kaiguanguan2.png' wx:if="{{tmp> 0}}"   bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
+              <image src='../../../images/devctr/kaiguanguan.png' wx:else    bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
     </view>
 </view>
 <view>
@@ -15,39 +19,39 @@
         <view class='text'>
               <view class='windspeed'>
                <view>本地温度:</view>
-               <view><text>{{airAllState.localTemperature/100}}C</text></view>
+               <view><text>{{localTemperature/100}}C</text></view>
                <view>空调温度:</view>
-               <view><text>{{airAllState.currentTemperature/100}}C</text></view>
+               <view><text>{{wendu/100}}C</text></view>
               </view>
          </view>
          <view class='text'>
               <view class='windspeed'>
                 <view>模式:</view>
-                <view wx:if="{{airAllState.mode==0}}">
+                <view wx:if="{{centralairConditionMode==0}}">
                  <text>关闭</text>
                 </view>
-                <view wx:elif="{{airAllState.mode==3}}">
+                <view wx:elif="{{centralairConditionMode==3}}">
                  <text>制冷</text>
                 </view>
-                <view wx:elif="{{airAllState.mode==4}}">
+                <view wx:elif="{{centralairConditionMode==4}}">
                  <text>制热</text>
                 </view>
-                <view wx:elif="{{airAllState.mode==5}}">
+                <view wx:elif="{{centralairConditionMode==5}}">
                  <text>打开</text>
                 </view>
               </view>
               <view class='windspeed'>
               <view>风速:</view>
-              <view wx:if="{{airAllState.windspeed==1}}">
+              <view wx:if="{{centralairConditionWindMode==1}}">
                   <text>低速</text>
               </view>
-               <view wx:elif="{{airAllState.windspeed==2}}">
+               <view wx:elif="{{centralairConditionWindMode==2}}">
                   <text>中速</text>
               </view>
-               <view wx:elif="{{airAllState.windspeed==3}}">
+               <view wx:elif="{{centralairConditionWindMode==3}}">
                   <text>高速</text>
               </view>
-               <view wx:elif="{{airAllState.windspeed==5}}">
+               <view wx:elif="{{centralairConditionWindMode==5}}">
                   <text>自动</text>
               </view>
               </view>

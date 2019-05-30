@@ -13,6 +13,7 @@ Page({
   data: {
     showModal:false,
     scenes:'',
+    background:'url("/images/TIM图片20190530172401.png")'
   },
   bindAdd: function () {
     this.setData({

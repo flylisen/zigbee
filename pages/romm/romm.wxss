@@ -1,3 +1,4 @@
+/* pages/romm/romm.wxss */
 page{ 
  height: 100%; 
 } 
@@ -8,6 +9,7 @@ page{
  flex-direction: column; 
  padding: 0; 
  box-sizing: border-box; 
+ background-color:white
 }
   
 /*登录图片*/

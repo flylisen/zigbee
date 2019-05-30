@@ -1,17 +1,12 @@
 <!--pages/scenesctr/scenesctr.wxml-->
-<view>
-    <view class='viewh1'>
-     <h1>全部场景</h1>
-     </view>
-    <view class='flex-wrp_one'>
-   <block  wx:for="{{scenes}}" wx:for-item="item">
-         <view bindtap='chang' data-id="{{item}}">
+        <view class="link">
+        <block  wx:for="{{scenes}}" wx:for-item="item">
+        <view bindtap='chang' data-id="{{item}}" class="link_child" style='background-image:{{background}}; width:40%;height:300rpx; background-size:cover;'>
                <image src='../../images/config/changjingpeizhi.png' style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.siName==''}}">场景</view>
                 <view wx:else>{{item.siName}}</view>
          </view>
-    </block>
-</view>
-</view>
+       </block>
+        </view>
 
 

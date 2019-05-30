@@ -94,7 +94,6 @@ Page({
     console.log(tp)
     if (tp.diOnlineStatu > 0) {
     var temSet;
-    var dd = tp.diOnoffStatu;
     if (tp.diOnoffStatu >= 1) {
         temSet = 0;
       } else {

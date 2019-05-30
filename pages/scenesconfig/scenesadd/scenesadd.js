@@ -358,6 +358,9 @@ Page({
       if (Array[i].diDeviceid == 514){
         o.brightness =10;//窗帘的开关程度
       }
+      var type1 = {};
+      var type2 = {};
+      var type3 = {};
       if (Array[i].diDeviceid == 769 && Array[i].diZonetype==1){ //空调
         let airTempArray = [];//清空
         var funId=0;
@@ -389,7 +392,7 @@ Page({
           type3.uuid = Array[i].diUuid;
           type3.deviceid = Array[i].diDeviceid;
           type3.status = Array[i].diOnoffStatu;
-          type3.temperature = this.data.temperature;
+          type3.temperature = this.data.temperature*100;
           type3.thermostatcontroltype = 3;
           type3.sceneFunctionID = funId++;
           type3.defenseID = nid++;
@@ -421,6 +424,8 @@ Page({
           }
       }
       if (Array[i].diDeviceid == 769 && Array[i].diZonetype == 1) {
+        console.log(this.data.airTempArray);
+         var type = {};
         if (this.data.airTempArray.length==0){
           var type={};
           type.uuid = Array[i].diUuid;

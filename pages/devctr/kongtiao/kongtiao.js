@@ -17,8 +17,11 @@ Page({
     airAllState:'',
     showModal: false,
     wendu:'',
+    localTemperature:'',
     sortedDevs:'',
     index:'',
+    tmp:'',
+    btn:'',
     ConditionMode: [
       { name: 0, value: '关' },
       { name: 3, value: '制冷' },
@@ -35,21 +38,21 @@ Page({
     centralairConditionWindMode:'',
   },
   wendu:function(e){
-    this.setData({
-      wendu: e.detail.value
-    })
+    this.data.centralairConditionMode = '';
+    this.data.centralairConditionWindMode = '';
+    this.data.wendu=e.detail.value*100;
   },
   checkboxChange: function (e) {
     console.log('模式：', e.detail.value)
-    this.setData({
-      centralairConditionMode: e.detail.value
-    })
+    this.data.wendu = '';
+    this.data.centralairConditionWindMode='';
+    this.data.centralairConditionMode = e.detail.value;
   },
   checkboxChangeWindMode: function (e) {
     console.log('风速：', e.detail.value)
-    this.setData({
-      centralairConditionWindMode: e.detail.value
-    })
+    this.data.wendu = '';
+    this.data.centralairConditionMode = '';
+    this.data.centralairConditionWindMode = e.detail.value;
   },
   /**
    * 生命周期函数--监听页面加载
@@ -64,7 +67,7 @@ Page({
     kongtiaos = JSON.parse(kongtiao);
     this.setData({
       diNames: kongtiaos.diShowName,
-      chuanglians: kongtiaos.diOnlineStatu,
+      chuanglians: kongtiaos.diOnoffStatu,
       sortedDevs: kongtiaos 
     });
     //获取获取温控器全部状态
@@ -82,16 +85,54 @@ Page({
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
       this.setData({
-        airAllState: res.data.airAllState
-      })
+        airAllState: res.data.airAllState,
+        wendu: res.data.airAllState.currentTemperature,//空调温度
+        localTemperature: res.data.airAllState.localTemperature, //本地温度
+        centralairConditionMode: res.data.airAllState.mode,//模式
+        centralairConditionWindMode: res.data.airAllState.windspeed//风速
+      });
     },
       (err) => {
         console.log(err.errMsg)
       }
     )
   },
-  reduce:function(){
-     
+  //开关事件
+  kaiguanguan: function (event) {
+    // if (kongtiaos.diOnlineStatu > 0) {
+    //   var temSet = kongtiaos.diOnoffStatu;
+    //   console.log(temSet);
+    //   if (temSet >= 1) {
+    //     temSet = 0;
+    //   } else {
+    //     temSet = 1;
+    //   }
+    //   console.log(temSet);
+    //   this.setData({
+    //     tmp: temSet
+    //   })
+    //   let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    //   console.log(url);
+    //   let data = {
+    //     bindid: username,
+    //     bindstr: pwd,
+    //     ctrType: 0,
+    //     devs: [{ deviceuid: kongtiaos.deviceuid, uuid: kongtiaos.diUuid, value: temSet }],
+    //     var: "2.0"
+    //   };
+    //   app.wxRequest('POST', url, data, (res) => {
+    //     console.log(res.data)
+    //   },
+    //     (err) => {
+    //       console.log(err.errMsg)
+    //     }
+    //   )
+    // } else {
+    //   wx.showToast({
+    //     title: '空调不在线',
+    //     icon: 'none'
+    //   })
+    // }
   },
   /**
     * 弹窗
@@ -118,6 +159,9 @@ Page({
    * 隐藏模态对话框
    */
   hideModal: function () {
+    this.data.wendu = '';
+    this.data.centralairConditionMode = '';
+    this.data.centralairConditionWindMode = '';
     this.setData({
       showModal: false
     });
@@ -126,71 +170,118 @@ Page({
  * 对话框确认按钮点击事件(温度)
  */
   onConfirm: function (e) {
-    if (this.data.wendu!=''){
-      let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act: "setthermostattemperature",
-        code: 276,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        devs: [{ uuid: kongtiaos.diUuid, value: this.data.wendu * 100 }],
-        ver: "2"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-        
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    } else if (this.data.centralairConditionMode!=''){
-      let url = app.globalData.URL + 'ariControlSpeed?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act: "setthermostatwindspeed",
-        code: 278,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        devs: [{ uuid: kongtiaos.diUuid, value: this.data.centralairConditionMode}],
-        ver: "2"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    } else if (this.data.centralairConditionWindMode!=''){
-      let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act: "setthermostatmode",
-        code: 277,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        devs: [{ uuid: kongtiaos.diUuid, value: this.data.centralairConditionWindMode }],
-        ver: "2"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
+    console.log(this.data.wendu);
+    console.log(this.data.centralairConditionMode);
+    console.log(this.data.centralairConditionWindMode);
+    var wendu =this.data.wendu;
+    var centralairConditionMode = this.data.centralairConditionMode;
+    var centralairConditionWindMode = this.data.centralairConditionWindMode;
+    var index = this.data.index;
+    if (index==1){
+      if (wendu != '') {//温度
+        let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "setthermostattemperature",
+          code: 276,
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ uuid: kongtiaos.diUuid, value:wendu}],
+          ver: "2"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+          if (res.data.code==1){
+            this.setData({
+              wendu: wendu
+            })
+          }
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '请输入温度'
+        })
+      }
+      this.hideModal();
+    } else if (index==2){
+      if (centralairConditionMode != '') {//模式
+        let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "setthermostatmode",
+          code: 277,
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ uuid: kongtiaos.diUuid, value: centralairConditionMode}],
+          ver: "2"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+          if(res.data.code==1){
+            this.setData({
+              centralairConditionMode: centralairConditionMode,
+            })
+          }
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '请输入模式'
+        })
+      }
+      this.hideModal();
+    } else if (index==3){
+      if (centralairConditionWindMode != '') { //风速
+        let url = app.globalData.URL + 'ariControlSpeed?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "setthermostatwindspeed",
+          code: 278,
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ uuid: kongtiaos.diUuid, value: centralairConditionWindMode}],
+          ver: "2"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+          if(res.data.code){
+            this.setData({
+              centralairConditionWindMode: centralairConditionWindMode,
+            })
+          }
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '请输入风速'
+        })
+      }
+      this.hideModal();
     }
-    this.hideModal();
   },
   /**
    * 对话框取消按钮点击事件
    */
   onCancel: function () {
+    this.data.wendu='';
+    this.data.centralairConditionMode='';
+    this.data.centralairConditionWindMode='';
     this.hideModal();
   },
   /**
@@ -228,28 +319,22 @@ Page({
       }
       console.log('curPage', curPage); 
        if (nodeType==100){
-        for (var i = 0; i < curPage.data.airAllState.length;i++){
-          var tmp = 'airAllState[' + i + '].mode';
-          curPage.setData({
-            [tmp]: value
-          })   
-        }
-      }
+        var centralairConditionMode = curPage.data.centralairConditionMode;
+         curPage.setData({
+          centralairConditionMode: value
+         })
+       }
       if (nodeType == 101) {
-        for (var i = 0; i < curPage.data.airAllState.length; i++) {
-          var tmp = 'airAllState[' + i + '].windspeed';
-          curPage.setData({
-            [tmp]: value
-          })
-        }
+        var centralairConditionWindMode = curPage.data.centralairConditionWindMode;
+        curPage.setData({
+          centralairConditionWindMode: value
+        })
       } 
       if (nodeType == 102) {
-        for (var i = 0; i < curPage.data.airAllState.length; i++) {
-          var tmp = 'airAllState[' + i + '].currentTemperature';
-          curPage.setData({
-            [tmp/100]: value
-          })
-        }
+        var wendu = curPage.data.wendu;
+        curPage.setData({
+          wendu:value
+        })
       }
       if (nodeType == 103) {
         for (var i = 0; i < curPage.data.airAllState.length; i++) {

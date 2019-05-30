@@ -1,16 +1,12 @@
 /**index.wxss**/
 
-navigator text{
-   display: flex;
+.setting{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
+  margin: 20px;
 }
-navigator image{
-  width: 100px;
-  height: 100px;
-}
-navigator{
-  padding-top: 30px;
-}
-.container{
-   margin-top: -100px;
-}
+
+ 
+

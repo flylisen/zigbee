@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/login/login",
+    "pages/romm/romm",
     "pages/index/index",
     "pages/config/config",
     "pages/areactr/areactr",
@@ -22,34 +22,33 @@
       ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#FF7017",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "white"
+    "navigationBarBackgroundColor": "white",
+    "navigationBarTitleText": "日顺智慧控制",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "custom" : true,
     "color": "#666",
-    "selectedColor": "#56abe4",
+    "selectedColor": "#FEA152",
     "backgroundColor": "#ddd",
     "borderStyle": "black",
     "list":[
       {
         "pagePath": "pages/index/index",
-        "iconPath": "/images/kongzhitaishouye.png",
-        "selectedIconPath": "/images/kongzhitaishouye2.png",
+        "iconPath": "/images/控制_未点击状态@2x.png",
+        "selectedIconPath": "/images/控制_点击状态@2x.png",
         "text": "控制"
       },
       {
         "pagePath": "pages/config/config",
-        "iconPath": "/images/dashujukeshihuaico-.png",
-        "selectedIconPath": "/images/dashujukeshihuaico2-.png",
+        "iconPath": "/images/配置_未点击状态@2x.png",
+        "selectedIconPath": "/images/配置_点击状态@2x.png",
         "isSpecial":true,
         "text": "配置"
       },
       {
         "pagePath": "pages/about/about",
-        "iconPath": "/images/wode.png",
-        "selectedIconPath": "/images/wode2.png",
+        "iconPath": "/images/我的_未点击状态@2x.png",
+        "selectedIconPath": "/images/我的_点击状态@2x.png",
         "text": "关于我"
       }
 

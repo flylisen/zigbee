@@ -184,8 +184,9 @@ Page({
   },
   //修改场景名称
   aiNames:function(e){
-    console.log(e.detail.value.aiNames);
-    if (e.detail.value.aiNames==''){
+    console.log(username);
+    console.log(pwd);
+    if (e.detail.value.aiNames==''&&e.detail.value.sceneName==''){
       wx.showModal({
         title: '提示',
         content: '请输入你要修改的名称'
@@ -200,7 +201,7 @@ Page({
         bindid: username,
         bindstr: pwd,
         ver: "2.0",
-        scenes: [{ sceneID: changjing.siSceneId, sceneName: e.detail.value.aiNames }]
+        scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.aiNames }]
 
       };
       app.wxRequest('POST', url, data, (res) => {

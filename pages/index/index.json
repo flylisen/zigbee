@@ -1,4 +1,7 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "控制"
+    "navigationBarBackgroundColor": "#FEA152",
+    "navigationBarTitleText": "控制",
+    "navigationBarTextStyle": "white"
+
 }

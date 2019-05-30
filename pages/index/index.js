@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    background1:'url("/images/TIM图片20190530145022.png")',
+    background2: 'url("/images/TIM图片20190530145022.png")',
+    background3: 'url("/images/TIM图片20190530145022.png")',
   },
 
   /**
@@ -16,7 +18,30 @@ Page({
   onLoad: function (options) {
    
   },
-
+  control1: function (event){
+      this.setData({
+        background1: 'url("/images/TIM图片20190530153000.png")'
+      })
+    wx.navigateTo({
+      url: '../areactr/areactr'
+    })
+  },
+  control2: function (event) {
+    this.setData({
+      background2: 'url("/images/TIM图片20190530153000.png")'
+    })
+    wx.navigateTo({
+      url: '../scenesctr/scenesctr'
+    })
+  },
+  control3: function (event) {
+    this.setData({
+      background3: 'url("/images/TIM图片20190530153000.png")'
+    })
+    wx.navigateTo({
+      url: '../devctr/devctr'
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -28,13 +53,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    wx.hideTabBar();
-    if (typeof this.getTabBar === 'function' &&
-      this.getTabBar()) {
-      this.getTabBar().setData({
-        selected: 0
-      })
-    }
     //回调
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
@@ -46,7 +64,11 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    this.setData({
+      background1: 'url("/images/TIM图片20190530145022.png")',
+      background2: 'url("/images/TIM图片20190530145022.png")',
+      background3: 'url("/images/TIM图片20190530145022.png")',
+    })
   },
 
   /**

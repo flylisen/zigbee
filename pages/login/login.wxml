@@ -1,31 +1,20 @@
-<view class='mian'>
-   <button bindtap='glz' class='btn'>管理者</button>
-   <button bindtap='kh' class='btn'>客户</button>
-</view>
-<!--弹窗-->
-<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-<view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">登录</view>
-  <view class="modal-content">
-    <view class="modal-input">
-      <view wx:if="{{index==1}}">
-      <view class='username'>
-        <text>用户名：</text>
-        <input placeholder='请输入用户名' bindinput="username" placeholder-class="input-holder" class="input"></input>
-      </view>
-      <view class='password'>
-        <text>密  码：</text>
-        <input password='true' bindinput="pwd" placeholder='请输入密码'  placeholder-class="input-holder" class="input"></input>
-      </view>
-    </view>
-    <view wx:if="{{index==2}}">
-        <text>房间号:</text>
-        <input placeholder='请输入房间号' bindinput="rommid"></input>
-      </view>
-  </view>
- </view>
-  <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
-  </view>
+<view class="container" style='width:100%;min-height:100%;background-image:url("/images/TIM图片20190530104512.png");background-size:100% 100%;'> 
+ <view class="login-from"> 
+ <!--账号-->
+ <view class="inputView"> 
+  <image class="nameImage" src="/images/用户名@2x.png"></image> 
+  <label class="loginLab">账号</label> 
+  <input class="inputText" placeholder="请输入账号" placeholder-style="color:white;" bindinput="phoneInput" /> 
+ </view> 
+ <!--密码-->
+ <view class="inputView"> 
+  <image class="keyImage" src="/images/密码@2x.png"></image> 
+  <label class="loginLab">密码</label> 
+  <input class="inputText" password="true" placeholder="请输入密码" placeholder-style="color:white;" bindinput="passwordInput" /> 
+ </view> 
+ <!--按钮-->
+ <view class="loginBtnView"> 
+  <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button> 
+ </view> 
+ </view> 
 </view>

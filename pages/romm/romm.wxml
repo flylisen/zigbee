@@ -1,0 +1,16 @@
+<!--pages/romm/romm.wxml-->
+<view class="container" style='width:100%;min-height:100%;background-image:url("/images/TIM图片20190530104517.png");background-size:100% 100%;'> 
+ <view class="login-from"> 
+ <!--房间号-->
+ <view class="inputView"> 
+  <image class="nameImage" src="/images/TIM图片20190530103533.png"></image> 
+  <label class="loginLab">房间号</label> 
+  <input class="inputText" placeholder="请输入房间号" placeholder-style="color:white;" bindinput="rommid" /> 
+ </view> 
+ <!--按钮-->
+ <view class="loginBtnView"> 
+  <button class="loginBtn" type="primary" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button> 
+ </view> 
+ </view> 
+</view>
+

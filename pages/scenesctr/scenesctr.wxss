@@ -1,72 +1,14 @@
 /* pages/scenesctr/scenesctr.wxss */
-view h1{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.btn{
-   width: 70px;
-   height: 50px;
-   justify-content: center;
-   background:gray;
-   display: flex;
-   color: aliceblue;
-   margin-top: -30px;
-   margin-right:20px;
-}
-.viewAN{
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-    
-}
-.list_l:active{
-  background:#ddd;
-  
-}
-.flex-wrp_one{
- display: flex;
- flex-flow: row wrap; 
-align-content: space-around;
-}
-.flex-wrp_one view{
-  padding: 15px;
-}
-.viewAN .list_l text{ padding: 20px; color: gray}
-.viewAN .list_l image{height: 50px;
- width: 50px; display: flex;padding: 10px; }
- .modalDlg{
-    width: 580rpx;
-    height: 720rpx;
-    position: fixed;
-    top: 50%;
-    left: 0;
-    z-index: 9999;
-    margin: -370rpx 85rpx;
-    background-color: #fff;
-    border-radius: 36rpx;
+.link {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 654rpx; 
+    margin: 0 auto;
+    position: relative;
+    left: 5rpx;
+}  
+.link_child {
+    width: 31%;
+    margin-top: 10px;
 }
-.modalDlg button{
-  margin-top: 10px;
-}
-.mask{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #000;
-    z-index: 9000;
-    opacity: 0.7;
-
-}
-.setting{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; 
-  margin-top: 160px;
-} 
