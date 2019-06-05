@@ -1,20 +1,18 @@
 <!--pages/devctr/dengcolor/dengcolor.wxml-->
-<view class='count'>
- <image src='../../../images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{diOnoffStatu>0}}"></image>
-  <image src='../../../images/devctr/deng.png' wx:else style="width:70px;height:70px;"></image>
-  <view wx:if="{{diNames==''}}">
-               <text>名称 :RGBW灯</text>
-           </view>
-           <view wx:else>
-        <text>名称 :{{diNames}}</text>
-        </view>
+<view class='imagesize'>
+  <image src='../../../images/devctr/dengdk.png' bindtap="gb" style='width:40%; height:40%'  mode='widthFix' wx:if="{{diOnoffStatu>0}}"></image>
+  <image src='../../../images/devctr/dengwdk.png' bindtap="dk" style='width:40%; height:40%' mode='widthFix' wx:else></image>
 </view>
+<view class="section">
+  <view>亮度</view>
+  <slider show-value max='255' min="1" step="5" value="" bindchange="listenerSlider"></slider>
+</view>
+<view class='imagesize'>
 <color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
- <button bindtap="picker">确定</button> 
-  <view>
-  <view class="section__title">亮度</view>
-  <slider name="slider" show-value bindchange="listenerSlider" value="" max='255'></slider>
-  </view>
+</view>
+<button class='btn' bindtap="picker" style='display: flex;justify-content: center;margin: 0 auto;'>确定</button> 
+
+
 
 
 

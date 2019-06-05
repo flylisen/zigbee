@@ -52,6 +52,15 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
+      if(res.data.code==1){
+        var pages = getCurrentPages(); // 当前页面 
+        var beforePage = pages[pages.length - 2]; // 前一个页面  
+        wx.navigateBack({
+          success: function () {
+            beforePage.onShow(); // 执行前一个页面的方法     
+          }
+        });
+      }
     },
       (err) => {
         console.log(err.errMsg)
@@ -69,99 +78,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //回调
-    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
-      console.log('接收到服务器信息', res);
-      var nodeType;
-      var diUuid;
-      var value;
-      var strs = new Array();
-      strs = res.data.split(","); //字符分割 
-      nodeType = strs[0].split('=')[1];
-      diUuid = strs[1].split('=')[1];
-      value = strs[2].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('diUuid', diUuid);
-      console.log('value', value);
-      //找到当前页面的page
-      var pageArray = getCurrentPages();
-      var curPage;
-      for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/devctr/devctr') {
-          curPage = pageArray[j];
-        }
-      }
-      console.log('curPage', curPage);
-      if (nodeType == 4) {
-        //设备开关状态发生改变
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 1) {
-        //设备新入网
-        /*
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-        */
-      } else if (nodeType == 2) {
-        //判断设备是否在线
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
-            curPage.setData({
-              [tmp]: 1
-            })
-          }
-        }
-      } else if (nodeType == 5) {
-        //修改名称
-        console.log(curPage.data.sortedDevs);
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 3) {
-        //删除设备
-        /*
-        //刷新当前页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-        */
-      } else if (nodeType == 6) {
-        var that = this;
-        let url = app.globalData.URL + 'getSensorAttrValue';
-        let data = {
-          actCode: "110",
-          bindid: username,
-          bindstr: pwd,
-          uuid: diUuid,
-          ver: "2"
-        };
-        app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
-        },
-          (err) => {
-            console.log(err.errMsg)
-          }
-        )
-      }
-      console.log('当前页面在窗帘控制');
-    } 
+      
   },
 
   /**

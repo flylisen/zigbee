@@ -1,16 +1,17 @@
-<view class="container" style='width:100%;min-height:100%;background-image:url("/images/TIM图片20190530104512.png");background-size:100% 100%;'> 
+<view class="container">
+<image class='background-image' src='/images/loginsettring.jpg' mode="scaleToFill"></image> 
  <view class="login-from"> 
  <!--账号-->
  <view class="inputView"> 
   <image class="nameImage" src="/images/用户名@2x.png"></image> 
   <label class="loginLab">账号</label> 
-  <input class="inputText" placeholder="请输入账号" placeholder-style="color:white;" bindinput="phoneInput" /> 
+  <input class="inputText" value='{{username}}' placeholder="请输入账号" placeholder-style="color:white;" bindinput="phoneInput" /> 
  </view> 
  <!--密码-->
  <view class="inputView"> 
   <image class="keyImage" src="/images/密码@2x.png"></image> 
   <label class="loginLab">密码</label> 
-  <input class="inputText" password="true" placeholder="请输入密码" placeholder-style="color:white;" bindinput="passwordInput" /> 
+  <input class="inputText" value='{{pwd}}' password="true" placeholder="请输入密码" placeholder-style="color:white;" bindinput="passwordInput" /> 
  </view> 
  <!--按钮-->
  <view class="loginBtnView"> 

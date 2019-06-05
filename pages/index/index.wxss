@@ -5,7 +5,17 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin-top: 80px;
+}
+.background-image{
+  position: absolute;
+  width: 85%;
+  height: 25%;
+  
+}
+.btnImg{
+  position: relative;
+  margin-top: 25px;
 }
 
  

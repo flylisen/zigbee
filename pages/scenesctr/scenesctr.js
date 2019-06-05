@@ -13,7 +13,7 @@ Page({
   data: {
     showModal:false,
     scenes:'',
-    background:'url("/images/TIM图片20190530172401.png")'
+    ins:-1,
   },
   bindAdd: function () {
     this.setData({
@@ -54,6 +54,11 @@ Page({
   },
   //触发场景
   chang(event){
+    var ins = event.currentTarget.id;//获得下标
+    console.log(ins);
+      this.setData({
+        ins:ins
+      })
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
     var that = this;
@@ -70,6 +75,9 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
+      this.setData({
+        ins:-1,
+      }) 
     },
       (err) => {
         console.log(err.errMsg)

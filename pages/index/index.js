@@ -7,9 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    background1:'url("/images/TIM图片20190530145022.png")',
-    background2: 'url("/images/TIM图片20190530145022.png")',
-    background3: 'url("/images/TIM图片20190530145022.png")',
+    background1:'/images/areasettingwdj.png',
+    background2: '/images/areasettingwdj.png',
+    background3: '/images/areasettingwdj.png',
   },
 
   /**
@@ -20,7 +20,7 @@ Page({
   },
   control1: function (event){
       this.setData({
-        background1: 'url("/images/TIM图片20190530153000.png")'
+        background1: '/images/areasettingdj.png'
       })
     wx.navigateTo({
       url: '../areactr/areactr'
@@ -28,7 +28,7 @@ Page({
   },
   control2: function (event) {
     this.setData({
-      background2: 'url("/images/TIM图片20190530153000.png")'
+      background2: '/images/areasettingdj.png'
     })
     wx.navigateTo({
       url: '../scenesctr/scenesctr'
@@ -36,7 +36,7 @@ Page({
   },
   control3: function (event) {
     this.setData({
-      background3: 'url("/images/TIM图片20190530153000.png")'
+      background3: '/images/areasettingdj.png'
     })
     wx.navigateTo({
       url: '../devctr/devctr'
@@ -65,9 +65,9 @@ Page({
    */
   onHide: function () {
     this.setData({
-      background1: 'url("/images/TIM图片20190530145022.png")',
-      background2: 'url("/images/TIM图片20190530145022.png")',
-      background3: 'url("/images/TIM图片20190530145022.png")',
+      background1:'/images/areasettingwdj.png' ,
+      background2:'/images/areasettingwdj.png' ,
+      background3:'/images/areasettingwdj.png' ,
     })
   },
 

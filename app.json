@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/romm/romm",
+    "pages/login/login",
     "pages/index/index",
     "pages/config/config",
     "pages/areactr/areactr",
@@ -17,6 +18,7 @@
     "pages/devctr/kongtiao/kongtiao",
     "pages/scenesconfig/scenesadd/scenesadd",
     "pages/devctr/sewendeng/sewendeng",
+    "pages/devctr/kaiguanguan/kaiguanguan",
     "pages/areactr/areainfo/areainfo",
     "pages/scenesconfig/changjing/changjing"
       ],

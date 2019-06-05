@@ -1,89 +1,136 @@
-<!--pages/devctr/kongtiao/kongtiao.wxml-->
-<view class='count'>
-<image src='../../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
-  <view wx:if="{{diNames==''}}">
-               <text>名称 :温控器{{btn}}</text>
-           </view>
-           <view wx:else>
-        <text>名称 :{{diNames}}</text>
-    </view>
-    <view>
-     <image src='../../../images/devctr/kaiguanguan2.png' wx:if="{{tmp> 0}}"   bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
-              <image src='../../../images/devctr/kaiguanguan.png' wx:else    bindtap='kaiguanguan' style="width:70px;height:70px;"></image>
-    </view>
+
+<view style='text-align:center;' class="picture-2">
+       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="../../../images/devctr/minuswdj.png" mode="widthFix"></image>
+       <image style='width:70%; height:70%' class="infoImage"  src="../../../images/devctr/kongtionbj.png" mode='widthFix'>
+         <view wx:if="{{centralairConditionMode!=0}}">
+          <text class='text'>{{wendu/100}}℃</text>
+          <text class='test2'>当前房间温度:{{localTemperature/100}}℃</text>
+          </view>
+       </image>
+       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'jia':''}}" class="Image" src="../../../images/devctr/jiawdj.png" mode="widthFix"></image>
 </view>
-<view>
-        <view>
-        <image src="../../../images/devctr/kongtiao.png"></image>
-        </view>
-        <view class='text'>
-              <view class='windspeed'>
-               <view>本地温度:</view>
-               <view><text>{{localTemperature/100}}C</text></view>
-               <view>空调温度:</view>
-               <view><text>{{wendu/100}}C</text></view>
+<!--模式-->
+  <view class="window_view2">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H2 local">
+             <view wx:if="{{centralairConditionMode==3}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../images/devctr/cooldj.png' mode="widthFix"></image>
               </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/coolwdj.png' mode="widthFix"></image>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H2 img">
+          <view wx:if="{{centralairConditionMode==4}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../images/devctr/hotdj.png' mode="widthFix"></image>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/hotwdj.png' mode="widthFix"></image>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<!--锁定-->
+<view class="window_view1">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H local">
+             <view wx:if="{{airAllState.lockedState==0}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../images/devctr/sddj.png' mode="widthFix"></image>
+               <text class='ztcolor'>锁定</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/sdwdj.png' mode="widthFix"></image>
+               <text class>锁定</text>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H img">
+          <view wx:if="{{airAllState.lockedState==1}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../images/devctr/jsdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>解锁</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/jswdj.png' mode="widthFix"></image>
+               <text class>解锁</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H audio">
+        <view wx:if="{{airAllState.lockedState==-1}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../images/devctr/wzdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>未知</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/wzwdj.png' mode="widthFix"></image>
+               <text class>未知</text>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<!--风速-->
+<view class="window_view1">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H1 local">
+        <view wx:if="{{centralairConditionWindMode==5}}" class='box'>
+              <image style='width:30%; height:30%' src='../../../images/devctr/zddj.png' mode="widthFix"></image>
+               <text class='ztcolor'>自动</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/zdwdj.png' mode="widthFix"></image>
+               <text class>自动</text>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H1 img">
+       <view wx:if="{{centralairConditionWindMode==1}}" class='box'>
+          <image style='width:20%; height:20%' src='../../../images/devctr/dsdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>低速</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/dswdj.png' mode="widthFix"></image>
+               <text class>低速</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H1 audio">
+       <view wx:if="{{centralairConditionWindMode==2}}" class='box'>
+        <image style='width:30%; height:30%' src='../../../images/devctr/zsdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>中速</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../images/devctr/zswdj.png' mode="widthFix"></image>
+               <text class>中速</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H1 audio">
+        <view wx:if="{{centralairConditionWindMode==3}}" class='box'>
+        <image style='width:30%; height:30%' src='../../../images/devctr/gsdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>高速</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:30%; height:30%' src='../../../images/devctr/gswdj.png' mode="widthFix"></image>
+               <text class>高速</text>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<view class="window_view">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H local" bindtap="{{centralairConditionMode!=0?'tongfeng':''}}">
+         <view class='box'>
+            <image src='{{ms}}'></image>
+            <text>模式</text>
          </view>
-         <view class='text'>
-              <view class='windspeed'>
-                <view>模式:</view>
-                <view wx:if="{{centralairConditionMode==0}}">
-                 <text>关闭</text>
-                </view>
-                <view wx:elif="{{centralairConditionMode==3}}">
-                 <text>制冷</text>
-                </view>
-                <view wx:elif="{{centralairConditionMode==4}}">
-                 <text>制热</text>
-                </view>
-                <view wx:elif="{{centralairConditionMode==5}}">
-                 <text>打开</text>
-                </view>
-              </view>
-              <view class='windspeed'>
-              <view>风速:</view>
-              <view wx:if="{{centralairConditionWindMode==1}}">
-                  <text>低速</text>
-              </view>
-               <view wx:elif="{{centralairConditionWindMode==2}}">
-                  <text>中速</text>
-              </view>
-               <view wx:elif="{{centralairConditionWindMode==3}}">
-                  <text>高速</text>
-              </view>
-               <view wx:elif="{{centralairConditionWindMode==5}}">
-                  <text>自动</text>
-              </view>
-              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H img" bindtap='kaiguanguan'>
+         <view class='box'>
+            <image src='{{kg}}'></image>
+            <text>开关</text>
          </view>
-         <view class='text'>
-              <view class='windspeed'>
-                   <view>锁定状态:</view>
-                  <view wx:if="{{airAllState.lockedState==0}}">
-                    <text>锁定</text>
-                  </view>
-                  <view wx:elif="{{airAllState.lockedState==1}}">
-                    <text>解锁</text>
-                  </view>
-                  <view wx:elif="{{airAllState.lockedState==-1}}">
-                    <text>未知</text>
-                  </view>
-              </view>
-        </view>
-    <view class='kongtiao'>
-            <view bindtap='showDialogBtn'>
-            <image src='../../../images/devctr/wendu.png' style="width:50px;height:50px;"></image>
-            <view>温度</view>
-            </view>
-            <view bindtap='tongfeng'>
-            <image src='../../../images/devctr/moshi.png' style="width:50px;height:50px;"></image>
-            <view>模式</view>
-            </view>
-             <view bindtap='actioncnt'>
-            <image src='../../../images/devctr/fengsu.png' style="width:50px;height:50px;"></image>
-             <view>风速</view>
-            </view>
-    </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H audio" bindtap="{{centralairConditionMode!=0?'actioncnt':''}}">
+         <view class='box'>
+            <image src='{{fs}}'></image>
+            <text>风速</text>
+         </view>
+      </view>
+   </scroll-view>
 </view>
 <!--弹窗-->
 <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
@@ -91,9 +138,6 @@
   <view class="modal-title">空调控制</view>
   <view class="modal-content">
     <view class="modal-input">
-      <view wx:if="{{index==1}}">
-      <input placeholder-class="input-holder" type="digit" maxlength="10" bindinput="wendu" class="input" placeholder="请输入温度"></input>
-    </view>
     <view wx:if="{{index==2}}">
           <view>请选择模式:</view>
            <radio-group bindchange="checkboxChange">
@@ -117,3 +161,5 @@
     <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
   </view>
 </view>
+
+

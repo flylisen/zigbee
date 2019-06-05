@@ -9,7 +9,13 @@ page{
  padding: 0; 
  box-sizing: border-box; 
 }
-  
+.background-image{
+  height : 100%;
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+}
 /*登录图片*/
 .login-icon{ 
  flex: none; 
@@ -23,6 +29,7 @@ page{
  margin-top: 130px; 
  flex: auto; 
  height:100%; 
+position: relative;
 } 
   
 .inputView { 

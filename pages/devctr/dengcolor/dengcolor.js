@@ -38,8 +38,8 @@ Page({
     rpxRatio: 1, //此值为你的屏幕CSS像素宽度/750，单位rpx实际像素
     sortedDevs: '',
     hex:'',
+    diOnoffStatu:''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -67,6 +67,43 @@ Page({
         })
       }
     });
+  },
+  //打开
+  dk:function(){
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: 1 }],
+      var: "2.0"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+  },
+  //关闭
+  gb: function () {
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    console.log(url);
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: 0 }],
+      var: "2.0"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
   onChangeColor(e) {
@@ -108,8 +145,6 @@ Page({
     H=(H/360)*255;
     //饱和度
     S = ((max - min) / max)*254;
-    console.log(parseInt(S));
-    console.log(parseInt(H));
   },
 picker:function(e){
   if(this.data.hex=='#111110'){
@@ -118,43 +153,57 @@ picker:function(e){
       icon: 'none'
     })
   }else{
-    let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      act: "controlhue",
-      code: "214",
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: username,
-      bindstr: pwd,
-      ver: "1",
-      devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+    if (this.data.diOnoffStatu>=1){
+      let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        act: "controlhue",
+        code: "214",
+        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+        key: "bq6wqzasjwtkl0i21pi9fbeq4",
+        bindid: username,
+        bindstr: pwd,
+        ver: "1",
+        devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }else{
+      wx.showToast({
+        title:'灯是关闭状态',
+        icon:'none'
+      })
+    }
   }
   },
   listenerSlider:function(e){
-    //获取滑动后的值
-    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      actCode: "102",
-      bindid: username,
-      bindstr: pwd,
-      ctrType: 1,
-      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: e.detail.value }],
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )  
+    if (this.data.diOnoffStatu >= 1){
+      //获取滑动后的值
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        actCode: "102",
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 1,
+        devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: e.detail.value }],
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }else{
+      wx.showToast({
+        title: '灯是关闭状态',
+        icon: 'none'
+      })
+    } 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -167,20 +216,55 @@ picker:function(e){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-    },
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      var nodeType;
+      var uuid;
+      var value;
+      var showname;
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割 
+      nodeType = strs[0].split('=')[1];
+      uuid = strs[1].split('=')[1];
+      value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
+      console.log('nodeType', nodeType);
+      console.log('uuid', uuid);
+      console.log('value', value);
+      console.log('showname', showname);
+      //找到当前页面的page
+      var pageArray = getCurrentPages();
+      var curPage;
+      for (var j = 0; j < pageArray.length; j++) {
+        if (pageArray[j].route == 'pages/devctr/dengcolor/dengcolor') {
+          curPage = pageArray[j];
+        }
+      }
+      console.log('curPage', curPage);
+      if (nodeType == 4) {
+        //设备开关状态发生改变
+        var diOnoffStatu = curPage.data.diOnoffStatu;
+        curPage.setData({
+          diOnoffStatu: value
+        })
+      } 
+      console.log('当前页面在设备详情');
+    }
+},
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
+  onHide: function () { 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

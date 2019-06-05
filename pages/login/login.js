@@ -52,6 +52,10 @@ Page({
               title: '提示',
               content: '网关不在线或用户名与密码错误'
             })
+            this.setData({
+              username: '',
+              pwd:'',
+            })
           }
         },
           (err) => {

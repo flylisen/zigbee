@@ -1,14 +1,30 @@
 /* pages/scenesctr/scenesctr.wxss */
+
 .link {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 654rpx; 
     margin: 0 auto;
-    position: relative;
     left: 5rpx;
 }  
 .link_child {
-    width: 31%;
-    margin-top: 10px;
+  width: 20%;
+  margin: 40px;
+}
+.background-image{
+  position: absolute;
+  width: 35%;
+  height: 20%;
+  margin-left: -20px;
+}
+.btnImg1{
+  position: relative;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+.btnImg2{
+   position: relative;
+   margin-left: 25px;
+   color: #FEA152;
 }
