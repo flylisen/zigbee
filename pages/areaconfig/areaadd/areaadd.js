@@ -18,6 +18,9 @@ Page({
     unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
     arr: '',
+    select: false,
+
+    grade_name: '--请选择--'
   },
   submit: function (e) {
     var that = this
@@ -25,10 +28,16 @@ Page({
     pwd = app.globalData.pwd;  //网关密码 
     var name = e.detail.value.areaname;
     let arr1 = that.data.arr;
-    if (name == '' || arr1 == '') {
+    let area = that.data.areatype;
+    console.log(area);
+    for (var i in area) {
+      var atId = area[i].atId
+    }
+    console.log(atId)
+    if (name == '' || arr1 == '' || area == undefined) {
       wx.showModal({
         title: '提示',
-        content: '请输入区域名称或者选择设备'
+        content: '请输入区域名称、选择设备或者选择区域类型'
       })
     }
     else {
@@ -42,15 +51,20 @@ Page({
         actCode: 106,
         bindid: username,
         areaName: name,
+        areaTypeId: atId,
         devs: arr2,
         ver: "2"
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
         if (res.data.code = 1) {
-          wx.redirectTo({
-            url: '../areaconfig',
-          }, 2000)
+          var pages = getCurrentPages(); // 当前页面 
+          var beforePage = pages[pages.length - 2]; // 前一个页面  
+          wx.navigateBack({
+            success: function () {
+              beforePage.onLoad(); // 执行前一个页面的方法     
+            }
+          })
         } else {
 
         }
@@ -62,9 +76,13 @@ Page({
     }
   },
   go: function () {
-    wx.redirectTo({
-      url: '../areaconfig',
-    }, 2000)
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面  
+    wx.navigateBack({
+      success: function () {
+        beforePage.onLoad(); // 执行前一个页面的方法     
+      }
+    })
   },
 
   /**
@@ -74,12 +92,47 @@ Page({
     var that = this;
     username = app.globalData.username;
     pwd = app.globalData.pwd;
-    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getAreaTypeList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    console.log(url);
     let data = {
+      bindid: username,
+      ver: "2"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
+      var tmp = {};
+      for (var index in res.data.areatype) {
+        var tag = res.data.areatype[index].atId + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
+        }
+        tmp[tag].push(res.data.areatype[index]);
+      };
+      var areaTypeList = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          areaTypeList.push(tmp[key][j]);
+        }
+      }
+      console.log(areaTypeList);
+
+      that.setData({
+        areaTypeList: areaTypeList
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+    let url1 = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data1 = {
       bindid: username,
       bindstr: pwd
     };
-    app.wxRequest('POST', url, data, (res) => {
+    app.wxRequest('POST', url1, data1, (res) => {
       console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
@@ -127,16 +180,19 @@ Page({
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
-      var diUuid;
+      var uuid;
       var value;
+      var showname;
       var strs = new Array();
       strs = res.data.split(","); //字符分割 
       nodeType = strs[0].split('=')[1];
-      diUuid = strs[1].split('=')[1];
+      uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
       console.log('nodeType', nodeType);
-      console.log('diUuid', diUuid);
+      console.log('uuid', uuid);
       console.log('value', value);
+      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -149,7 +205,7 @@ Page({
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
               [tmp]: value
@@ -158,7 +214,6 @@ Page({
         }
       } else if (nodeType == 1) {
         //设备新入网
-        //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
@@ -166,7 +221,7 @@ Page({
       } else if (nodeType == 2) {
         //判断设备是否在线
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
             curPage.setData({
               [tmp]: 1
@@ -175,34 +230,32 @@ Page({
         }
       } else if (nodeType == 5) {
         //修改名称
-        console.log(curPage.data.sortedDevs);
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (diUuid == curPage.data.sortedDevs[i].diUuid) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
             console.log('i=' + i);
-            var tmp = 'sortedDevs[' + i + '].diName';
+            var tmp = 'sortedDevs[' + i + '].diShowName';
+            var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({
-              [tmp]: value
+              [dname]: value,
+              [tmp]: showname
             })
           }
         }
       } else if (nodeType == 3) {
         //删除设备
-        //刷新当前页面
         if (getCurrentPages().length != 0) {
           //刷新当前页面的数据
           getCurrentPages()[getCurrentPages().length - 1].onLoad()
         }
       } else if (nodeType == 6) {
         var that = this;
-        username = app.globalData.username;  //网关账号 
-        pwd = app.globalData.pwd;  //网关密码 
         let url = app.globalData.URL + 'getSensorAttrValue';
         let data = {
           actCode: "110",
           bindid: username,
           bindstr: pwd,
-          uuid: diUuid,
-          ver: "2"
+          uuid: uuid,
+          ver: "2.0"
         };
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data)
@@ -270,5 +323,43 @@ Page({
       sortedDevs: infoArray,
       arr
     })
+  },
+  /**
+
+*  点击下拉框 */
+
+  bindShowMsg() {
+    this.setData({
+
+      select: !this.data.select
+
+    })
+
+  },/**
+
+* 已选下拉框 */
+
+  mySelect(e) {
+
+    console.log(e);
+    var name = e.currentTarget.dataset.name
+    console.log(name)
+    let typeinfo = this.data.areaTypeList;
+    let areatype = [];
+    console.log(this.data.areaTypeList);
+    for (var i = 0; i < typeinfo.length; i++) {
+      if (typeinfo[i].atName == name) {
+        areatype.push(typeinfo[i])
+      }
+    }
+    console.log(areatype);
+    this.setData({
+
+      grade_name: name,
+      areatype,
+      select: false
+
+    })
+
   },
 })

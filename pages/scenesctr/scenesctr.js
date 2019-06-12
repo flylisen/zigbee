@@ -5,6 +5,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var rommid;
 Page({
 
   /**
@@ -28,7 +29,11 @@ Page({
     username = app.globalData.username;
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
-    var rommid = app.globalData.rommid;
+    rommid = app.globalData.rommid;
+    console.log(rommid);
+    that.setData({
+      rommid
+    })
     token = app.globalData.token;
     sign = app.globalData.sign;
     let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -46,7 +51,6 @@ Page({
       console.log(res.data)
       this.setData({
         scenes: res.data.scenes,
-        rommid:rommid
       })
     },
       (err) => {

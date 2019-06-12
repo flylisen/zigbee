@@ -16,11 +16,21 @@ input{
   height: 40px;
   margin: 20px 0px;
 }
-button{
-  float: left;
+.button1{
   font-size: 20px;
-  margin-left: 50px;
-  color: black;
+  color: white;
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  background: orange;
+  margin-top: 40rpx;
+}
+.button2{
+  font-size: 20px;
+  color: white;
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  background: red;
+  margin-top: 40rpx;
 }
 .flex-wrp_one{
  display: flex;
@@ -92,7 +102,52 @@ align-content: space-around;
   text-align: center;
 }
 .view1{
-  display: flex;
-  margin-top: 20px;
-  justify-content:space-around;
+  display:flex;
+margin-top:20px;
+justify-content:space-around;
+flex-direction:column;
+align-items:center;
+}
+.text{
+   margin-left: 30px;
+}
+.gl{
+  margin-top: 20rpx;
+}
+.link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 654rpx; 
+    margin: 0 auto;
+    position: relative;
+    left: 30rpx;
+}  
+.link_child {
+    width: 31%;
+    margin-top: 20rpx;
+}
+.link_child:not(:nth-child(3n)){
+    margin-right: 10rpx;
+}
+.tp{
+   position: absolute;
+   z-index: 1;
+   margin-left:-83px;
+   margin-top:20px;
+}
+.tb{
+   position: absolute;
+   z-index: 1;
+   margin-left:-48px;
+   margin-top:9px;
+
+}
+.zt{
+   position: absolute;
+   z-index: 1;
+  margin-left:34px;
+  font-size:17px;
+  margin-top:-46px;
+  color:#999999; 
 }

@@ -1,22 +1,26 @@
 <view class="bg">
   <view class="head">
     <view class="headIcon">
-      <image src="../../images/about/guanyuwomen.png" style="width:70px;height:70px;"></image> 
+      <image src="../../images/about/user.png" style="width:70px;height:70px;"></image> 
     </view>
     <text>用户名:{{username}}</text>
   </view>
 </view>
-  <view class="about">
-  <text>产品名称：日顺微信网关</text>
-  <text>版本号：1.0</text>
-  <!-- <text>数据来源：和风天气</text> -->
-  <text>开发时间：2019年03月</text>
+  <view class="about" >
+  <view><image src="../../images/about/guide.png" style="width:30px;height:30px;"></image></view>
+  <view>操作指南</view>
   </view>
-  <view class="about aboutme">
-    <text class="title">日顺官网：http://www.gzrishun.com/</text>
-    <text>邮箱：rishun@gzrishun.com</text>
-    <text>联系我们：020 - 6682 3969</text>
-    <text class="title">地址：广州市番禺区洛溪新城恒达工业园A2栋4层</text>
-    
+  <view class="about" >
+  <view><image src="../../images/about/idea.png" style="width:30px;height:30px;"></image></view>
+  <view>意见反馈</view>
+  </view><view class="about" >
+  <view><image src="../../images/about/setup.png" style="width:30px;height:30px;"></image></view>
+  <view>个性设置</view>
+  </view><view class="about" >
+  <view><image src="../../images/about/me.png" style="width:30px;height:30px;"></image></view>
+  <view>关于我们</view>
+  </view>
+  <view class='logout'>
+  <button bindtap='logout'>退出登录</button>
   </view>
   

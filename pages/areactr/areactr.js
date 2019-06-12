@@ -5,6 +5,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var rommid;
 Page({
 
   /**
@@ -14,8 +15,8 @@ Page({
     showModal: false
   },
   bindAdd: function () {
-    this.setData({
-      showModal: true
+    wx.navigateTo({
+      url: '../areaconfig/areaconfig'
     })
   },
   go: function () {
@@ -40,6 +41,15 @@ Page({
     var that = this;
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    console.log(username)
+    rommid = app.globalData.rommid;
+    console.log(rommid);
+    that.setData({
+      rommid
+    })
     let url = app.globalData.URL + 'areaList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       actCode: 107,

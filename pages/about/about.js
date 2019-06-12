@@ -1,10 +1,10 @@
-var app=getApp();
+var app = getApp();
 var username;
 var pwd;
 var rommid;
 Page({
   data: {
-  }, 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -14,22 +14,27 @@ Page({
       username: username
     });
   },
-  onShow: function () {
-    if (app.globalData.index==1){
-      if (typeof this.getTabBar === 'function' &&
-        this.getTabBar()) {
-        this.getTabBar().setData({
-          selected: 2
-        })
-      }
-    } else if (app.globalData.index==2){
-      if (typeof this.getTabBar === 'function' &&
-        this.getTabBar()) {
-        this.getTabBar().setData({
-          selected: 1
-        })
-      }
+  logout: function () {
+    wx.closeSocket();
+    var that = this;
+    rommid = app.globalData.rommid
+    console.log(rommid)
+    if (rommid == 888) {
+      wx.reLaunch({
+        url: '../romm/romm',
+      })
+    } else {
+      wx.reLaunch({
+        url: '../login/login',
+      })
     }
-    
-  }     
+  },
+  onShow: function () {
+    if (typeof this.getTabBar === 'function' &&
+      this.getTabBar()) {
+      this.getTabBar().setData({
+        selected: 2
+      })
+    }
+  }
 })

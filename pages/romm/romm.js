@@ -45,6 +45,7 @@ Page({
        }
        var roomid = this.data.rommid
        console.log(roomid)
+       app.room(roomid)
        app.wxRequest('POST', url, data, (res) => {
          console.log(res.data)
          var username = res.data.gwLoginName;
@@ -71,7 +72,6 @@ Page({
                console.log("时间戳" + timestamp);
                console.log("签名:" + sign);
                app.safety(timestamp, token, sign);
-               app.room(roomid)
                //建立websocket连接 
                if (res.data.gwId != -1) {
                  app.initWebSocket(res.data.gwId);

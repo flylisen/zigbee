@@ -1,23 +1,16 @@
 <!--pages/areactr/areactr.wxml-->
 <view class='viewh1'> 
-     <h1>全部区域</h1>  
-     <button class='btn' bindtap='bindAdd'>配置</button> 
+     <h1>全部区域</h1>
+     <view wx:if="{{rommid != 888}}">
+     <button class='btn' hover-class="hover" bindtap='bindAdd'>配置</button> 
+     </view>
      </view>
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">
        <view>
-               <image src='../../images/areactr/jiedianleiquyu.png' data-id="{{item}}" id="{{index}}"   bindtap='areainfo' style="width:70px;height:70px;"></image>
+               <image src='../../images/areactr/{{item.atImg}}' data-id="{{item}}" id="{{index}}"   bindtap='areainfo' style="width:70px;height:70px;"></image>
                 <view wx:if="{{item.aiName==''}}">区域</view>
                 <view wx:else>{{item.aiName}}</view>
       </view>
     </block>
-</view> 
-     <!--模态框-->
-     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-      <view class='modalDlg' wx:if="{{showModal}}">
-       <view class='setting' bindtap='scenesctr'>
-        <image class='btnImg' src='../../images/dashujukeshihuaico-.png' style="width:200rpx;height:200rpx;"></image>
-        <text style="font-size:1rem;">区域配置</text> 
-    </view>
-        <button bindtap="go">关闭</button>
-     </view>
+</view>

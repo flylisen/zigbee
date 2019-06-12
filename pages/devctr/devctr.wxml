@@ -1,8 +1,8 @@
 <!--pages/devctr/devctr.wxml-->
 <view class='viewh1'>
      <text>全部设备</text>
-    <view wx:if="{{rommid==''}}">
-     <button class='btn' hover-class="hover" bindtap='pz'>配置</button>
+    <view wx:if="{{rommid != 888}}">
+     <button class='btn' hover-class="hover" bindtap='pz'>配置</button> 
      </view>
 </view>
 <view class="container">

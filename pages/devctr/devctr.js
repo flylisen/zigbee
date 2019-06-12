@@ -5,6 +5,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var rommid;
 Page({
   /**
    * 页面的初始数据
@@ -29,7 +30,11 @@ Page({
      var that = this;
      username = app.globalData.username;
      pwd = app.globalData.pwd;
-    var rommid=app.globalData.rommid;
+    rommid = app.globalData.rommid;
+    console.log(rommid);
+    that.setData({
+      rommid
+    })
     console.log(username);
     console.log(pwd);
     console.log(rommid);
@@ -63,7 +68,6 @@ Page({
       })
       that.setData({
         sortedDevs: sortResult,
-        rommid: rommid
       });
     },
       (err) => {
