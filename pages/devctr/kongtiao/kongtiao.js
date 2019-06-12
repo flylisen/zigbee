@@ -25,6 +25,11 @@ Page({
     ms:'../../../images/devctr/mswdj.png',
     fs:'../../../images/devctr/fswdj.png',
     kg:'../../../images/devctr/kgwdj.png',
+    mstext:false,
+    fstext:false,
+    kgtext:false,
+    minus:'../../../images/devctr/minuswdj.png',
+    jia:'../../../images/devctr/jiawdj.png',
     ConditionMode: [
       { name: 3, value: '制冷' },
       { name: 4, value: '制热' },
@@ -94,6 +99,9 @@ Page({
   },
   
   minus:function(){
+    this.setData({
+      minus: '../../../images/devctr/minusdj.png'
+    })
     var wendu;
     if (this.data.wendu>1600){
        wendu= this.data.wendu - 100;
@@ -112,14 +120,15 @@ Page({
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
       bindstr: pwd,
-      devs: [{ uuid: kongtiaos.diUuid, value: wendu }],
+      devs: [{ uuid: kongtiaos.diUuid, value: wendu}],
       ver: "2"
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
       if (res.data.code == 1) {
         this.setData({
-          wendu: wendu
+          wendu: wendu,
+          minus:'../../../images/devctr/minuswdj.png'
         })
       }
     },
@@ -129,9 +138,12 @@ Page({
     )
   },
   jia:function(){
-    var wendu;
-    if (this.data.wendu<3200){
-       wendu = this.data.wendu + 100;
+    this.setData({
+      jia: '../../../images/devctr/jiadj.png',
+    })
+    var wendu = this.data.wendu;
+    if (wendu<3200){
+      wendu = wendu + 100;
     }else{
       wx.showModal({
         title: '提示',
@@ -139,6 +151,7 @@ Page({
       })
       wendu=3200;
     }
+    console.log(wendu);
     let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "setthermostattemperature",
@@ -154,7 +167,8 @@ Page({
       console.log(res.data)
       if (res.data.code == 1) {
         this.setData({
-          wendu: wendu
+          wendu: wendu,
+          jia: '../../../images/devctr/jiawdj.png',
         })
       }
     },
@@ -166,7 +180,8 @@ Page({
   //开关事件
   kaiguanguan: function (event) {
     this.setData({
-      kg: '../../../images/devctr/kgdj.png'
+      kg: '../../../images/devctr/kgdj.png',
+      kgtext:true
     })
     var centralairConditionMode = this.data.centralairConditionMode;
     if (centralairConditionMode!=0){//关闭
@@ -186,7 +201,8 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             centralairConditionMode: 0,
-            kg: '../../../images/devctr/kgwdj.png'
+            kg: '../../../images/devctr/kgwdj.png',
+            kgtext:false
           })
         }
       },
@@ -211,7 +227,8 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             centralairConditionMode: 5,
-            kg: '../../../images/devctr/kgwdj.png'
+            kg: '../../../images/devctr/kgwdj.png',
+            kgtext:false
           })
         }
       },
@@ -229,6 +246,7 @@ Page({
       showModal: true,
       index:2,
       ms: '../../../images/devctr/msdj.png',
+      mstext:true
     })
   },
   actioncnt:function(){
@@ -236,6 +254,7 @@ Page({
       showModal: true,
       index:3,
       fs: '../../../images/devctr/fsdj.png',
+      fstext:true
     })
   },
   /**
@@ -248,6 +267,8 @@ Page({
       showModal: false,
       ms: '../../../images/devctr/mswdj.png',
       fs: '../../../images/devctr/fswdj.png',
+      mstext:false,
+      fstext:false
     });
   },
   /**
@@ -261,7 +282,7 @@ Page({
     var index = this.data.index;
     if (index==2){
       if (centralairConditionMode != '') {//模式
-        let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
         let data = {
           act: "setthermostatmode",
           code: 277,
@@ -386,7 +407,7 @@ Page({
       if (nodeType == 102) {
         var wendu = curPage.data.wendu;
         curPage.setData({
-          wendu:value
+          wendu:parseInt(value)
         })
       }
       if (nodeType == 103) {

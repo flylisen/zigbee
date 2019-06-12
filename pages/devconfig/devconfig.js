@@ -66,6 +66,11 @@ Page({
   },
   kaiguanguan: function (event){
       console.log(event.currentTarget.dataset['kaiguanguan']);
+      var ins = event.currentTarget.id;//获得下标
+      console.log(ins);
+      this.setData({
+       ins: ins
+      })
       var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kaiguanguan']));//函数可把字符串作为 URI
       wx.navigateTo({
         url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
@@ -149,9 +154,9 @@ Page({
         }
       } else if (nodeType == 1) {
          //设备新入网
-        if (getCurrentPages().length != 0) {
+        if (pageArray.length != 0) {
           //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          pageArray[pageArray.length - 1].onLoad()
         }
       } else if (nodeType == 2) {
         //判断设备是否在线
@@ -178,9 +183,9 @@ Page({
         }
       } else if (nodeType == 3) {
         //删除设备
-        if (getCurrentPages().length != 0) {
+        if (pageArray.length != 0) {
           //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          pageArray[pageArray.length - 1].onLoad()
         } 
       } else if (nodeType == 6) {
         var that = this;
@@ -208,13 +213,18 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      ins: -1,
+    })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {        
+  onUnload: function () {
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

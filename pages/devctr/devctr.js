@@ -10,28 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal: false,
     chuanglians: '',
     sortedDevs: '',
     switch:'',
     ins:-1,
     line:1,
-    deng:false,
+    rommid:''
   },
-  bindAdd: function () {
-    this.setData({
-      showModal: true
-    })
-  },
-  go: function () {
-    this.setData({
-      showModal: false
-    })
-    wx.redirectTo({
-      url: '../devctr/devctr'
-    })
-  },
-  scenesctr: function () {
+  pz: function () {
     wx.navigateTo({
       url: '../devconfig/devconfig'
     })
@@ -43,19 +29,20 @@ Page({
      var that = this;
      username = app.globalData.username;
      pwd = app.globalData.pwd;
+    var rommid=app.globalData.rommid;
     console.log(username);
     console.log(pwd);
+    console.log(rommid);
      timestamp = app.globalData.timestamp;
      token = app.globalData.token;
      sign = app.globalData.sign;
     let url = app.globalData.URL + 'getDev?timestamp='+timestamp +'&token='+token+'&sign='+sign;
-    console.log(url);
     let data = {
       bindid: username,
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data);
+    console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -74,10 +61,9 @@ Page({
         //这里需要截取的内容
         item.diShowName = item.diShowName.substring(0, 3)
       })
-      console.log(sortResult);
-
       that.setData({
-        sortedDevs: sortResult
+        sortedDevs: sortResult,
+        rommid: rommid
       });
     },
       (err) => {
@@ -125,26 +111,45 @@ Page({
     this.setData({
       ins: ins
     })
-    var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + device
-    })
+    if (event.currentTarget.dataset['device'].diOnlineStatu>0){
+      var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + device
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins:-1
+      })
+    }
   },
   xia: function (event){
     console.log(event.currentTarget.dataset['deng']);
     var ins = event.currentTarget.id;//获得下标
     console.log(ins);
     this.setData({
-      ins: ins,
-      deng:true
+      ins: ins
     })
-    var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'dengcolor/dengcolor?deng=' + deng
-    })
-    this.setData({
-        deng:false
-    })
+    if (event.currentTarget.dataset['deng'].diOnlineStatu>0){
+      var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'dengcolor/dengcolor?deng=' + deng
+      })
+      this.setData({
+        deng: false
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
   },
   kongtiao:function(event){
     console.log(event.currentTarget.dataset['kongtiao']);
@@ -153,25 +158,66 @@ Page({
     this.setData({
       ins: ins
     })
-    var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'kongtiao/kongtiao?kongtiao=' + kongtiao
-    })
+    if (event.currentTarget.dataset['kongtiao'].diOnlineStatu>0){
+      var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'kongtiao/kongtiao?kongtiao=' + kongtiao
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
   },
+
   sewendeng: function (event){
     console.log(event.currentTarget.dataset['sewendeng']);
-    var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'sewendeng/sewendeng?sewendeng=' + sewendeng
+    var ins = event.currentTarget.id;//获得下标
+    console.log(ins);
+    this.setData({
+      ins: ins
     })
+    if (event.currentTarget.dataset['sewendeng'].diOnlineStatu>0){
+      var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'sewendeng/sewendeng?sewendeng=' + sewendeng
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }   
   },
   //窗帘
   chuanglian: function (event) {
     console.log(event.currentTarget.dataset['chuanglian']);
-    var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
-    wx.navigateTo({
-      url: 'chuanglian/chuanglian?deviceuid=' + deviceuid
+    var ins = event.currentTarget.id;//获得下标
+    console.log(ins);
+    this.setData({
+      ins: ins
     })
+    if (event.currentTarget.dataset['chuanglian'].diOnlineStatu>0){
+      var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
+      wx.navigateTo({
+        url: 'chuanglian/chuanglian?deviceuid=' + deviceuid
+      })
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

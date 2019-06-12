@@ -1,5 +1,19 @@
 /* pages/scenesctr/scenesctr.wxss */
-
+.viewh1{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+.btn{
+  background-color:#D9D9D9;
+  color:white;
+  margin-left: 50px;
+  margin-top: -10px;
+  position: absolute;
+}
+.hover{
+  background-color:#FEA152;
+}
 .link {
     display: flex;
     flex-direction: row;
@@ -27,4 +41,12 @@
    position: relative;
    margin-left: 25px;
    color: #FEA152;
+   width: 100%;
 }
+.btnImg3{
+   position: relative;
+   margin-left: 15px;
+   color: #FEA152;
+   width: 100%;
+}
+

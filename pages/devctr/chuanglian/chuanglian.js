@@ -12,7 +12,13 @@ Page({
    */
   data: {
     diNames:'',
-    chuanglians:''
+    diOnoffStatu:'',
+    k:'/images/chuanglian/kwdj.png',
+    tz:'/images/chuanglian/tzwdj.png',
+    g:'/images/chuanglian/gwdj.png',
+    ktest:false,
+    tztest:false,
+    gtext:false,
   },
   
   /**
@@ -28,44 +34,84 @@ Page({
     Industrys = JSON.parse(deviceuid);
     this.setData({
       diNames: Industrys.diShowName,
-      chuanglians: Industrys.diOnoffStatu
+      diOnoffStatu: Industrys.diOnoffStatu
     })
   },
-  chuangliang: function (a) {
-    var that = this
-    if (Industrys.diOnoffStatu >= 1) {
-      Industrys.diOnoffStatu = 0
-    } else {
-      Industrys.diOnoffStatu = 1
+  chuangliank:function(e){
+    if (this.data.diOnoffStatu==0){
+      this.setData({
+        k: '/images/chuanglian/kdj.png',
+        ktest: true
+      })
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: Industrys.diDeviceuid, uuid: Industrys.diUuid, value: 1 }],
+        var: '2.0'
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data.code == 1) {
+          this.setData({
+            k: '/images/chuanglian/kwdj.png',
+            ktest: false
+          })
+        }
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '已经是打开的状态'
+      }) 
     }
-    console.log(Industrys.diOnoffStatu)
+  },
+  chuangliantz:function(e){
     this.setData({
-      chuanglians:Industrys.diOnoffStatu
+        tz: '/images/chuanglian/tzdj.png',
+        tztest:true
     })
-    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      bindid: username,
-      bindstr: pwd,
-      ctrType: 0,
-      devs: [{ deviceuid: Industrys.diDeviceuid, uuid: Industrys.diUuid, value: Industrys.diOnoffStatu}],
-      var:'2.0'
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-      if(res.data.code==1){
-        var pages = getCurrentPages(); // 当前页面 
-        var beforePage = pages[pages.length - 2]; // 前一个页面  
-        wx.navigateBack({
-          success: function () {
-            beforePage.onShow(); // 执行前一个页面的方法     
-          }
-        });
-      }
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
+   
+  },
+  chuangliag:function(e){
+    if (this.data.diOnoffStatu>0){
+      this.setData({
+        g: '/images/chuanglian/gdj.png',
+        gtext: true
+      })
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: Industrys.diDeviceuid, uuid: Industrys.diUuid, value: 0 }],
+        var: '2.0'
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data.code == 1) {
+          this.setData({
+            g: '/images/chuanglian/gwdj.png',
+            gtext: false
+          })
+        }
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '已经是关闭的状态'
+      }) 
+    }
+  
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -78,7 +124,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      
+    //回调
+    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+      console.log('接收到服务器信息', res);
+      var nodeType;
+      var uuid;
+      var value;
+      var showname;
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割 
+      nodeType = strs[0].split('=')[1];
+      uuid = strs[1].split('=')[1];
+      value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
+      console.log('nodeType', nodeType);
+      console.log('uuid', uuid);
+      console.log('value', value);
+      console.log('showname', showname);
+      //找到当前页面的page
+      var pageArray = getCurrentPages();
+      var curPage;
+      for (var j = 0; j < pageArray.length; j++) {
+        if (pageArray[j].route == 'pages/devctr/chuanglian/chuanglian') {
+          curPage = pageArray[j];
+        }
+      }
+      console.log('curPage', curPage);
+      if (nodeType == 4) {
+        //设备开关状态发生改变
+        var diOnoffStatu = curPage.data.diOnoffStatu;
+        curPage.setData({
+          diOnoffStatu: value
+        })
+      }
+      console.log('当前页面在窗帘');
+    }
   },
 
   /**
@@ -92,7 +172,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

@@ -1,13 +1,13 @@
 
 <view style='text-align:center;' class="picture-2">
-       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="../../../images/devctr/minuswdj.png" mode="widthFix"></image>
+       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="{{minus}}" mode="widthFix"></image>
        <image style='width:70%; height:70%' class="infoImage"  src="../../../images/devctr/kongtionbj.png" mode='widthFix'>
          <view wx:if="{{centralairConditionMode!=0}}">
           <text class='text'>{{wendu/100}}℃</text>
           <text class='test2'>当前房间温度:{{localTemperature/100}}℃</text>
           </view>
        </image>
-       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'jia':''}}" class="Image" src="../../../images/devctr/jiawdj.png" mode="widthFix"></image>
+       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'jia':''}}" class="Image" src="{{jia}}" mode="widthFix"></image>
 </view>
 <!--模式-->
   <view class="window_view2">
@@ -115,19 +115,19 @@
       <view id="local" class="scroll-view-item_H local" bindtap="{{centralairConditionMode!=0?'tongfeng':''}}">
          <view class='box'>
             <image src='{{ms}}'></image>
-            <text>模式</text>
+            <text style="{{mstext==true?'color: #FEA152;':''}}">模式</text>
          </view>
       </view>
       <view id="img" class="scroll-view-item_H img" bindtap='kaiguanguan'>
          <view class='box'>
             <image src='{{kg}}'></image>
-            <text>开关</text>
+            <text style="{{kgtext==true?'color: #FEA152;':''}}">开关</text>
          </view>
       </view>
       <view id="audio" class="scroll-view-item_H audio" bindtap="{{centralairConditionMode!=0?'actioncnt':''}}">
          <view class='box'>
             <image src='{{fs}}'></image>
-            <text>风速</text>
+            <text style="{{fstext==true?'color: #FEA152;':''}}">风速</text>
          </view>
       </view>
    </scroll-view>

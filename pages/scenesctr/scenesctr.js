@@ -11,13 +11,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal:false,
     scenes:'',
     ins:-1,
+    rommid: ''
   },
-  bindAdd: function () {
-    this.setData({
-      showModal: true
+  pz:function(){
+    wx.navigateTo({
+      url: '../scenesconfig/scenesconfig'
     })
   },
   /**
@@ -28,6 +28,7 @@ Page({
     username = app.globalData.username;
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
+    var rommid = app.globalData.rommid;
     token = app.globalData.token;
     sign = app.globalData.sign;
     let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -44,7 +45,8 @@ Page({
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
       this.setData({
-        scenes: res.data.scenes
+        scenes: res.data.scenes,
+        rommid:rommid
       })
     },
       (err) => {
@@ -55,7 +57,6 @@ Page({
   //触发场景
   chang(event){
     var ins = event.currentTarget.id;//获得下标
-    console.log(ins);
       this.setData({
         ins:ins
       })

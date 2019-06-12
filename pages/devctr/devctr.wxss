@@ -1,15 +1,25 @@
 /* pages/devctr/devctr.wxss */
-view h1{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.viewh1{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+
+}
+.btn{
+  background-color:#D9D9D9;
+  color:white;
+  margin-left: 50px;
+  margin-top: -10px;
+  position: absolute;
+}
+.hover{
+  background-color:#FEA152;
 }
 .weui-grids {
   position: relative;
   overflow: hidden;
-  margin-top: -80px;
+  margin-top: -50px;
 }
-
 .weui-grids:before {
   content: " ";
   position: absolute;
@@ -24,7 +34,9 @@ view h1{
           transform: scaleY(0.5);
 
 }
-
+switch{
+  zoom: 0.8;
+}
 .weui-grids:after {
   content: " ";
   position: absolute;
@@ -34,45 +46,29 @@ view h1{
   bottom: 0;
   color: #D9D9D9;
   -webkit-transform-origin: 0 0;
-
           transform-origin: 0 0;
-
   -webkit-transform: scaleX(0.5);
-
           transform: scaleX(0.5);
 
 }
 
 .weui-grid {
-
   position: relative;
-
   float: left;
-
   padding: 20px 10px;
-
   width: 33.33333333%;
-
+  height: 120px;
   box-sizing: border-box;
-
 }
 
 .weui-grid:before {
-
   content: " ";
-
   position: absolute;
-
   right: 0;
-
   top: 0;
-
   width: 1px;
-
   bottom: 0;
-
   color: #D9D9D9;
-
   -webkit-transform-origin: 100% 0;
 
           transform-origin: 100% 0;

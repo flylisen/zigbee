@@ -1,34 +1,51 @@
 /* pages/scenesconfig/scenesconfig.wxss */
-view h1{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-.flex-wrp_one{
- display: flex;
- flex-flow: row wrap; 
-align-content: space-around;
-}
-.flex-wrp_one view{
-  padding: 15px;
+.viewh1{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ margin-left: 160px;
 }
 .btn{
-   width: 70px;
-   height: 50px;
-   justify-content: center;
-   background:gray;
-   display: flex;
-   color: aliceblue;
-   margin-top: -30px;
-   margin-right:20px;
+  background-color:#D9D9D9;
+  color:white;
 }
-.flex-wrp_one{
- display: flex;
- flex-flow: row wrap; 
-align-content: space-around;
+.hover{
+  background-color:#FEA152;
 }
-.flex-wrp_one view{
-  padding: 15px;
+.link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 654rpx; 
+    margin: 0 auto;
+    left: 5rpx;
+}  
+.link_child {
+  width: 20%;
+  margin: 40px;
+}
+.background-image{
+  position: absolute;
+  width: 35%;
+  height: 20%;
+  margin-left: -20px;
+}
+.btnImg1{
+  position: relative;
+  margin-top: 25px;
+  margin-left: 25px;
+}
+.btnImg2{
+   position: relative;
+   margin-left: 25px;
+   color: #FEA152;
+   width: 100%;
+}
+.btnImg3{
+   position: relative;
+   margin-left: 15px;
+   color: #FEA152;
+   width: 100%;
 }
 
 

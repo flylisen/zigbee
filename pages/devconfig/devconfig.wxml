@@ -1,265 +1,320 @@
 <!--pages/devconfig/devconfig.wxml-->
- <view class='viewh1'>
-     <h1>全部设备</h1>
-      <button class='btn' bindtap='bindAdd'>设备入网</button> 
- </view>
-      <view class='flex-wrp_one'>
-   <block  wx:for="{{sortedDevs}}" wx:for-item="item">
-       <view wx:if="{{item.diDeviceid==2}}" class='view' data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-               <image src='../../images/devctr/kaiguanguan2.png' wx:if="{{item.diOnoffStatu > 0}}" style="width:70px;height:70px;"></image>
-              <image src='../../images/devctr/kaiguanguan.png' wx:else style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:else>
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                <text wx:if="{{item.diShowName==''}}">开关</text>
-                <text wx:else>{{item.diShowName}}</text>
-       </view>
-       <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-         <image src='../../images/devctr/shuijinchuanganqiicon.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <text wx:if="{{item.diShowName==''}}">水浸传感器</text>
-                 <text wx:else>{{item.diShowName}}</text>
-         </view>
-           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-              <image src='../../images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diShowName==''}}">窗帘</view>
-                 <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-              <image src='../../images/devctr/chuanglian.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diShowName==''}}">浴帘</view>
-                 <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/jinjianniu.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">紧急按钮</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==277}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/anfangyaokongqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">安防遥控器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-        <view wx:if="{{item.diDeviceid==528}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-                  <image src='../../images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.diOnoffStatu>0}}" data-deng="{{item}}"></image>
-  <image src='../../images/devctr/deng.png' wx:else style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">RGBW灯</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/rentichuanganqiicon.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">人体传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==32769}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/yiyanghuatanchuanganqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">一氧化碳传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==21}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/mencichuanganqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">门磁传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/wenshiduchuanganqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">温湿度传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/qingjingkaiguan.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">情景开关</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-         <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/hongwaiyaokongqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">红外宝</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-         <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==40}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/yanwubaojingqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">烟雾传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">温控器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/shuibiao.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">水表</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/mensuo.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">门锁</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-            <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/shengguangbaojingqi.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">声光报警器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==43}}"  data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/keranqiti.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">可燃气体传感器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/mianban.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">新风面板</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/chazuo.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">开关/插座</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-         <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/zhongjiqizhongwen.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">PA中继器</view>
-                <view wx:else>{{item.diShowName}}</view>
-         </view>
-          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}"  data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
-          <image src='../../images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.diOnlineStatu==0}}">
-                 <image src='../../images/devctr/yuandian.png' style="width:30px;height:30px;"></image>
-                 </view>
-                 <view wx:if="{{item.diOnlineStatu>0}}">
-                 <image src='../../images/devctr/yuandian2.png' style="width:30px;height:30px;"></image>
-                 </view>
-                  <view wx:if="{{item.diShowName==''}}">色温（CCT）灯</view>
-                <view wx:else>{{item.diShowName}}</view>
-           </view> 
-    </block>
+  <view class='viewh1'>
+     <text>全部设备</text>
+     <button class='btn' hover-class="hover" bindtap='bindAdd'>设备入网</button>
 </view>
-  
+<view class="container">
+  <view class="weui-grids">
+    <view class="weui-grid" wx:for="{{sortedDevs}}" wx:key="name">
+      <!--开关-->
+      <view wx:if="{{item.diDeviceid==2}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+        <view class="weui-grid__icon">
+          <image src="{{index==ins?'/images/devctr/switchdj.png':'/images/devctr/switchwdj.png'}}" mode="scaleToFill" />
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{index==ins?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+        <text class="weui-grid__label" style="{{index==ins?'color: #FEA152':''}}">在线</text>
+          </view>
+      <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{index==ins?'color: #FEA152':''}}">开关</text>
+          <text class="weui-grid__label" wx:else style="{{index==ins?'color: #FEA152':''}}">{{item.diShowName}}</text>
+      </view>
+       <!--灯-->
+        <view wx:if="{{item.diDeviceid==528}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon" bindtap="xia" id="{{index}}" data-deng="{{item}}">
+          <image  src="{{index==ins?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{index==ins?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{index==ins?'color: #FEA152':''}}">在线</text>
+          </view>
+           <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:if="{{item.diShowName==''}}" style="{{index==ins?'color: #FEA152':''}}">灯</text>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:else style="{{index==ins?'color: #FEA152':''}}">{{item.diShowName}}</text>
+       </view>
+        <!--窗帘-->
+        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+          <image src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">窗帘</text>
+          <text class="weui-grid__label" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+        <!--色温灯-->
+         <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon" bindtap="sewendeng" id="{{index}}" data-sewendeng="{{item}}">
+          <image src="{{index==ins?'/images/devctr/swdj.png':'/images/devctr/swwdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{index==ins?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{index==ins?'color: #FEA152':''}}">在线</text>
+          </view>
+           <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:if="{{item.diShowName==''}}" style="{{index==ins?'color: #FEA152':''}}">色温灯</text>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:else style="{{index==ins?'color: #FEA152':''}}">{{item.diShowName}}</text>
+       </view>
+       <!--空调-->
+        <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+          <image src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
+         </view>
+         <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">空调</text>
+          <text class="weui-grid__label" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+        <!--人体传感器-->
+         <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+         <image src="{{ins==index?'/images/devctr/bodydj.png':'/images/devctr/bodywdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">人体传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--水浸传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sqdj.png':'/images/devctr/sqwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">水浸传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--紧急按钮-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/jjdj.png':'/images/devctr/jjwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">紧急按钮</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--安防遥控器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==277}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/afyqkdj.png':'/images/devctr/afyqkwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">安防遥控器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--一氧化碳传感器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==32769}}"id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/yhtdj.png':'/images/devctr/yhtwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">一氧化碳传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--门磁传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==21}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/mckgdj.png':'/images/devctr/mckgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">门磁传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+        <!--温湿度传感器-->
+        <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/wsddj.png':'/images/devctr/wsdwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">温湿度传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--情景开关--->
+          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/qjkgdj.png':'/images/devctr/qjkgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">情景开关</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--红外宝-->
+        <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/hwbdj.png':'/images/devctr/hwbwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">红外宝</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--烟雾传感器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==40}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/ywdj.png':'/images/devctr/ywwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">烟雾传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--水表-->
+         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sbdj.png':'/images/devctr/sbwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">水表</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--门锁-->
+        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/msodj.png':'/images/devctr/msowdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">门锁</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--声光报警器-->
+          <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}"id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sgdj.png':'/images/devctr/sgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">声光报警器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--可燃气体传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==43}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/krdj.png':'/images/devctr/krwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">可燃气体传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--新风面板-->
+          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/xfdj.png':'/images/devctr/xfwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">新风面板</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--开关/插座-->
+        <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/czdj.png':'/images/devctr/czwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">开关/插座</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--PA中继器-->
+          <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}"id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'>
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">PA中继器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+    </view>
+  </view>
+</view>
+

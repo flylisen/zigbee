@@ -1,6 +1,9 @@
 <!--pages/devctr/devctr.wxml-->
-  <view class='viewh1'>
-     <h1>全部设备</h1>
+<view class='viewh1'>
+     <text>全部设备</text>
+    <view wx:if="{{rommid==''}}">
+     <button class='btn' hover-class="hover" bindtap='pz'>配置</button>
+     </view>
 </view>
 <view class="container">
   <view class="weui-grids">
@@ -14,16 +17,16 @@
          <text class="weui-grid__label" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">离线</text>
           </view>
           <view wx:else>
-          <text class="weui-grid__label" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">在线</text>
+        <text class="weui-grid__label" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">在线</text>
           </view>
-           <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">开关</text>
+      <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">开关</text>
           <text class="weui-grid__label" wx:else style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">{{item.diShowName}}</text>
-          <switch bindchange='changTap' class="weui-grid__label" checked="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?true:fales}}" id="{{index}}" data-tp="{{item}}" disabled='{{item.diOnlineStatu==0?true:fales}}'>开关</switch>
+          <switch bindchange='changTap' class="weui-grid__label" checked="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?true:fales}}" id="{{index}}" data-tp="{{item}}" disabled='{{item.diOnlineStatu==0?true:fales}}'></switch>
       </view>
        <!--灯-->
         <view wx:if="{{item.diDeviceid==528}}">
          <view class="weui-grid__icon" bindtap="xia" id="{{index}}" data-deng="{{item}}">
-          <image src="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
+          <image  src="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">离线</text>
@@ -33,12 +36,12 @@
           </view>
            <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:if="{{item.diShowName==''}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">灯</text>
           <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:else style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">{{item.diShowName}}</text>
-          <switch bindchange='changTap' class="weui-grid__label" checked="{{item.diOnoffStatu>=1?true:fales}}" id="{{index}}" data-tp="{{item}}" disabled='{{item.diOnlineStatu==0?true:fales}}'>开关</switch>
+          <switch bindchange='changTap' class="weui-grid__label" checked="{{item.diOnoffStatu>=1?true:fales}}" id="{{index}}" data-tp="{{item}}" disabled='{{item.diOnlineStatu==0?true:fales}}'></switch>
        </view>
-       <!--空调-->
-        <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" bindtap='kongtiao' data-kongtiao="{{item}}">
+        <!--窗帘-->
+        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian'>
          <view class="weui-grid__icon">
-          <image src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
+          <image src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
@@ -46,15 +49,30 @@
           <view wx:else>
           <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
           </view>
-          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">空调</text>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">窗帘</text>
           <text class="weui-grid__label" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
          </view>
-         <!--窗帘-->
-        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian'>
-         <view class="weui-grid__icon">
-          <image src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
+        <!--色温灯-->
+         <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
+         <view class="weui-grid__icon" bindtap="sewendeng" id="{{index}}" data-sewendeng="{{item}}">
+          <image src="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'/images/devctr/swdj.png':'/images/devctr/swwdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">在线</text>
+          </view>
+           <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:if="{{item.diShowName==''}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">色温灯</text>
+          <text class="weui-grid__label" bindtap="xia" id="{{index}}" data-deng="{{item}}" wx:else style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">{{item.diShowName}}</text>
+          <switch bindchange='changTap' class="weui-grid__label" checked="{{item.diOnoffStatu>=1?true:fales}}" id="{{index}}" data-tp="{{item}}" disabled='{{item.diOnlineStatu==0?true:fales}}'></switch>
+       </view>
+       <!--空调-->
+        <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" bindtap='kongtiao' data-kongtiao="{{item}}">
+         <view class="weui-grid__icon">
+          <image src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
+         </view>
+         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
           </view>
           <view wx:else>
@@ -64,9 +82,9 @@
           <text class="weui-grid__label" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
          </view>
         <!--人体传感器-->
-         <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}">
+         <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}" id="{{index}}" bindtap='device' data-device="{{item}}">
          <view class="weui-grid__icon">
-          <image src="{{ins==index?'/images/devctr/bodydj.png':'/images/devctr/bodywdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        <image src="{{ins==index?'/images/devctr/bodydj.png':'/images/devctr/bodywdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
@@ -75,6 +93,230 @@
           <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
           </view>
           <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">人体传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--水浸传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==42}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sqdj.png':'/images/devctr/sqwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">水浸传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--紧急按钮-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/jjdj.png':'/images/devctr/jjwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">紧急按钮</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--安防遥控器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==277}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/afyqkdj.png':'/images/devctr/afyqkwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">安防遥控器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--一氧化碳传感器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==32769}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/yhtdj.png':'/images/devctr/yhtwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">一氧化碳传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--门磁传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==21}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/mckgdj.png':'/images/devctr/mckgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">门磁传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+        <!--温湿度传感器-->
+        <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/wsddj.png':'/images/devctr/wsdwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">温湿度传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--情景开关--->
+          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/qjkgdj.png':'/images/devctr/qjkgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">情景开关</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--红外宝-->
+        <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/hwbdj.png':'/images/devctr/hwbwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">红外宝</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--烟雾传感器-->
+          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==40}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/ywdj.png':'/images/devctr/ywwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">烟雾传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--水表-->
+         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sbdj.png':'/images/devctr/sbwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">水表</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--门锁-->
+        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/msodj.png':'/images/devctr/msowdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">门锁</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--声光报警器-->
+          <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/sgdj.png':'/images/devctr/sgwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">声光报警器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--可燃气体传感器-->
+        <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==43}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/krdj.png':'/images/devctr/krwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">可燃气体传感器</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--新风面板-->
+          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/xfdj.png':'/images/devctr/xfwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">新风面板</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--开关/插座-->
+        <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/czdj.png':'/images/devctr/czwdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">开关/插座</text>
+          <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+         </view>
+         <!--PA中继器-->
+          <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" id="{{index}}" bindtap='device' data-device="{{item}}">
+         <view class="weui-grid__icon">
+        <image src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill" id="{{index}}" bindtap='device' data-device="{{item}}"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+          <text class="weui-grid__label" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">PA中继器</text>
           <text class="weui-grid__label" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
          </view>
     </view>

@@ -21,6 +21,7 @@ Page({
     showModal: false,
     diDeviceid:'',
     diZonetype:'',
+    showView: true,
     arry:[],
     items: [
       { name: 0, value: '不可见'},
@@ -49,33 +50,106 @@ Page({
     CCT:'',
     index:'',
     airTempArray:[],
+    kgcd:'',
+    ins:-1,
+    ins2:-1,
+    ins3:-1,
+    ins4:-1,
+    ins5:-1,
   },
-  //温度
-  temperature: function (e) {
-    this.setData({
-      temperature: e.detail.value
-    })
+  kindToggle: function (e) {
+    var ins = e.currentTarget.id;//获得下标
+    if(this.data.ins==ins){
+      this.setData({
+        ins:-1,
+      })  
+    }else{
+      this.setData({
+        ins: ins,
+      })
+    }
   },
-  //亮度
-  brightness:function(e){
+  kindToggle2: function (e) {
+    var ins2 = e.currentTarget.id;//获得下标
+    if (this.data.ins2 == ins2) {
+      this.setData({
+        ins2: -1,
+      })
+    } else {
+      this.setData({
+        ins2: ins2,
+      })
+    }
+  },
+  kindToggle3: function (e) {
+    var ins3 = e.currentTarget.id;//获得下标
+    if (this.data.ins3 == ins3) {
+      this.setData({
+        ins3: -1,
+      })
+    } else {
+      this.setData({
+        ins3: ins3,
+      })
+    }
+  },
+  kindToggle4: function (e) {
+    var ins4 = e.currentTarget.id;//获得下标
+    if (this.data.ins4 == ins4) {
+      this.setData({
+        ins4: -1,
+      })
+    } else {
+      this.setData({
+        ins4: ins4,
+      })
+    }
+  },
+  kindToggle5: function (e) {
+    var ins5 = e.currentTarget.id;//获得下标
+    if (this.data.ins5 == ins5) {
+      this.setData({
+        ins5: -1,
+      })
+     } else {
+      this.setData({
+        ins5: ins5,
+      })
+    }
+  },
+  //窗帘开关程度
+  kgcd:function(e){
+     var val=e.detail.value;
+     this.setData({
+       kgcd:val
+     })
+  },
+  //灯亮度
+  ld:function(e){
     this.setData({
       brightness: e.detail.value
     })
   },
-  //色调
-  hue: function (e) {
+  //灯色调
+  sd:function(e){
     this.setData({
       hue: e.detail.value
     })
   },
   //饱和度
-  saturation: function (e) {
+  bhd:function(e){
     this.setData({
       saturation: e.detail.value
     })
   },
+  //温度
+  wd: function (e) {
+    this.setData({
+      temperature: e.detail.value
+    })
+  },
   //灯温
-  CCT: function (e) {
+  dengwd: function (e) {
     this.setData({
       CCT: e.detail.value
     })
@@ -94,16 +168,6 @@ Page({
     console.log('风速：', e.detail.value)
     this.setData({
       centralairConditionWindMode: e.detail.value
-    })
-  },
-  //关闭
-  go: function () {
-    var pages = getCurrentPages(); // 当前页面 
-    var beforePage = pages[pages.length - 2]; // 前一个页面  
-    wx.navigateBack({
-      success: function () {
-        beforePage.onLoad(); // 执行前一个页面的方法     
-      }
     })
   },
   /**
@@ -181,25 +245,6 @@ Page({
     this.data.sceneMemberArray = arr;
 
   },
-  //开关事件
-  kaiguanguan: function (event) {
-     var that=this;
-     tp = event.currentTarget.dataset['tp'];
-     console.log(tp)
-     temSet = '';
-      if (tp.diOnoffStatu >= 1) {
-        temSet = 0;
-      } else {
-        temSet = 1;
-      }
-      var index = event.currentTarget.id;//获得下标
-      var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
-      this.setData({
-        [tmp]: temSet,
-      })
-      console.log(temSet);
-      that.chufa(tp);
-  },
   /**
     * 空调弹窗
     */
@@ -236,97 +281,17 @@ Page({
       index:3
     })
   },
-  /**
-   * 隐藏模态对话框
-   */
-  hideModal: function () {
-    this.setData({
-      showModal: false
-    });
-  },
-  /**
-   * 对话框取消按钮点击事件
-   */
-  onCancel: function () {
-    this.hideModal();
-  },
-  /**
-   * 对话框确认按钮点击事件
-   */
-  onConfirm: function () {
-    console.log(tp);
-    var that=this;
-    console.log(this.data.temperature);//温度
-    console.log(this.data.centralairConditionMode);//模式
-    console.log(this.data.centralairConditionWindMode);//风速
-    console.log(this.data.brightness);//亮度
-    console.log(this.data.hue);//色调
-    console.log(this.data.saturation);//饱和度
-    console.log(this.data.CCT);//灯温
-    console.log(this.data.index);//下标
-    if (this.data.index==1){//空调
-      if (this.data.temperature == '' && this.data.centralairConditionMode == '' && this.data.centralairConditionWindMode == '') {
-        wx.showModal({
-          title: '提示',
-          content: '请选择你要的空调控制'
-        });
-      }else{
-        this.hideModal();
-      }
-    } else if (this.data.index == 2){
-      if (this.data.brightness == '' && this.data.hue == '' && this.data.saturation == '') {
-        wx.showModal({
-          title: '提示',
-          content: '请选择你要的彩灯控制'
-        })
-        }else{
-        this.hideModal();
-        }
-    } else if (this.data.index == 3){
-      if (this.data.brightness == '' && this.data.hue == '' && this.data.saturation == ''){
-        wx.showModal({
-          title: '提示',
-          content: '请选择你要的色温控制'
-        }) 
-      }else{
-        this.hideModal();
-      }
-    }
-  },
-  //窗帘开关
-  chuangliand: function (event) {
+  //开关事件
+  changTap: function (e) {
     var that = this;
-    tp = event.currentTarget.dataset['chuangliand'];
+    var tp = e.currentTarget.dataset['tp'];
     console.log(tp)
     temSet = '';
-    if (tp.diOnoffStatu >= 1) {
-      temSet = 0;
-    } else {
+    if (e.detail.value == true) {
       temSet = 1;
+    } else {
+      temSet = 0;
     }
-    var index = event.currentTarget.id;//获得下标
-    var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
-    this.setData({
-      [tmp]: temSet,
-    })
-    console.log(temSet);
-    that.chufa(tp);
-  },
-  //灯开关
-  deng: function (event) {
-     var that=this;
-    tp = event.currentTarget.dataset['dengs'];
-      temSet='';
-      if (tp.diOnoffStatu >= 1) {
-        temSet = 0;
-      } else {
-        temSet = 1;
-      }
-      var index = event.currentTarget.id;//获得下标
-      var tmp = 'sortedDevs[' + index + '].diOnoffStatu';
-      this.setData({
-        [tmp]: temSet
-      })
     console.log(temSet);
     that.chufa(tp);
   },
@@ -335,7 +300,7 @@ Page({
     for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
       if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
         if (tp.diDeviceid == 2) {//开关
-          that.data.sceneMemberArray[i].status = temSet;
+            that.data.sceneMemberArray[i].status = temSet;
         }
         if (tp.diDeviceid ==514){//窗帘
           that.data.sceneMemberArray[i].status = temSet;
@@ -354,9 +319,17 @@ Page({
       var o = {};
       o.uuid = Array[i].diUuid;
       o.deviceid = Array[i].diDeviceid;
-      o.status = Array[i].diOnoffStatu;
+      if (typeof (Array[i].status) == "undefined"){
+        o.status=0;
+      }else{
+        o.status = Array[i].status;
+      }
       if (Array[i].diDeviceid == 514){
-        o.brightness =10;//窗帘的开关程度
+        if (this.data.kgcd==''){
+          o.brightness=0
+        }else{
+          o.brightness = this.data.kgcd;//窗帘的开关程度
+        }
       }
       var type1 = {};
       var type2 = {};
@@ -424,7 +397,6 @@ Page({
           }
       }
       if (Array[i].diDeviceid == 769 && Array[i].diZonetype == 1) {
-        console.log(this.data.airTempArray);
          var type = {};
         if (this.data.airTempArray.length==0){
           var type={};
@@ -444,9 +416,13 @@ Page({
       }
       console.log(this.data.realsceneMemberArray);
     }
+    console.log(this.data.realsceneMemberArray);
     var that = this
     var name = e.detail.value.areaname;
-    if (name != '' && Array != '' && sceneVisible!=''){
+    var showname = e.detail.value.showName;
+    console.log(name);
+    console.log(showname);
+    if (name != '' && showname!='' && Array != '' && sceneVisible!=''){
       let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act: "setScenes",
@@ -458,12 +434,12 @@ Page({
         ver: "2.0",
         scenes: [{
           sceneName: name,
+          showName: showname,
           sceneVisible: sceneVisible,
           sceneMembers: this.data.realsceneMemberArray
         }]
       };
       app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
         if (res.data.code==1) {
           var pages = getCurrentPages(); // 当前页面 
           var beforePage = pages[pages.length - 2]; // 前一个页面  

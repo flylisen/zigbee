@@ -60,8 +60,6 @@ Page({
   //修改设备名称
   submit: function (e) {
     var that = this;
-    console.log(e.detail.value.showname);
-    console.log(e.detail.value.name);  
     var name = e.detail.value.name;
     var showname = e.detail.value.showname;
     if (showname == '' || name=='') {
@@ -111,6 +109,8 @@ Page({
       content: '确定要删除吗？',
       success: function (sm) {
         if (sm.confirm) {
+          console.log(kaiguanguans.diUuid);
+          console.log(kaiguanguans.diIeee);
           let url = app.globalData.URL + 'delDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
           let data = {
             act:"deletedev",

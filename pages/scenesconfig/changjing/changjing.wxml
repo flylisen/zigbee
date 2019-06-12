@@ -1,65 +1,72 @@
-<!--pages/scenesconfig/changjing/changjing.wxml-->
- <view class='view1'>
-    <view wx:if="{{aiNames==''}}">
-               <text>场景设备</text>
+<view class='imagesize'>
+    <image src='/images/changjing/cj.png'  style='width:20%; height:20%' mode='widthFix'></image>
+</view>
+<view class='imagesize'>
+    <view wx:if="{{siShowName==''}}">
+           <text>场景设备</text>
            </view>
            <view wx:else>
-              <text>{{aiNames}}场景</text>
-           </view>       
-  </view>
-  <view class='view2'>
-  <view>修改名称</view> 
-  <form bindsubmit='aiNames'>
-      <text>界面名称:</text>
-      <input name="aiNames" style=' border: 1px solid gray;' maxlength='7'></input>
-       <text>程序名称:</text>
-      <input name="sceneName" style=' border: 1px solid gray;' maxlength='7'></input>
-      <button form-type='submit'>确定</button>
+           <text>{{siShowName}}场景</text>
+    </view>
+</view>
+<form bindsubmit='aiNames'>
+     <text class='text'>展示名称</text>
+     <input type="text" class="input" name="sceneShowName" maxlength='10'></input>
+      <text class='text'>内存名称</text>
+     <input type="text" class="input"  name="sceneName" maxlength='10'></input>
+     <button class='btn' form-type='submit'>确定</button>
 </form>
- </view> 
-    <form bindsubmit='submit'>
-  <view class='button1'>
-        <view><button class='button2' form-type='submit'>删除设备</button></view>
-        <view><button  bindtap='delete'>删除场景</button></view>
+<view class='gl'>
+<text class='text'>管理设备</text>
+</view>
+<form bindsubmit='submit'>
+ <view class="link">
+ <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
+    <view class="link_child" wx:if="{{item.deviceid==2}}">
+         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
+         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/switchwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" class='zt'>开关</view>
+           <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
-   <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
-   <view class="con-wrapper">
-   <image src="{{item.isSelect?choseImg:unchoseImg}}" class="se-img" bindtap="chooseTap"  data-index="{{index}}"></image>
-       <view wx:if="{{item.deviceid==2}}">
-               <image src='/images/devctr/kaiguanguan2.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
-              <image src='/images/devctr/kaiguanguan.png' wx:else style="width:70px;height:70px;"></image>
-                <view wx:if="{{item.deviceName==''}}">开关</view>
-                <view wx:else>{{item.deviceName}}</view>
-      </view>
-           <view wx:if="{{item.deviceid==514&&item.zonetype==2}}">
-               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
-              <image src='/images/chuanglian/chuanglianguan.png' wx:else style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.deviceName==''}}">窗帘</view>
-                 <view wx:else>{{item.deviceName}}</view>
-         </view>
-         <view wx:if="{{item.deviceid==514&&item.zonetype==1}}" data-deviceuid="{{item}}" >
-               <image src='/images/chuanglian/chuangliankai.png' wx:if="{{item.status> 0}}" style="width:70px;height:70px;"></image>
-              <image src='/images/chuanglian/chuanglianguan.png' wx:else style="width:70px;height:70px;"></image>
-                 <view wx:if="{{item.deviceName==''}}">浴帘</view>
-                 <view wx:else>{{item.deviceName}}</view>
-         </view>
-          <view wx:if="{{item.deviceid==528}}" data-deng="{{item}}" >
-                    <image src='/images/devctr/deng2.png' style="width:70px;height:70px;" wx:if="{{item.status>0}}" data-deng="{{item}}" id="{{index}}" bindtap='deng'></image>
-  <image src='/images/devctr/deng.png' wx:else  bindtap='deng' style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.deviceName==''}}">RGBW灯</view>
-                <view wx:else>{{item.deviceName}}</view>
-         </view>
-          <view wx:if="{{item.deviceid==769&&item.zonetype==1}}"  data-kongtiao="{{item}}">
-          <image src='/images/devctr/wenkongqi.png' style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.deviceName==''}}">温控器</view>
-                <view wx:else>{{item.deviceName}}</view>
-         </view>
-          <view wx:if="{{item.deviceid==544&&item.zonetype==255}}" data-sewendeng="{{item}}">
-          <image src='/images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
-                  <view wx:if="{{item.deviceName==''}}">色温（CCT）灯</view>
-                <view wx:else>{{item.deviceName}}</view>
-           </view>
-         </view>
-    </block>    
-    </form> 
+   <view class="link_child" wx:if="{{item.deviceid==514&&item.zonetype==2}}">
+         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
+         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/clwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" class='zt'>窗帘</view>
+           <view wx:else class='zt'>{{item.deviceName}}</view>
+   </view>
+      <view class="link_child" wx:if="{{item.deviceid==528}}">
+         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
+         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/dengwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" class='zt'>灯</view>
+           <view wx:else class='zt'>{{item.deviceName}}</view>
+   </view>
+    <view class="link_child" wx:if="{{item.deviceid==769&&item.zonetype==1}}">
+         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
+         <image src='/images/devctr/airdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/airwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" class='zt'>空调</view>
+           <view wx:else class='zt'>{{item.deviceName}}</view>
+   </view>
+   <view class="link_child" wx:if="{{item.deviceid==544&&item.zonetype==255}}">
+         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
+         <image src='/images/devctr/swdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/swwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" class='zt'>色温灯</view>
+           <view wx:else class='zt'>{{item.deviceName}}</view>
+   </view>
+</block>
+</view>
+<button class='button2' class='btn' form-type='submit'>删除设备</button>
+<button  bindtap='delete' class='btn2'>删除场景</button>
+</form>
 
+
+ 

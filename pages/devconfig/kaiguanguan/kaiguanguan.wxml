@@ -1,10 +1,36 @@
 <!--pages/devconfig/kaiguanguan/kaiguanguan.wxml-->
-  <view wx:if="{{diNames==''}}">
-                     <view wx:if="{{diDeviceid==2}}"><text>名称:开关</text></view>
-                     <view wx:elif="{{diDeviceid==1026&&diZonetype==42}}"><text>名称:水浸传感器</text></view>
-                     <view wx:elif="{{diDeviceid==514&&diZonetype==2}}"><text>名称:窗帘</text></view>
-                     <view wx:elif="{{diDeviceid==514&&diZonetype==1}}"><text>名称:浴帘</text></view>
-                     <view wx:elif="{{diDeviceid==1026&&diZonetype==44}}"><text>名称:紧急按钮</text></view>
+<view class='imagesize'>
+    <image src='../../../images/kaiguanguan/kg.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==2}}"></image>
+    <image src='../../../images/kaiguanguan/sq.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==42}}"></image>
+        <image src='../../../images/kaiguanguan/cl.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==2}}"></image>
+        <image src='../../../images/kaiguanguan/yl.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==1}}"></image>
+     <image src='../../../images/kaiguanguan/jj.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==44}}"></image>
+    <image src='../../../images/kaiguanguan/af.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==277}}"></image>
+    <image src='../../../images/kaiguanguan/cdeng.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==528}}"></image>
+    <image src='../../../images/kaiguanguan/rt.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==13}}"></image>
+      <image src='../../../images/kaiguanguan/yht.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==32769}}"></image>
+      <image src='../../../images/kaiguanguan/mc.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==21}}"></image>
+      <image src='../../../images/kaiguanguan/wsd.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==770&&diZonetype==0}}"></image>
+      <image src='../../../images/kaiguanguan/qj.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==4&&diZonetype==0}}"></image>
+       <image src='../../../images/kaiguanguan/hwb.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==353&&diZonetype==0}}"></image>
+        <image src='../../../images/kaiguanguan/ew.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==40}}"></image>
+        <image src='../../../images/kaiguanguan/kt.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==769&&diZonetype==1}}"></image>
+        <image src='../../../images/kaiguanguan/sb.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==83&&diZonetype==258}}"></image>
+        <image src='../../../images/kaiguanguan/ms.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==10&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/sg.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1027&&diZonetype==549}}"></image>
+        <image src='../../../images/kaiguanguan/klq.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==43}}"></image>
+        <image src='../../../images/kaiguanguan/xf.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==771&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/cz.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/pa.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
+          <image src='../../../images/kaiguanguan/sdeng.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==544&&diZonetype==255}}"></image>
+</view>
+<view class='imagesize'>
+    <view wx:if="{{diNames==''}}">
+                    <view wx:if="{{diDeviceid==2}}"><text>名称:开关</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==42}}"><text>名称:水浸传感器</text></view>
+                    <view wx:elif="{{diDeviceid==514&&diZonetype==2}}"><text>名称:窗帘</text></view>
+                    <view wx:elif="{{diDeviceid==514&&diZonetype==1}}"><text>名称:浴帘</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==44}}"><text>名称:紧急按钮</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==277}}"><text>名称:安防遥控器</text></view>
                     <view wx:elif="{{diDeviceid==528}}"><text>名称:RGBW灯</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==13}}"><text>名称:人体传感器</text></view>
@@ -18,69 +44,33 @@
                     <view wx:elif="{{diDeviceid==83&&diZonetype==258}}"><text>名称:水表</text></view>
                     <view wx:elif="{{diDeviceid==10&&diZonetype==255}}"><text>名称:门锁</text></view>
                     <view wx:elif="{{diDeviceid==1027&&diZonetype==549}}"><text>名称:声光报警器</text></view>
-                     <view wx:elif="{{diDeviceid==1026&&diZonetype==43}}"><text>名称:可燃气体传感器</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==43}}"><text>名称:可燃气体传感器</text></view>
                     <view wx:elif="{{diDeviceid==771&&diZonetype==255}}"><text>名称:新风面板</text></view>
-                    <view wx:elif="{{diDeviceid==9&&diZonetype==255}}"><text>名称:开关/插座</text></view>
-                     <view wx:elif="{{diDeviceid==337&&diZonetype==0}}"><text>名称:PA中继器</text></view>
-                     <view wx:elif="{{diDeviceid==544&&diZonetype==255}}"><text>名称:色温（CCT）灯</text></view>
+                    <view wx:elif="{{diDeviceid==9&&diZonetype==255}}"><text>名称:插座</text></view>
+                    <view wx:elif="{{diDeviceid==337&&diZonetype==0}}"><text>名称:PA中继器</text></view>
+                    <view wx:elif="{{diDeviceid==544&&diZonetype==255}}"><text>名称:色温灯</text></view>
            </view>
            <view wx:else>
-              <text>名称 :{{diNames}}</text>
+              <text>名称:{{diNames}}</text>
            </view>
+</view>
+<view class='imagesize'>
            <view wx:if="{{chuanglians>=0}}">
-                  <text>状态:正常</text>
+               <text>状态: </text>
+               <text style='color:#33ff33;'> 正常</text>
            </view>
             <view wx:else>
-            <text>状态 ：异常</text>         
+              <text>状态: </text>
+              <text style='color:red;'> 异常</text>         
            </view>
-            <view wx:for="{{points}}" wx:for-item="item">
-                     <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='0'}}">
-                          <text>门磁检测:关门</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='1'}}">
-                          <text>门磁检测:开门</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
-                          <text>人体红外检测:有人</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
-                          <text>人体红外检测:无人</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
-                          <text>烟雾检测:有泄露</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
-                          <text>烟雾检测:无泄露</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='0'}}">
-                          <text>防拆:未拆除</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='1'}}">
-                          <text>防拆:拆除</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='0'}}">
-                          <text>电池电量:电池电压正常</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='1'}}">
-                          <text>电池电量:电池电压低</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==203}}">
-                          <text>温度:{{item.spAttrValue/100}}</text>
-                     </view>
-                     <view wx:if="{{item.spAttrType==204}}">
-                          <text>湿度:{{item.spAttrValue/100}}%</text>
-                     </view>
-            </view>
-            <view>
-            <button bindtap='qingjingsc'>删除</button>
-           </view>         
-  <view class='view2'>
-  <view>修改信息</view> 
-  <form bindsubmit='submit'>
-       <text>展示名称:</text>
-       <input name="showname" style=' border: 1px solid gray;' maxlength='7'></input>
-        <text>内存名称:</text>
-       <input name="name" style=' border: 1px solid gray;' maxlength='7'></input>
-      <button form-type='submit'>确定</button>
-    </form>
- </view>
+</view>
+<view>
+    <form bindsubmit='submit'>
+     <text class='text'>展示名称</text>
+     <input type="text" class="input" name="showname"></input>
+      <text class='text'>内存名称</text>
+     <input type="text" class="input"  name="name"></input>
+      <button class='btn' form-type='submit'>确定</button>
+     </form>
+      <button bindtap='qingjingsc' class='btn2'>删除</button>
+</view>

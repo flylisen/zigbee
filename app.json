@@ -19,6 +19,7 @@
     "pages/scenesconfig/scenesadd/scenesadd",
     "pages/devctr/sewendeng/sewendeng",
     "pages/devctr/kaiguanguan/kaiguanguan",
+    "pages/devctr/chuanglian/chuanglian",
     "pages/areactr/areainfo/areainfo",
     "pages/scenesconfig/changjing/changjing"
       ],
@@ -41,19 +42,11 @@
         "text": "控制"
       },
       {
-        "pagePath": "pages/config/config",
-        "iconPath": "/images/配置_未点击状态@2x.png",
-        "selectedIconPath": "/images/配置_点击状态@2x.png",
-        "isSpecial":true,
-        "text": "配置"
-      },
-      {
         "pagePath": "pages/about/about",
         "iconPath": "/images/我的_未点击状态@2x.png",
         "selectedIconPath": "/images/我的_点击状态@2x.png",
         "text": "关于我"
       }
-
     ],
     "position": "bottom"
   },

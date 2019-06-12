@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    aiNames:'',
+    siShowName:'',
     sortedDevs:[],
     allSelect: false,
     choseImg: '/images/check-circle2.png',
@@ -31,8 +31,9 @@ Page({
     sign = app.globalData.sign;
     var changjings = decodeURIComponent(options.changjing);
     changjing = JSON.parse(changjings);
+    console.log(changjing);
     this.setData({
-      aiNames: changjing.siName
+      siShowName: changjing.siShowName
     })
     let url = app.globalData.URL + 'gerSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
@@ -74,6 +75,7 @@ Page({
         arr.push(infoArray[i]);
       }
     }
+    console.log(arr);
     this.setData({
       sortedDevs: infoArray,
       arr
@@ -184,9 +186,9 @@ Page({
   },
   //修改场景名称
   aiNames:function(e){
-    console.log(username);
-    console.log(pwd);
-    if (e.detail.value.aiNames==''&&e.detail.value.sceneName==''){
+    console.log(e.detail.value.sceneShowName);
+    console.log(e.detail.value.sceneName);
+    if (e.detail.value.sceneShowName == '' && e.detail.value.sceneName==''){
       wx.showModal({
         title: '提示',
         content: '请输入你要修改的名称'
@@ -201,16 +203,19 @@ Page({
         bindid: username,
         bindstr: pwd,
         ver: "2.0",
-        scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.aiNames }]
-
+        scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.sceneShowName }]
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        wx.redirectTo({
-          url: "../scenesconfig"
-        })
+        var pages = getCurrentPages(); // 当前页面 
+        var beforePage = pages[pages.length - 2]; // 前一个页面  
+        wx.navigateBack({
+          success: function () {
+            beforePage.onLoad(); // 执行前一个页面的方法     
+          }
+        });
       },
-        (err) => {
+        (err) => {  
           console.log(err.errMsg)
         }
       )

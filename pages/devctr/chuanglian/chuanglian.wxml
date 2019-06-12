@@ -1,17 +1,26 @@
-
- <h1>窗帘控制</h1>
-           <view wx:if="{{diNames==''}}">
-               <text>名称 :窗帘</text>
-           </view>
-           <view wx:else>
-              <text>名称 :{{diNames}}</text>
-           </view>
-           <view wx:if="{{chuanglians>0}}">
-                  <text>状态 :开</text>
-           </view>
-            <view wx:else>
-                  <text>状态 :关</text>
-           </view> 
-      <image src='/images/chuanglian/chuangliankai.png' wx:if="{{chuanglians>0}}" ></image>
-       <image src='/images/chuanglian/chuanglianguan.png' wx:else></image>
-       <button bindtap='chuangliang'>开关</button>    
+<view class='imagesize'>
+       <image src='/images/chuanglian/clk.png'style='width:70%; height:=70%' mode='widthFix' wx:if="{{diOnoffStatu>0}}" ></image>
+       <image src='/images/chuanglian/clg.png' style='width:70%; height:=70%' mode='widthFix' wx:else></image>
+</view>
+<view class="window_view">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H local" bindtap="chuangliank">
+         <view class='box'>
+            <image src='{{k}}'></image>
+            <text style="{{ktest==true?'color: #FEA152;':''}}">窗帘开</text>
+         </view>
+      </view>
+      <view id="img" class="scroll-view-item_H img" bindtap='chuangliantz'>
+         <view class='box'>
+            <image src='{{tz}}'></image>
+            <text style="{{tztest==true?'color: #FEA152;':''}}">停止</text>
+         </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H audio" bindtap="chuangliag">
+         <view class='box'>
+            <image src='{{g}}'></image>
+            <text style="{{gtext==true?'color: #FEA152;':''}}">窗帘关</text>
+         </view>
+      </view>
+   </scroll-view>
+</view>
