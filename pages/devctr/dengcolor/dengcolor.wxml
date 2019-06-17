@@ -3,6 +3,9 @@
   <image src='../../../images/devctr/dengdk.png' bindtap="gb" style='width:40%; height:40%'  mode='widthFix' wx:if="{{diOnoffStatu>0}}"></image>
   <image src='../../../images/devctr/dengwdk.png' bindtap="dk" style='width:40%; height:40%' mode='widthFix' wx:else></image>
 </view>
+<view class='imagesize'>
+        <text style="{{diOnoffStatu>0?'color: #FEA152':' color:rgb(133, 123, 123);'}}">开关</text>
+</view>
 <view class="section">
   <view>亮度</view>
   <slider show-value max='255' min="1" step="5" value="" bindchange="listenerSlider"></slider>
