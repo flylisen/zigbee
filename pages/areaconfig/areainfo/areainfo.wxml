@@ -25,16 +25,16 @@
 </view>
 <view class="link_child" wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}">
 <image src='/images/areactr/background.png' style='width:100%; height:100%;' mode='widthFix'></image>
-         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:10%; height:10%;' mode='widthFix'></image>
-         <image src='/images/devctr/clwdj.png' class='tp' wx:else style='width:10%; height:10%;' mode='widthFix'></image>
+         <image src='/images/chuanglian/clk.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:10%; height:10%;' mode='widthFix'></image>
+         <image src='/images/chuanglian/clg.png' class='tp' wx:else style='width:10%; height:10%;' mode='widthFix'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%;' mode='widthFix' data-index="{{index}}"></image>
               <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>浴帘</view>
               <view wx:else class='zt'>{{item.diShowName}}</view>
 </view>
 <view class="link_child" wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
 <image src='/images/areactr/background.png' style='width:100%; height:100%;' mode='widthFix'></image>
-         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:10%; height:10%;' mode='widthFix'></image>
-         <image src='/images/devctr/clwdj.png' class='tp' wx:else style='width:10%; height:10%;' mode='widthFix'></image>
+         <image src='/images/chuanglian/clk.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:10%; height:10%;' mode='widthFix'></image>
+         <image src='/images/chuanglian/clg.png' class='tp' wx:else style='width:10%; height:10%;' mode='widthFix'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%;' mode='widthFix' data-index="{{index}}"></image>
                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>窗帘</view>
                 <view wx:else class='zt'>{{item.diShowName}}</view>

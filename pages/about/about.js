@@ -4,6 +4,46 @@ var pwd;
 var rommid;
 Page({
   data: {
+    ins: -1,
+    ins2: -1,
+    ins3: -1,
+  },
+  kindToggle: function (e) {
+    var ins = e.currentTarget.id;//获得下标
+    console.log(ins);
+    if (this.data.ins == ins) {
+      this.setData({
+        ins: -1,
+      })
+    } else {
+      this.setData({
+        ins: ins,
+      })
+    }
+  },
+  kindToggle2: function (e) {
+    var ins2 = e.currentTarget.id;//获得下标
+    if (this.data.ins2 == ins2) {
+      this.setData({
+        ins2: -1,
+      })
+    } else {
+      this.setData({
+        ins2: ins2,
+      })
+    }
+  },
+  kindToggle3: function (e) {
+    var ins3 = e.currentTarget.id;//获得下标
+    if (this.data.ins3 == ins3) {
+      this.setData({
+        ins3: -1,
+      })
+    } else {
+      this.setData({
+        ins3: ins3,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

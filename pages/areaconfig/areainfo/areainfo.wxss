@@ -118,10 +118,12 @@ align-items:center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 654rpx; 
+    width: 100%; 
     margin: 0 auto;
     position: relative;
     left: 30rpx;
+  /* height: 555px; */
+  align-items: center;
 }  
 .link_child {
     width: 31%;
@@ -133,21 +135,21 @@ align-items:center;
 .tp{
    position: absolute;
    z-index: 1;
-   margin-left:-83px;
+   margin-left:-90px;
    margin-top:20px;
 }
 .tb{
    position: absolute;
    z-index: 1;
    margin-left:-48px;
-   margin-top:9px;
+   margin-top:24px;
 
 }
 .zt{
-   position: absolute;
+   position: relative;
    z-index: 1;
-  margin-left:34px;
+  margin-left:12px;
   font-size:17px;
-  margin-top:-46px;
+  margin-top:-45px;
   color:#999999; 
 }

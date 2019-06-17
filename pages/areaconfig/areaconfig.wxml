@@ -1,14 +1,15 @@
 <!--pages/areaconfig/areaconfig.wxml--> 
 <view class='viewh1'> 
      <h1>区域配置列表</h1>  
-     <button class='btn' bindtap='bindAdd'>新增</button> 
+     <button class='btn' hover-class="hover" bindtap='bindAdd'>新增</button> 
      </view>
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">
-       <view>
-               <image src='../../images/areactr/{{item.atImg}}' data-id="{{item}}"    bindtap='areainfo' style="width:70px;height:70px;"></image>
-                <view wx:if="{{item.aiName==''}}">区域</view>
-                <view wx:else>{{item.aiName}}</view>
+       <view class="info" data-id="{{item}}"    bindtap='areainfo'>
+       <image src='../../images/scenesctr/scenesettringdj.png' style='width:100%; height:100%;' mode='widthFix'></image>
+               <image  src='../../images/areactr/{{item.atImg}}' class='tp' style="width:28%;height:20%;" ></image>
+                <view class='areaname' wx:if="{{item.aiName==''}}">区域</view>
+                <view class='areaname' wx:else>{{item.aiName}}</view>
       </view>
     </block>
     </view> 
