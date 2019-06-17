@@ -23,8 +23,6 @@ Page({
     var that = this;
     username = app.globalData.username;
     pwd = app.globalData.pwd;
-    console.log(username);
-    console.log(pwd);
     timestamp = app.globalData.timestamp;
     token = app.globalData.token;
     sign = app.globalData.sign;
@@ -49,8 +47,6 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult);
-      app.name(diName, diShowName);
       that.setData({
         sortedDevs: sortResult
       }); 

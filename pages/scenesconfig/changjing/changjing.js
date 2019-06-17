@@ -6,6 +6,8 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var siName=[];
+var siShowName=[];
 Page({
 
   /**
@@ -198,40 +200,99 @@ Page({
   },
   //修改场景名称
   aiNames:function(e){
-    console.log(e.detail.value.sceneShowName);
-    console.log(e.detail.value.sceneName);
-    if (e.detail.value.sceneShowName == '' && e.detail.value.sceneName==''){
-      wx.showModal({
-        title: '提示',
-        content: '请输入你要修改的名称'
-      })
-    }else{
-      let url = app.globalData.URL + 'alterSceneName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act: "resetSceneName",
-        code: 606,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver: "2.0",
-        scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.sceneShowName }]
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-        var pages = getCurrentPages(); // 当前页面 
-        var beforePage = pages[pages.length - 2]; // 前一个页面  
-        wx.navigateBack({
-          success: function () {
-            beforePage.onLoad(); // 执行前一个页面的方法     
-          }
-        });
-      },
-        (err) => {  
-          console.log(err.errMsg)
+    var sceneName = e.detail.value.sceneName;
+    var sceneShowName = e.detail.value.sceneShowName;
+    console.log(sceneName);
+    console.log(sceneShowName);
+    let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      act: "getScenes",
+      code: 601,
+      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+      key: "bq6wqzasjwtkl0i21pi9fbeq4",
+      bindid: username,
+      bindstr: pwd,
+      option: 2,
+      ver: "2.0"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data.scenes)
+      var siName=[];
+      var siShowName=[];
+      for (var i in res.data.scenes){
+        siName.push(res.data.scenes[i].siName);
+        siShowName.push(res.data.scenes[i].siShowName);
+      }
+      for (var i = 0; i < siName.length; i++) {
+        if (siName[i] == "") {
+          siName.splice(i, 1);
+          i = i - 1;
         }
-      )
-    } 
+      }
+      for (var i = 0; i < siShowName.length; i++) {
+        if (siShowName[i] == "") {
+          siShowName.splice(i, 1);
+          i = i - 1;
+        }
+      }
+      var bool;
+      for (var j in siName) {
+        if (sceneName == siName[j]) {
+          bool = "fal1";
+        }
+      }
+      for (var k in siShowName) {
+        if (sceneShowName == siShowName[k]) {
+          bool = "fal2";
+        }
+      }
+      if (sceneName == '' || sceneShowName == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请输入你要修改的名称'
+        })
+      } else if (bool =="fal1") {
+        wx.showModal({
+          title: '提示',
+          content: '内存名称已经存在'
+        })
+      } else if (bool =="fal2") {
+        wx.showModal({
+          title: '提示',
+          content: '展示名称已经存在'
+        })
+      } else {
+        let url = app.globalData.URL + 'alterSceneName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "resetSceneName",
+          code: 606,
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          ver: "2.0",
+          scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.sceneShowName }]
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+          var pages = getCurrentPages(); // 当前页面 
+          var beforePage = pages[pages.length - 2]; // 前一个页面  
+          wx.navigateBack({
+            success: function () {
+              beforePage.onShow(); // 执行前一个页面的方法     
+            }
+          });
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      }
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    ) 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

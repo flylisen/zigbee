@@ -51,8 +51,6 @@ Page({
          var username = res.data.gwLoginName;
          var pwd = res.data.gwLoginPwd;
          app.user(username, pwd);
-         console.log(username);
-         console.log(pwd);
          if (username != '' && pwd != '') {  //客人
            let url = app.globalData.URL + 'login';
            let data = {

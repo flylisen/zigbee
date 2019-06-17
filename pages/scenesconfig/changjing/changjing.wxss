@@ -6,7 +6,7 @@ page{
  justify-content: center;     
 }
 .input{
-   background-color: #F5F5F5;
+   background-color:white;
    border-radius:10rpx; 
    margin: 10rpx auto;
    width: 300px;

@@ -6,6 +6,8 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+var diName=[];
+var diShowName=[];
 Page({
 
   /**
@@ -28,7 +30,6 @@ Page({
     sign = app.globalData.sign;
     var kaiguanguan = decodeURIComponent(options.kaiguanguan);
     kaiguanguans = JSON.parse(kaiguanguan);
-    //console.log(kaiguanguans);
     this.setData({
       diNames: kaiguanguans.diShowName,
       chuanglians: kaiguanguans.diOnlineStatu,
@@ -47,7 +48,6 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
-      console.log(res.data.points)
       that.setData({
         points: res.data.points
       });
@@ -61,13 +61,59 @@ Page({
   submit: function (e) {
     var that = this;
     var name = e.detail.value.name;//内存名称
-    var showname = e.detail.value.showname;//显示名称
-    if (showname == '' || name=='') {
-      wx.showModal({
-        title: '提示',
-        content: '请输入内存名或者展示名称'
-      })
-    }else {
+    var showname = e.detail.value.showname;//显示名称    
+    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      bindid: username,
+      bindstr: pwd
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+      var diName=[];
+      var diShowName=[];
+      for (var i in res.data.devs){
+        diName.push(res.data.devs[i].diName);
+        diShowName.push(res.data.devs[i].diShowName);
+      }
+      for (var i = 0; i < diName.length; i++) {
+        if (diName[i] =="") {
+          diName.splice(i, 1);
+          i = i - 1;
+        }
+      }
+      for (var i = 0; i < diShowName.length; i++) {
+        if (diShowName[i] == "") {
+          diShowName.splice(i, 1);
+          i = i - 1;
+        }
+      }
+      var bool;
+      for (var j in diName) {
+        if (name == diName[j]) {
+          bool = "fal1";
+        }
+      }
+      for (var k in diShowName) {
+        if (showname == diShowName[k]) {
+          bool = "fal2";
+        }
+      }
+      if (showname == '' || name == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请输入内存名或者展示名称'
+        })
+      } else if (bool =="fal1"){
+        wx.showModal({
+          title: '提示',
+          content: '内存名称已经存在'
+        })
+      }else if(bool=="fal2"){
+        wx.showModal({
+          title: '提示',
+          content: '展示名称已经存在'
+        })
+      }else{
         let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
         let data = {
           act: "alterdevname",
@@ -90,7 +136,7 @@ Page({
             var beforePage = pages[pages.length - 2]; // 前一个页面  
             wx.navigateBack({
               success: function () {
-                beforePage.onLoad(); // 执行前一个页面的方法     
+                beforePage.onShow(); // 执行前一个页面的方法     
               }
             });
           }
@@ -99,7 +145,12 @@ Page({
             console.log(err.errMsg)
           }
         )
-       }
+      }
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   //删除设备
   qingjingsc: function () {
