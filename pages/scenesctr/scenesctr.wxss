@@ -29,12 +29,17 @@
 .background-image{
   position: absolute;
   width: 35%;
-  height: 20%;
+  height: 24%;
   margin-left: -20px;
+}
+.btnImg{
+  position: relative;
+  margin-top: 25px;
+  margin-left: 25px;
 }
 .btnImg1{
   position: relative;
-  margin-top: 25px;
+  margin-top:40px;
   margin-left: 25px;
 }
 .btnImg2{

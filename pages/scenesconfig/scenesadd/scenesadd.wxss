@@ -119,6 +119,10 @@ page{
 .kind-list-img {
   width: 60rpx;
   height: 60rpx;
+  position: absolute;
+  margin-left:300px;
+  margin-top:15px;
+
 }
 .kind-list-item-hd {
   padding: 30rpx;

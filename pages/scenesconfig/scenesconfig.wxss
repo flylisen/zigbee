@@ -1,13 +1,18 @@
 /* pages/scenesconfig/scenesconfig.wxss */
-.viewh1{
- display:flex;
- align-items:center;
- justify-content:center;
- margin-left: 160px;
+view h1{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 .btn{
-  background-color:#D9D9D9;
-  color:white;
+    width: 70px;
+   height: 50px;
+   justify-content: center;
+   background:gray;
+   display: flex;
+   color: aliceblue;
+   margin-top: -30px;
+   margin-right:20px;
 }
 .hover{
   background-color:#FEA152;
@@ -27,12 +32,17 @@
 .background-image{
   position: absolute;
   width: 35%;
-  height: 20%;
+  height: 24%;
   margin-left: -20px;
+}
+.btnImg{
+  position: relative;
+  margin-top: 25px;
+  margin-left: 25px;
 }
 .btnImg1{
   position: relative;
-  margin-top: 25px;
+  margin-top:40px;
   margin-left: 25px;
 }
 .btnImg2{

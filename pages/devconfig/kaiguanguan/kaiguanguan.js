@@ -60,46 +60,46 @@ Page({
   //修改设备名称
   submit: function (e) {
     var that = this;
-    var name = e.detail.value.name;
-    var showname = e.detail.value.showname;
+    var name = e.detail.value.name;//内存名称
+    var showname = e.detail.value.showname;//显示名称
     if (showname == '' || name=='') {
       wx.showModal({
         title: '提示',
         content: '请输入内存名或者展示名称'
       })
     }else {
-      let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act:"alterdevname",
-        code:202,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        devs: [{ uuid: kaiguanguans.diUuid, devShowName:showname, value:name}],
-        ver:"2.0"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-        if (res.data.code==1){
-          wx.showToast({
-            title: '修改成功',
-            duration: 2000
-          });
-          var pages = getCurrentPages(); // 当前页面 
-          var beforePage = pages[pages.length - 2]; // 前一个页面  
-          wx.navigateBack({
-            success: function () {
-              beforePage.onShow(); // 执行前一个页面的方法     
-            }
-          });
-        } 
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    }
+        let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "alterdevname",
+          code: 202,
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          devs: [{ uuid: kaiguanguans.diUuid, devShowName: showname, value: name }],
+          ver: "2.0"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+          if (res.data.code == 1) {
+            wx.showToast({
+              title: '修改成功',
+              duration: 2000
+            });
+            var pages = getCurrentPages(); // 当前页面 
+            var beforePage = pages[pages.length - 2]; // 前一个页面  
+            wx.navigateBack({
+              success: function () {
+                beforePage.onLoad(); // 执行前一个页面的方法     
+              }
+            });
+          }
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+       }
   },
   //删除设备
   qingjingsc: function () {
@@ -168,14 +168,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

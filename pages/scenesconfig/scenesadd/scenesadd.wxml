@@ -10,7 +10,7 @@
       <radio-group class="radio-group" bindchange="radioChange">
         <label class="radio" wx:for="{{items}}">
         <radio value="{{item.name}}" checked="{{item.checked}}" />
-         {{item.value}}
+            {{item.value}}
         </label>
         </radio-group>
      <text class='text'>添加设备</text>
@@ -18,12 +18,12 @@
   <view class="index-bd">
     <view class="kind-list">
       <block wx:for-items="{{sortedDevs}}"  wx:key="{{index}}">
+       <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
         <!--开关-->
         <view class="kind-list-item">
           <view wx:if="{{item.diDeviceid==2}}" id="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">开关</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
-            <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
           </view>
           <view class="kind-list-item-bd {{index==ins? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{index==ins? 'navigator-box-show': ''}}">
@@ -39,7 +39,6 @@
           <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle2">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">窗帘</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
-            <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
           </view>
           <view class="kind-list-item-bd {{index==ins2? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{index==ins2? 'navigator-box-show': ''}}">
@@ -59,7 +58,6 @@
           <view wx:if="{{item.diDeviceid==528}}" id="{{index}}" class="kind-list-item-hd {{index==ins3? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle3">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
-            <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
           </view>
           <view class="kind-list-item-bd {{index==ins3? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{index==ins3? 'navigator-box-show': ''}}">
@@ -87,7 +85,6 @@
           <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle4">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">空调</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
-            <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
           </view>
           <view class="kind-list-item-bd {{index==ins4? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{index==ins4? 'navigator-box-show': ''}}">
@@ -119,7 +116,6 @@
           <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" id="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle5">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
-            <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
           </view>
           <view class="kind-list-item-bd {{index==ins5? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{index==ins5? 'navigator-box-show': ''}}">

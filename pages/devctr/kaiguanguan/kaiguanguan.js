@@ -57,91 +57,6 @@ Page({
       }
     )
   },
-  //修改设备名称
-  submit: function (e) {
-    var that = this;
-    if (e.detail.value.username == '') {
-      wx.showModal({
-        title: '提示',
-        content: '请输入名称'
-      })
-    } else {
-      let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act:"alterdevname",
-        code:202,
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        devs: [{ uuid: kaiguanguans.diUuid, value: e.detail.value.username }],
-        ver:"2.0"
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-        if (res.data!=null){
-          wx.showToast({
-            title: '修改成功',
-            duration: 2000
-          });
-          var pages = getCurrentPages(); // 当前页面 
-          var beforePage = pages[pages.length - 2]; // 前一个页面  
-          wx.navigateBack({
-            success: function () {
-              beforePage.onShow(); // 执行前一个页面的方法     
-            }
-          });
-        } 
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    }
-  },
-  //删除设备
-  qingjingsc: function () {
-    var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除吗？',
-      success: function (sm) {
-        if (sm.confirm) {
-          let url = app.globalData.URL + 'delDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-          let data = {
-            act:"deletedev",
-            code:'201',
-            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-            key: "bq6wqzasjwtkl0i21pi9fbeq4",
-            bindid: username,
-            bindstr: pwd,
-            devs: [{ uuid: kaiguanguans.diUuid, value: kaiguanguans.diIeee }],
-            ver:"2.0"
-          };
-          app.wxRequest('POST', url, data, (res) => {
-            console.log(res.data)
-            wx.showToast({
-              title: '删除成功',
-              duration: 2000
-            });
-            var pages = getCurrentPages(); // 当前页面 
-            var beforePage = pages[pages.length - 2]; // 前一个页面  
-            wx.navigateBack({
-              success: function () {
-                beforePage.onShow(); // 执行前一个页面的方法     
-              }
-            });
-          },
-            (err) => {
-              console.log(err.errMsg)
-            }
-          )
-        } else if (sm.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -171,7 +86,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

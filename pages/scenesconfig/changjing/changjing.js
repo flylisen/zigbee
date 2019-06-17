@@ -13,12 +13,14 @@ Page({
    */
   data: {
     siShowName:'',
+    sortedDevss:[],
     sortedDevs:[],
     allSelect: false,
     choseImg: '/images/check-circle2.png',
     unchoseImg: '/images/check-circle.png',
     arr: '',
     uidarry:[],
+    sceneMembers:[],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -49,12 +51,15 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
-      for (var i in res.data.scenes){
+      for (var i in res.data.scenes) {
         var sceneMembers = res.data.scenes[i].sceneMembers;
         console.log(sceneMembers);
-
+        this.data.sceneMembers = sceneMembers;
         const filterListResult = sceneMembers.filter((item, index, self) => index === self.findIndex((t) => (t.uuid === item.uuid)));
-        console.log(filterListResult);//去重复的数据
+        filterListResult.forEach((item) => {
+          //这里需要截取的内容
+          item.deviceName = item.deviceName.substring(0, 5)
+        })
         this.setData({
           sortedDevs: filterListResult
         })
@@ -71,8 +76,14 @@ Page({
     let arr = [];
     infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
     for (var i = 0; i < infoArray.length; i++) { //获取选中信息
-      if (infoArray[i].isSelect) {
-        arr.push(infoArray[i]);
+      var uuid = infoArray[i].uuid;
+      if (infoArray[i].isSelect) { //选中
+        var sceneMembers = this.data.sceneMembers;
+        for (var j in sceneMembers){
+          if (uuid == sceneMembers[j].uuid){
+            arr.push(sceneMembers[j]);
+          }
+        }
       }
     }
     console.log(arr);
@@ -87,21 +98,22 @@ Page({
     for (var i in arr1) {
       var uuids ={}; 
       uuids.uuid = arr1[i].uuid;
+      uuids.sceneFunctionID = arr1[i].sceneFunctionID;
       this.data.uidarry.push(uuids);
     }
+    var uidarry = this.data.uidarry;
     wx.showModal({
       title: '提示',
       content: '确定删除该场景的设备吗？',
       success: function (msg) {
-          if (that.data.uidarry.length ===0){
-            wx.showModal({
-              title: '提示',
-              content: '请选择你要删除的设备'
-            })
+        if (uidarry.length ===0){
+          wx.showToast({
+            title:'请选择你要删除的设备',
+            icon:'none'
+          })
           }else{
             if (msg.confirm) {
             let url = app.globalData.URL + 'delSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-             console.log(that.data.uidarry);
             let data = {
               act: "deleteScenemembers",
               code: 605,
@@ -112,7 +124,7 @@ Page({
               ver: "2",
               scenes: [{
                 sceneID: changjing.siSceneId, sceneName: changjing.siName,
-                sceneMembers: that.data.uidarry
+                sceneMembers: uidarry
               }]
             };
             app.wxRequest('POST', url, data, (res) => {
@@ -246,7 +258,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

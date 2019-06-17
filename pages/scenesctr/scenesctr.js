@@ -66,6 +66,7 @@ Page({
       })
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
+    console.log(siSceneId);
     var that = this;
     let url = app.globalData.URL + 'triggerScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {

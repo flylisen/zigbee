@@ -1,6 +1,5 @@
 // pages/scenesconfig/scenesadd/scenesadd.js
 const app = getApp();
-var sceneVisible='';
 var username;
 var pwd;
 var timestamp;
@@ -22,6 +21,7 @@ Page({
     diDeviceid:'',
     diZonetype:'',
     showView: true,
+    sceneVisible:'',
     arry:[],
     items: [
       { name: 0, value: '不可见'},
@@ -155,17 +155,14 @@ Page({
     })
   },
   radioChange: function (e) {
-    sceneVisible=e.detail.value
-    console.log('可见值:', e.detail.value)
+    this.data.sceneVisible=e.detail.value
   },
   checkboxChange: function (e) {
-    console.log('模式：', e.detail.value)
     this.setData({
       centralairConditionMode: e.detail.value
     })
   },
   checkboxChangeWindMode:function(e){
-    console.log('风速：', e.detail.value)
     this.setData({
       centralairConditionWindMode: e.detail.value
     })
@@ -420,9 +417,11 @@ Page({
     var that = this
     var name = e.detail.value.areaname;
     var showname = e.detail.value.showName;
+    var sceneVisible= this.data.sceneVisible;
     console.log(name);
     console.log(showname);
-    if (name != '' && showname!='' && Array != '' && sceneVisible!=''){
+    console.log(sceneVisible);
+    if (name != ''&& showname!=''&& Array != ''&& sceneVisible!=''){
       let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act: "setScenes",
@@ -485,7 +484,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var pages = getCurrentPages(); // 当前页面 
+    var beforePage = pages[pages.length - 2]; // 前一个页面
+    beforePage.onLoad();
   },
 
   /**

@@ -31,13 +31,9 @@ Page({
      username = app.globalData.username;
      pwd = app.globalData.pwd;
     rommid = app.globalData.rommid;
-    console.log(rommid);
     that.setData({
       rommid
     })
-    console.log(username);
-    console.log(pwd);
-    console.log(rommid);
      timestamp = app.globalData.timestamp;
      token = app.globalData.token;
      sign = app.globalData.sign;
@@ -62,10 +58,6 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      sortResult.forEach((item) => {
-        //这里需要截取的内容
-        item.diShowName = item.diShowName.substring(0, 3)
-      })
       that.setData({
         sortedDevs: sortResult,
       });

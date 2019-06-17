@@ -76,7 +76,27 @@ Page({
         tz: '/images/chuanglian/tzdj.png',
         tztest:true
     })
-   
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: Industrys.diDeviceuid, uuid: Industrys.diUuid, value: 2}],
+      var: '2.0'
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+      if (res.data.code == 1) {
+        this.setData({
+          tz: '/images/chuanglian/tzwdj.png',
+          tztest: false
+        })
+      }
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
   },
   chuangliag:function(e){
     if (this.data.diOnoffStatu>0){

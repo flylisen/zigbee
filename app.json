@@ -32,19 +32,19 @@
   "tabBar": {
     "color": "#666",
     "selectedColor": "#FEA152",
-    "backgroundColor": "#ddd",
+    "backgroundColor": "#FFFFFF",
     "borderStyle": "black",
     "list":[
       {
         "pagePath": "pages/index/index",
-        "iconPath": "/images/控制_未点击状态@2x.png",
-        "selectedIconPath": "/images/控制_点击状态@2x.png",
+        "iconPath": "/images/kzwdj.png",
+        "selectedIconPath": "/images/kzdj.png",
         "text": "控制"
       },
       {
         "pagePath": "pages/about/about",
-        "iconPath": "/images/我的_未点击状态@2x.png",
-        "selectedIconPath": "/images/我的_点击状态@2x.png",
+        "iconPath": "/images/wdwdj.png",
+        "selectedIconPath": "/images/wddj.png",
         "text": "关于我"
       }
     ],

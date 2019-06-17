@@ -49,15 +49,11 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      sortResult.forEach((item) => {
-        //这里需要截取的内容
-        item.diShowName = item.diShowName.substring(0, 3)
-      })
       console.log(sortResult);
-
+      app.name(diName, diShowName);
       that.setData({
         sortedDevs: sortResult
-      });
+      }); 
     },
       (err) => {
         console.log(err.errMsg)
