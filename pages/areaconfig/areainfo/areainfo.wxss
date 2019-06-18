@@ -17,22 +17,28 @@ input{
   margin: 20px 0px;
 }
 .button1{
-  font-size: 20px;
   color: white;
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: orange;
   margin-top: 40px;
   width: 60%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button2{
-  font-size: 20px;
   color: white;
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: red;
   margin-top: 40rpx;
   width: 60%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .flex-wrp_one{
  display: flex;

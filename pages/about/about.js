@@ -48,10 +48,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    username = app.globalData.username;
+    username = app.globalData.rommid;
+    if(username == 'rs'){
     this.setData({
-      username: username
+      username: app.globalData.username,
     });
+    }else{
+      this.setData({
+        username:username,
+      })
+    }
   },
   logout: function () {
     wx.closeSocket();

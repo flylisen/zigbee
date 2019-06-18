@@ -1,11 +1,12 @@
 .bg {
-  height: 150px;
+  height: 220px;
   background-color:#FF7017;
 }
 
 .head {
   display: flex;
   flex-direction: column;
+  margin-top: 60px;
 }
 
 .headIcon{
@@ -21,13 +22,16 @@
    
 }
 .logout{
-  font-size: 20px;
   color: white;
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: red;
   margin-top: 20rpx;
   width: 60%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .index-hd {
   padding: 80rpx;

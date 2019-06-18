@@ -1,7 +1,7 @@
 <view class="bg">
   <view class="head">
     <view class="headIcon">
-      <image src="../../images/about/user.png" style="width:70px;height:70px;"></image> 
+      <image src="../../images/about/user.png" style="width:70px;height:70px;margin-top:60px;"></image> 
     </view>
     <text>用户名:{{username}}</text>
   </view>
