@@ -1,5 +1,5 @@
 
-<view style='text-align:center;' class="picture-2">
+<view style='text-align:center;margin-top:40px;' class="picture-2">
        <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="{{minus}}" mode="widthFix"></image>
        <image style='width:70%; height:70%' class="infoImage"  src="../../../images/devctr/kongtionbj.png" mode='widthFix'>
          <view wx:if="{{centralairConditionMode!=0}}">
@@ -31,7 +31,7 @@
    </scroll-view>
 </view>
 <!--锁定-->
-<view class="window_view1">
+<view>
    <scroll-view class="scroll-view_H" scroll-x="true">
       <view id="local" class="scroll-view-item_H local">
              <view wx:if="{{airAllState.lockedState==0}}" class='box'>
@@ -66,7 +66,7 @@
    </scroll-view>
 </view>
 <!--风速-->
-<view class="window_view1">
+<view>
    <scroll-view class="scroll-view_H" scroll-x="true">
       <view id="local" class="scroll-view-item_H1 local">
         <view wx:if="{{centralairConditionWindMode==5}}" class='box'>

@@ -7,12 +7,12 @@
 </view>
 <view class="section">
   <view>亮度</view>
-  <slider show-value max='255' min="1" step="5" value="" bindchange="listenerSlider"></slider>
+  <slider show-value max='255' min="1" blockSize="20" step="5" value="" bindchange="listenerSlider"></slider>
 </view>
 <view class='imagesize'>
 <color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
 </view>
-<button class='btn' bindtap="picker" style='display: flex;justify-content: center;margin: 0 auto;'>确定</button> 
+
 
 
 

@@ -4,9 +4,13 @@
  align-items:center;
  justify-content:center;
 }
+.text{
+  margin-top:20px;
+}
 .btn{
   background-color:#D9D9D9;
   color:white;
+  font-size:13px;
   margin-left: 50px;
   margin-top: -10px;
   position: absolute;

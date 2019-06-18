@@ -22,12 +22,7 @@ page{
 .Image{
   margin-top: 112px;
 }
-.window_view{
-   margin-top: 20px;
-}
-.window_view1{
-  margin-top: -25px;
-}
+
 .scroll-view_H {
    width: 100%;
   height: 200rpx;

@@ -8,6 +8,7 @@
 .btn{
   background-color:#D9D9D9;
   color:white;
+  font-size:13px;
 }
 .hover{
   background-color:#FEA152;
@@ -126,7 +127,27 @@ switch{
   margin-top: 5px;
 }
 
-.weui-grid__label {
+.weui-grid__label1{
+
+  display: block;
+
+  text-align: center;
+
+  font-weight: bold;
+
+  color:rgb(133, 123, 123);
+
+  font-size:9px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+
+}
+
+.weui-grid__label2{
 
   display: block;
 

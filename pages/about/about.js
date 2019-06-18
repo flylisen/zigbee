@@ -10,7 +10,6 @@ Page({
   },
   kindToggle: function (e) {
     var ins = e.currentTarget.id;//获得下标
-    console.log(ins);
     if (this.data.ins == ins) {
       this.setData({
         ins: -1,

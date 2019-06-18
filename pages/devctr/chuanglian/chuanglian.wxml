@@ -1,6 +1,7 @@
 <view class='imagesize'>
-       <image src='/images/chuanglian/clk.png'style='width:70%; height:=70%' mode='widthFix' wx:if="{{diOnoffStatu>0}}" ></image>
-       <image src='/images/chuanglian/clg.png' style='width:70%; height:=70%' mode='widthFix' wx:else></image>
+       <image src='/images/chuanglian/cltz.png'style='width:70%; height:=70%' mode='widthFix' wx:if="{{diOnoffStatu==2}}" ></image>
+       <image src='/images/chuanglian/clk.png'style='width:70%; height:=70%' mode='widthFix' wx:elif="{{diOnoffStatu==1}}" ></image>
+       <image src='/images/chuanglian/clg.png' style='width:70%; height:=70%' mode='widthFix' wx:elif="{{diOnoffStatu==0}}"></image>
 </view>
 <view class="window_view">
    <scroll-view class="scroll-view_H" scroll-x="true">

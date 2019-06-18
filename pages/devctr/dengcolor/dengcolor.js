@@ -135,40 +135,38 @@ Page({
     H=(H/360)*255;
     //饱和度
     S = ((max - min) / max)*254;
-  },
-picker:function(e){
-  if(this.data.hex=='#111110'){
-    wx.showToast({
-      title: '请选择正确的颜色',
-      icon: 'none'
-    })
-  }else{
-    if (this.data.diOnoffStatu>=1){
-      let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-      let data = {
-        act: "controlhue",
-        code: "214",
-        AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-        key: "bq6wqzasjwtkl0i21pi9fbeq4",
-        bindid: username,
-        bindstr: pwd,
-        ver: "1",
-        devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
-      };
-      app.wxRequest('POST', url, data, (res) => {
-        console.log(res.data)
-      },
-        (err) => {
-          console.log(err.errMsg)
-        }
-      )
-    }else{
+    if (this.data.hex == '#111110') {
       wx.showToast({
-        title:'灯是关闭状态',
-        icon:'none'
+        title: '请选择正确的颜色',
+        icon: 'none'
       })
+    } else {
+      if (this.data.diOnoffStatu >= 1) {
+        let url = app.globalData.URL + 'ctrLightColor?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+        let data = {
+          act: "controlhue",
+          code: "214",
+          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+          key: "bq6wqzasjwtkl0i21pi9fbeq4",
+          bindid: username,
+          bindstr: pwd,
+          ver: "1",
+          devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      } else {
+        wx.showToast({
+          title: '灯是关闭状态',
+          icon: 'none'
+        })
+      }
     }
-  }
   },
   listenerSlider:function(e){
     if (this.data.diOnoffStatu >= 1){
