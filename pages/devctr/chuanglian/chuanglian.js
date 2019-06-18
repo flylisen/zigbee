@@ -38,7 +38,6 @@ Page({
     })
   },
   chuangliank:function(e){
-    if (this.data.diOnoffStatu==0){
       this.setData({
         k: '/images/chuanglian/kdj.png',
         ktest: true
@@ -64,12 +63,6 @@ Page({
           console.log(err.errMsg)
         }
       )
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '已经是打开的状态'
-      }) 
-    }
   },
   chuangliantz:function(e){
     this.setData({
@@ -99,7 +92,6 @@ Page({
     )
   },
   chuangliag:function(e){
-    if (this.data.diOnoffStatu>0){
       this.setData({
         g: '/images/chuanglian/gdj.png',
         gtext: true
@@ -125,12 +117,6 @@ Page({
           console.log(err.errMsg)
         }
       )
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '已经是关闭的状态'
-      }) 
-    }
   
   },
   /**

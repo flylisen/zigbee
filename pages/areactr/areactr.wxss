@@ -28,13 +28,13 @@ view h1{
   position: relative;
    z-index: 1;
   margin-left:12px;
-  font-size:17px;
-  margin-top:-32px;
+  font-size:15px;
+  margin-top:-50px;
   color:black; 
 }
 .info{
    width: 31%;
-    margin-top: 20px;
+    margin-top: 32px;
 }
 .info:not(:nth-child(3n)){
     margin-right: 10rpx;

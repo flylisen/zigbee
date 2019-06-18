@@ -9,7 +9,7 @@
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">
        <view class="info" data-id="{{item}}" id="{{index}}"   bindtap='areainfo'>
        <image src='../../images/scenesctr/scenesettringdj.png' style='width:100%; height:100%;' mode='widthFix'></image>
-               <image class='btnImg1' src='../../images/areactr/{{item.atImg}}'  class='tp' style="width:28%;height:20%;"></image>
+               <image class='btnImg1' src='../../images/areactr/{{item.atImg}}'  class='tp' style="width:28%;height:68px;"></image>
                 <view class='areaname' wx:if="{{item.aiName==''}}">区域</view>
                 <view class='areaname' wx:else>{{item.aiName}}</view>
       </view>

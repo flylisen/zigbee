@@ -198,7 +198,7 @@ to {
 }  
 .link_child {
     width: 31%;
-    margin-top: 20rpx;
+    margin-top: 20px;
 }
 .link_child:not(:nth-child(3n)){
     margin-right: 10rpx;
@@ -206,21 +206,21 @@ to {
 .tp{
    position: absolute;
    z-index: 1;
-   margin-left:-83px;
-   margin-top:20px;
+   margin-left:-95px;
+   margin-top:16px;
 }
 .tb{
    position: absolute;
    z-index: 1;
-   margin-left:-48px;
-   margin-top:24px;
+   margin-left:-52px;
+   margin-top:16px;
 
 }
 .zt{
    position: relative;
    z-index: 1;
   margin-left:12px;
-  font-size:17px;
-  margin-top:-42px;
+  font-size:15px;
+  margin-top:-62px;
   color:#999999; 
 }
