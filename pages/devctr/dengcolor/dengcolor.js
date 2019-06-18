@@ -69,32 +69,22 @@ Page({
     });
   },
   //打开
-  dk:function(){
+  kg:function(e){
     let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    var value;
+    console.log(dengs.diOnoffStatu);
+    if (dengs.diOnoffStatu==0){
+      value=1;
+      dengs.diOnoffStatu=1;
+     }else{
+      value=0;
+      dengs.diOnoffStatu=0;
+     }
     let data = {
       bindid: username,
       bindstr: pwd,
       ctrType: 0,
-      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: 1 }],
-      var: "2.0"
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-    },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )
-  },
-  //关闭
-  gb: function () {
-    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    console.log(url);
-    let data = {
-      bindid: username,
-      bindstr: pwd,
-      ctrType: 0,
-      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: 0 }],
+      devs: [{ deviceuid: dengs.deviceuid, uuid: dengs.diUuid, value: value }],
       var: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {

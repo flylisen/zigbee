@@ -69,7 +69,6 @@ Page({
   changTap:function(e){
     var ins = e.currentTarget.id;//获得下标
     var tp = e.currentTarget.dataset['tp'];
-    console.log(ins);
      this.setData({
        ins:ins
      })

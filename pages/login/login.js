@@ -36,9 +36,6 @@ Page({
             timestamp = timestamp / 1000;
             var token = res.data.token;
             var sign = util.hexMD5(timestamp + token + "rishun");
-            console.log("令牌:" + token);
-            console.log("时间戳" + timestamp);
-            console.log("签名:" + sign);
             app.safety(timestamp, token, sign);
             //建立websocket连接 
             if (res.data.gwId != -1) {

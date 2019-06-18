@@ -43,8 +43,7 @@ Page({
          roomName: this.data.rommid,
          var: "2.0"
        }
-       var roomid = this.data.rommid
-       console.log(roomid)
+       var roomid = this.data.rommid;
        app.room(roomid)
        app.wxRequest('POST', url, data, (res) => {
          console.log(res.data)
