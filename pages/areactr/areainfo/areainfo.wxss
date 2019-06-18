@@ -60,7 +60,7 @@
   padding: 20px 10px;
 
   width: 33.33333333%;
-  height: 120px;
+  height: 86px;
 
   box-sizing: border-box;
 
@@ -143,6 +143,25 @@
 }
 
 .weui-grid__label {
+
+  display: block;
+
+  text-align: center;
+
+  font-weight: bold;
+
+  color:rgb(133, 123, 123);
+
+  font-size: 7px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+
+}
+.weui-grid__label1 {
 
   display: block;
 

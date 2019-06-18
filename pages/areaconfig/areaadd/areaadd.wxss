@@ -22,7 +22,8 @@ input{
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: orange;
-  margin-top: 40rpx;
+  margin-top: 40px;
+  width: 60%;
 }
 .flex-wrp_one{
  display: flex;
@@ -206,21 +207,21 @@ to {
 .tp{
    position: absolute;
    z-index: 1;
-   margin-left:-95px;
-   margin-top:16px;
+   margin-left:-80px;
+   margin-top:28px;
 }
 .tb{
    position: absolute;
    z-index: 1;
-   margin-left:-52px;
-   margin-top:16px;
+   margin-left:-50px;
+   margin-top:30px;
 
 }
 .zt{
    position: relative;
    z-index: 1;
-  margin-left:12px;
-  font-size:15px;
+  margin-left:30px;
+  font-size:13px;
   margin-top:-62px;
   color:#999999; 
 }

@@ -26,7 +26,8 @@
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: red;
-  margin-top: 40rpx;
+  margin-top: 20rpx;
+  width: 60%;
 }
 .index-hd {
   padding: 80rpx;

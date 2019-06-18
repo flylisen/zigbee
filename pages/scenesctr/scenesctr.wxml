@@ -1,7 +1,7 @@
 <!--pages/scenesctr/scenesctr.wxml-->
 <view class='viewh1'>
-     <text class='text'>全部场景</text>
-     <view wx:if="{{rommid != 888}}">
+     <text>全部场景</text>
+     <view wx:if="{{rommid == 'rs'}}">
      <button class='btn' hover-class="hover" bindtap='pz'>配置</button> 
      </view>
 </view>

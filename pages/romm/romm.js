@@ -86,9 +86,14 @@ Page({
                console.log(err.errMsg)
              }
            )
-         }else{
+         }else if(roomid == 'rs'){
            wx.redirectTo({
              url: '../login/login'
+           })
+         }else{
+           wx.showModal({
+             title: '提示',
+             content: '请输入正确的房间号'
            })
          }
          (err) => {

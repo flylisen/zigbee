@@ -7,9 +7,12 @@ view h1{
 .btn{
   background-color:#D9D9D9;
   color:white;
-  margin-left: 250px;
-  margin-top: -40px;
+  margin-left: 255px;
+  margin-top: -26px;
   position: absolute;
+  height: 28px;
+  display: flex;
+  align-items: center;
 }
 .hover{
   background-color:#FEA152;

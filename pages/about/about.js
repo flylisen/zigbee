@@ -58,13 +58,13 @@ Page({
     var that = this;
     rommid = app.globalData.rommid
     console.log(rommid)
-    if (rommid == 888) {
+    if (rommid == 'rs') {
       wx.reLaunch({
-        url: '../romm/romm',
+         url: '../login/login',
       })
     } else {
       wx.reLaunch({
-        url: '../login/login',
+        url: '../romm/romm',
       })
     }
   },
