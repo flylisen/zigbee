@@ -24,8 +24,8 @@
  <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
     <view class="link_child" wx:if="{{item.deviceid==2}}">
          <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
-         <image src='/images/devctr/switchwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
+         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:7%; height:7%' mode='widthFix'></image>
+         <image src='/images/devctr/switchwdj.png' class='tp' wx:else style='width:7%; height:7%' mode='widthFix'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>开关</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
