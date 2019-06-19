@@ -1,11 +1,24 @@
 /**index.wxss**/
-
-.setting{
+.setting1{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  margin-top:50px;
+}
+.setting2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top:100px;
+}
+.setting3{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top:100px;
 }
 .background-image{
   position: absolute;

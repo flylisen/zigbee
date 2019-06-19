@@ -11,8 +11,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    diNames:'',
     diOnoffStatu:'',
+    diDeviceid:'',
+    diZonetype:'',
     k:'/images/chuanglian/kwdj.png',
     tz:'/images/chuanglian/tzwdj.png',
     g:'/images/chuanglian/gwdj.png',
@@ -33,9 +34,15 @@ Page({
     var deviceuid = decodeURIComponent(options.deviceuid);
     Industrys = JSON.parse(deviceuid);
     this.setData({
-      diNames: Industrys.diShowName,
+      diDeviceid: Industrys.diDeviceid,
+      diZonetype: Industrys.diZonetype,
       diOnoffStatu: Industrys.diOnoffStatu
     })
+    if(this.data.diDeviceid==514&&this.data.diZonetype==2){
+      wx.setNavigationBarTitle({
+        title: '窗帘'
+      })
+    }
   },
   chuangliank:function(e){
       this.setData({

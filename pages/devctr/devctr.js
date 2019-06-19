@@ -41,7 +41,7 @@ Page({
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
-    console.log(res.data);
+      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -200,7 +200,6 @@ Page({
   chuanglian: function (event) {
     console.log(event.currentTarget.dataset['chuanglian']);
     var ins = event.currentTarget.id;//获得下标
-    console.log(ins);
     this.setData({
       ins: ins
     })

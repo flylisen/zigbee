@@ -17,9 +17,6 @@ App({
     gwId: -1,
     onReceiveWebsocketMessageCallback: function () { },
   },
-  onLaunch:function(){
-
-  },
   /**  
   * 
   * 封装wx.request请求  
@@ -67,10 +64,12 @@ App({
     let that = this;
     that.globalData.gwId = gwId;
     //建立websocket连接
+    console.log(that.globalData.gwId);
     console.log('初始化建立websocket连接');
     that.globalData.localWebsocket = wx.connectSocket({
       url: 'wss://dev.rishuncloud.com:8443/websocket/' + that.globalData.gwId,
     });
+    console.log(that.globalData.localWebsocket);
     //websocket连接打开
     that.globalData.localWebsocket.onOpen(function (res) {
       console.log('websocket已建立连接');
@@ -82,10 +81,10 @@ App({
     //连接关闭 重连
     that.globalData.localWebsocket.onClose(function (res) {
       console.log('websocket连接关闭');
-      /**if (that.globalData.gwId != -1) {
+      if (that.globalData.gwId != -1) {
         console.log('执行websocket重连');
         that.initWebSocket(that.globalData.gwId);
-      }**/
+      }
     });
     //websocket接收到信息
     that.globalData.localWebsocket.onMessage(function (res) {

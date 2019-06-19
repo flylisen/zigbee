@@ -1,16 +1,16 @@
 <!--index.wxml-->
 <view class='count'>
-<view class='setting'  bindtap='control1'>
+<view class='setting1'  bindtap='control1'>
       <image src="{{background1}}" mode="scaleToFill" class="background-image"></image>
       <image class='btnImg' src='/images/areactr.png' style="width:80px;height:60px;"></image>
       <text class='btnImg'>区域控制</text>
  </view>
- <view class='setting' bindtap='control2'>
+ <view class='setting2' bindtap='control2'>
   <image src="{{background2}}" mode="scaleToFill" class="background-image"></image>
    <image class='btnImg' src='/images/scenesctr.png' style="width:80px;height:60px;"></image>
       <text class='btnImg'>场景控制</text>
  </view>
- <view class='setting'  bindtap='control3'>
+ <view class='setting3'  bindtap='control3'>
  <image src="{{background3}}" mode="scaleToFill" class="background-image"></image>
       <image class='btnImg' src='/images/devctr.png' style="width:80px;height:60px;"></image>
       <text class='btnImg'>设备控制</text>

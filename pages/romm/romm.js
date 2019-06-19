@@ -95,6 +95,9 @@ Page({
              title: '提示',
              content: '请输入正确的房间号'
            })
+           this.setData({
+             rommid: '',
+           })
          }
          (err) => {
            console.log(err.errMsg)
