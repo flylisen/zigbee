@@ -418,48 +418,6 @@ Page({
     var name = e.detail.value.areaname;
     var showname = e.detail.value.showName;
     var sceneVisible= this.data.sceneVisible;
-    let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    let data = {
-      act: "getScenes",
-      code: 601,
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: username,
-      bindstr: pwd,
-      option: 2,
-      ver: "2.0"
-    };
-    app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data.scenes)
-      var names = [];
-      var shownames = [];
-      for (var i in res.data.scenes) {
-        names.push(res.data.scenes[i].siName);
-        shownames.push(res.data.scenes[i].siShowName);
-      }
-      for (var i = 0; i < names.length; i++) {
-        if (names[i] == "") {
-          shownames.splice(i, 1);
-          i = i - 1;
-        }
-      }
-      for (var i = 0; i < shownames.length; i++) {
-        if (shownames[i] == "") {
-          shownames.splice(i, 1);
-          i = i - 1;
-        }
-      }
-      var bool;
-      for (var j in names) {
-        if (name == names[j]) {
-          bool = "fal1";
-        }
-      }
-      for (var k in shownames) {
-        if (showname == shownames[k]) {
-          bool = "fal2";
-        }
-      }
       if (name == '' || showname == '') {
         wx.showModal({
           title: '提示',
@@ -474,16 +432,6 @@ Page({
         wx.showModal({
           title: '提示',
           content: '请选择设备'
-        })
-      } else if (bool =="fal1") {
-        wx.showModal({
-          title: '提示',
-          content: '内存名称已存在'
-        })
-      } else if (bool == "fal2"){
-        wx.showModal({
-          title: '提示',
-          content: '显示名称已存在'
         })
       }else{
         let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -517,12 +465,7 @@ Page({
             console.log(err.errMsg)
           }
         )
-      }
-     },
-      (err) => {
-        console.log(err.errMsg)
-      }
-    )    
+      }   
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

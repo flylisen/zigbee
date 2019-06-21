@@ -104,7 +104,7 @@ Page({
     })
     var wendu;
     if (this.data.wendu>1600){
-       wendu= this.data.wendu - 100;
+       wendu= this.data.wendu - 50;
    }else{
       wx.showModal({
         title: '提示',
@@ -143,7 +143,7 @@ Page({
     })
     var wendu = this.data.wendu;
     if (wendu<3200){
-      wendu = wendu + 100;
+      wendu = wendu + 50;
     }else{
       wx.showModal({
         title: '提示',
@@ -370,7 +370,7 @@ Page({
    */
   onShow: function () {
     //回调
-    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+    app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
       var diUuid;
@@ -411,7 +411,7 @@ Page({
         })
       }
       if (nodeType == 103) {
-        var localTemperature = curPage.data.wendu;
+        var localTemperature = curPage.data.localTemperature;
         curPage.setData({
           localTemperature: value
         })

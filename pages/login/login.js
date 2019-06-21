@@ -37,10 +37,6 @@ Page({
             var token = res.data.token;
             var sign = util.hexMD5(timestamp + token + "rishun");
             app.safety(timestamp, token, sign);
-            //建立websocket连接 
-            if (res.data.gwId != -1) {
-              app.initWebSocket(res.data.gwId);
-            }
             wx.switchTab({
               url: '../index/index',
             })

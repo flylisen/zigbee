@@ -4,21 +4,24 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:50px;
+  margin-top:100rpx;
+}
+.count{
+  margin-top:200rpx
 }
 .setting2{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:100px;
+  margin-top:200rpx;
 }
 .setting3{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:100px;
+  margin-top:200rpx;
 }
 .background-image{
   position: absolute;

@@ -1,4 +1,6 @@
 //app.js
+let socketMsgQueue = []
+let isLoading = false
 App({
  //设置全局对象  
   globalData: {
@@ -12,10 +14,9 @@ App({
     token:'',
     sign:'',
     data:'',
-    localWebsocket: {},      //websocket对象
     URL: 'https://dev.rishuncloud.com:8443/',  
-    gwId: -1,
-    onReceiveWebsocketMessageCallback: function () { },
+    localSocket: {},
+    callback: function () { }
   },
   /**  
   * 
@@ -59,37 +60,59 @@ App({
     that.globalData.token = token;
     that.globalData.sign = sign;
   },
-  //初始化websocket
-  initWebSocket: function (gwId) {
-    let that = this;
-    that.globalData.gwId = gwId;
-    //建立websocket连接
-    console.log(that.globalData.gwId);
-    console.log('初始化建立websocket连接');
-    that.globalData.localWebsocket = wx.connectSocket({
-      url: 'wss://dev.rishuncloud.com:8443/websocket/' + that.globalData.gwId,
-    });
-    console.log(that.globalData.localWebsocket);
-    //websocket连接打开
-    that.globalData.localWebsocket.onOpen(function (res) {
-      console.log('websocket已建立连接');
-    });
-    //websocket连接出错
-    that.globalData.localWebsocket.onError(function (res) {
-      console.log('websocket连接出错');
-    });
-    //连接关闭 重连
-    that.globalData.localWebsocket.onClose(function (res) {
-      console.log('websocket连接关闭');
-      if (that.globalData.gwId != -1) {
-        console.log('执行websocket重连');
-        that.initWebSocket(that.globalData.gwId);
+  showLoad() {
+    if (!isLoading) {
+      wx.showLoading({
+        title: '请稍后...',
+      })
+      isLoading = true
+    }
+  },
+  hideLoad() {
+    wx.hideLoading()
+    isLoading = false
+  },
+  initSocket() {
+    let that = this
+    that.globalData.localSocket = wx.connectSocket({
+      url: 'wss://dev.rishuncloud.com:8443/websocket/1'
+    })
+    that.showLoad()
+    that.globalData.localSocket.onOpen(function (res) {
+      console.log('WebSocket连接已打开！readyState=' + that.globalData.localSocket.readyState)
+      that.hideLoad()
+      while (socketMsgQueue.length > 0) {
+        var msg = socketMsgQueue.shift();
+        that.sendSocketMessage(msg);
       }
-    });
-    //websocket接收到信息
-    that.globalData.localWebsocket.onMessage(function (res) {
-        console.log('-------------------------');
-        that.globalData.onReceiveWebsocketMessageCallback(res);
-    });
+    })
+    that.globalData.localSocket.onMessage(function (res) {
+      that.hideLoad()
+      that.globalData.callback(res)
+    })
+    that.globalData.localSocket.onError(function (res) {
+      console.log('readyState=' + that.globalData.localSocket.readyState)
+    })
+    that.globalData.localSocket.onClose(function (res) {
+      console.log('WebSocket连接已关闭！readyState=' + that.globalData.localSocket.readyState)
+      that.initSocket()
+    })
+  },
+  //统一发送消息
+  sendSocketMessage: function (msg) {
+    if (this.globalData.localSocket.readyState === 1) {
+      this.showLoad()
+      this.globalData.localSocket.send({
+        data: JSON.stringify(msg)
+      })
+    } else {
+      socketMsgQueue.push(msg)
+    }
+  },
+  onShow: function (options) {
+    if (this.globalData.localSocket.readyState !== 0 && this.globalData.localSocket.readyState !== 1) {
+      console.log('开始尝试连接WebSocket！readyState=' + this.globalData.localSocket.readyState)
+      this.initSocket()
+    }
   }
 })

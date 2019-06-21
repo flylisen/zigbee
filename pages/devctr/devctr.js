@@ -229,7 +229,7 @@ Page({
    */
   onShow: function () {
     //回调
-    app.globalData.onReceiveWebsocketMessageCallback = function (res) {
+    app.globalData.callback= function (res) {
       console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;

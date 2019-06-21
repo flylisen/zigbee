@@ -22,7 +22,8 @@ page{
   width: 90%;
   background-color: #FEA152;
   color: white;
-  border-radius:50rpx; 
+  border-radius:50rpx;
+  margin-top:-40rpx; 
 }
 .index-hd {
   padding: 80rpx;
