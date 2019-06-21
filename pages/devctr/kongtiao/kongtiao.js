@@ -13,21 +13,17 @@ Page({
    */
   data: {
     diNames: '',
-    chuanglians: '',
     airAllState:'',
     showModal: false,
     wendu:'',
     localTemperature:'',
-    sortedDevs:'',
     index:'',
     tmp:'',
     btn:'',
     ms:'../../../images/devctr/mswdj.png',
     fs:'../../../images/devctr/fswdj.png',
-    kg:'../../../images/devctr/kgwdj.png',
     mstext:false,
     fstext:false,
-    kgtext:false,
     minus:'../../../images/devctr/minuswdj.png',
     jia:'../../../images/devctr/jiawdj.png',
     ConditionMode: [
@@ -65,10 +61,9 @@ Page({
     sign = app.globalData.sign;
     var kongtiao = decodeURIComponent(options.kongtiao);
     kongtiaos = JSON.parse(kongtiao);
+    console.log(kongtiaos);
     this.setData({
       diNames: kongtiaos.diShowName,
-      chuanglians: kongtiaos.diOnoffStatu,
-      sortedDevs: kongtiaos 
     });
     //获取获取温控器全部状态
     let url = app.globalData.URL + 'getAirAllState?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -179,13 +174,9 @@ Page({
   },
   //开关事件
   kaiguanguan: function (event) {
-    this.setData({
-      kg: '../../../images/devctr/kgdj.png',
-      kgtext:true
-    })
     var centralairConditionMode = this.data.centralairConditionMode;
     if (centralairConditionMode!=0){//关闭
-      let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act: "setthermostatmode",
         code: 277,
@@ -201,17 +192,15 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             centralairConditionMode: 0,
-            kg: '../../../images/devctr/kgwdj.png',
-            kgtext:false
           })
         }
       },
         (err) => {
           console.log(err.errMsg)
         }
-      )   
+      )  
     }else{//打开
-      let url = app.globalData.URL + 'ariControlTemp?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         act: "setthermostatmode",
         code: 277,
@@ -227,15 +216,13 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             centralairConditionMode: 5,
-            kg: '../../../images/devctr/kgwdj.png',
-            kgtext:false
           })
         }
       },
         (err) => {
           console.log(err.errMsg)
         }
-      )    
+      ) 
     }
   },
   /**
