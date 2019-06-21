@@ -120,9 +120,9 @@
 
 .weui-grid__icon {
 
-  width: 32px;
+  width: 28px;
 
-  height: 32px;
+  height: 36px;
 
   margin: 0 auto;
 

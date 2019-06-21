@@ -30,10 +30,11 @@ view h1{
 .areaname{
   position: relative;
    z-index: 1;
-  margin-left:12px;
   font-size:15px;
-  margin-top:-50px;
+  margin-top:-100rpx;
   color:black; 
+  display: flex;
+  justify-content: center;
 }
 .info{
    width: 31%;
@@ -45,5 +46,5 @@ view h1{
 .tp{
    position: absolute;
    z-index: 1;
-   margin-left:-110px;
+   margin-left:-225rpx;
 }
