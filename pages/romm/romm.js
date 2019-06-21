@@ -65,6 +65,11 @@ Page({
                timestamp = timestamp / 1000;
                var token = res.data.token;
                var sign = util.hexMD5(timestamp + token + "rishun");
+               app.gw(res.data.gwId);
+               //建立websocket连接
+               if (res.data.gwId != -1) {
+                 app.initSocket();
+               }
                wx.switchTab({
                  url: '../index/index',
                })
