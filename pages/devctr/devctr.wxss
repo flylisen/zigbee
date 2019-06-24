@@ -110,18 +110,12 @@ switch{
           transform: scaleY(0.5);
 
 }
-
-
 .weui-grid__icon {
-
-  width: 32px;
-
-  height: 32px;
-
+  width: 40px;
+  height: 40px; 
   margin: 0 auto;
 
 }
-
 .weui-grid__icon image {
 
   display: block;
@@ -131,7 +125,6 @@ switch{
   height: 100%;
 
 }
-
 .weui-grid__icon + .weui-grid__label {
   margin-top: 5px;
 }

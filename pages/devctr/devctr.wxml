@@ -25,7 +25,7 @@
        <!--灯-->
         <view wx:if="{{item.diDeviceid==528}}" bindtap='xia' data-deng="{{item}}" id="{{index}}">
          <view class="weui-grid__icon" id="{{index}}" data-deng="{{item}}">
-          <image  src="{{index==ins||item.diOnoffStatu>=1?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
+          <image src="{{index==ins||item.diOnoffStatu>=1?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label1" id="{{index}}" data-deng="{{item}}" style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">离线</text>
