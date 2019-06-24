@@ -1,5 +1,5 @@
 
-<view style='text-align:center;margin-top:40px;' class="picture-2">
+<view style='text-align:center;margin-top:100rpx;' class="picture-2">
        <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="{{minus}}" mode="widthFix"></image>
        <image style='width:70%; height:70%' class="infoImage"  src="../../../images/devctr/kongtionbj.png" mode='widthFix'>
          <view wx:if="{{centralairConditionMode!=0}}">

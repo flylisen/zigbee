@@ -19,11 +19,16 @@ page{
    margin-left: 30px;
 }
 .btn{
-  width: 90%;
-  background-color: #FEA152;
   color: white;
-  border-radius:50rpx;
-  margin-top:-40rpx; 
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  background: orange;
+  width: 60%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:-20px;
 }
 .index-hd {
   padding: 80rpx;

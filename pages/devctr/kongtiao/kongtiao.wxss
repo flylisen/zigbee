@@ -66,8 +66,9 @@ page{
 image {
    margin-right: auto;
    margin-left: auto;
-   width: 100rpx;
-   height: 100rpx;
+   width:140rpx;
+   height:140rpx;
+
 }
 text {
    margin-right: auto;

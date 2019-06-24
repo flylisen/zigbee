@@ -79,9 +79,8 @@ App({
   },
   initSocket() {
     let that = this
-    console.log(that.globalData.gwId);
     that.globalData.localSocket = wx.connectSocket({
-      url: 'wss://dev.rishuncloud.com:8443/websocket/' + that.globalData.gwId,
+      url: 'wss://dev.rishuncloud.com:8443/websocket/'+that.globalData.gwId
     })
     that.showLoad()
     that.globalData.localSocket.onOpen(function (res) {
