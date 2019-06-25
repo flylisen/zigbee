@@ -55,7 +55,7 @@
            </view>
 </view>
 <view class='imagesize'>
-           <view wx:if="{{chuanglians>=0}}">
+           <view wx:if="{{chuanglians>0}}">
                <text>状态: </text>
                <text style='color:#33ff33;'> 正常</text>
            </view>

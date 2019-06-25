@@ -12,7 +12,10 @@
                 <view class="{{item.siShowName.length>=4?'btnImg2':'btnImg3'}}" wx:else>{{item.siShowName}}</view>
          </view>
        </block>
-        </view>
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
 
         
         

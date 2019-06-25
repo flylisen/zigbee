@@ -15,7 +15,8 @@ Page({
     chuanglians: '',
     sortedDevs: '',
     ins:-1,
-    rommid:''
+    rommid:'',
+    hidden:false,
   },
   pz: function () {
     wx.navigateTo({
@@ -58,6 +59,7 @@ Page({
       }
       that.setData({
         sortedDevs: sortResult,
+        hidden:true
       });
     },
       (err) => {

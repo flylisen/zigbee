@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    scenename:''
+    scenename:'',
+    hidden:false,
   },
   bindAdd:function(){
     wx.navigateTo({
@@ -40,7 +41,8 @@ Page({
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
       this.setData({
-        scenes: res.data.scenes
+        scenes: res.data.scenes,
+        hidden:true
       })
     },
       (err) => {

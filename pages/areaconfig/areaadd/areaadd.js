@@ -19,7 +19,7 @@ Page({
     sortedDevs: '',
     arr: '',
     select: false,
-
+    hidden:false,
     grade_name: '--请选择--'
   },
   submit: function (e) {
@@ -155,7 +155,8 @@ Page({
         }
       };
       that.setData({
-        sortedDevs: arr3
+        sortedDevs: arr3,
+        hidden:true
       });
     },
       (err) => {

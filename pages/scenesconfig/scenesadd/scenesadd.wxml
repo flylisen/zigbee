@@ -137,6 +137,10 @@
       <button class='btn' form-type='submit'>确定</button>
     </form>
 </view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
+
 
 
 

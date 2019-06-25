@@ -58,6 +58,7 @@ Page({
     ins3:-1,
     ins4:-1,
     ins5:-1,
+    hidden:false,
   },
   kindToggle: function (e) {
     var ins = e.currentTarget.id;//获得下标
@@ -212,7 +213,8 @@ Page({
       }
       console.log(arr3)
       that.setData({
-        sortedDevs: arr3
+        sortedDevs: arr3,
+        hidden:true
       });
     },
       (err) => {

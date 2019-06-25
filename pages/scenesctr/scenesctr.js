@@ -15,7 +15,8 @@ Page({
   data: {
     scenes:'',
     ins:-1,
-    rommid: ''
+    rommid: '',
+    hidden:false,
   },
   pz:function(){
     wx.navigateTo({
@@ -31,7 +32,6 @@ Page({
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
     rommid = app.globalData.rommid;
-    console.log(rommid);
     that.setData({
       rommid
     })
@@ -52,6 +52,7 @@ Page({
       console.log(res.data)
       this.setData({
         scenes: res.data.scenes,
+        hidden: true
       })
     },
       (err) => {
@@ -67,7 +68,6 @@ Page({
       })
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
-    console.log(siSceneId);
     var that = this;
     let url = app.globalData.URL + 'triggerScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
@@ -104,7 +104,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      console.log('接收到服务器信息', res);
       console.log('当前页面在scenesctr');
     }
   },
