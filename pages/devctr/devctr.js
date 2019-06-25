@@ -10,6 +10,7 @@ Page({
   /**
    * 页面的初始数据
    */
+  path:'pages/devctr/devctr',
   data: {
     chuanglians: '',
     sortedDevs: '',
@@ -41,7 +42,6 @@ Page({
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data);
       var tmp = {};
       for (var index in res.data.devs) {
         var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
@@ -108,7 +108,6 @@ Page({
      }
   },
   device: function (event) {
-    console.log(event.currentTarget.dataset['device']);
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -129,7 +128,6 @@ Page({
     }
   },
   xia: function (event){
-    console.log(event.currentTarget.dataset['deng']);
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -153,7 +151,6 @@ Page({
     }
   },
   kongtiao:function(event){
-    console.log(event.currentTarget.dataset['kongtiao']);
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -175,9 +172,7 @@ Page({
   },
 
   sewendeng: function (event){
-    console.log(event.currentTarget.dataset['sewendeng']);
     var ins = event.currentTarget.id;//获得下标
-    console.log(ins);
     this.setData({
       ins: ins
     })
@@ -198,7 +193,6 @@ Page({
   },
   //窗帘
   chuanglian: function (event) {
-    console.log(event.currentTarget.dataset['chuanglian']);
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -230,7 +224,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback= function (res) {
-      console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;
       var value;
@@ -241,10 +234,6 @@ Page({
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       showname = strs[3].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('uuid', uuid);
-      console.log('value', value);
-      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -253,7 +242,6 @@ Page({
           curPage = pageArray[j];
         }
       }
-      console.log('curPage', curPage);
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -284,7 +272,6 @@ Page({
         //修改名称
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diShowName';
             var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({

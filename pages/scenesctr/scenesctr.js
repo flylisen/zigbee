@@ -11,6 +11,7 @@ Page({
   /**
    * 页面的初始数据
    */
+  path: 'pages/scenesctr/scenesctr',
   data: {
     scenes:'',
     ins:-1,

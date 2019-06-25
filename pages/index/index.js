@@ -22,25 +22,25 @@ Page({
       this.setData({
         background1: '/images/areasettingdj.png'
       })
-    wx.navigateTo({
-      url: '../areactr/areactr'
-    })
+     wx.navigateTo({
+       url: '../areactr/areactr'
+     })
   },
   control2: function (event) {
     this.setData({
       background2: '/images/areasettingdj.png'
     })
-    wx.navigateTo({
-      url: '../scenesctr/scenesctr'
-    })
+      wx.navigateTo({
+        url: '../scenesctr/scenesctr'
+      })
   },
   control3: function (event) {
     this.setData({
       background3: '/images/areasettingdj.png'
     })
-    wx.navigateTo({
-      url: '../devctr/devctr'
-    })
+      wx.navigateTo({
+        url: '../devctr/devctr'
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
