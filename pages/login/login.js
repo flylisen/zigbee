@@ -1,10 +1,13 @@
 var app=getApp();
 var util = require('../../utils/md5.js'); 
+const utils = require('../../utils/util.js')
 Page({
 
   data: {
     username:'',
     pwd:'',
+    bool:true,
+    tp:'/images/yc.png'
   },
   phoneInput: function (e) {
     this.setData({
@@ -16,7 +19,20 @@ Page({
       pwd: e.detail.value
     })
   },
-  login:function(){
+  pass:function(){
+    if (this.data.tp =='/images/xs.png'){
+    this.setData({
+      bool: true,
+      tp: '/images/yc.png'
+    })
+   }else{
+      this.setData({
+        bool: false,
+        tp: '/images/xs.png'
+    })
+   }
+  },
+  login: utils.throttle(function(){
     var username = this.data.username;
     var pwd = this.data.pwd;
       if (username != '' && pwd != '') {
@@ -66,5 +82,5 @@ Page({
           content: '请输入用户名和密码'
         })
       }
-  }
+  },3000)
 })

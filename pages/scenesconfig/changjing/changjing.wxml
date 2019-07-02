@@ -1,72 +1,83 @@
 <view class='imagesize'>
-    <image src='/images/changjing/cj.png'  style='width:20%; height:20%' mode='widthFix'></image>
+    <image src='/images/changjing/cj.png' class='cj'></image>
 </view>
 <view class='imagesize'>
     <view wx:if="{{siShowName==''}}">
-           <text>场景设备</text>
+           <text class='txt'>场景</text>
            </view>
            <view wx:else>
-           <text>{{siShowName}}场景</text>
+           <text class='txt'>{{siShowName}}</text>
     </view>
 </view>
+<view class='form'>
 <form bindsubmit='aiNames'>
-     <text class='text'>展示名称</text>
+     <view class='text1'>
+     <text>展示名称</text>
+     </view>
      <input type="text" class="input" name="sceneShowName" maxlength='10'></input>
-      <text class='text'>内存名称</text>
+      <view class='text1'>
+      <text>内存名称</text>
+      </view>
      <input type="text" class="input"  name="sceneName" maxlength='10'></input>
      <button class='btn' form-type='submit'>确定</button>
 </form>
 <view class='gl'>
-<text class='text'>管理设备</text>
+<view class='text1'>
+<text>管理设备</text>
+</view>
 </view>
 <form bindsubmit='submit'>
  <view class="link">
  <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
     <view class="link_child" wx:if="{{item.deviceid==2}}">
-         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:7%; height:7%' mode='widthFix'></image>
-         <image src='/images/devctr/switchwdj.png' class='tp' wx:else style='width:7%; height:7%' mode='widthFix'></image>
-        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" ></image>
+         <image src='/images/devctr/switchwdj.png' class='tp' wx:else ></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>开关</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
    <view class="link_child" wx:if="{{item.deviceid==514&&item.zonetype==2}}">
-         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
-         <image src='/images/devctr/clwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
-        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.status> 0}}"></image>
+         <image src='/images/devctr/clwdj.png' class='tp' wx:else></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>窗帘</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
       <view class="link_child" wx:if="{{item.deviceid==528}}">
-         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
-         <image src='/images/devctr/dengwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
-        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.status> 0}}"></image>
+         <image src='/images/devctr/dengwdj.png' class='tp' wx:else></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>灯</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
     <view class="link_child" wx:if="{{item.deviceid==769&&item.zonetype==1}}">
-         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/airdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
-         <image src='/images/devctr/airwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
-        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/airdj.png' class='tp' wx:if="{{item.status> 0}}"></image>
+         <image src='/images/devctr/airwdj.png' class='tp' wx:else></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>空调</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
    <view class="link_child" wx:if="{{item.deviceid==544&&item.zonetype==255}}">
-         <image src='/images/changjing/bj.png' style='width:100%; height:100%' mode='widthFix'></image>
-         <image src='/images/devctr/swdj.png' class='tp' wx:if="{{item.status> 0}}" style='width:10%; height:10%' mode='widthFix'></image>
-         <image src='/images/devctr/swwdj.png' class='tp' wx:else style='width:10%; height:10%' mode='widthFix'></image>
-        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:10%; height:10%' mode='widthFix' data-index="{{index}}"></image>
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/swdj.png' class='tp' wx:if="{{item.status> 0}}"></image>
+         <image src='/images/devctr/swwdj.png' class='tp' wx:else></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>色温灯</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>
    </view>
 </block>
 </view>
-<button class='button2' class='btn' form-type='submit'>删除设备</button>
-<button  bindtap='delete' class='btn2'>删除场景</button>
+<button class='btn2' form-type='submit' hover-class="btn2-hover" >删除设备</button>
+<button  bindtap='delete' class='btn3' hover-class="btn3-hover" >删除场景</button>
 </form>
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
 
 
  

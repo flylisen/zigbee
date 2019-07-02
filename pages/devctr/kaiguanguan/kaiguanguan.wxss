@@ -4,7 +4,8 @@
  justify-content: center;      
 }
 .root-view{
-    margin-top: 90px;
+    margin-top:90rpx;
+    margin-left:50rpx;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,27 +17,39 @@
   height:60px;
 }
 .ico{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-top: -20px;
+position:absolute;
+top:0;
+left:0;
+width:680rpx;
+height:580rpx;
+margin-top:350rpx;
+margin-left:40rpx;
 }
 .txt{
    position: relative;
-   margin-left: 30px;
+   
  }
  .txt1{
    position: relative;
-   margin-left: 100px;
+   margin-left: 420rpx;
    color:#33ff33; 
- }
- .txt3{
-    position: relative;
-    margin-left: 40px;
  }
  .txt2{
     position: relative;
-    margin-left: 100px;
+    margin-left:300rpx;
  }
+ .border{
+   position:absolute;
+   margin-top:-20px;
+ }
+  .border2{
+   border-bottom: 1px rgb(238, 235, 235) solid;
+   position: relative;
+   width:550rpx;
+ }
+ .txt3{
+    position: relative;
+    margin-left:400rpx;
+ }
+ 
+

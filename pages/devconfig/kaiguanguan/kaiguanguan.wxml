@@ -66,11 +66,15 @@
 </view>
 <view>
     <form bindsubmit='submit'>
+     <view class='bd'>
      <text class='text'>展示名称</text>
      <input type="text" class="input" name="showname" maxlength='8'></input>
+     </view>
+      <view class='bd'>
       <text class='text'>内存名称</text>
-     <input type="text" class="input"  name="name" maxlength='10'></input>
-      <button class='btn' form-type='submit'>确定</button>
+      <input type="text" class="input"  name="name" maxlength='10'></input>
+      </view>
+      <button class='btn' form-type='submit' hover-class='btn-hover'>确定</button>
      </form>
-      <button bindtap='qingjingsc' class='btn2'>删除</button>
+      <button bindtap='qingjingsc' class='btn2' hover-class='btn2-hover'>删除</button>
 </view>

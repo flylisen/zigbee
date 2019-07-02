@@ -6,12 +6,12 @@ var timestamp;
 var token;
 var sign;
 var rommid;
+const utils = require('../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
-  path: 'pages/scenesctr/scenesctr',
   data: {
     scenes:'',
     ins:-1,
@@ -19,9 +19,12 @@ Page({
     hidden:false,
   },
   pz:function(){
-    wx.navigateTo({
-      url: '../scenesconfig/scenesconfig'
-    })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({
+        url: '../scenesconfig/scenesconfig'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -61,7 +64,7 @@ Page({
     )
   },
   //触发场景
-  chang(event){
+  chang: utils.throttle(function(event){
     var ins = event.currentTarget.id;//获得下标
       this.setData({
         ins:ins
@@ -81,16 +84,13 @@ Page({
       scenes: [{sceneID: siSceneId}]
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
-      this.setData({
-        ins:-1,
-      }) 
+      console.log(res.data) 
     },
       (err) => {
         console.log(err.errMsg)
       }
     )   
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -102,6 +102,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.pageLoading = !1;
     //回调
     app.globalData.callback = function (res) {
       console.log('当前页面在scenesctr');
