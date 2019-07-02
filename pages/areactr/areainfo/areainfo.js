@@ -6,6 +6,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js')
 Page({
 
   /**
@@ -77,10 +78,9 @@ Page({
     )
   },
   //设备的开关
-  changTap: function (e) {
+  changTap: utils.throttle(function (e) {
     var ins = e.currentTarget.id;//获得下标
     var tp = e.currentTarget.dataset['tp'];
-    console.log(ins);
     this.setData({
       ins: ins
     })
@@ -99,6 +99,9 @@ Page({
         ins: -1
       })
     } else {
+      this.setData({
+        ins: -1
+      })
       let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         bindid: username,
@@ -109,18 +112,17 @@ Page({
       };
       app.wxRequest('POST', url, data, (res) => {
         console.log(res.data)
-        this.setData({
-          ins: -1
-        })
+        // this.setData({
+        //   ins: -1
+        // })
       },
         (err) => {
           console.log(err.errMsg)
         }
       )
     }
-  },
-  device: function (event) {
-    console.log(event.currentTarget.dataset['device']);
+  }, 1000),
+  device: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -129,9 +131,9 @@ Page({
       var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
-      wx.navigateTo({
-        url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + device
-      })
+        wx.navigateTo({
+          url: '../../devctr/kaiguanguan/kaiguanguan?kaiguanguan=' + device
+        })
       }
     } else {
       wx.showModal({
@@ -142,9 +144,8 @@ Page({
         ins: -1
       })
     }
-  },
-  xia: function (event) {
-    console.log(event.currentTarget.dataset['deng']);
+  }, 1000),
+  xia: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -153,9 +154,9 @@ Page({
       var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
-      wx.navigateTo({
-        url: '../../devctr/dengcolor/dengcolor?deng=' + deng
-      })
+        wx.navigateTo({
+          url: '../../devctr/dengcolor/dengcolor?deng=' + deng
+        })
       }
       this.setData({
         deng: false
@@ -169,9 +170,8 @@ Page({
         ins: -1
       })
     }
-  },
-  kongtiao: function (event) {
-    console.log(event.currentTarget.dataset['kongtiao']);
+  }, 1000),
+  kongtiao: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
@@ -180,9 +180,9 @@ Page({
       var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
-      wx.navigateTo({
-        url: '../../devctr/kongtiao/kongtiao?kongtiao=' + kongtiao
-      })
+        wx.navigateTo({
+          url: '../../devctr/kongtiao/kongtiao?kongtiao=' + kongtiao
+        })
       }
     } else {
       wx.showModal({
@@ -193,12 +193,9 @@ Page({
         ins: -1
       })
     }
-  },
-
-  sewendeng: function (event) {
-    console.log(event.currentTarget.dataset['sewendeng']);
+  }, 1000),
+  sewendeng: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
-    console.log(ins);
     this.setData({
       ins: ins
     })
@@ -206,9 +203,9 @@ Page({
       var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
-      wx.navigateTo({
-        url: '../../devctr/sewendeng/sewendeng?sewendeng=' + sewendeng
-      })
+        wx.navigateTo({
+          url: '../../devctr/sewendeng/sewendeng?sewendeng=' + sewendeng
+        })
       }
     } else {
       wx.showModal({
@@ -219,12 +216,10 @@ Page({
         ins: -1
       })
     }
-  },
+  }, 1000),
   //窗帘
-  chuanglian: function (event) {
-    console.log(event.currentTarget.dataset['chuanglian']);
+  chuanglian: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
-    console.log(ins);
     this.setData({
       ins: ins
     })
@@ -232,9 +227,9 @@ Page({
       var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
-      wx.navigateTo({
-        url: '../../devctr/chuanglian/chuanglian?deviceuid=' + deviceuid
-      })
+        wx.navigateTo({
+          url: '../../devctr/chuanglian/chuanglian?deviceuid=' + deviceuid
+        })
       }
     } else {
       wx.showModal({
@@ -245,7 +240,7 @@ Page({
         ins: -1
       })
     }
-  },
+  }, 1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

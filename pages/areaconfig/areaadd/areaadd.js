@@ -7,6 +7,7 @@ var token;
 var username;
 var pwd;
 var sign;
+const utils = require('../../../utils/util.js')
 Page({
 
   /**
@@ -22,7 +23,7 @@ Page({
     hidden:false,
     grade_name: '--请选择--'
   },
-  submit: function (e) {
+  submit: utils.throttle(function (e) {
     var that = this
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
@@ -74,7 +75,7 @@ Page({
         }
       )
     }
-  },
+  }, 1000),
   go: function () {
     var pages = getCurrentPages(); // 当前页面 
     var beforePage = pages[pages.length - 2]; // 前一个页面  

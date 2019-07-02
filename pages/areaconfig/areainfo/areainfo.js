@@ -6,6 +6,7 @@ var pwd  //网关密码
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js')
 Page({
 
   /**
@@ -21,7 +22,7 @@ Page({
     aiNames: '',
     atImg: ''
   },
-  submit: function (e) {  //删除设备
+  submit: utils.throttle(function (e) {  //删除设备
     var that = this
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
@@ -72,8 +73,7 @@ Page({
         }
       })
     }
-  },
-
+  },1000),
   /**
    * 生命周期函数--监听页面加载
    */
@@ -279,7 +279,7 @@ Page({
       arr
     })
   },
-  delete: function (e) {  //删除区域
+  delete: utils.throttle(function (e) {  //删除区域
     var that = this;
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
@@ -317,5 +317,5 @@ Page({
         }
       }
     })
-  }
+  },1000),
 })
