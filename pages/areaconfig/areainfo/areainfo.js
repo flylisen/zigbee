@@ -55,15 +55,12 @@ Page({
               console.log(res.data);
               wx.showToast({
                 title: '删除成功',
-                duration: 2000
+                duration: 1000
               });
-              var pages = getCurrentPages(); // 当前页面 
-              var beforePage = pages[pages.length - 2]; // 前一个页面  
-              wx.navigateBack({
-                success: function () {
-                  beforePage.onLoad(); // 执行前一个页面的方法     
-                }
-              })
+              var pages = getCurrentPages()    //获取加载的页面
+              var currentPage = pages[pages.length - 1]    //获取当前页面的对象
+              var options = currentPage.options
+              that.onLoad(options);
             },
               (err) => {
                 console.log(err.errMsg)
@@ -276,6 +273,7 @@ Page({
         arr.push(infoArray[i]);
       }
     }
+    console.log(arr);
     this.setData({
       sortedDevs: infoArray,
       arr

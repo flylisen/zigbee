@@ -1,0 +1,18 @@
+<!--pages/about/guide/guide.wxml-->
+<view class='guide'>
+如何使用小程序？
+</view>
+<view>
+<view class="navigator">
+                     <text class="navigator-text">区域控制：进入某一区域控制区域内设备</text>
+                 </view>
+                 <view class="navigator">
+                    <text class="navigator-text">场景控制：点击触发场景</text>
+                 </view>
+                  <view class="navigator">
+                   <text class="navigator-text">设备控制：1.可控设备：控制设备开关等</text>
+                 </view>
+                 <view class="navigator1">
+                   <text class="navigator-text1">2.不可控设备：查看设备信息</text>
+                 </view>
+</view>

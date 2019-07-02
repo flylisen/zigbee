@@ -1,20 +1,22 @@
 <view class="bg">
   <view class="head">
-    <view class="headIcon">
-      <image src="../../images/about/user.png" style="width:70px;height:70px;margin-top:60px;"></image> 
+    <view class='tp'>
+      <image src="../../images/about/user.png" class="headIcon"></image> 
     </view>
     <text>用户名:{{username}}</text>
   </view>
 </view>
 <view class="index">
+<image src='../../images/about/background.png' class='to' style='width:100%;height:460rpx;' ></image>
   <view class="index-bd">
     <view class="kind-list">
         <view class="kind-list-item">
-          <view  id="1" class="kind-list-item-hd {{1==ins? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
-          <view><image src="../../images/about/guide.png" style="width:30px;height:26px;"></image></view>
+          <view  class="kind-list-item-hd" bindtap="kindToggle">
+          <view><image src="../../images/about/guide.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">操作指南</view>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
           </view>
-          <view class="kind-list-item-bd {{1==ins? 'kind-list-item-bd-show' : ''}}">
+          <!-- <view class="kind-list-item-bd {{1==ins? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{1==ins? 'navigator-box-show': ''}}">
                  <view class="navigator">
                      <text class="navigator-text">区域控制：进入某一区域控制区域内设备</text>
@@ -29,14 +31,15 @@
                    <text class="navigator-text1">2.不可控设备：查看设备信息</text>
                  </view>
             </view>
-          </view>
+          </view> -->
         </view>
         <view class="kind-list-item">
-          <view  id="2" class="kind-list-item-hd {{2==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle2">
-          <view><image src="../../images/about/idea.png" style="width:30px;height:26px;"></image></view>
+          <view  class="kind-list-item-hd" bindtap="kindToggle2">
+          <view><image src="../../images/about/idea.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">意见反馈</view>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
           </view>
-          <view class="kind-list-item-bd {{2==ins2? 'kind-list-item-bd-show' : ''}}">
+          <!-- <view class="kind-list-item-bd {{2==ins2? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{2==ins2? 'navigator-box-show': ''}}">
                  <view class="navigator">
                      <text class="navigator-text">邮箱：rishun@gzrishun.com</text>
@@ -45,13 +48,15 @@
                     <text class="navigator-text">联系我们：020 - 6682 3969</text>
                  </view>
             </view>
+          </view> -->
           </view>
         </view><view class="kind-list-item">
-          <view  id="3" class="kind-list-item-hd {{3==ins3? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle3">
-          <view><image src="../../images/about/me.png" style="width:30px;height:26px;"></image></view>
+          <view  class="kind-list-item-hd1" bindtap="kindToggle3">
+          <view><image src="../../images/about/me.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">关于我们</view>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
           </view>
-          <view class="kind-list-item-bd {{3==ins3? 'kind-list-item-bd-show' : ''}}">
+          <!-- <view class="kind-list-item-bd {{3==ins3? 'kind-list-item-bd-show' : ''}}">
             <view class="navigator-box {{3==ins3? 'navigator-box-show': ''}}">
                  <view class="navigator">
                      <text class="navigator-text">产品名称：日顺微信网关</text>
@@ -63,11 +68,10 @@
                    <text class="navigator-text">地址：广州市番禺区洛溪新城恒达工业园A2栋4层</text>
                  </view>
             </view>
-          </view>
+          </view> -->
         </view>
     </view>
   </view>
-</view>
   <view>
   <button bindtap='logout' class='logout'>退出登录</button>
   </view>

@@ -1,0 +1,16 @@
+/* pages/about/aboutus/aboutus.wxss */
+.navigator {
+  padding: 20rpx 30rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+.navigator-text {
+  flex: 1;
+}
+.guide{
+  border-bottom: 1px rgb(238, 235, 235) solid;
+  font-size: 36rpx;
+  padding: 30rpx;
+}

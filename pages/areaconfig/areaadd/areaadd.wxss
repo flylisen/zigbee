@@ -10,11 +10,14 @@
   color: black;
   font-size: 30px;
 }
+.header{
+  margin-left: 50rpx;
+}
 input{
   border: 1px solid black;
-  width: 90%;
+  width: 89%;
   height: 40px;
-  margin: 20px 20px;
+  margin: 40rpx 50rpx;
 }
 .button1{
   color: white;
@@ -22,8 +25,8 @@ input{
   padding:0rpx 100rpx;
   background: orange;
   margin-top: 40px;
-  width: 60%;
-  height: 35px;
+  width: 88%;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,15 +115,14 @@ border-bottom: 1px solid #000;
 
 }
 .top-text{
-
-float: left}
+float: left;
+margin-left: 50rpx;
+}
 .top-selected{
 
 width: 50%;
 
 display: flex;
-
-
 
 align-items: center;
 
@@ -131,7 +133,7 @@ border: 1px solid #ccc;
 padding: 0 10rpx;
 
 font-size: 30rpx;
-margin-left:300rpx;
+margin-left:326rpx;
 }
 .select_box {
 
@@ -236,4 +238,8 @@ to {
   font-size:32rpx;
   margin-top:-128rpx;
   color:#999999; 
+}
+.device{
+  margin-top: 50rpx;
+  margin-left:50rpx;
 }

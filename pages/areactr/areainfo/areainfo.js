@@ -127,9 +127,12 @@ Page({
     })
     if (event.currentTarget.dataset['device'].diOnlineStatu > 0) {
       var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
       wx.navigateTo({
         url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + device
       })
+      }
     } else {
       wx.showModal({
         title: '提示',
@@ -148,9 +151,12 @@ Page({
     })
     if (event.currentTarget.dataset['deng'].diOnlineStatu > 0) {
       var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
       wx.navigateTo({
         url: '../../devctr/dengcolor/dengcolor?deng=' + deng
       })
+      }
       this.setData({
         deng: false
       })
@@ -172,9 +178,12 @@ Page({
     })
     if (event.currentTarget.dataset['kongtiao'].diOnlineStatu > 0) {
       var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
       wx.navigateTo({
         url: '../../devctr/kongtiao/kongtiao?kongtiao=' + kongtiao
       })
+      }
     } else {
       wx.showModal({
         title: '提示',
@@ -195,9 +204,12 @@ Page({
     })
     if (event.currentTarget.dataset['sewendeng'].diOnlineStatu > 0) {
       var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
       wx.navigateTo({
         url: '../../devctr/sewendeng/sewendeng?sewendeng=' + sewendeng
       })
+      }
     } else {
       wx.showModal({
         title: '提示',
@@ -218,9 +230,12 @@ Page({
     })
     if (event.currentTarget.dataset['chuanglian'].diOnlineStatu > 0) {
       var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
       wx.navigateTo({
         url: '../../devctr/chuanglian/chuanglian?deviceuid=' + deviceuid
       })
+      }
     } else {
       wx.showModal({
         title: '提示',
@@ -242,6 +257,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.pageLoading = !1;
     var pages = getCurrentPages()    //获取加载的页面
     var currentPage = pages[pages.length - 1]    //获取当前页面的对象
     var options = currentPage.options

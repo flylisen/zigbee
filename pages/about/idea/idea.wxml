@@ -1,0 +1,12 @@
+<!--pages/about/idea/idea.wxml-->
+<view class='guide'>
+如何联系我们反馈问题？
+</view>
+<view>
+<view class="navigator">
+                     <text class="navigator-text">邮箱：rishun@gzrishun.com</text>
+                 </view>
+                 <view class="navigator">
+                    <text class="navigator-text">联系我们：020 - 6682 3969</text>
+                 </view>
+</view>
