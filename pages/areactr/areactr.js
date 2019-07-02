@@ -15,23 +15,32 @@ Page({
     showModal: false
   },
   bindAdd: function () {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({
       url: '../areaconfig/areaconfig'
     })
+    }
   },
   go: function () {
     this.setData({
       showModal: false
     });
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.redirectTo({
       url: '../areactr/areactr',
     }, 2000)
+    }
   },
   //跳转到区域配置页面
   scenesctr: function () {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({
       url: '../areaconfig/areaconfig'
     })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -94,14 +103,18 @@ Page({
     console.log(event.currentTarget.dataset['id']);
     var aiid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['id']));//函数可把字符串作为 URI
     console.log(aiid)
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({
       url: 'areainfo/areainfo?aiid=' + aiid
     })
+    }
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.pageLoading = !1;
     //回调
     app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);

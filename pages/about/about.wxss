@@ -1,24 +1,31 @@
+/* page{
+  background-color:#F8F8F8;
+} */
 .bg {
-  height: 220px;
-  background-color:#FF7017;
+  height: 340rpx;
+  background-color:#FEA152;
 }
 
 .head {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
 }
-
-.headIcon{
+.tp{
   display: flex;
   justify-content: center;
 }
+ .headIcon{
+ width:70px;
+ height:70px;
+ margin-top:70rpx;
+} 
 .head text{
    display: flex;
    justify-content: center;
    margin-right: 10px;
-   margin-top: 30px;
+   font-size: 40rpx;
    color: #f4f5f6;
+   margin-top: 20rpx;
    
 }
 .logout{
@@ -26,19 +33,26 @@
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   background: red;
-  margin-top: 20rpx;
-  width: 60%;
+  margin-top: 260rpx;
+  width: 88%;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.index{
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin-top: 20rpx;
 }
 .index-hd {
   padding: 80rpx;
   text-align: center;
 }
 .index-bd {
-  padding: 0 30rpx 40rpx;
+  padding: 30rpx 30rpx 0 30rpx;
+  position: absolute;
 }
 .index-ft {
   padding-bottom: 20rpx;
@@ -120,11 +134,13 @@
   margin-top: -8rpx;
   right: 28rpx;
 }
-
+.kind-list{
+  width: 690rpx;
+}
 
 .kind-list-item {
   margin: 5rpx 0;
-  background-color: #FFFFFF;
+  /* background-color: #FFFFFF; */
   border-radius: 4rpx;
   overflow: hidden;
 }
@@ -134,21 +150,35 @@
 .kind-list-text{
   flex: 1;
   margin-left: 15rpx;
+  margin-top: -20rpx;
 }
 .kind-list-img {
   width: 60rpx;
   height: 60rpx;
 }
 .kind-list-item-hd {
-  padding: 30rpx;
+  padding: 0 0 20rpx 0;
   display: flex;
   align-items: center;
   border:8rpx slide black;
-  border-bottom:100%;
-  border-bottom-style: groove;
+  border-bottom: 1px rgb(245,245,245) solid;
   height: 20px;
-  margin-top: 20rpx;
+  margin-top: 50rpx;
   transition: opacity .3s;
+  margin-left:40rpx;
+margin-right:40rpx
+}
+.kind-list-item-hd1 {
+  padding: 0 0 20rpx 0;
+  display: flex;
+  align-items: center;
+  border:8rpx slide black;
+  /* border-bottom: 1px rgb(245,245,245) solid; */
+  height: 20px;
+  margin-top: 50rpx;
+  transition: opacity .3s;
+  margin-left:40rpx;
+margin-right:40rpx
 }
 .kind-list-item-hd-show {
   opacity: .2;
@@ -159,4 +189,7 @@
 }
 .kind-list-item-bd-show {
   height: auto;
+}
+.to{
+  position:relative;
 }

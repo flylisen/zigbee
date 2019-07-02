@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "区域设备"
+  "navigationBarTitleText": "区域设备",
+  "navigationBarBackgroundColor": "#FEA152",
+  "navigationBarTextStyle": "white"
 }

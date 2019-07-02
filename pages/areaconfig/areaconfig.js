@@ -59,9 +59,12 @@ Page({
     )
   },
   bindAdd: function () {
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({
       url: '../areaconfig/areaadd/areaadd',
     }, 2000)
+    }
   },
 
   /**
@@ -75,6 +78,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    this.pageLoading = !1;
     //回调
     app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);
@@ -98,8 +102,11 @@ Page({
   areainfo: function (event) {
     // var aiId = event.currentTarget.id;
     var aiid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['id']));//函数可把字符串作为 URI
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
     wx.navigateTo({
       url: 'areainfo/areainfo?aiid=' + aiid
     })
+    }
   }
 })

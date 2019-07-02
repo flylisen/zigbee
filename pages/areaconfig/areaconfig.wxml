@@ -5,9 +5,9 @@
      </view>
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">
-       <view class="info" data-id="{{item}}"    bindtap='areainfo'>
-       <image src='../../images/scenesctr/scenesettringdj.png' style='width:100%; height:100%;' mode='widthFix'></image>
-               <image  src='../../images/areactr/{{item.atImg}}' class='tp' style="width:28%;height:140rpx;" ></image>
+       <view class="info" data-id="{{item}}" id="{{index}}"   bindtap='areainfo'>
+       <image src='../../images/areactr/{{item.atImg}}'  class='tp' style='width:100%; height:190rpx;' mode='widthFix'></image>
+               <!-- <image class='btnImg1' src='../../images/areactr/{{item.atImg}}'  class='tp' style="width:28%;height:140rpx;"></image> -->
                 <view class='areaname' wx:if="{{item.aiName==''}}">区域</view>
                 <view class='areaname' wx:else>{{item.aiName}}</view>
       </view>

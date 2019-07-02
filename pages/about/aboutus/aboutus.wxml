@@ -1,0 +1,15 @@
+<!--pages/about/aboutus/aboutus.wxml-->
+<view class='guide'>
+小程序简介
+</view>
+<view>
+<view class="navigator">
+                     <text class="navigator-text">产品名称：日顺微信网关</text>
+                 </view>
+                 <view class="navigator">
+                    <text class="navigator-text">版本号：1.0</text>
+                 </view>
+                  <view class="navigator">
+                   <text class="navigator-text">地址：广州市番禺区洛溪新城恒达工业园A2栋4层</text>
+                 </view>
+</view>

@@ -1,12 +1,12 @@
 <!--pages/areaconfig/areaadd/areaadd.wxml-->
 <view class='main'>
-  <view class='header'>
+  <view>
    <image src='/images/areactr/areaadd.png' style="width:70px;height:70px;"></image>
   </view>
   <view class='body'>
     <form bindsubmit='submit'>
       <view>
-        <text>区域名称：</text>
+        <text class='header'>区域名称：</text>
         <input placeholder='区域名称' name="areaname" maxlength='8'></input>
       </view>
       <view class='top-text'>区域所选类型</view>
@@ -30,6 +30,7 @@
   </view>
 
 </view>
+<view class='device'>添加设备</view>
    <view class="link">
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
        <view class="link_child" wx:if="{{item.diDeviceid==2}}">
@@ -80,7 +81,7 @@
          </view>
     </block> 
     </view>
-    <button class='button1' form-type='submit'>保存</button>
+    <button class='button1' form-type='submit'>确定</button>
     </form>
   </view>
 </view>
