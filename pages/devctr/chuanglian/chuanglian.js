@@ -5,6 +5,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js');
 Page({
 
   /**
@@ -44,7 +45,7 @@ Page({
       })
     }
   },
-  chuangliank:function(e){
+  chuangliank: utils.throttle(function(e){
       this.setData({
         k: '/images/chuanglian/kdj.png',
         ktest: true
@@ -70,8 +71,8 @@ Page({
           console.log(err.errMsg)
         }
       )
-  },
-  chuangliantz:function(e){
+  },3000),
+  chuangliantz: utils.throttle(function(e){
     this.setData({
         tz: '/images/chuanglian/tzdj.png',
         tztest:true
@@ -97,8 +98,8 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },
-  chuangliag:function(e){
+  },3000),
+  chuangliag: utils.throttle(function(e){
       this.setData({
         g: '/images/chuanglian/gdj.png',
         gtext: true
@@ -125,7 +126,7 @@ Page({
         }
       )
   
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -8,10 +8,12 @@
         <view class="link">
         <block  wx:for="{{scenes}}" wx:for-item="item">
         <view bindtap='chang' data-id="{{item}}" class="link_child" id="{{index}}">
-               <image src="{{index==ins?'/images/scenesctr/scenesettringdj.png':'/images/scenesctr/scenesettringwdj.png'}}" mode="scaleToFill" class="{{item.siShowName.length>=5?'background-image1':'background-image2'}}"></image>
-               <image class="btnImg1" src='../../images/scenesctr/scene.png' style="width:40px;height:40px;"></image>
-                <view class="{{item.siShowName.length>=4?'btnImg2':'btnImg3'}}" wx:if="{{item.siShowName==''}}">场景</view>
-                <view class="{{item.siShowName.length>=4?'btnImg2':'btnImg3'}}" wx:else>{{item.siShowName}}</view>
+                <image src="../../images/scenesctr/scenebj.png" class='bjtp'></image>
+                <view wx:if="{{index==ins}}">
+                <image src="../../images/scenesctr/scenexz.png" class='xz'></image>
+                </view>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:if="{{item.siShowName==''}}">场景</view>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:else>{{item.siShowName}}</view>
          </view>
        </block>
 </view>

@@ -13,9 +13,12 @@ Page({
     hidden:false,
   },
   bindAdd:function(){
-    wx.navigateTo({
-      url: '../scenesconfig/scenesadd/scenesadd',
-    }, 2000)
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({
+        url: '../scenesconfig/scenesadd/scenesadd',
+      }, 2000)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -52,9 +55,12 @@ Page({
   },
   changjing: function (event){
     var changjing = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['id']));//函数可把字符串作为 URI
-    wx.navigateTo({
-       url: 'changjing/changjing?changjing=' + changjing
-    })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({
+        url: 'changjing/changjing?changjing=' + changjing
+      })
+    }
   }, 
   /**
    * 生命周期函数--监听页面卸载
@@ -63,5 +69,8 @@ Page({
     var pages = getCurrentPages(); // 当前页面 
     var beforePage = pages[pages.length - 2]; // 前一个页面
     beforePage.onLoad();
+  },
+  onShow(){
+    this.pageLoading = !1;
   }
 })

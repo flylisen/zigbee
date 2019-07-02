@@ -8,6 +8,7 @@ var token;
 var sign;
 var diName=[];
 var diShowName=[];
+const utils = require('../../../utils/util.js');
 Page({
 
   /**
@@ -58,7 +59,7 @@ Page({
     )
   },
   //修改设备名称
-  submit: function (e) {
+  submit: utils.throttle(function (e) {
     var that = this;
     var name = e.detail.value.name;//内存名称
     var showname = e.detail.value.showname;//显示名称    
@@ -68,7 +69,6 @@ Page({
       bindstr: pwd
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
       var diName=[];
       var diShowName=[];
       for (var i in res.data.devs){
@@ -151,9 +151,9 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },
+  },3000),
   //删除设备
-  qingjingsc: function () {
+  qingjingsc: utils.throttle(function () {
     var that = this;
     wx.showModal({
       title: '提示',
@@ -196,7 +196,7 @@ Page({
         }
       }
     })
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

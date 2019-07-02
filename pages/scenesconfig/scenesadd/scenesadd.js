@@ -9,6 +9,7 @@ var temSet;
 var tp;
 var name = [];
 var showname = [];
+const utils = require('../../../utils/util.js')
 Page({
 
   /**
@@ -60,7 +61,7 @@ Page({
     ins5:-1,
     hidden:false,
   },
-  kindToggle: function (e) {
+  kindToggle: utils.throttle(function (e) {
     var ins = e.currentTarget.id;//获得下标
     if(this.data.ins==ins){
       this.setData({
@@ -71,8 +72,8 @@ Page({
         ins: ins,
       })
     }
-  },
-  kindToggle2: function (e) {
+  },3000),
+  kindToggle2: utils.throttle(function (e) {
     var ins2 = e.currentTarget.id;//获得下标
     if (this.data.ins2 == ins2) {
       this.setData({
@@ -83,8 +84,8 @@ Page({
         ins2: ins2,
       })
     }
-  },
-  kindToggle3: function (e) {
+  },3000),
+  kindToggle3: utils.throttle(function (e) {
     var ins3 = e.currentTarget.id;//获得下标
     if (this.data.ins3 == ins3) {
       this.setData({
@@ -95,8 +96,8 @@ Page({
         ins3: ins3,
       })
     }
-  },
-  kindToggle4: function (e) {
+  },3000),
+  kindToggle4: utils.throttle(function (e) {
     var ins4 = e.currentTarget.id;//获得下标
     if (this.data.ins4 == ins4) {
       this.setData({
@@ -107,8 +108,8 @@ Page({
         ins4: ins4,
       })
     }
-  },
-  kindToggle5: function (e) {
+  },3000),
+  kindToggle5: utils.throttle(function (e) {
     var ins5 = e.currentTarget.id;//获得下标
     if (this.data.ins5 == ins5) {
       this.setData({
@@ -119,7 +120,7 @@ Page({
         ins5: ins5,
       })
     }
-  },
+  },3000),
   //窗帘开关程度
   kgcd:function(e){
      var val=e.detail.value;
@@ -211,7 +212,6 @@ Page({
           arr3.push(sortResult[i]);
         }
       }
-      console.log(arr3)
       that.setData({
         sortedDevs: arr3,
         hidden:true
@@ -228,7 +228,7 @@ Page({
       this.data.sortedDevs[i].isSelect = false;
     }
   },
-  chooseTap(e) {//单击选中或取消按钮
+  chooseTap: utils.throttle(function(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
      let infoArray = this.data.sortedDevs;
       let arr = [];
@@ -236,20 +236,19 @@ Page({
         for (var i = 0; i < infoArray.length; i++) { //获取选中信息
           if (infoArray[i].isSelect) {
             arr.push(infoArray[i]);
-            console.log(arr);
           }
         }
         this.setData({
           sortedDevs: infoArray,
           arry:arr
         })
-    this.data.sceneMemberArray = arr;
-
-  },
+    console.log(arr);
+    this.data.sceneMemberArray = arr; 
+  },3000),
   /**
     * 空调弹窗
     */
-  kongtiao: function (event) {
+  kongtiao: utils.throttle(function (event) {
     tp = event.currentTarget.dataset['kongtiao'];
     this.setData({
       showModal: true,
@@ -257,11 +256,11 @@ Page({
       diZonetype: tp.diZonetype,
       index:1
     })
-  },
+  },3000),
   /**
    * 灯弹窗
    */
-  dengxia: function (event) {
+  dengxia: utils.throttle(function (event) {
     tp = event.currentTarget.dataset['deng'];
     this.setData({
       showModal: true,
@@ -269,11 +268,11 @@ Page({
       diZonetype: tp.diZonetype,
       index: 2
     })
-  },
+  },3000),
   /**
    * 色温灯
    */
-  sewendeng: function (event) {
+  sewendeng: utils.throttle(function (event) {
     tp = event.currentTarget.dataset['sewendeng'];
     this.setData({
       showModal: true,
@@ -281,9 +280,9 @@ Page({
       diZonetype: tp.diZonetype,
       index:3
     })
-  },
+  },3000),
   //开关事件
-  changTap: function (e) {
+  changTap: utils.throttle(function (e) {
     var that = this;
     var tp = e.currentTarget.dataset['tp'];
     console.log(tp)
@@ -295,8 +294,8 @@ Page({
     }
     console.log(temSet);
     that.chufa(tp);
-  },
-  chufa: function (tp) {
+  },3000),
+  chufa: utils.throttle(function (tp) {
     var that = this;
     for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
       if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
@@ -311,8 +310,8 @@ Page({
         }
       }
     }
-  },
-  submit: function (e) {
+  },3000),
+  submit: utils.throttle(function (e) {
     let Array = this.data.sceneMemberArray;
     console.log(Array);
     let sceneMemberArray=[];
@@ -336,7 +335,7 @@ Page({
       var type2 = {};
       var type3 = {};
       if (Array[i].diDeviceid == 769 && Array[i].diZonetype==1){ //空调
-        let airTempArray = [];//清空
+        this.data.airTempArray = [];//清空
         var funId=0;
         var nid=0;
         var type1={};
@@ -436,39 +435,50 @@ Page({
           content: '请选择设备'
         })
       }else{
-        let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-        let data = {
-          act: "setScenes",
-          code: 603,
-          AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-          key: "bq6wqzasjwtkl0i21pi9fbeq4",
-          bindid: username,
-          bindstr: pwd,
-          ver: "2.0",
-          scenes: [{
-            sceneName: name,
-            showName: showname,
-            sceneVisible: sceneVisible,
-            sceneMembers: this.data.realsceneMemberArray
-          }]
-        };
-        app.wxRequest('POST', url, data, (res) => {
-          if (res.data.code == 1) {
-            var pages = getCurrentPages(); // 当前页面 
-            var beforePage = pages[pages.length - 2]; // 前一个页面  
-            wx.navigateBack({
-              success: function () {
-                beforePage.onShow(); // 执行前一个页面的方法     
-              }
-            })
-          }
-        },
-          (err) => {
-            console.log(err.errMsg)
-          }
-        )
+        if (this.data.realsceneMemberArray.length<=20){
+          let url = app.globalData.URL + 'addScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+          let data = {
+            act: "setScenes",
+            code: 603,
+            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
+            key: "bq6wqzasjwtkl0i21pi9fbeq4",
+            bindid: username,
+            bindstr: pwd,
+            ver: "2.0",
+            scenes: [{
+              sceneName: name,
+              showName: showname,
+              sceneVisible: sceneVisible,
+              sceneMembers: this.data.realsceneMemberArray
+            }]
+          };
+          app.wxRequest('POST', url, data, (res) => {
+            console.log(res.data);
+            if (res.data.code == 1) {
+              var pages = getCurrentPages(); // 当前页面 
+              var beforePage = pages[pages.length - 2]; // 前一个页面  
+              wx.navigateBack({
+                success: function () {
+                  beforePage.onShow(); // 执行前一个页面的方法     
+                }
+              })
+            }
+          },
+            (err) => {
+              console.log(err.errMsg)
+            }
+          )
+        }else{
+          this.data.realsceneMemberArray = [];
+          console.log(this.data.realsceneMemberArray);
+          wx.showModal({
+            title: '提示',
+            content: '选择的设备超过范围'
+          })
+
+        }
       }   
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

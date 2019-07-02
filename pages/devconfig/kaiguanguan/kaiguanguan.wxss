@@ -4,27 +4,35 @@
  justify-content: center;     
 }
 .input{
-   background-color: #F5F5F5;
+   background-color: #F8F8F8;
    border-radius:10rpx; 
    margin: 10rpx auto;
-   width: 300px;
-   height: 40px;
+   width: 700rpx;
+   height: 90rpx;
 }
 .text{
-   margin-left: 30px;
+   margin-left: 30rpx;
 }
 .btn{
-  width: 75%;
+  width: 700rpx;
   margin-top: 50rpx;
-  background-color: #FEA152;
+  background: #FEA152;
   color: white;
   border-radius:50rpx; 
 }
 .btn2{
-  width: 75%;
+  width:700rpx;
   margin-top: 50rpx;
-  background-color: #FE5653;
-  color: white;
+  background: none;
+  color: #FE5653;
+  border: 1px solid #FE5653; 
   border-radius:50rpx; 
+}
+.btn2-hover{
+  background: #FE5653;
+  color:white;
+}
+.bd{
+  margin-top:40rpx;
 }
 

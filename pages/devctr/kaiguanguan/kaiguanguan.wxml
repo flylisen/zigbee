@@ -41,78 +41,69 @@
               <text>名称 :{{diNames}}</text>
            </view>
 </view>
+<image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
 <view class='root-view'>
      <!--状态-->
     <view class='imgbox'>
-       <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
         <view wx:if="{{chuanglians>=0}}">
            <text class='txt'>状态</text>
            <text class='txt1'>正常</text>
            </view>
             <view wx:else>
             <text class='txt'>状态</text>
-            <text class='txt1'>异常</text>         
+            <text class='txt1'>异常</text>      
            </view>
-    </view>
+</view>
     <view wx:for="{{points}}" wx:for-item="item">
+      <view class='border'>
+          <view class='border2'></view>
+      </view>   
       <view class='imgbox'>
         <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='0'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                 <text class='txt'>门磁检测</text>
                 <text class='txt2'>关门</text>
          </view>
          <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='0'}}">
-           <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                 <text class='txt'>门磁检测</text>
                 <text class='txt2'>开门</text>
          </view>
          <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
-           <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>人体红外检测</text>
-                    <text class='txt3'>有人</text>
+                    <text class='txt2'>有人</text>
          </view>
           <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>人体红外检测</text>
-                    <text class='txt3'>无人</text>
+                    <text class='txt2'>无人</text> 
           </view>
            <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>烟雾检测</text>
-                    <text class='txt2'>有泄露</text>
+                    <text class='txt3'>有泄露</text> 
           </view>
           <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>烟雾检测</text>
-                    <text class='txt2'>无泄露</text>
+                    <text class='txt3'>无泄露</text> 
           </view>
           <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='0'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>防拆</text>
-                    <text class='txt2'>未拆除</text>
+                    <text class='txt3'>未拆除</text> 
           </view>
           <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='1'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>防拆</text>
-                    <text class='txt2'>拆除</text>
+                    <text class='txt3'>拆除</text> 
           </view>
           <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='0'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>电量</text>
                     <text class='txt2'>电池电压正常</text>
           </view>
           <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='1'}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>电量</text>
                     <text class='txt2'>电池电压低</text>
           </view>
           <view wx:if="{{item.spAttrType==203}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>温度</text>
                     <text class='txt2'>{{item.spAttrValue/100}}℃</text>
           </view>
           <view wx:if="{{item.spAttrType==204}}">
-          <image class='ico' src='../../../images/facility/bj.png' mode='scaleToFill'></image>
                     <text class='txt'>湿度</text>
                     <text class='txt2'>{{item.spAttrValue/100}}℃</text>
           </view>

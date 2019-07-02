@@ -8,6 +8,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js');
 Page({
 
   /**
@@ -52,6 +53,7 @@ Page({
     sign = app.globalData.sign;
     var deng = decodeURIComponent(options.deng);
     dengs = JSON.parse(deng);
+    console.log(dengs);
     that.setData({
       sortedDevs: dengs
     }); 
@@ -69,7 +71,7 @@ Page({
     });
   },
   //打开
-  kg:function(e){
+  kg: utils.throttle(function(e){
     let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     var value;
     console.log(dengs.diOnoffStatu);
@@ -94,7 +96,7 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },
+  },3000),
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
   onChangeColor(e) {
     //返回的信息在e.detail.colorData中
@@ -168,7 +170,7 @@ Page({
       }
     }
   },
-  listenerSlider:function(e){
+  listenerSlider: utils.throttle(function(e){
     if (this.data.diOnoffStatu >= 1){
       //获取滑动后的值
       let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -192,7 +194,7 @@ Page({
         icon: 'none'
       })
     } 
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

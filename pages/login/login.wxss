@@ -16,6 +16,13 @@ page{
   left: 0px;
   top: 0px;
 }
+.text{
+  color: white;
+  position: absolute; 
+  margin-top:10rpx;
+  margin-left:50rpx;
+  font-size:14px;
+}
 /*登录图片*/
 .login-icon{ 
  flex: none; 
@@ -26,39 +33,45 @@ page{
   
 /*表单内容*/
 .login-from { 
- margin-top: 130px; 
+ margin-top: 350rpx; 
  flex: auto; 
  height:100%; 
-position: relative;
+ position: relative;
 } 
   
 .inputView { 
  background-color:#cccccc;
- border-radius: 5px; 
- line-height: 44px; 
+ border-radius: 50px; 
+ line-height: 30px; 
  margin-top: 30px;
- background: rgba(0, 0, 0, 0.192);
+ background: rgba(250, 246, 246, 0.192);
 } 
 /*输入框*/
 .nameImage, .keyImage { 
- margin-left: 22px; 
- width: 14px; 
- height: 14px
+ margin-left: 22px;
+ margin-top: 11px; 
+ width: 40rpx; 
+ height: 40rpx
 } 
-  
+.keyImage1{
+position:absolute;
+margin-left:180px;
+width:40rpx;
+height:30rpx;
+margin-top:30rpx;
+} 
 .loginLab { 
  margin: 15px 15px 15px 10px; 
  color:white; 
- font-size: 14px
 } 
 .inputText { 
  flex: block; 
  float: right; 
- text-align: right; 
- margin-right: 22px; 
- margin-top: 11px;
+ margin-right: 60px; 
+ margin-top: 10px;
  color:white; 
- font-size: 14px
+ font-size: 14px;
+ padding-left: 10px;
 }  
 /*按钮*/
 .loginBtnView { 
@@ -70,6 +83,9 @@ position: relative;
 } 
   
 .loginBtn { 
- width: 80%; 
- margin-top: 35px; 
+ width: 98%; 
+ margin-top: 35px;
+ border-radius: 50rpx; 
+ background-color: #FEA152;
+ color: white; 
 }

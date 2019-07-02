@@ -22,25 +22,34 @@ Page({
       this.setData({
         background1: '/images/areasettingdj.png'
       })
-     wx.navigateTo({
-       url: '../areactr/areactr'
-     })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
+      wx.navigateTo({
+        url: '../areactr/areactr'
+      })
+    }
   },
   control2: function (event) {
     this.setData({
       background2: '/images/areasettingdj.png'
     })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
       wx.navigateTo({
         url: '../scenesctr/scenesctr'
       })
+    }
   },
   control3: function (event) {
     this.setData({
       background3: '/images/areasettingdj.png'
     })
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
       wx.navigateTo({
         url: '../devctr/devctr'
       })
+    }    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -53,6 +62,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.pageLoading = !1;
     //回调
     app.globalData.callback= function (res) {
       console.log('接收到服务器信息', res);

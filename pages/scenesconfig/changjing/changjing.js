@@ -8,6 +8,7 @@ var token;
 var sign;
 var siName=[];
 var siShowName=[];
+const utils = require('../../../utils/util.js')
 Page({
 
   /**
@@ -18,11 +19,12 @@ Page({
     sortedDevss:[],
     sortedDevs:[],
     allSelect: false,
-    choseImg: '/images/check-circle2.png',
-    unchoseImg: '/images/check-circle.png',
-    arr: '',
+    choseImg: '/images/changjing/xz.png',
+    unchoseImg: '/images/changjing/wxz.png',
+    arr:'',
     uidarry:[],
     sceneMembers:[],
+    hidden: false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -35,7 +37,6 @@ Page({
     sign = app.globalData.sign;
     var changjings = decodeURIComponent(options.changjing);
     changjing = JSON.parse(changjings);
-    console.log(changjing);
     this.setData({
       siShowName: changjing.siShowName
     })
@@ -52,10 +53,9 @@ Page({
 
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data)
+      console.log(res.data.scenes);
       for (var i in res.data.scenes) {
         var sceneMembers = res.data.scenes[i].sceneMembers;
-        console.log(sceneMembers);
         this.data.sceneMembers = sceneMembers;
         const filterListResult = sceneMembers.filter((item, index, self) => index === self.findIndex((t) => (t.uuid === item.uuid)));
         filterListResult.forEach((item) => {
@@ -63,7 +63,8 @@ Page({
           item.deviceName = item.deviceName.substring(0, 5)
         })
         this.setData({
-          sortedDevs: filterListResult
+          sortedDevs: filterListResult,
+          hidden:true
         })
       }
     },
@@ -72,15 +73,16 @@ Page({
       }
     )
   },
-  chooseTap(e) {//单击选中或取消按钮
+  chooseTap: utils.throttle(function(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
     let infoArray = this.data.sortedDevs;
     let arr = [];
+    let sceneMembers=[];
     infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
     for (var i = 0; i < infoArray.length; i++) { //获取选中信息
       var uuid = infoArray[i].uuid;
       if (infoArray[i].isSelect) { //选中
-        var sceneMembers = this.data.sceneMembers;
+        sceneMembers = this.data.sceneMembers;
         for (var j in sceneMembers){
           if (uuid == sceneMembers[j].uuid){
             arr.push(sceneMembers[j]);
@@ -88,13 +90,13 @@ Page({
         }
       }
     }
-    console.log(arr);
     this.setData({
       sortedDevs: infoArray,
       arr
     })
-  },
-  submit:function(){
+    console.log(this.data.arr);
+  },3000),
+  submit: utils.throttle(function(){
     var that = this;
     let arr1 = that.data.arr;
     for (var i in arr1) {
@@ -103,12 +105,13 @@ Page({
       uuids.sceneFunctionID = arr1[i].sceneFunctionID;
       this.data.uidarry.push(uuids);
     }
-    var uidarry = this.data.uidarry;
+    let uidarrys = this.data.uidarry;
+    console.log(uidarrys);
     wx.showModal({
       title: '提示',
       content: '确定删除该场景的设备吗？',
       success: function (msg) {
-        if (uidarry.length ===0){
+        if (uidarrys.length ===0){
           wx.showToast({
             title:'请选择你要删除的设备',
             icon:'none'
@@ -126,7 +129,7 @@ Page({
               ver: "2",
               scenes: [{
                 sceneID: changjing.siSceneId, sceneName: changjing.siName,
-                sceneMembers: uidarry
+                sceneMembers: uidarrys
               }]
             };
             app.wxRequest('POST', url, data, (res) => {
@@ -149,15 +152,15 @@ Page({
             )
           }else if (msg.cancel) {
             console.log('用户点击取消')
+              that.data.arr=[];
+              that.data.uidarry=[];
           }
         }
       }
     })
-  },
-  delete: function (e) {  //删除场景
+  },3000),
+  delete: utils.throttle(function (e) {  //删除场景
     var that = this;
-    console.log(changjing.siId);
-    console.log(changjing.siName);
     wx.showModal({
       title: '提示',
       content: '确定删除该场景吗？',
@@ -197,13 +200,11 @@ Page({
         }
       }
     })
-  },
+  },3000),
   //修改场景名称
-  aiNames:function(e){
+  aiNames: utils.throttle(function(e){
     var sceneName = e.detail.value.sceneName;
     var sceneShowName = e.detail.value.sceneShowName;
-    console.log(sceneName);
-    console.log(sceneShowName);
     let url = app.globalData.URL + 'getSceneInfo?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getScenes",
@@ -216,7 +217,6 @@ Page({
       ver: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data.scenes)
       var siName=[];
       var siShowName=[];
       for (var i in res.data.scenes){
@@ -274,7 +274,6 @@ Page({
           scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.sceneShowName }]
         };
         app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
           var pages = getCurrentPages(); // 当前页面 
           var beforePage = pages[pages.length - 2]; // 前一个页面  
           wx.navigateBack({
@@ -293,7 +292,7 @@ Page({
         console.log(err.errMsg)
       }
     ) 
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

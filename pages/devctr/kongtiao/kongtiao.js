@@ -6,6 +6,7 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js');
 Page({
 
   /**
@@ -93,7 +94,7 @@ Page({
     )
   },
   
-  minus:function(){
+  minus: utils.throttle(function(){
     this.setData({
       minus: '../../../images/devctr/minusdj.png'
     })
@@ -131,8 +132,8 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },
-  jia:function(){
+  },3000),
+  jia: utils.throttle(function(){
     this.setData({
       jia: '../../../images/devctr/jiadj.png',
     })
@@ -171,9 +172,9 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },
+  },3000),
   //开关事件
-  kaiguanguan: function (event) {
+  kaiguanguan: utils.throttle(function (event) {
     var centralairConditionMode = this.data.centralairConditionMode;
     if (centralairConditionMode!=0){//关闭
       let url = app.globalData.URL + 'ariControlMode?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -224,30 +225,30 @@ Page({
         }
       ) 
     }
-  },
+  },3000),
   /**
     * 弹窗
     */
-  tongfeng: function () {
+  tongfeng: utils.throttle(function () {
     this.setData({
       showModal: true,
       index:2,
       ms: '../../../images/devctr/msdj.png',
       mstext:true
     })
-  },
-  actioncnt:function(){
+  },3000),
+  actioncnt: utils.throttle(function(){
     this.setData({
       showModal: true,
       index:3,
       fs: '../../../images/devctr/fsdj.png',
       fstext:true
     })
-  },
+  },3000),
   /**
    * 隐藏模态对话框
    */
-  hideModal: function () {
+  hideModal: utils.throttle(function () {
     this.data.centralairConditionMode = '';
     this.data.centralairConditionWindMode = '';
     this.setData({
@@ -257,11 +258,11 @@ Page({
       mstext:false,
       fstext:false
     });
-  },
+  },3000),
   /**
  * 对话框确认按钮点击事件(温度)
  */
-  onConfirm: function (e) {
+  onConfirm: utils.throttle(function (e) {
     console.log(this.data.centralairConditionMode);
     console.log(this.data.centralairConditionWindMode);
     var centralairConditionMode = this.data.centralairConditionMode;
@@ -332,11 +333,11 @@ Page({
       }
       this.hideModal();
     }
-  },
+  },3000),
   /**
    * 对话框取消按钮点击事件
    */
-  onCancel: function () {
+  onCancel: utils.throttle(function () {
     this.data.centralairConditionMode='';
     this.data.centralairConditionWindMode='';
     this.hideModal();
@@ -344,7 +345,7 @@ Page({
       ms: '../../../images/devctr/mswdj.png',
       fs: '../../../images/devctr/fswdj.png',
     })
-  },
+  },3000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -63,9 +63,12 @@ Page({
        ins: ins
       })
       var kaiguanguan = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kaiguanguan']));//函数可把字符串作为 URI
+    if (!this.pageLoading) {
+      this.pageLoading = !0;
       wx.navigateTo({
         url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + kaiguanguan
       })
+    }
   },
   //新设备入网
   bindAdd:function(){
@@ -107,6 +110,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.pageLoading = !1;
     //回调
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       var nodeType;

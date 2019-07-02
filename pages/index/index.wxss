@@ -31,7 +31,13 @@
 }
 .btnImg{
   position: relative;
-  margin-top: 25px;
+  margin-top: 15rpx;
+}
+.btnImg1{
+   position: relative;
+  margin-top: 15rpx;
+  margin-left:90rpx;
+  font-size: 20px;
 }
 
  
