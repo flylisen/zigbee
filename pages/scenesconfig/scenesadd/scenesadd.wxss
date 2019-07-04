@@ -3,32 +3,30 @@ page{
 }
 .imagesize{
  display:flex;                   
- justify-content: center;      
+ justify-content: center; 
+ margin-top: 40rpx;     
 }
 .input{
    background-color:white;
    border-radius:10rpx; 
    margin: 10rpx auto;
-   width: 300px;
+   width:350px;
    height: 40px;
 }
 .text{
-   margin-left: 30px;
+   margin-left: 20px;
 }
 .radio-group{
-   margin-left: 30px;
+   margin-left: 20px;
+  margin-top:30rpx;
 }
 .btn{
+  width: 90%;
+  margin-top: -10rpx;
+  background-color: #FEA152;
   color: white;
-  border-radius: 50rpx;
-  padding:0rpx 100rpx;
-  background: orange;
-  width: 60%;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top:-20px;
+  border-radius:100rpx;
+  border: none; 
 }
 .index-hd {
   padding: 80rpx;
@@ -36,6 +34,7 @@ page{
 }
 .index-bd {
   padding: 0 30rpx 40rpx;
+  margin-top: 50rpx;
 }
 .index-ft {
   padding-bottom: 20rpx;
@@ -88,7 +87,7 @@ page{
 }
 .navigator-text2{
   flex: 1;
-  margin-left: 120px;
+  margin-left: 360rpx;
 }
 .navigator-arrow {
   padding-right: 26rpx;
@@ -123,10 +122,10 @@ page{
   flex: 1;
 }
 .kind-list-img {
-  width: 60rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
   position: absolute;
-  margin-left:300px;
+  margin-left: 600rpx;
   margin-top:15px;
 
 }
@@ -146,4 +145,14 @@ page{
 }
 .kind-list-item-bd-show {
   height: auto;
+}
+.name{
+  margin-top: 50rpx;
+}
+
+.checkbox1{
+  margin-left: 13rpx;
+}
+.switch{
+  margin-left: 70rpx;
 }

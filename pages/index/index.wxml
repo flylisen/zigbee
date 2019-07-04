@@ -1,4 +1,5 @@
 <!--index.wxml-->
+     <image class='bj' src='/images/bj.png' mode="widthFix"></image> 
 <view class='count'>
 <view class='setting1'  bindtap='control1'>
       <image src="{{background1}}" mode="scaleToFill" class="background-image"></image>

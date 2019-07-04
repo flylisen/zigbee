@@ -1,11 +1,15 @@
 <view class='imagesize'>
-    <image src='/images/scenesadd/cj.png'  style='width:20%; height:20%' mode='widthFix'></image>
+    <image src='/images/scenesadd/cj.png'  style='width:30%; height:30%' mode='widthFix'></image>
 </view>
 <view>
  <form bindsubmit='submit'>
+     <view class="name">
      <text class='text'>内存名称</text>
+     </view>
      <input type="text" class="input" name="areaname" maxlength='10'></input>
+       <view class="name">
       <text class='text'>显示名称</text>
+      </view>
       <input type="text" class="input" name="showName" maxlength='10'></input>
       <radio-group class="radio-group" bindchange="radioChange">
         <label class="radio" wx:for="{{items}}">
@@ -13,7 +17,9 @@
             {{item.value}}
         </label>
         </radio-group>
+      <view class="name">
      <text class='text'>添加设备</text>
+     </view>
 <view class="index">
   <view class="index-bd">
     <view class="kind-list">
@@ -29,7 +35,9 @@
             <view class="navigator-box {{index==ins? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
+                   <view class="switch">
                   <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                  </view>
                  </view>
             </view>
           </view>
@@ -44,7 +52,9 @@
             <view class="navigator-box {{index==ins2? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
+                   <view class="switch">
                  <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                  </view>
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">开关程度</text>
@@ -103,10 +113,10 @@
                   <view class="navigator">
                    <text class="navigator-text">风速</text>
                     <radio-group bindchange="checkboxChangeWindMode">
-	                  <label class="checkbox" wx:for="{{WindMode}}">
+	                  <label class="checkbox1" wx:for="{{WindMode}}">
 	                  <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
 	                 </label>
-                    </radio-group>  
+                    </radio-group> 
                  </view>
             </view>
           </view>
@@ -121,7 +131,9 @@
             <view class="navigator-box {{index==ins5? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
+                  <view class="switch">
                  <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                 </view>
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">温度</text>

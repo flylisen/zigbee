@@ -73,18 +73,27 @@ Page({
     )
   },
   //设备的开关
-  changTap: utils.throttle(function(e){
+  changTap:function(e){
     var ins = e.currentTarget.id;//获得下标
     var tp = e.currentTarget.dataset['tp'];
-    this.setData({
-      ins: ins
-    })
     var value; 
     if (tp.diOnoffStatu==0){
       value=1;
     }else{
       value =0; 
     }
+    for (var i = 0; i < this.data.sortedDevs.length; i++) {
+      if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
+        console.log('找到匹配', i);
+        var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+        this.setData({
+          [tmp]: value
+        })
+      }
+    }
+    this.setData({
+      ins: ins
+    })
     if (tp.diOnlineStatu==0){
       wx.showModal({
         title: '提示',
@@ -107,16 +116,18 @@ Page({
       };
       app.wxRequest('POST', url, data, (res) => {
          console.log(res.data)
-        // this.setData({
-        //   ins: -1
-        // })
+        if (res.data.code!=1){
+          this.setData({
+            ins: -1
+          })
+        }
       },
         (err) => {
           console.log(err.errMsg)
         }
       )
      }
-  },3000),
+  },
   device: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
@@ -139,7 +150,7 @@ Page({
         ins:-1
       })
     }
-  },3000),
+  },1000),
   xia: utils.throttle(function (event){
     var ins = event.currentTarget.id;//获得下标
     this.setData({
@@ -165,7 +176,7 @@ Page({
         ins: -1
       })
     }
-  },3000),
+  },1000),
   kongtiao: utils.throttle(function(event){
     var ins = event.currentTarget.id;//获得下标
     this.setData({
@@ -188,7 +199,7 @@ Page({
         ins: -1
       })
     }
-  },3000),
+  },1000),
   sewendeng: utils.throttle(function (event){
     var ins = event.currentTarget.id;//获得下标
     this.setData({
@@ -211,7 +222,7 @@ Page({
         ins: -1
       })
     }   
-  },3000),
+  },1000),
   //窗帘
   chuanglian: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
@@ -235,7 +246,7 @@ Page({
         ins: -1
       })
     }
-  },3000),
+  },1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -132,7 +132,7 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },3000),
+  },1000),
   jia: utils.throttle(function(){
     this.setData({
       jia: '../../../images/devctr/jiadj.png',
@@ -172,7 +172,7 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },3000),
+  },1000),
   //开关事件
   kaiguanguan: utils.throttle(function (event) {
     var centralairConditionMode = this.data.centralairConditionMode;
@@ -225,7 +225,7 @@ Page({
         }
       ) 
     }
-  },3000),
+  },1000),
   /**
     * 弹窗
     */
@@ -236,7 +236,7 @@ Page({
       ms: '../../../images/devctr/msdj.png',
       mstext:true
     })
-  },3000),
+  },1000),
   actioncnt: utils.throttle(function(){
     this.setData({
       showModal: true,
@@ -244,7 +244,7 @@ Page({
       fs: '../../../images/devctr/fsdj.png',
       fstext:true
     })
-  },3000),
+  },1000),
   /**
    * 隐藏模态对话框
    */
@@ -258,7 +258,7 @@ Page({
       mstext:false,
       fstext:false
     });
-  },3000),
+  },1000),
   /**
  * 对话框确认按钮点击事件(温度)
  */
@@ -333,7 +333,7 @@ Page({
       }
       this.hideModal();
     }
-  },3000),
+  },1000),
   /**
    * 对话框取消按钮点击事件
    */
@@ -345,7 +345,7 @@ Page({
       ms: '../../../images/devctr/mswdj.png',
       fs: '../../../images/devctr/fswdj.png',
     })
-  },3000),
+  },1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

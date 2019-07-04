@@ -71,7 +71,7 @@ Page({
           console.log(err.errMsg)
         }
       )
-  },3000),
+  },1000),
   chuangliantz: utils.throttle(function(e){
     this.setData({
         tz: '/images/chuanglian/tzdj.png',
@@ -98,7 +98,7 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },3000),
+  },1000),
   chuangliag: utils.throttle(function(e){
       this.setData({
         g: '/images/chuanglian/gdj.png',
@@ -126,7 +126,7 @@ Page({
         }
       )
   
-  },3000),
+  },1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

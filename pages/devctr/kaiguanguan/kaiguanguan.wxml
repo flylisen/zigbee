@@ -17,7 +17,7 @@
         <image src='../../../images/facility/cz.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
         <image src='../../../images/facility/pa.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
 </view>
-<view class='imagesize'>
+<view class='imagesize1'>
     <view wx:if="{{diNames==''}}">
                     <view wx:if="{{diDeviceid==1026&&diZonetype==42}}"><text>水浸传感器</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==44}}"><text>紧急按钮</text></view>
@@ -47,18 +47,22 @@
     <view class='imgbox'>
         <view wx:if="{{chuanglians>=0}}">
            <text class='txt'>状态</text>
+           <view class='dq'>
            <text class='txt1'>正常</text>
+           </view>
            </view>
             <view wx:else>
             <text class='txt'>状态</text>
-            <text class='txt1'>异常</text>      
+             <view class='dq'>
+            <text class='txt1'>异常</text>
+            </view>      
            </view>
 </view>
     <view wx:for="{{points}}" wx:for-item="item">
       <view class='border'>
           <view class='border2'></view>
       </view>   
-      <view class='imgbox'>
+            <view class='imgbox'>
         <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='0'}}">
                 <text class='txt'>门磁检测</text>
                 <text class='txt2'>关门</text>
@@ -69,31 +73,41 @@
          </view>
          <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
                     <text class='txt'>人体红外检测</text>
-                    <text class='txt2'>有人</text>
+                    <view class='dq'>
+                    <text>有人</text>
+                    </view>
          </view>
           <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
                     <text class='txt'>人体红外检测</text>
-                    <text class='txt2'>无人</text> 
+                    <view class='dq'>
+                    <text>无人</text>
+                    </view> 
           </view>
            <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
                     <text class='txt'>烟雾检测</text>
-                    <text class='txt3'>有泄露</text> 
+                    <text>有泄露</text> 
           </view>
           <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
                     <text class='txt'>烟雾检测</text>
-                    <text class='txt3'>无泄露</text> 
+                    <text>无泄露</text> 
           </view>
           <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='0'}}">
                     <text class='txt'>防拆</text>
-                    <text class='txt3'>未拆除</text> 
+                    <view class='dq'>
+                    <text>未拆除</text>
+                    </view> 
           </view>
           <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='1'}}">
                     <text class='txt'>防拆</text>
-                    <text class='txt3'>拆除</text> 
+                    <view class='dq'>
+                    <text>拆除</text>
+                    </view> 
           </view>
           <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='0'}}">
                     <text class='txt'>电量</text>
-                    <text class='txt2'>电池电压正常</text>
+                    <view class='dq'>
+                    <text>电池电压正常</text>
+                    </view>
           </view>
           <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='1'}}">
                     <text class='txt'>电量</text>
@@ -107,6 +121,6 @@
                     <text class='txt'>湿度</text>
                     <text class='txt2'>{{item.spAttrValue/100}}℃</text>
           </view>
-    </view>
+       </view>
     </view>  
 </view>

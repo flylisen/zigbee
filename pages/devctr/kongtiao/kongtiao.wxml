@@ -17,12 +17,12 @@
               <image style='width:20%; height:20%' src='../../../images/devctr/cooldj.png' mode="widthFix"></image>
               </view>
               <view wx:else class='box'>
-               <image style='width:20%; height:20%' src='../../../images/devctr/coolwdj.png' mode="widthFix"></image>
+               <image style='width:25%; height:25%' src='../../../images/devctr/coolwdj.png' mode="widthFix"></image>
               </view>
       </view>
       <view id="img" class="scroll-view-item_H2 img">
           <view wx:if="{{centralairConditionMode==4}}" class='box'>
-              <image style='width:20%; height:20%' src='../../../images/devctr/hotdj.png' mode="widthFix"></image>
+              <image style='width:25%; height:25%' src='../../../images/devctr/hotdj.png' mode="widthFix"></image>
               </view>
               <view wx:else class='box'>
                <image style='width:20%; height:20%' src='../../../images/devctr/hotwdj.png' mode="widthFix"></image>
@@ -40,7 +40,7 @@
               </view>
               <view wx:else class='box'>
                <image style='width:20%; height:20%' src='../../../images/devctr/sdwdj.png' mode="widthFix"></image>
-               <text class>锁定</text>
+               <text>锁定</text>
               </view>
       </view>
       <view id="img" class="scroll-view-item_H img">
@@ -50,17 +50,17 @@
               </view>
               <view wx:else class='box'>
                <image style='width:20%; height:20%' src='../../../images/devctr/jswdj.png' mode="widthFix"></image>
-               <text class>解锁</text>
+               <text>解锁</text>
               </view>
       </view>
       <view id="audio" class="scroll-view-item_H audio">
         <view wx:if="{{airAllState.lockedState==-1&&centralairConditionMode!=0}}" class='box'>
-              <image style='width:20%; height:20%' src='../../../images/devctr/wzdj.png' mode="widthFix"></image>
+              <image src='../../../images/devctr/wzdj.png' style='width:20%; height:20%' mode="widthFix"></image>
                <text class='ztcolor'>未知</text>
               </view>
               <view wx:else class='box'>
                <image style='width:20%; height:20%' src='../../../images/devctr/wzwdj.png' mode="widthFix"></image>
-               <text class>未知</text>
+               <text>未知</text>
               </view>
       </view>
    </scroll-view>
@@ -74,7 +74,7 @@
                <text class='ztcolor'>自动</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:20%; height:20%' src='../../../images/devctr/zdwdj.png' mode="widthFix"></image>
+               <image style='width:30%; height:30%' src='../../../images/devctr/zdwdj.png' mode="widthFix"></image>
                <text class>自动</text>
               </view>
       </view>
@@ -84,7 +84,7 @@
                <text class='ztcolor'>低速</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:20%; height:20%' src='../../../images/devctr/dswdj.png' mode="widthFix"></image>
+               <image style='width:10%; height:10%' src='../../../images/devctr/dswdj.png' mode="widthFix"></image>
                <text class>低速</text>
               </view>
       </view>
@@ -140,19 +140,23 @@
     <view class="modal-input">
     <view wx:if="{{index==2}}">
           <view>请选择模式:</view>
+          <view class='label'>
            <radio-group bindchange="checkboxChange">
 	         <label class="checkbox" wx:for="{{ConditionMode}}">
 	         <checkbox value="{{item.name}}"/>{{item.value}}
 	        </label>
-          </radio-group>  
+          </radio-group>
+          </view>  
       </view>
        <view wx:if="{{index==3}}">
          <view>请选择风速:</view>
+           <view class='label'>
           <radio-group bindchange="checkboxChangeWindMode">
 	        <label class="checkbox" wx:for="{{WindMode}}">
 	        <checkbox value="{{item.name}}"/>{{item.value}}
 	       </label>
-         </radio-group> 
+         </radio-group>
+         </view> 
       </view>
      </view>
   </view>

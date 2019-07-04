@@ -1,7 +1,18 @@
 /* pages/devconfig/kaiguanguan/kaiguanguan.wxss */
 .imagesize{
  display:flex;                   
- justify-content: center;     
+ justify-content: center; 
+ margin-top:40rpx;     
+}
+.imagesize1{
+ display:flex;                   
+ justify-content: center; 
+ margin-top:-10rpx; 
+}
+.imagesize2{
+display:flex;                   
+ justify-content: center; 
+margin-top: 10rpx;
 }
 .input{
    background-color: #F8F8F8;

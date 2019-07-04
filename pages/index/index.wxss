@@ -4,24 +4,25 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:100rpx;
+  margin-top:170rpx;
 }
 .count{
-  margin-top:200rpx
+  margin-top:200rpx；
+  
 }
 .setting2{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:200rpx;
+  margin-top:170rpx;
 }
 .setting3{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top:200rpx;
+  margin-top:170rpx;
 }
 .background-image{
   position: absolute;
@@ -38,6 +39,9 @@
   margin-top: 15rpx;
   margin-left:90rpx;
   font-size: 20px;
+}
+.bj{
+width: 100%;
 }
 
  

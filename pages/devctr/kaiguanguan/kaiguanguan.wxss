@@ -1,10 +1,16 @@
 /* pages/devconfig/kaiguanguan/kaiguanguan.wxss */
 .imagesize{
  display:flex;                   
- justify-content: center;      
+ justify-content: center;
+ margin-top:20rpx;      
+}
+.imagesize1{
+ display:flex;                   
+ justify-content: center;
+ margin-top:-20rpx;
 }
 .root-view{
-    margin-top:90rpx;
+    margin-top:120rpx;
     margin-left:50rpx;
     display: flex;
     flex-direction: column;
@@ -20,36 +26,33 @@
 position:absolute;
 top:0;
 left:0;
-width:680rpx;
+width:760rpx;
 height:580rpx;
-margin-top:350rpx;
-margin-left:40rpx;
+margin-top: 380rpx;
+margin-left:-5rpx;
 }
 .txt{
    position: relative;
-   
+   margin-left:-50rpx;
  }
  .txt1{
-   position: relative;
-   margin-left: 420rpx;
    color:#33ff33; 
- }
- .txt2{
-    position: relative;
-    margin-left:300rpx;
  }
  .border{
    position:absolute;
    margin-top:-20px;
+   margin-left: -50rpx;
  }
   .border2{
-   border-bottom: 1px rgb(238, 235, 235) solid;
+   border-bottom: 1px rgb(245,245,245) solid;
    position: relative;
-   width:550rpx;
+   width:610rpx;
  }
- .txt3{
-    position: relative;
-    margin-left:400rpx;
+ .dq{
+position:relative;
+text-align:right;
+margin-right:10rpx;
+margin-top:-45rpx;
  }
  
 

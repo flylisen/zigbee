@@ -61,8 +61,8 @@ page{
    display: flex;
    flex-direction: column;
    justify-content: center;
+   margin-top: -15px;
 }
-
 image {
    margin-right: auto;
    margin-left: auto;
@@ -149,6 +149,14 @@ input-holder {
   color: #ec5300;
   text-align: center;
 }
+.modal-input{
+  margin-top: -40rpx;
+}
+.label{
+  margin-top: 30rpx;
+}
+
+
 
 
 

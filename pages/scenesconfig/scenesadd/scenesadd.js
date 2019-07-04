@@ -17,8 +17,8 @@ Page({
    */
   data: {
     allSelect: false,
-    choseImg: '/images/check-circle2.png',
-    unchoseImg: '/images/check-circle.png',
+    choseImg: '/images/changjing/xz.png',
+    unchoseImg: '/images/scenesadd/wxz.png',
     sortedDevs: '',
     showModal: false,
     diDeviceid:'',
@@ -61,7 +61,7 @@ Page({
     ins5:-1,
     hidden:false,
   },
-  kindToggle: utils.throttle(function (e) {
+  kindToggle: function (e) {
     var ins = e.currentTarget.id;//获得下标
     if(this.data.ins==ins){
       this.setData({
@@ -72,8 +72,8 @@ Page({
         ins: ins,
       })
     }
-  },3000),
-  kindToggle2: utils.throttle(function (e) {
+  },
+  kindToggle2: function (e) {
     var ins2 = e.currentTarget.id;//获得下标
     if (this.data.ins2 == ins2) {
       this.setData({
@@ -84,8 +84,8 @@ Page({
         ins2: ins2,
       })
     }
-  },3000),
-  kindToggle3: utils.throttle(function (e) {
+  },
+  kindToggle3: function (e) {
     var ins3 = e.currentTarget.id;//获得下标
     if (this.data.ins3 == ins3) {
       this.setData({
@@ -96,8 +96,8 @@ Page({
         ins3: ins3,
       })
     }
-  },3000),
-  kindToggle4: utils.throttle(function (e) {
+  },
+  kindToggle4: function (e) {
     var ins4 = e.currentTarget.id;//获得下标
     if (this.data.ins4 == ins4) {
       this.setData({
@@ -108,8 +108,8 @@ Page({
         ins4: ins4,
       })
     }
-  },3000),
-  kindToggle5: utils.throttle(function (e) {
+  },
+  kindToggle5: function (e) {
     var ins5 = e.currentTarget.id;//获得下标
     if (this.data.ins5 == ins5) {
       this.setData({
@@ -120,7 +120,7 @@ Page({
         ins5: ins5,
       })
     }
-  },3000),
+  },
   //窗帘开关程度
   kgcd:function(e){
      var val=e.detail.value;
@@ -228,7 +228,7 @@ Page({
       this.data.sortedDevs[i].isSelect = false;
     }
   },
-  chooseTap: utils.throttle(function(e) {//单击选中或取消按钮
+  chooseTap: function(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
      let infoArray = this.data.sortedDevs;
       let arr = [];
@@ -244,11 +244,11 @@ Page({
         })
     console.log(arr);
     this.data.sceneMemberArray = arr; 
-  },3000),
+  },
   /**
     * 空调弹窗
     */
-  kongtiao: utils.throttle(function (event) {
+  kongtiao: function (event) {
     tp = event.currentTarget.dataset['kongtiao'];
     this.setData({
       showModal: true,
@@ -256,11 +256,11 @@ Page({
       diZonetype: tp.diZonetype,
       index:1
     })
-  },3000),
+  },
   /**
    * 灯弹窗
    */
-  dengxia: utils.throttle(function (event) {
+  dengxia: function (event) {
     tp = event.currentTarget.dataset['deng'];
     this.setData({
       showModal: true,
@@ -268,11 +268,11 @@ Page({
       diZonetype: tp.diZonetype,
       index: 2
     })
-  },3000),
+  },
   /**
    * 色温灯
    */
-  sewendeng: utils.throttle(function (event) {
+  sewendeng: function (event) {
     tp = event.currentTarget.dataset['sewendeng'];
     this.setData({
       showModal: true,
@@ -280,9 +280,9 @@ Page({
       diZonetype: tp.diZonetype,
       index:3
     })
-  },3000),
+  },
   //开关事件
-  changTap: utils.throttle(function (e) {
+  changTap: function (e) {
     var that = this;
     var tp = e.currentTarget.dataset['tp'];
     console.log(tp)
@@ -294,8 +294,8 @@ Page({
     }
     console.log(temSet);
     that.chufa(tp);
-  },3000),
-  chufa: utils.throttle(function (tp) {
+  },
+  chufa: function (tp) {
     var that = this;
     for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
       if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
@@ -310,8 +310,8 @@ Page({
         }
       }
     }
-  },3000),
-  submit: utils.throttle(function (e) {
+  },
+  submit: function (e) {
     let Array = this.data.sceneMemberArray;
     console.log(Array);
     let sceneMemberArray=[];
@@ -478,7 +478,7 @@ Page({
 
         }
       }   
-  },3000),
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
