@@ -12,11 +12,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal: false
+    showModal: false,
+    tp: '/images/pzwdj.png',
   },
   bindAdd: function () {
     if (!this.pageLoading) {
       this.pageLoading = !0;
+      this.setData({
+        tp: '/images/pzdj.png', 
+      })
     wx.navigateTo({
       url: '../areaconfig/areaconfig'
     })
@@ -126,7 +130,9 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+  this.setData({
+      tp: '/images/pzwdj.png',
+  })
   },
 
   /**

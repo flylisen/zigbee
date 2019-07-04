@@ -1,7 +1,9 @@
 <!--pages/devconfig/devconfig.wxml-->
   <view class='viewh1'>
      <text class='bt'>全部设备</text>
-     <button class='btn' hover-class="hover" bindtap='bindAdd'>设备入网</button>
+     <view class="tpwz">
+     <image src="{{tp}}"  bindtap='bindAdd' class="tp" mode="widthFix"></image>
+     </view>
 </view>
 <view class="container">
   <view class="weui-grids">

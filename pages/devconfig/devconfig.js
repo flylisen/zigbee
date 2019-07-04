@@ -15,6 +15,7 @@ Page({
     sortedDevs:'',
     isRefresh: false,
     hidden:false,
+    tp:'/images/sbwdj.png',
   },
 
   /**
@@ -72,6 +73,10 @@ Page({
   },
   //新设备入网
   bindAdd:function(){
+    var that=this;
+    this.setData({
+      tp: '/images/sbdj.png',
+    })
     wx.showLoading({
       title: '入网中',
     })
@@ -90,6 +95,9 @@ Page({
         console.log(res.data)
         if (res.data.code= 1) {
           wx.hideLoading()
+          that.setData({
+            tp: '/images/sbwdj.png',
+          })
         }
       },
         (err) => {

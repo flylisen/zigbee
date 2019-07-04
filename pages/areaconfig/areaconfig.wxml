@@ -1,7 +1,9 @@
 <!--pages/areaconfig/areaconfig.wxml--> 
 <view class='viewh1'> 
-     <h1>区域配置列表</h1>  
-     <button class='btn' hover-class="hover" bindtap='bindAdd'>新增</button> 
+     <h1 class="h1">区域配置列表</h1>  
+      <view class="tpbj">
+     <image src="{{tp}}" class="tp" bindtap='bindAdd' mode="widthFix"></image>
+     </view>
      </view>
       <view class='flex-wrp_one'>
    <block  wx:for="{{sortedAreas}}" wx:for-item="item">

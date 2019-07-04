@@ -1,7 +1,9 @@
 <!--pages/scenesconfig/scenesconfig.wxml-->
 <view class='viewh1'>
-     <h1>场景配置列表</h1>
-     <button class='btn' hover-class="hover" bindtap='bindAdd'>新增</button>
+     <h1 class="h1">场景配置列表</h1>
+     <view class="tpbj">
+    <image src="{{tp}}" bindtap='bindAdd' class="tp" mode="widthFix"></image>
+    </view>
 </view>
         <view class="link">
         <block  wx:for="{{scenes}}" wx:for-item="item">

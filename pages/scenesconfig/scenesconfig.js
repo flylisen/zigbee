@@ -11,10 +11,14 @@ Page({
   data: {
     scenename:'',
     hidden:false,
+    tp:'/images/xzwdj.png',
   },
   bindAdd:function(){
     if (!this.pageLoading) {
       this.pageLoading = !0;
+      this.setData({
+        tp: '/images/xzdj.png'
+      })
       wx.navigateTo({
         url: '../scenesconfig/scenesadd/scenesadd',
       }, 2000)
@@ -72,5 +76,10 @@ Page({
   },
   onShow(){
     this.pageLoading = !1;
-  }
+  },
+   onHide(){
+     this.setData({
+       tp: '/images/xzwdj.png'
+     })
+   }
 })

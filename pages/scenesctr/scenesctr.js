@@ -17,10 +17,14 @@ Page({
     ins:-1,
     rommid: '',
     hidden:false,
+    pz: '/images/pzwdj.png',
   },
   pz:function(){
     if (!this.pageLoading) {
       this.pageLoading = !0;
+      this.setData({
+        pz: '/images/pzdj.png'
+      })
       wx.navigateTo({
         url: '../scenesconfig/scenesconfig'
       })
@@ -120,14 +124,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.setData({
+      pz: '/images/pzwdj.png'
+    })    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
 
   /**

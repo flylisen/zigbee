@@ -1,8 +1,8 @@
 <!--pages/areactr/areactr.wxml-->
 <view class='viewh1'> 
-     <h1>全部区域</h1>
-     <view wx:if="{{rommid == 'rs'}}">
-     <button class='btn' hover-class="hover" bindtap='bindAdd'>配置</button> 
+     <h1 class="h1">全部区域</h1>
+     <view wx:if="{{rommid == 'rs'}}" class="tpbj">
+      <image src="{{tp}}" bindtap='bindAdd' class="tp"  mode="widthFix"></image>
      </view>
      </view>
       <view class='flex-wrp_one'>

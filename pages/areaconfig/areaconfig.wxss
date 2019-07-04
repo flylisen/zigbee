@@ -5,18 +5,16 @@ view h1{
   display: flex;
   justify-content: center;
 }
-.btn{
-  background-color:#D9D9D9;
-  color:white;
-   margin-left:550rpx;
-margin-top:-50rpx;
-  position: absolute;
-  height: 28px;
-  display: flex;
-  align-items: center;
+.h1{
+margin-left: -410rpx;
 }
-.hover{
-  background-color:#FEA152;
+.tpbj{
+  position: absolute;
+  margin-left: 580rpx;
+  margin-top: -64rpx;
+}
+.tp{
+  width: 140rpx;
 }
 .flex-wrp_one{
  display: flex;

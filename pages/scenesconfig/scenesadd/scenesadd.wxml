@@ -58,7 +58,7 @@
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">开关程度</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="kgcd"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="kgcd"></input>
                  </view>
             </view>
           </view>
@@ -77,15 +77,15 @@
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">亮度</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="ld"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="ld"></input>
                  </view>
                   <view class="navigator">
                      <text class="navigator-text">色调</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="sd"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="sd"></input>
                  </view>
                   <view class="navigator">
                      <text class="navigator-text">饱和度</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="bhd"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="bhd"></input>
                  </view>
             </view>
           </view>
@@ -100,7 +100,7 @@
             <view class="navigator-box {{index==ins4? 'navigator-box-show': ''}}">
                 <view class="navigator">
                      <text class="navigator-text">温度</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="wd"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="wd"></input>
                  </view>
                  <view class="navigator">
                     <text class="navigator-text">模式</text>
@@ -137,7 +137,7 @@
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">温度</text>
-                    <input type="text" style=' background-color:#F8F8F8;' bindinput="dengwd"></input>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="dengwd"></input>
                  </view>
             </view>
           </view>
