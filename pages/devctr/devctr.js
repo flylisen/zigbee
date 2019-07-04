@@ -18,10 +18,14 @@ Page({
     ins:-1,
     rommid:'',
     hidden:false,
+    pz:'/images/pzwdj.png',
   },
   pz: function () {
     if (!this.pageLoading) {
       this.pageLoading = !0;
+      this.setData({
+        pz: '/images/pzdj.png'
+      })
       wx.navigateTo({
         url: '../devconfig/devconfig'
       })
@@ -360,6 +364,7 @@ Page({
   onHide: function () {
     this.setData({
       ins: -1,
+      pz: '/images/pzwdj.png'
     })
   },
   /**

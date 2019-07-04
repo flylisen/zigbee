@@ -7,10 +7,10 @@
 .imagesize1{
  display:flex;                   
  justify-content: center;
- margin-top:-20rpx;
+ margin-top:20rpx;
 }
 .root-view{
-    margin-top:120rpx;
+    margin-top: 150rpx;
     margin-left:50rpx;
     display: flex;
     flex-direction: column;

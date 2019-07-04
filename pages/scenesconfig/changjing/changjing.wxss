@@ -10,6 +10,10 @@ page{
 width:250rpx;
 height:250rpx;
 }
+.radio-group{
+   margin-left: 20px;
+  margin-top:30rpx;
+}
 .input{
    background-color:white;
    border-radius:10rpx; 

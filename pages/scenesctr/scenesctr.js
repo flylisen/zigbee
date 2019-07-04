@@ -53,8 +53,15 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
+      var scenes = res.data.scenes;
+      let sceness=[];
+      for (var i in scenes){
+        if (scenes[i].siSceneVisibal==1){
+          sceness.push(scenes[i]);
+        }
+      }
       this.setData({
-        scenes: res.data.scenes,
+        scenes: sceness,
         hidden: true
       })
     },

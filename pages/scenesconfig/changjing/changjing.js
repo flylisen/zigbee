@@ -22,9 +22,18 @@ Page({
     choseImg: '/images/changjing/xz.png',
     unchoseImg: '/images/changjing/wxz.png',
     arr:'',
+    siName:'',
+    sceneVisible: '',
+    items: [
+      { name: 0, value: '不可见', checked:''},
+      { name: 1, value: '可见', checked: ''},
+     ],
     uidarry:[],
     sceneMembers:[],
     hidden: false,
+  },
+  radioChange: function (e) {
+    this.data.sceneVisible = e.detail.value
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,9 +46,21 @@ Page({
     sign = app.globalData.sign;
     var changjings = decodeURIComponent(options.changjing);
     changjing = JSON.parse(changjings);
+    console.log(changjing);
     this.setData({
-      siShowName: changjing.siShowName
+      siShowName: changjing.siShowName,
+      siName: changjing.siName
     })
+    if (changjing.siSceneVisibal==0){
+      var index = 0;
+      this.data.items[index].checked = "true"; 
+    }else{
+      var index = 1;
+      this.data.items[index].checked = "true"; 
+    }
+    this.setData({
+      items: this.data.items
+    }) 
     let url = app.globalData.URL + 'gerSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       act: "getscenemembersbydetail",
@@ -217,12 +238,22 @@ Page({
       ver: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {
+      console.log(this.data.sceneVisible);
+      var sceneVisible = this.data.sceneVisible;//是否可见
+      var siShowNames = this.data.siShowName;
+      var siNames= this.data.siName;
       var siName=[];
       var siShowName=[];
       for (var i in res.data.scenes){
-        siName.push(res.data.scenes[i].siName);
-        siShowName.push(res.data.scenes[i].siShowName);
+        if (res.data.scenes[i].siName != siNames){
+          siName.push(res.data.scenes[i].siName);
+        }
+        if (res.data.scenes[i].siShowName != siShowNames){
+          siShowName.push(res.data.scenes[i].siShowName);
+        }
       }
+      console.log(siName);
+      console.log(siShowName);
       for (var i = 0; i < siName.length; i++) {
         if (siName[i] == "") {
           siName.splice(i, 1);
@@ -271,9 +302,15 @@ Page({
           bindid: username,
           bindstr: pwd,
           ver: "2.0",
-          scenes: [{ sceneName: e.detail.value.sceneName, sceneID: changjing.siSceneId, sceneShowName: e.detail.value.sceneShowName }]
+          scenes: [{ 
+            sceneName: e.detail.value.sceneName, 
+            sceneID: changjing.siSceneId, 
+            sceneShowName: e.detail.value.sceneShowName,
+            sceneVisible: sceneVisible,
+            }]
         };
         app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data);
           var pages = getCurrentPages(); // 当前页面 
           var beforePage = pages[pages.length - 2]; // 前一个页面  
           wx.navigateBack({

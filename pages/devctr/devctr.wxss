@@ -11,14 +11,6 @@
 .container{
    margin-top: -35px;
 }
-.btn{
-  background-color:#D9D9D9;
-  color:white;
-  font-size:13px;
-  margin-left: 50px;
-  margin-top: -10px;
-  position: absolute;
-}
 .bj{
     position: absolute;
     width:110%;
@@ -37,9 +29,6 @@
     z-index: 1;
     margin-left:20rpx;
 
-}
-.hover{
-  background-color:#FEA152;
 }
 .weui-grids {
   position: relative;
@@ -171,6 +160,15 @@ white-space: nowrap;
 .bt{
  margin-top:20rpx;
  font-size: 36rpx;
+ margin-left: -550rpx;
+}
+.pz{
+position:absolute;
+margin-left: 300rpx;
+margin-top: 20rpx;
+}
+.pztb{
+width:140rpx;
 }
 
 

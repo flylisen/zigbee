@@ -1,28 +1,28 @@
 <!--pages/devconfig/kaiguanguan/kaiguanguan.wxml-->
 <view class='imagesize'>
-    <image src='../../../images/devctr/bodydj.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==2}}"></image>
-    <image src='../../../images/kaiguanguan/sq.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==42}}"></image>
-        <image src='../../../images/kaiguanguan/cl.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==2}}"></image>
-        <image src='../../../images/kaiguanguan/yl.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==1}}"></image>
-     <image src='../../../images/kaiguanguan/jj.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==44}}"></image>
-    <image src='../../../images/kaiguanguan/af.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==277}}"></image>
-    <image src='../../../images/kaiguanguan/cdeng.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==528}}"></image>
-    <image src='../../../images/kaiguanguan/rt.png'  style='width:40%; height:40%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==13}}"></image>
-      <image src='../../../images/kaiguanguan/yht.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==32769}}"></image>
-      <image src='../../../images/kaiguanguan/mc.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==21}}"></image>
-      <image src='../../../images/kaiguanguan/wsd.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==770&&diZonetype==0}}"></image>
-      <image src='../../../images/kaiguanguan/qj.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==4&&diZonetype==0}}"></image>
-       <image src='../../../images/kaiguanguan/hwb.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==353&&diZonetype==0}}"></image>
-        <image src='../../../images/kaiguanguan/ew.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==40}}"></image>
-        <image src='../../../images/kaiguanguan/kt.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==769&&diZonetype==1}}"></image>
-        <image src='../../../images/kaiguanguan/sb.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==83&&diZonetype==258}}"></image>
-        <image src='../../../images/kaiguanguan/ms.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==10&&diZonetype==255}}"></image>
-        <image src='../../../images/kaiguanguan/sg.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1027&&diZonetype==549}}"></image>
-        <image src='../../../images/kaiguanguan/klq.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==43}}"></image>
-        <image src='../../../images/kaiguanguan/xf.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==771&&diZonetype==255}}"></image>
-        <image src='../../../images/kaiguanguan/cz.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
-        <image src='../../../images/kaiguanguan/pa.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
-          <image src='../../../images/kaiguanguan/sdeng.png'  style='width:20%; height:20%' mode='widthFix' wx:if="{{diDeviceid==544&&diZonetype==255}}"></image>
+    <image src='../../../images/kaiguanguan/kg.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==2}}"></image>
+    <image src='../../../images/kaiguanguan/sq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==42}}"></image>
+        <image src='../../../images/kaiguanguan/cl.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==2}}"></image>
+        <image src='../../../images/kaiguanguan/yl.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==514&&diZonetype==1}}"></image>
+     <image src='../../../images/kaiguanguan/jj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==44}}"></image>
+    <image src='../../../images/kaiguanguan/af.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==277}}"></image>
+    <image src='../../../images/kaiguanguan/cdeng.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==528}}"></image>
+    <image src='../../../images/kaiguanguan/rt.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==13}}"></image>
+      <image src='../../../images/kaiguanguan/yht.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==32769}}"></image>
+      <image src='../../../images/kaiguanguan/mc.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==21}}"></image>
+      <image src='../../../images/kaiguanguan/wsd.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==770&&diZonetype==0}}"></image>
+      <image src='../../../images/kaiguanguan/qj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==4&&diZonetype==0}}"></image>
+       <image src='../../../images/kaiguanguan/hwb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==353&&diZonetype==0}}"></image>
+        <image src='../../../images/kaiguanguan/ew.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==40}}"></image>
+        <image src='../../../images/kaiguanguan/kt.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==769&&diZonetype==1}}"></image>
+        <image src='../../../images/kaiguanguan/sb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==83&&diZonetype==258}}"></image>
+        <image src='../../../images/kaiguanguan/ms.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==10&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/sg.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1027&&diZonetype==549}}"></image>
+        <image src='../../../images/kaiguanguan/klq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==43}}"></image>
+        <image src='../../../images/kaiguanguan/xf.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==771&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/cz.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
+        <image src='../../../images/kaiguanguan/pa.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
+          <image src='../../../images/kaiguanguan/sdeng.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==544&&diZonetype==255}}"></image>
 </view>
 <view class='imagesize1'>
     <view wx:if="{{diNames==''}}">

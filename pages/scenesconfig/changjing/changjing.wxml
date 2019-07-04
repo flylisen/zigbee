@@ -14,11 +14,17 @@
      <view class='text1'>
      <text>展示名称</text>
      </view>
-     <input type="text" class="input" name="sceneShowName" maxlength='10'></input>
+     <input type="text" class="input" value="{{siShowName}}" name="sceneShowName" maxlength='10'></input>
       <view class='text1'>
       <text>内存名称</text>
       </view>
-     <input type="text" class="input"  name="sceneName" maxlength='10'></input>
+     <input type="text" class="input" value="{{siName}}"  name="sceneName" maxlength='10'></input>
+        <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />
+            {{item.value}}
+        </label>
+        </radio-group>
      <button class='btn' form-type='submit'>确定</button>
 </form>
 <view class='gl'>
