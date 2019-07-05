@@ -35,8 +35,8 @@
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
        <view class="link_child" wx:if="{{item.diDeviceid==2}}">
        <image src='/images/areactr/background.png' style='width:100%; height:100%;' mode='widthFix'></image>
-         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:7%; height:7%;' mode='widthFix'></image>
-         <image src='/images/devctr/switchwdj.png' class='tp' wx:else style='width:7%; height:7%;' mode='widthFix'></image>
+         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}" style='width:7%; height:7%;' mode='widthFix'></image>
+         <image src='/images/devctr/dengwdj.png' class='tp' wx:else style='width:7%; height:7%;' mode='widthFix'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="tb" bindtap="chooseTap" style='width:7%; height:7%;' mode='widthFix' data-index="{{index}}"></image>
                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class="{{item.diShowName.length>4?'zt2':'zt1'}}">开关</view>
                 <view wx:else class="{{item.diShowName.length>4?'zt2':'zt1'}}">{{item.diShowName}}</view>

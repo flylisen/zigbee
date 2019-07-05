@@ -34,7 +34,7 @@ Page({
    */
   onLoad: function (options) {
     username = app.globalData.rommid;
-    if(username == 'rs'){
+    if (username == 'RS@xcx12'){
     this.setData({
       username: app.globalData.username,
     });
@@ -49,7 +49,7 @@ Page({
     var that = this;
     rommid = app.globalData.rommid
     console.log(rommid)
-    if (rommid == 'rs') {
+    if (rommid == 'RS@xcx12') {
       if (!this.pageLoading) {
         this.pageLoading = !0;
       wx.reLaunch({

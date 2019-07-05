@@ -1,4 +1,7 @@
 /* pages/areaconfig/areaconfig.wxss */
+.main{
+  overflow-x:hidden;
+}
 view h1{
   font-size: 36rpx;
   margin-top: 20rpx;

@@ -1,8 +1,8 @@
 <!--pages/scenesctr/scenesctr.wxml-->
 <view class='viewh1'>
      <text class='text'>全部场景</text>
-     <view wx:if="{{rommid == 'rs'}}" class="pz">
-       <image src="{{pz}}" class="pztb" bindtap='pz' mode="widthFix"></image> 
+     <view wx:if="{{rommid == 'RS@xcx12'}}" class="pz">
+       <image src="{{pz}}" class="pztb" bindtap='pz' mode="widthFix"></image>
      </view>
 </view>
         <view class="link">

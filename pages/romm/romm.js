@@ -88,7 +88,7 @@ Page({
                console.log(err.errMsg)
              }
            )
-         }else if(roomid == 'rs'){
+         }else if(roomid == 'RS@xcx12'){
            wx.redirectTo({
              url: '../login/login'
            })

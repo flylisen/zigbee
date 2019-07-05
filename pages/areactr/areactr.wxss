@@ -1,4 +1,7 @@
 /* pages/areactr/areactr.wxss */
+.main{
+  overflow-x:hidden;
+}
 view h1{
   font-size: 36rpx;
   margin-top: 20rpx;
@@ -25,7 +28,8 @@ margin-top: -65rpx;
     margin: 0 auto;
     position: relative;
     left: 40rpx;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
+  overflow-x:hidden;
 }
 .areaname{
   position: absolute;

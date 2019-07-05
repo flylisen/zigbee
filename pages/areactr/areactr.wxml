@@ -1,7 +1,8 @@
 <!--pages/areactr/areactr.wxml-->
+<view class='main'>
 <view class='viewh1'> 
      <h1 class="h1">全部区域</h1>
-     <view wx:if="{{rommid == 'rs'}}" class="tpbj">
+     <view wx:if="{{rommid == 'RS@xcx12'}}" class="tpbj">
       <image src="{{tp}}" bindtap='bindAdd' class="tp"  mode="widthFix"></image>
      </view>
      </view>
@@ -13,4 +14,5 @@
                 <view class='areaname' wx:else>{{item.aiName}}</view>
       </view>
     </block>
+</view>
 </view>

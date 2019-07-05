@@ -14,21 +14,21 @@
           <view  class="kind-list-item-hd" bindtap="kindToggle">
           <view><image src="../../images/about/guide.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">操作指南</view>
-             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;' class='arrows'></image>
           </view>
         </view>
         <view class="kind-list-item">
           <view  class="kind-list-item-hd" bindtap="kindToggle2">
           <view><image src="../../images/about/idea.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">意见反馈</view>
-             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;' class='arrows'></image>
           </view>
           </view>
         </view><view class="kind-list-item">
           <view  class="kind-list-item-hd1" bindtap="kindToggle3">
           <view><image src="../../images/about/me.png" style="width:23px;height:23px;"></image></view>
              <view class="kind-list-text">关于我们</view>
-             <image src='../../images/about/arrows.png' style='width:12px;height:12px;'></image>
+             <image src='../../images/about/arrows.png' style='width:12px;height:12px;' class='arrows'></image>
           </view>
         </view>
     </view>

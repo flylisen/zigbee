@@ -1,8 +1,10 @@
 /* pages/areaconfig/areainfo/areainfo.wxss */
+.main{
+  overflow-x:hidden;
+}
 .view1{
   display:flex;
- align-items:center;
- justify-content:center;
+ margin-left: 24rpx;
  margin-top: 40rpx;
 }
 .text{
@@ -24,7 +26,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 160rpx 0;
+  padding: 26rpx 0;
   box-sizing: border-box;
 }
 .bj{
@@ -52,7 +54,6 @@
 .weui-grids {
   position: relative;
   overflow: hidden;
-  margin-top: -50px;
 }
 .weui-grids:before {
   content: " ";

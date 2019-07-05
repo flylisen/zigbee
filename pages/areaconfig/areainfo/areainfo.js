@@ -62,6 +62,10 @@ Page({
               var currentPage = pages[pages.length - 1]    //获取当前页面的对象
               var options = currentPage.options
               that.onLoad(options);
+              arr =[];
+              that.setData({
+                arr
+              });
             },
               (err) => {
                 console.log(err.errMsg)

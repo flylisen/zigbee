@@ -150,20 +150,20 @@
 .kind-list-text{
   flex: 1;
   margin-left: 15rpx;
-  margin-top: -20rpx;
+  margin-top: -24rpx;
 }
 .kind-list-img {
   width: 60rpx;
   height: 60rpx;
 }
 .kind-list-item-hd {
-  padding: 0 0 20rpx 0;
+  padding: 0 0 30rpx 0;
   display: flex;
   align-items: center;
   border:8rpx slide black;
   border-bottom: 1px rgb(245,245,245) solid;
   height: 20px;
-  margin-top: 50rpx;
+  margin-top: 47rpx;
   transition: opacity .3s;
   margin-left:40rpx;
 margin-right:40rpx
@@ -175,7 +175,7 @@ margin-right:40rpx
   border:8rpx slide black;
   /* border-bottom: 1px rgb(245,245,245) solid; */
   height: 20px;
-  margin-top: 50rpx;
+  margin-top: 40rpx;
   transition: opacity .3s;
   margin-left:40rpx;
 margin-right:40rpx
@@ -192,4 +192,7 @@ margin-right:40rpx
 }
 .to{
   position:relative;
+}
+.arrows{
+  padding: 0 0 20rpx 0;
 }
