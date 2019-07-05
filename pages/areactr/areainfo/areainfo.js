@@ -19,6 +19,7 @@ Page({
     chuanglians: '',
     sortedDevs: '',
     switch: '',
+    hidden: false,
     ins: -1,
     line: 1,
     deng: false,
@@ -69,7 +70,8 @@ Page({
         }
       })
       that.setData({
-        sortedDevs: sortResult
+        sortedDevs: sortResult,
+        hidden: true
       });
     },
       (err) => {

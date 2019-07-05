@@ -14,6 +14,7 @@ Page({
   data: {
     showModal: false,
     tp: '/images/pzwdj.png',
+    hidden: false
   },
   bindAdd: function () {
     if (!this.pageLoading) {
@@ -87,7 +88,8 @@ Page({
       }
       console.log(sortResult)
       that.setData({
-        sortedAreas: sortResult
+        sortedAreas: sortResult,
+        hidden: true
       });
     },
       (err) => {

@@ -15,6 +15,7 @@ Page({
   data: {
     sortedAreas: '',
     tp:'/images/xzwdj.png',
+    hidden: false
   },
 
   /**
@@ -51,7 +52,8 @@ Page({
       }
       console.log(areaResult);
       that.setData({
-        sortedAreas: areaResult
+        sortedAreas: areaResult,
+        hidden: true
       });
     },
       (err) => {

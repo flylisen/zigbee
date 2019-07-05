@@ -18,6 +18,7 @@ Page({
     unchoseImg: '/images/check-circle.png',
     sortedDevs: '',
     arr: '',
+    hidden: false,
     sortedDevs: '',
     aiNames: '',
     atImg: ''
@@ -120,7 +121,8 @@ Page({
         }
       }
       that.setData({
-        sortedDevs: sortResult
+        sortedDevs: sortResult,
+        hidden: true
       });
     },
       (err) => {
