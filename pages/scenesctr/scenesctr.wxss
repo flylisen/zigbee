@@ -9,17 +9,6 @@
   font-size: 36rpx;
   margin-left: -480rpx;
 }
-.btn{
-  background-color:#D9D9D9;
-  color:white;
-  font-size:13px;
-  margin-left:100rpx;
-  margin-top:-10px;
-  position: absolute;
-}
-.hover{
-  background-color:#FEA152;
-}
 .link {
     display: flex;
     flex-direction: row;
@@ -37,7 +26,6 @@ margin-top:30rpx;
   width:350rpx;
   height:350rpx;
   margin-left:-80rpx;
-
 }
 .showtext1{
   width:200rpx;
@@ -50,15 +38,15 @@ margin-top:30rpx;
 }
 .xz{
 position: absolute;
-width:70rpx;
-height:70rpx;
+width: 60rpx;
+height: 60rpx;
 margin-left:150rpx;
 margin-top:-330rpx;
 }
 .pz{
 position:absolute;
 margin-left: 270rpx;
-margin-top: 20rpx;
+margin-top: 17rpx;
 }
 .pztb{
 width:140rpx;

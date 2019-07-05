@@ -86,15 +86,6 @@ Page({
     }else{
       value =0; 
     }
-    for (var i = 0; i < this.data.sortedDevs.length; i++) {
-      if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
-        console.log('找到匹配', i);
-        var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-        this.setData({
-          [tmp]: value
-        })
-      }
-    }
     this.setData({
       ins: ins
     })
@@ -107,6 +98,15 @@ Page({
         ins: -1
       })
      }else{
+      for (var i = 0; i < this.data.sortedDevs.length; i++) {
+        if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
+          console.log('找到匹配', i);
+          var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+          this.setData({
+            [tmp]: value
+          })
+        }
+      }
       this.setData({
         ins: -1
       })

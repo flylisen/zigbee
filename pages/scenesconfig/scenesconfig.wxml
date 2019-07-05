@@ -1,6 +1,6 @@
 <!--pages/scenesconfig/scenesconfig.wxml-->
 <view class='viewh1'>
-     <h1 class="h1">场景配置列表</h1>
+     <text class="text">场景配置列表</text>
      <view class="tpbj">
     <image src="{{tp}}" bindtap='bindAdd' class="tp" mode="widthFix"></image>
     </view>

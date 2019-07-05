@@ -12,7 +12,7 @@
       <!--开关-->
           <view wx:if="{{item.diDeviceid==2}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' id="{{index}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
         <view class="weui-grid__icon">
-          <image class="image1" src="{{index==ins?'/images/devctr/switchdj.png':'/images/devctr/switchwdj.png'}}" mode="scaleToFill" />
+          <image class="image1" src="{{index==ins?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill" />
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
          <text class="weui-grid__label1" style="{{index==ins?'color: #FEA152':''}}">离线</text>

@@ -16,6 +16,7 @@ Page({
    */
   data: {
     diNames: '',
+    diName:'',
     chuanglians: '',
     diDeviceid:'',
     diZonetype:'',
@@ -31,8 +32,10 @@ Page({
     sign = app.globalData.sign;
     var kaiguanguan = decodeURIComponent(options.kaiguanguan);
     kaiguanguans = JSON.parse(kaiguanguan);
+    console.log(kaiguanguans);
     this.setData({
-      diNames: kaiguanguans.diShowName,
+      diNames: kaiguanguans.diShowName,//显示名称
+      diName: kaiguanguans.diName,//内存名称
       chuanglians: kaiguanguans.diOnlineStatu,
       diDeviceid: kaiguanguans.diDeviceid,
       diZonetype: kaiguanguans.diZonetype
@@ -62,7 +65,9 @@ Page({
   submit: utils.throttle(function (e) {
     var that = this;
     var name = e.detail.value.name;//内存名称
-    var showname = e.detail.value.showname;//显示名称    
+    var showname = e.detail.value.showname;//显示名称
+    var diNames = this.data.diName;
+    console.log(name);    
     let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
@@ -70,10 +75,10 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       var diName=[];
-      var diShowName=[];
       for (var i in res.data.devs){
-        diName.push(res.data.devs[i].diName);
-        diShowName.push(res.data.devs[i].diShowName);
+        if (res.data.devs[i].diName != diNames){
+          diName.push(res.data.devs[i].diName);
+        }
       }
       for (var i = 0; i < diName.length; i++) {
         if (diName[i] =="") {
@@ -81,38 +86,23 @@ Page({
           i = i - 1;
         }
       }
-      for (var i = 0; i < diShowName.length; i++) {
-        if (diShowName[i] == "") {
-          diShowName.splice(i, 1);
-          i = i - 1;
-        }
-      }
+      console.log(diName);
       var bool;
       for (var j in diName) {
         if (name == diName[j]) {
           bool = "fal1";
         }
       }
-      for (var k in diShowName) {
-        if (showname == diShowName[k]) {
-          bool = "fal2";
-        }
-      }
-      if (showname == '' || name == '') {
-        wx.showModal({
-          title: '提示',
-          content: '请输入内存名或者展示名称'
-        })
-      } else if (bool =="fal1"){
+       if (bool =="fal1"){
         wx.showModal({
           title: '提示',
           content: '内存名称已经存在'
         })
-      }else if(bool=="fal2"){
-        wx.showModal({
-          title: '提示',
-          content: '展示名称已经存在'
-        })
+       } else if (name==''){
+         wx.showModal({
+           title: '提示',
+           content: '内存名称不能为空'
+         })
       }else{
         let url = app.globalData.URL + 'editDevName?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
         let data = {
@@ -122,7 +112,7 @@ Page({
           key: "bq6wqzasjwtkl0i21pi9fbeq4",
           bindid: username,
           bindstr: pwd,
-          devs: [{ uuid: kaiguanguans.diUuid, devShowName: showname, value: name }],
+          devs: [{ uuid: kaiguanguans.diUuid, devShowName: showname, value: name}],
           ver: "2.0"
         };
         app.wxRequest('POST', url, data, (res) => {

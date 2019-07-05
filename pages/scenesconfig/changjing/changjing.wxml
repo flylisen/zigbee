@@ -37,8 +37,8 @@
  <block wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
     <view class="link_child" wx:if="{{item.deviceid==2}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/switchdj.png' class='tp' wx:if="{{item.status> 0}}" ></image>
-         <image src='/images/devctr/switchwdj.png' class='tp' wx:else ></image>
+         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.status> 0}}" ></image>
+         <image src='/images/devctr/dengwdj.png' class='tp' wx:else ></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.deviceName==''}}" class='zt'>开关</view>
            <view wx:else class='zt'>{{item.deviceName}}</view>

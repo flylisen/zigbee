@@ -24,6 +24,7 @@ Page({
     arr:'',
     siName:'',
     sceneVisible: '',
+    siSceneVisibal:'',
     items: [
       { name: 0, value: '不可见', checked:''},
       { name: 1, value: '可见', checked: ''},
@@ -49,7 +50,8 @@ Page({
     console.log(changjing);
     this.setData({
       siShowName: changjing.siShowName,
-      siName: changjing.siName
+      siName: changjing.siName,
+      siSceneVisibal:changjing.siSceneVisibal,
     })
     if (changjing.siSceneVisibal==0){
       var index = 0;
@@ -238,8 +240,13 @@ Page({
       ver: "2.0"
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(this.data.sceneVisible);
       var sceneVisible = this.data.sceneVisible;//是否可见
+      console.log(sceneVisible);
+      if (sceneVisible==''){
+         sceneVisible = this.data.siSceneVisibal;
+      }else{
+         sceneVisible = this.data.sceneVisible;//是否可见
+      }
       var siShowNames = this.data.siShowName;
       var siNames= this.data.siName;
       var siName=[];

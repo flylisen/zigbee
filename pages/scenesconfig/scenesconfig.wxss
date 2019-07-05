@@ -1,19 +1,21 @@
 /* pages/scenesconfig/scenesconfig.wxss */
-view h1{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+.viewh1{
+   display:flex;
+ align-items:center;
+ justify-content:center;
 }
-.h1{
-  margin-left: -470rpx;
+.text{
+  margin-top:20rpx;
+  font-size: 36rpx;
+  margin-left: -450rpx;
 }
 .tp{
-  width: 130rpx;
+  width:140rpx;
 }
 .tpbj{
-  position: absolute;
-  margin-left: 580rpx;
-  margin-top: -60rpx;
+position:absolute;
+margin-left: 270rpx;
+margin-top: 17rpx;
 }
 .link {
     display: flex;

@@ -165,7 +165,7 @@ white-space: nowrap;
 .pz{
 position:absolute;
 margin-left: 300rpx;
-margin-top: 20rpx;
+margin-top: 17rpx;
 }
 .pztb{
 width:140rpx;

@@ -155,8 +155,9 @@ white-space: nowrap;
   margin-top:20rpx;
 }
 .bt{
-  margin-top:20rpx;
-  margin-left: -590rpx;
+ margin-top:20rpx;
+ font-size: 36rpx;
+ margin-left: -550rpx;
 }
 .tp{
   width:170rpx;
@@ -164,7 +165,7 @@ white-space: nowrap;
 .tpwz{
    position: absolute; 
    margin-left: 290rpx;
-   margin-top: 20rpx;
+   margin-top: 17rpx;
 }
 
 

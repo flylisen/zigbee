@@ -68,11 +68,11 @@
     <form bindsubmit='submit'>
      <view class='bd'>
      <text class='text'>展示名称</text>
-     <input type="text" class="input" name="showname" maxlength='8'></input>
+     <input type="text" class="input" value="{{diNames}}" name="showname" maxlength='8'></input>
      </view>
       <view class='bd'>
       <text class='text'>内存名称</text>
-      <input type="text" class="input"  name="name" maxlength='10'></input>
+      <input type="text" class="input" value="{{diName}}"  name="name" maxlength='10'></input>
       </view>
       <button class='btn' form-type='submit' hover-class='btn-hover'>确定</button>
      </form>
