@@ -29,11 +29,10 @@ input{
   padding:0rpx 100rpx;
   background: orange;
   margin-top: 20rpx;
-  width: 90%;
+  width: 88%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 50rpx;
 }
 .flex-wrp_one{
  display: flex;
