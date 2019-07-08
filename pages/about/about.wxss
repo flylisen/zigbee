@@ -136,6 +136,7 @@
 }
 .kind-list{
   width: 690rpx;
+  margin-top: 10rpx;
 }
 
 .kind-list-item {

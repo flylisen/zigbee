@@ -79,14 +79,8 @@ Page({
       console.log(res.data.scenes);
       for (var i in res.data.scenes) {
         var sceneMembers = res.data.scenes[i].sceneMembers;
-        this.data.sceneMembers = sceneMembers;
-        const filterListResult = sceneMembers.filter((item, index, self) => index === self.findIndex((t) => (t.uuid === item.uuid)));
-        filterListResult.forEach((item) => {
-          //这里需要截取的内容
-          item.deviceName = item.deviceName.substring(0, 5)
-        })
         this.setData({
-          sortedDevs: filterListResult,
+          sortedDevs: sceneMembers,
           hidden:true
         })
       }
@@ -96,7 +90,7 @@ Page({
       }
     )
   },
-  chooseTap: utils.throttle(function(e) {//单击选中或取消按钮
+  chooseTap:function(e) {//单击选中或取消按钮
     let index = e.currentTarget.dataset.index;  //当前点击列表的index
     let infoArray = this.data.sortedDevs;
     let arr = [];
@@ -118,7 +112,7 @@ Page({
       arr
     })
     console.log(this.data.arr);
-  },3000),
+  },
   submit: utils.throttle(function(){
     var that = this;
     let arr1 = that.data.arr;

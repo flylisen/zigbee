@@ -18,8 +18,9 @@ height:250rpx;
    background-color:white;
    border-radius:10rpx; 
    margin: 10rpx auto;
-   width:700rpx;
+   width:680rpx;
    height:90rpx;
+   padding-left: 20px;
 }
 .text1{
    margin-left: 50rpx;
@@ -89,17 +90,27 @@ margin-top:-20rpx;
    margin-top:9px;
 
 }
-.zt{
+.zt1{
  position:absolute;
 z-index:1;
 margin-left:-50rpx;
 font-size:12px;
-margin-top:-90rpx;
-color:#999999; 
+margin-top:-120rpx;
+color:#999999;
+width: 140rpx;
+}
+.zt2{
+ position:absolute;
+z-index:1;
+margin-left:-50rpx;
+font-size:12px;
+margin-top: -110rpx;
+color:#999999;
+width: 140rpx;
 }
 .bj{
 width:240rpx;
-height:200rpx;
+height:220rpx;
 margin-left:-90rpx;
 }
 .dj{

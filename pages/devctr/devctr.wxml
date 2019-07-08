@@ -60,17 +60,17 @@
         <!--色温灯-->
          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon" bindtap="sewendeng" id="{{index}}" data-sewendeng="{{item}}">
-          <image class="image1" src="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'/images/devctr/swdj.png':'/images/devctr/swwdj.png'}}" mode="scaleToFill"/>
+          <image class="image1" src="{{index==ins||item.diOnoffStatu>=1?'/images/devctr/swdj.png':'/images/devctr/swwdj.png'}}" mode="scaleToFill"/>
         </view>
         <view wx:if="{{item.diOnlineStatu==0}}">
-         <text class="weui-grid__label1" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">离线</text>
+         <text class="weui-grid__label1" style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">离线</text>
           </view>
           <view wx:else>
-          <text class="weui-grid__label1" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">在线</text>
+          <text class="weui-grid__label1" style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">在线</text>
           </view>
            <view class="showname">
-           <text class="weui-grid__label2"  wx:if="{{item.diShowName==''}}" style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">色温灯</text>
-          <text class="weui-grid__label2" wx:else style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">{{item.diShowName}}</text>
+           <text class="weui-grid__label2"  wx:if="{{item.diShowName==''}}" style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">色温灯</text>
+          <text class="weui-grid__label2" wx:else style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">{{item.diShowName}}</text>
            </view>
        </view>
        <!--空调-->

@@ -15,7 +15,7 @@ Page({
   data: {
     allSelect: false,
     choseImg: '/images/changjing/xz.png',
-    unchoseImg: '/images/changjing/wxz.png',
+    unchoseImg: '/images/scenesadd/wxz.png',
     sortedDevs: '',
     arr: '',
     hidden: false,

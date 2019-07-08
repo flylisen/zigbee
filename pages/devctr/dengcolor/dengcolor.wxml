@@ -1,4 +1,7 @@
 <!--pages/devctr/dengcolor/dengcolor.wxml-->
+<view class='imagesizes'>
+<color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
+</view>
 <view class='imagesize'>
   <image src="{{diOnoffStatu>0?'../../../images/devctr/dengdk.png':'../../../images/devctr/dengwdk.png'}}" bindtap="kg" style='width:40%; height:40%'  mode='widthFix'></image>
 </view>
@@ -8,9 +11,6 @@
 <view class="section">
   <view>亮度</view>
   <slider show-value max='255' min="1" blockSize="20" step="5" value="" bindchange="listenerSlider"></slider>
-</view>
-<view class='imagesize'>
-<color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
 </view>
 
 

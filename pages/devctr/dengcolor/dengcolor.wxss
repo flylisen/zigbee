@@ -4,6 +4,12 @@
  justify-content: center;
  margin-top: 20px;      
 }
+.imagesizes{
+position: absolute;
+margin-left: 80rpx;
+margin-top: 550rpx;
+
+}
 .section{padding: 10px;margin-top: 10px;margin-left: 20px;}
 
 .section.icon-wrapper{height: 100px; font-size: 12px;}

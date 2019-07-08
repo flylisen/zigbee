@@ -10,11 +10,11 @@ page{
    background-color:white;
    border-radius:10rpx; 
    margin: 10rpx auto;
-   width:350px;
-   height: 40px;
+   width: 700rpx;
+  height: 70rpx;
 }
 .text{
-   margin-left: 20px;
+  margin-left: 25rpx;
 }
 .radio-group{
    margin-left: 20px;

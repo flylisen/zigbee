@@ -71,7 +71,7 @@ Page({
     });
   },
   //打开
-  kg: utils.throttle(function(e){
+  kg:function(e){
     let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     var value;
     console.log(dengs.diOnoffStatu);
@@ -82,6 +82,10 @@ Page({
       value=0;
       dengs.diOnoffStatu=0;
      }
+    var diOnoffStatu = this.data.diOnoffStatu;
+    this.setData({
+      diOnoffStatu: value
+    })
     let data = {
       bindid: username,
       bindstr: pwd,
@@ -96,7 +100,7 @@ Page({
         console.log(err.errMsg)
       }
     )
-  },3000),
+  },
   //选择改色时触发（在左侧色盘触摸或者切换右侧色相条）
   onChangeColor(e) {
     //返回的信息在e.detail.colorData中
@@ -156,7 +160,7 @@ Page({
           devs: [{ deviceuid: dengs.diDeviceuid, valueother: parseInt(S), value: parseInt(H) }]
         };
         app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
+        
         },
           (err) => {
             console.log(err.errMsg)

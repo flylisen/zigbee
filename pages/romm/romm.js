@@ -19,23 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //判断网关是否在线
-    let url = 'https://dev.fbeecloud.com/devcontrol/';
-    let data = {
-      act: "getgatewayinfo",
-      code: "217",
-      AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-      key: "bq6wqzasjwtkl0i21pi9fbeq4",
-      bindid: "4459",
-      bindstr: "09z4",
-      ver: "2.0"
-    }
-    app.wxRequest('POST', url, data, (res) => {
-       console.log(res.data)
-      ,(err) => {
-        console.log(err.errMsg)
-      }
-    })
+    
   },
   login: utils.throttle(function(){
      if (this.data.rommid != '') {

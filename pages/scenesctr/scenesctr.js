@@ -75,7 +75,7 @@ Page({
     )
   },
   //触发场景
-  chang: utils.throttle(function(event){
+  chang:function(event){
     var ins = event.currentTarget.id;//获得下标
       this.setData({
         ins:ins
@@ -101,7 +101,7 @@ Page({
         console.log(err.errMsg)
       }
     )   
-  },3000),
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
