@@ -147,7 +147,7 @@ align-items:center;
    position: absolute;
    z-index: 1;
    margin-left:-104rpx;
-   margin-top:60rpx;
+   margin-top:30rpx;
 
 }
 .zt{

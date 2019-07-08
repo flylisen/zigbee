@@ -14,8 +14,8 @@ Page({
    */
   data: {
     allSelect: false,
-    choseImg: '/images/check-circle2.png',
-    unchoseImg: '/images/check-circle.png',
+    choseImg: '/images/changjing/xz.png',
+    unchoseImg: '/images/changjing/wxz.png',
     sortedDevs: '',
     arr: '',
     hidden: false,
