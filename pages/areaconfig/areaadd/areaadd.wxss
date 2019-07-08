@@ -234,8 +234,8 @@ height:240rpx;
 margin-left:-90rpx;
 }
 .dj{
-width:40rpx;
-height:40rpx;
+width:45rpx;
+height:45rpx;
 margin-left:-90rpx;
 position:absolute;
 margin-top:40rpx;
