@@ -17,26 +17,28 @@ input{
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   /* background: orange; */
-  border: 3px solid red;
-  margin-top: 40px;
-  width: 88%;
+  border: 1px solid red;
+  margin-top: 20rpx;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   background:none;
+  margin-left: 50rpx;
 }
 .button2{
   color: orange;
   border-radius: 50rpx;
   padding:0rpx 100rpx;
   /* background: red; */
-  border: 3px solid orange;
+  border: 1px solid orange;
   margin-top: 40rpx;
-  width: 88%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
+  margin-left: 50rpx;
 }
 .flex-wrp_one{
  display: flex;
@@ -124,37 +126,43 @@ align-items:center;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 100%; 
+    width: 750rpx; 
     margin: 0 auto;
     position: relative;
     left: 30rpx;
-   margin-top: -24rpx;
+    margin-top:20rpx;
+    margin-left:80rpx;
 }  
 .link_child {
-    width: 31%;
-    margin-top: 40rpx;
-}
-.link_child:not(:nth-child(3n)){
-    margin-right: 10rpx;
+width:240rpx;
+margin-top:-20rpx;
 }
 .tp{
    position: absolute;
    z-index: 1;
-   margin-left:-170rpx;
-   margin-top:38rpx;
-}
-.tb{
-   position: absolute;
-   z-index: 1;
-   margin-left:-104rpx;
-   margin-top:30rpx;
-
+  margin-left:-200rpx;
+  margin-top:40rpx;
+  width:70rpx;
+  height:70rpx;
 }
 .zt{
-   position: relative;
-   z-index: 1;
-  margin-left:60rpx;
-  font-size:32rpx;
-  margin-top:-128rpx;
-  color:#999999; 
+ position:absolute;
+z-index:1;
+margin-left:-50rpx;
+font-size:12px;
+margin-top:-126rpx;
+color:#999999; 
+width: 150rpx;
+}
+.bj{
+width:240rpx;
+height:240rpx;
+margin-left:-90rpx;
+}
+.dj{
+width:40rpx;
+height:40rpx;
+margin-left:-90rpx;
+position:absolute;
+margin-top:40rpx;
 }
