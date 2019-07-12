@@ -65,7 +65,6 @@ Page({
     this.pageLoading = !1;
     //回调
     app.globalData.callback= function (res) {
-      console.log('接收到服务器信息', res);
       console.log('当前页面在index');
     }
   },

@@ -53,7 +53,6 @@ Page({
     sign = app.globalData.sign;
     var deng = decodeURIComponent(options.deng);
     dengs = JSON.parse(deng);
-    console.log(dengs);
     that.setData({
       sortedDevs: dengs
     }); 
@@ -74,7 +73,6 @@ Page({
   kg:function(e){
     let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     var value;
-    console.log(dengs.diOnoffStatu);
     if (dengs.diOnoffStatu==0){
       value=1;
       dengs.diOnoffStatu=1;
@@ -212,7 +210,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;
       var value;
@@ -223,10 +220,6 @@ Page({
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       showname = strs[3].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('uuid', uuid);
-      console.log('value', value);
-      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -235,7 +228,6 @@ Page({
           curPage = pageArray[j];
         }
       }
-      console.log('curPage', curPage);
       if (nodeType == 4) {
         //设备开关状态发生改变
         var diOnoffStatu = curPage.data.diOnoffStatu;
@@ -243,7 +235,6 @@ Page({
           diOnoffStatu: value
         })
       } 
-      console.log('当前页面在设备详情');
     }
 },
   /**

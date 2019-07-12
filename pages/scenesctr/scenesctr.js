@@ -95,7 +95,13 @@ Page({
       scenes: [{sceneID: siSceneId}]
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data) 
+      console.log(res.data)
+      if(res.data.code!=1){
+        wx.showModal({
+          title: '提示',
+          content: '触发场景失败'
+        })
+      } 
     },
       (err) => {
         console.log(err.errMsg)

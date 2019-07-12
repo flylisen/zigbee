@@ -24,7 +24,8 @@
     "pages/devctr/kaiguanguan/kaiguanguan",
     "pages/devctr/chuanglian/chuanglian",
     "pages/areactr/areainfo/areainfo",
-    "pages/scenesconfig/changjing/changjing"
+    "pages/scenesconfig/changjing/changjing",
+    "pages/scenesconfig/changjingadd/changjingadd"
       ],
   "window": {
     "backgroundTextStyle": "dark",

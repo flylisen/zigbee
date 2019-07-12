@@ -8,17 +8,39 @@ var sign;
 var rommid;
 const utils = require('../../utils/util.js')
 Page({
-  /**
-   * 页面的初始数据
-   */
-  path:'pages/devctr/devctr',
   data: {
+    flag: 0,
+    currentTab: 0,
     chuanglians: '',
     sortedDevs: '',
-    ins:-1,
-    rommid:'',
-    hidden:false,
-    pz:'/images/pzwdj.png',
+    ins: -1,
+    rommid: '',
+    hidden: false,
+    pz: '/images/pzwdj.png',
+    winHeight:'',
+     arr1:'',//开关
+     arr2:'',//灯
+     arr3:'',//窗帘
+     arr4:'',//空调
+     arr5:'',//传感器
+     arr6:'',//其他设备
+  },
+  switchNav: function (e) {
+    var page = this;
+    var id = e.target.id;
+    if (this.data.currentTab == id) {
+      return false;
+    } else {
+      page.setData({
+        currentTab: id
+      });
+    }
+    page.setData({
+      flag: id
+    });
+  },
+  catchTouchMove: function (res) {
+    return false
   },
   pz: function () {
     if (!this.pageLoading) {
@@ -31,21 +53,31 @@ Page({
       })
     }
   },
+  stopTouchMove:function(){
+     
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-     var that = this;
-     username = app.globalData.username;
-     pwd = app.globalData.pwd;
+    var that = this;
+    username = app.globalData.username;
+    pwd = app.globalData.pwd;
     rommid = app.globalData.rommid;
     that.setData({
       rommid
     })
-     timestamp = app.globalData.timestamp;
-     token = app.globalData.token;
-     sign = app.globalData.sign;
-    let url = app.globalData.URL + 'getDev?timestamp='+timestamp +'&token='+token+'&sign='+sign;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          winHeight: res.windowHeight
+        });
+      }
+    });
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
       bindstr: pwd
@@ -65,10 +97,36 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      console.log(sortResult);
+      var arr1=[];//开关
+      var arr2=[];//灯
+      var arr3=[];//窗帘
+      var arr4=[];//空调
+      var arr5=[];//传感器
+      var arr6=[];//其他设备
+      for (var i in sortResult){
+        if (sortResult[i].diDeviceid==2){
+          arr1.push(sortResult[i]);
+        } else if ((sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)){
+          arr2.push(sortResult[i]);
+        } else if (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2){
+          arr3.push(sortResult[i]);
+        }else if (sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype ==1) {
+          arr4.push(sortResult[i]);
+        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 13) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 42) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 32769) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 21) || (sortResult[i].diDeviceid == 770 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 40) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype ==43)){
+          arr5.push(sortResult[i]);
+        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 44) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 277) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 353 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 83 && sortResult[i].diZonetype == 258) || (sortResult[i].diDeviceid == 10 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 1027 && sortResult[i].diZonetype == 549) || (sortResult[i].diDeviceid == 771 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 337&& sortResult[i].diZonetype == 0)) {
+          arr6.push(sortResult[i]);
+        }
+      }
       that.setData({
-        sortedDevs: sortResult,
-        hidden:true,
+        sortedDevs: sortResult,//所有设备
+        arr1:arr1,
+        arr2:arr2,
+        arr3:arr3,
+        arr4: arr4,
+        arr5:arr5,
+        arr6:arr6,
+        hidden: true,
       });
     },
       (err) => {
@@ -77,19 +135,19 @@ Page({
     )
   },
   //设备的开关
-  changTap:function(e){
+  changTap: utils.throttle(function (e) {
     var ins = e.currentTarget.id;//获得下标
     var tp = e.currentTarget.dataset['tp'];
-    var value; 
-    if (tp.diOnoffStatu==0){
-      value=1;
-    }else{
-      value =0; 
+    var value;
+    if (tp.diOnoffStatu == 0) {
+      value = 1;
+    } else {
+      value = 0;
     }
     this.setData({
       ins: ins
     })
-    if (tp.diOnlineStatu==0){
+    if (tp.diOnlineStatu == 0) {
       wx.showModal({
         title: '提示',
         content: '设备不在线'
@@ -97,10 +155,9 @@ Page({
       this.setData({
         ins: -1
       })
-     }else{
+    } else {
       for (var i = 0; i < this.data.sortedDevs.length; i++) {
         if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
-          console.log('找到匹配', i);
           var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
           this.setData({
             [tmp]: value
@@ -119,8 +176,8 @@ Page({
         var: "2.0"
       };
       app.wxRequest('POST', url, data, (res) => {
-         console.log(res.data)
-        if (res.data.code!=1){
+        console.log(res.data)
+        if (res.data.code != 1) {
           this.setData({
             ins: -1
           })
@@ -130,14 +187,14 @@ Page({
           console.log(err.errMsg)
         }
       )
-     }
-  },
+    }
+  }, 500),
   device: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
     })
-    if (event.currentTarget.dataset['device'].diOnlineStatu>0){
+    if (event.currentTarget.dataset['device'].diOnlineStatu > 0) {
       var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
@@ -145,22 +202,22 @@ Page({
           url: 'kaiguanguan/kaiguanguan?kaiguanguan=' + device
         })
       }
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '设备不在线'
       })
       this.setData({
-        ins:-1
+        ins: -1
       })
     }
-  },1000),
-  xia: utils.throttle(function (event){
+  }, 1000),
+  xia: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
     })
-    if (event.currentTarget.dataset['deng'].diOnlineStatu>0){
+    if (event.currentTarget.dataset['deng'].diOnlineStatu > 0) {
       var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
@@ -171,7 +228,7 @@ Page({
       this.setData({
         deng: false
       })
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '设备不在线'
@@ -180,13 +237,13 @@ Page({
         ins: -1
       })
     }
-  },1000),
-  kongtiao: utils.throttle(function(event){
+  }, 1000),
+  kongtiao: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
     })
-    if (event.currentTarget.dataset['kongtiao'].diOnlineStatu>0){
+    if (event.currentTarget.dataset['kongtiao'].diOnlineStatu > 0) {
       var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
@@ -194,7 +251,7 @@ Page({
           url: 'kongtiao/kongtiao?kongtiao=' + kongtiao
         })
       }
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '设备不在线'
@@ -203,13 +260,13 @@ Page({
         ins: -1
       })
     }
-  },1000),
-  sewendeng: utils.throttle(function (event){
+  }, 1000),
+  sewendeng: utils.throttle(function (event) {
     var ins = event.currentTarget.id;//获得下标
     this.setData({
       ins: ins
     })
-    if (event.currentTarget.dataset['sewendeng'].diOnlineStatu>0){
+    if (event.currentTarget.dataset['sewendeng'].diOnlineStatu > 0) {
       var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
         this.pageLoading = !0;
@@ -217,31 +274,7 @@ Page({
           url: 'sewendeng/sewendeng?sewendeng=' + sewendeng
         })
       }
-    }else{
-      wx.showModal({
-        title: '提示',
-        content: '设备不在线'
-      })
-      this.setData({
-        ins: -1
-      })
-    }   
-  },1000),
-  //窗帘
-  chuanglian: utils.throttle(function (event) {
-    var ins = event.currentTarget.id;//获得下标
-    this.setData({
-      ins: ins
-    })
-    if (event.currentTarget.dataset['chuanglian'].diOnlineStatu>0){
-      var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
-      if (!this.pageLoading) {
-        this.pageLoading = !0;
-        wx.navigateTo({
-          url: 'chuanglian/chuanglian?deviceuid=' + deviceuid
-        })
-      }
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         content: '设备不在线'
@@ -250,12 +283,36 @@ Page({
         ins: -1
       })
     }
-  },1000),
+  }, 1000),
+  //窗帘
+  chuanglian: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['chuanglian'].diOnlineStatu > 0) {
+      var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: 'chuanglian/chuanglian?deviceuid=' + deviceuid
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -263,14 +320,13 @@ Page({
   onShow: function () {
     this.pageLoading = !1;
     //回调
-    app.globalData.callback= function (res) {
+    app.globalData.callback = function (res) {
       var nodeType;
       var uuid;
       var value;
       var showname;
       var strs = new Array();
       strs = res.data.split(","); //字符分割
-      console.log(strs); 
       nodeType = strs[0].split('=')[1];
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
@@ -285,7 +341,6 @@ Page({
       }
       if (nodeType == 4) {
         //设备开关状态发生改变
-        console.log("设备开关状态发生改变");
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
@@ -302,20 +357,19 @@ Page({
         }
       } else if (nodeType == 2) {
         //判断设备是否在线
-        console.log("设备在线状态发生改变");
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
-            if (curPage.data.sortedDevs[i].diOnlineStatu==0){
+            if (curPage.data.sortedDevs[i].diOnlineStatu == 0) {
               curPage.setData({
                 [tmp]: 1
               })
-            }else{
+            } else {
               curPage.setData({
                 [tmp]: 0
               })
             }
-           
+
           }
         }
       } else if (nodeType == 5) {
@@ -354,7 +408,6 @@ Page({
           }
         )
       }
-      console.log('当前页面在设备配置');
     }
   },
 
@@ -377,7 +430,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-       
+
   },
 
   /**

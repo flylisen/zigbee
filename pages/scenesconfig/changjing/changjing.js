@@ -45,7 +45,7 @@ Page({
     timestamp = app.globalData.timestamp;
     token = app.globalData.token;
     sign = app.globalData.sign;
-    var changjings = decodeURIComponent(options.changjing);
+    var changjings = decodeURIComponent(options.changjings);
     changjing = JSON.parse(changjings);
     console.log(changjing);
     this.setData({
@@ -76,11 +76,21 @@ Page({
 
     };
     app.wxRequest('POST', url, data, (res) => {
-      console.log(res.data.scenes);
       for (var i in res.data.scenes) {
         var sceneMembers = res.data.scenes[i].sceneMembers;
+        var len = sceneMembers.length;
+        var ret = [];
+        for (var i = 0; i < len; i++) {
+          for (var j = i + 1; j < len; j++) {
+            if (sceneMembers[i].uuid === sceneMembers[j].uuid) {
+              j = ++i;
+            }
+          }
+          ret.push(sceneMembers[i]);
+        }
         this.setData({
-          sortedDevs: sceneMembers,
+          sortedDevs: ret,
+          sceneMembers: sceneMembers,
           hidden:true
         })
       }
@@ -109,7 +119,7 @@ Page({
     }
     this.setData({
       sortedDevs: infoArray,
-      arr
+      arr:arr
     })
     console.log(this.data.arr);
   },
@@ -175,49 +185,7 @@ Page({
         }
       }
     })
-  },3000),
-  delete: utils.throttle(function (e) {  //删除场景
-    var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确定删除该场景吗？',
-      success: function (msg) {
-        if (msg.confirm) {
-          let url = app.globalData.URL + 'delSceneMem?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-          let data = {
-            act:"deleteScenemembers",
-            code: 605,
-            AccessID: "vlvgt9vecxti7zqy9xu0yyy7e",
-            key: "bq6wqzasjwtkl0i21pi9fbeq4",
-            bindid: username,
-            bindstr: pwd,
-            ver: "2",
-            scenes: [{ sceneID: changjing.siSceneId, sceneName: changjing.siName}]
-          };
-          app.wxRequest('POST', url, data, (res) => {
-            console.log(res.data)
-            wx.showToast({
-              title: '删除成功',
-              duration: 2000
-            });
-            var pages = getCurrentPages(); // 当前页面 
-            var beforePage = pages[pages.length - 2]; // 前一个页面  
-            wx.navigateBack({
-              success: function () {
-                beforePage.onLoad(); // 执行前一个页面的方法     
-                }
-              });
-            },
-            (err) => {
-              console.log(err.errMsg)
-            }
-          )
-        } else if (msg.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-  },3000),
+  },1000),
   //修改场景名称
   aiNames: utils.throttle(function(e){
     var sceneName = e.detail.value.sceneName;
@@ -235,7 +203,6 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       var sceneVisible = this.data.sceneVisible;//是否可见
-      console.log(sceneVisible);
       if (sceneVisible==''){
          sceneVisible = this.data.siSceneVisibal;
       }else{
@@ -253,8 +220,6 @@ Page({
           siShowName.push(res.data.scenes[i].siShowName);
         }
       }
-      console.log(siName);
-      console.log(siShowName);
       for (var i = 0; i < siName.length; i++) {
         if (siName[i] == "") {
           siName.splice(i, 1);
@@ -330,7 +295,7 @@ Page({
         console.log(err.errMsg)
       }
     ) 
-  },3000),
+  },1000),
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

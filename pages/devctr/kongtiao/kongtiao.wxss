@@ -41,6 +41,12 @@ page{
    margin-top: -50rpx;
    margin-left: 10px;
 }
+.scroll-view-item_H3{
+  width: 150rpx;
+   height: 200rpx;
+   display: inline-flex;
+   margin-top: 10rpx;
+}
 .window_view2{
    margin-top: -200rpx;
    margin-left: 100px;
@@ -76,85 +82,10 @@ text {
    margin-top: 5rpx;
    font: 20;
 }
-.modal-mask {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: #000;
-  opacity: 0.5;
-  overflow: hidden;
-  z-index: 9000;
-  color: #fff;
+.window_view{
+
 }
-.input {
-  width: 100%;
-  height: 82rpx;
-  font-size: 28rpx;
-  line-height: 28rpx;
-  padding: 0 20rpx;
-  box-sizing: border-box;
-  color: #333;
-}
-.modal-dialog {
-  width: 540rpx;
-  overflow: hidden;
-  position: fixed;
-  top: 50%;
-  left: 0;
-  z-index: 9999;
-  background: #f9f9f9;
-  margin: -350rpx 105rpx;
-  border-radius: 36rpx;
-}
-.modal-title {
-  padding-top: 50rpx;
-  font-size: 36rpx;
-  color: #030303;
-  text-align: center;
-}
-.modal-content {
-  padding: 50rpx 32rpx;
-}
-.input {
-  width: 100%;
-  height: 82rpx;
-  font-size: 28rpx;
-  line-height: 28rpx;
-  padding: 0 20rpx;
-  box-sizing: border-box;
-  color: #333;
-}
-input-holder {
-  color: #666;
-  font-size: 28rpx;
-}
-.modal-footer {
-  display: flex;
-  flex-direction: row;
-  height: 86rpx;
-  border-top: 1px solid #dedede;
-  font-size: 34rpx;
-  line-height: 86rpx;
-}
-.btn-cancel {
-  width: 50%;
-  color: #666;
-  text-align: center;
-  border-right: 1px solid #dedede;
-}
-.btn-confirm {
-  width: 50%;
-  color: #ec5300;
-  text-align: center;
-}
-.modal-input{
-  margin-top: -40rpx;
-}
-.label{
-  margin-top: 30rpx;
-}
+
 
 
 

@@ -47,7 +47,6 @@ Page({
     };
     app.wxRequest('POST', url, data, (res) => {
       console.log(res.data)
-      console.log(res.data.points)
       that.setData({
         points: res.data.points
       });
@@ -71,7 +70,6 @@ Page({
     //回调
     app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);
-      console.log('当前页面在kaiguanguan');
     } 
   },
 

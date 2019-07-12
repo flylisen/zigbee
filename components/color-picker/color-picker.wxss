@@ -4,19 +4,7 @@
 .bg {
   background: #5f27cd;
 }
-.t50 {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.tx50 {
-  left: 50%;
-  transform: translateX(-50%);
-}
-.ty50 {
-  top: 50%;
-  transform: translateY(-50%);
-}
+
 .cw {
   color: #fff;
 }

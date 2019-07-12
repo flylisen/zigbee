@@ -1,22 +1,11 @@
 <view class='imagesize'>
     <image src='/images/scenesadd/cj.png'  style='width:30%; height:30%' mode='widthFix'></image>
 </view>
+<view class='imagesize'>
+    <text>{{siShowName}}</text>
+</view>
 <view>
  <form bindsubmit='submit'>
-       <view class="name">
-      <text class='text'>显示名称</text>
-      </view>
-      <input type="text" class="input" name="showName" maxlength='10'></input>
-    <view class="name">
-     <text class='text'>内存名称</text>
-     </view>
-     <input type="text" class="input" name="areaname" maxlength='10'></input>
-      <radio-group class="radio-group" bindchange="radioChange">
-        <label class="radio" wx:for="{{items}}">
-        <radio value="{{item.name}}" checked="{{item.checked}}" />
-            {{item.value}}
-        </label>
-        </radio-group>
       <view class="name">
      <text class='text'>添加设备</text>
      </view>

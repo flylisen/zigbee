@@ -21,6 +21,7 @@ Page({
     ktest:false,
     tztest:false,
     gtext:false,
+    bjtp:'',
   },
   
   /**
@@ -34,7 +35,16 @@ Page({
     sign = app.globalData.sign;
     var deviceuid = decodeURIComponent(options.deviceuid);
     Industrys = JSON.parse(deviceuid);
+    var bjtp;
+    if (Industrys.diOnoffStatu==0){
+      bjtp ='/images/chuanglian/clg.jpg';  
+    } else if (Industrys.diOnoffStatu ==1){
+      bjtp = '/images/chuanglian/clk.jpg';    
+    } else if (Industrys.diOnoffStatu == 2){
+      bjtp ='/images/chuanglian/cltz.jpg';
+    }
     this.setData({
+      bjtp:bjtp,
       diDeviceid: Industrys.diDeviceid,
       diZonetype: Industrys.diZonetype,
       diOnoffStatu: Industrys.diOnoffStatu
@@ -63,7 +73,8 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             k: '/images/chuanglian/kwdj.png',
-            ktest: false
+            ktest: false,
+            bjtp:'/images/chuanglian/clk.jpg'
           })
         }
       },
@@ -90,7 +101,8 @@ Page({
       if (res.data.code == 1) {
         this.setData({
           tz: '/images/chuanglian/tzwdj.png',
-          tztest: false
+          tztest: false,
+          bjtp :'/images/chuanglian/cltz.jpg'
         })
       }
     },
@@ -117,7 +129,8 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             g: '/images/chuanglian/gwdj.png',
-            gtext: false
+            gtext: false,
+            bjtp :'/images/chuanglian/clg.jpg'
           })
         }
       },
@@ -140,7 +153,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;
       var value;
@@ -151,10 +163,6 @@ Page({
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       showname = strs[3].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('uuid', uuid);
-      console.log('value', value);
-      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -163,7 +171,6 @@ Page({
           curPage = pageArray[j];
         }
       }
-      console.log('curPage', curPage);
       if (nodeType == 4) {
         //设备开关状态发生改变
         var diOnoffStatu = curPage.data.diOnoffStatu;
@@ -171,7 +178,6 @@ Page({
           diOnoffStatu: value
         })
       }
-      console.log('当前页面在窗帘');
     }
   },
 

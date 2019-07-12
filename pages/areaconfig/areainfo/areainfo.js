@@ -43,8 +43,6 @@ Page({
             for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diId
               arr2.push(arr1[i].diId);
             }
-            console.log(arr1);
-            console.log(arr2);
             let url = app.globalData.URL + 'delDevFromArea?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
             let data = {
               actCode: "109",
@@ -85,12 +83,10 @@ Page({
   onLoad: function (options) {
     var aiid = decodeURIComponent(options.aiid);
     Industrys = JSON.parse(aiid);
-    console.log(Industrys);
     this.setData({
       aiNames: Industrys.aiName,
       atImg: Industrys.atImg
     })
-    console.log(Industrys.atImg);
     var that = this;
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
@@ -144,7 +140,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;
       var value;
@@ -155,10 +150,6 @@ Page({
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       showname = strs[3].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('uuid', uuid);
-      console.log('value', value);
-      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -167,7 +158,6 @@ Page({
           curPage = pageArray[j];
         }
       }
-      console.log('curPage', curPage);
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -198,7 +188,6 @@ Page({
         //修改名称
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diShowName';
             var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({
@@ -231,7 +220,6 @@ Page({
           }
         )
       }
-      console.log('当前页面在区域详情');
     }
   },
 

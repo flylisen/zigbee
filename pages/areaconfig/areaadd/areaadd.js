@@ -30,11 +30,9 @@ Page({
     var name = e.detail.value.areaname;
     let arr1 = that.data.arr;
     let area = that.data.areatype;
-    console.log(area);
     for (var i in area) {
       var atId = area[i].atId
     }
-    console.log(atId)
     if (name == '' || arr1 == '' || area == undefined) {
       wx.showModal({
         title: '提示',
@@ -46,7 +44,6 @@ Page({
       for (let i = 0; i < arr1.length; i++) {  //获取选中设备的diUuid
         arr2.push(arr1[i].diUuid);
       }
-      console.log(name);
       let url = app.globalData.URL + 'addArea?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
       let data = {
         actCode: 106,
@@ -97,7 +94,6 @@ Page({
     token = app.globalData.token;
     sign = app.globalData.sign;
     let url = app.globalData.URL + 'getAreaTypeList?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
-    console.log(url);
     let data = {
       bindid: username,
       ver: "2"
@@ -118,7 +114,6 @@ Page({
           areaTypeList.push(tmp[key][j]);
         }
       }
-      console.log(areaTypeList);
 
       that.setData({
         areaTypeList: areaTypeList
@@ -180,7 +175,6 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      console.log('接收到服务器信息', res);
       var nodeType;
       var uuid;
       var value;
@@ -191,10 +185,6 @@ Page({
       uuid = strs[1].split('=')[1];
       value = strs[2].split('=')[1];
       showname = strs[3].split('=')[1];
-      console.log('nodeType', nodeType);
-      console.log('uuid', uuid);
-      console.log('value', value);
-      console.log('showname', showname);
       //找到当前页面的page
       var pageArray = getCurrentPages();
       var curPage;
@@ -203,7 +193,6 @@ Page({
           curPage = pageArray[j];
         }
       }
-      console.log('curPage', curPage);
       if (nodeType == 4) {
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -234,7 +223,6 @@ Page({
         //修改名称
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            console.log('i=' + i);
             var tmp = 'sortedDevs[' + i + '].diShowName';
             var dname = 'sortedDevs[' + i + '].diName';
             curPage.setData({
@@ -267,7 +255,6 @@ Page({
           }
         )
       }
-      console.log('当前页面在区域新增');
     }
   },
 
@@ -344,18 +331,14 @@ Page({
 
   mySelect(e) {
 
-    console.log(e);
     var name = e.currentTarget.dataset.name
-    console.log(name)
     let typeinfo = this.data.areaTypeList;
     let areatype = [];
-    console.log(this.data.areaTypeList);
     for (var i = 0; i < typeinfo.length; i++) {
       if (typeinfo[i].atName == name) {
         areatype.push(typeinfo[i])
       }
     }
-    console.log(areatype);
     this.setData({
 
       grade_name: name,

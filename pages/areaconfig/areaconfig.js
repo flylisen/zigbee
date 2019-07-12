@@ -50,7 +50,6 @@ Page({
           areaResult.push(tmp[key][j]);
         }
       }
-      console.log(areaResult);
       that.setData({
         sortedAreas: areaResult,
         hidden: true
@@ -88,7 +87,6 @@ Page({
     //回调
     app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);
-      console.log('当前页面在areaconfig');
     }
   },
   /**

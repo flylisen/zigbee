@@ -32,7 +32,6 @@ Page({
     sign = app.globalData.sign;
     var kaiguanguan = decodeURIComponent(options.kaiguanguan);
     kaiguanguans = JSON.parse(kaiguanguan);
-    console.log(kaiguanguans);
     this.setData({
       diNames: kaiguanguans.diShowName,//显示名称
       diName: kaiguanguans.diName,//内存名称
@@ -66,8 +65,7 @@ Page({
     var that = this;
     var name = e.detail.value.name;//内存名称
     var showname = e.detail.value.showname;//显示名称
-    var diNames = this.data.diName;
-    console.log(name);    
+    var diNames = this.data.diName;  
     let url = app.globalData.URL + 'getDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
     let data = {
       bindid: username,
@@ -86,7 +84,6 @@ Page({
           i = i - 1;
         }
       }
-      console.log(diName);
       var bool;
       for (var j in diName) {
         if (name == diName[j]) {
@@ -118,10 +115,6 @@ Page({
         app.wxRequest('POST', url, data, (res) => {
           console.log(res.data)
           if (res.data.code == 1) {
-            wx.showToast({
-              title: '修改成功',
-              duration: 2000
-            });
             var pages = getCurrentPages(); // 当前页面 
             var beforePage = pages[pages.length - 2]; // 前一个页面  
             wx.navigateBack({
@@ -129,6 +122,11 @@ Page({
                 beforePage.onShow(); // 执行前一个页面的方法     
               }
             });
+          }else{
+            wx.showToast({
+              title: '修改失败',
+              icon: 'none'
+            })
           }
         },
           (err) => {
@@ -150,8 +148,6 @@ Page({
       content: '确定要删除吗？',
       success: function (sm) {
         if (sm.confirm) {
-          console.log(kaiguanguans.diUuid);
-          console.log(kaiguanguans.diIeee);
           let url = app.globalData.URL + 'delDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
           let data = {
             act:"deletedev",
@@ -165,24 +161,26 @@ Page({
           };
           app.wxRequest('POST', url, data, (res) => {
             console.log(res.data)
-            wx.showToast({
-              title: '删除成功',
-              duration: 2000
-            });
-            var pages = getCurrentPages(); // 当前页面 
-            var beforePage = pages[pages.length - 2]; // 前一个页面  
-            wx.navigateBack({
-              success: function () {
-                beforePage.onShow(); // 执行前一个页面的方法     
-              }
-            });
+            if (res.data.code == 1){
+              var pages = getCurrentPages(); // 当前页面 
+              var beforePage = pages[pages.length - 2]; // 前一个页面  
+              wx.navigateBack({
+                success: function () {
+                  beforePage.onShow(); // 执行前一个页面的方法     
+                }
+              });
+            }else{
+              wx.showToast({
+                title: '删除失败',
+                icon: 'none'
+              })
+            }
           },
             (err) => {
               console.log(err.errMsg)
             }
           )
         } else if (sm.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -201,7 +199,6 @@ Page({
     //回调
     app.globalData.onReceiveWebsocketMessageCallback = function (res) {
       console.log('接收到服务器信息', res);
-      console.log('当前页面在kaiguanguan');
     } 
   },
 

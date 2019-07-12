@@ -1,13 +1,11 @@
 
 <view style='text-align:center;margin-top:100rpx;' class="picture-2">
-       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'minus':''}}" class="Image"  src="{{minus}}" mode="widthFix"></image>
        <image style='width:70%; height:70%' class="infoImage"  src="../../../images/devctr/kongtionbj.png" mode='widthFix'>
          <view wx:if="{{centralairConditionMode!=0}}">
           <text class='text'>{{wendu/100}}℃</text>
           <text class='test2'>当前房间温度:{{localTemperature/100}}℃</text>
           </view>
        </image>
-       <image style='width:10%; height:10%' bindtap="{{centralairConditionMode!=0?'jia':''}}" class="Image" src="{{jia}}" mode="widthFix"></image>
 </view>
 <!--模式-->
   <view class="window_view2">
@@ -112,58 +110,37 @@
 </view>
 <view class="window_view">
    <scroll-view class="scroll-view_H" scroll-x="true">
-      <view id="local" class="scroll-view-item_H local" bindtap="{{centralairConditionMode!=0?'tongfeng':''}}">
+      <view id="local" class="scroll-view-item_H3 local" bindtap="{{centralairConditionMode!=0?'tongfeng':''}}">
          <view class='box'>
             <image src='{{ms}}'></image>
             <text style="{{mstext==true?'color: #FEA152;':''}}">模式</text>
          </view>
       </view>
-      <view id="img" class="scroll-view-item_H img" bindtap='kaiguanguan'>
+      <view id="img" class="scroll-view-item_H3 img" bindtap='kaiguanguan'>
          <view class='box'>
             <image src="{{centralairConditionMode!=0?'../../../images/devctr/kgdj.png':'../../../images/devctr/kgwdj.png'}}"></image>
             <text style="{{centralairConditionMode!=0?'color: #FEA152;':''}}">开关</text>
          </view>
       </view>
-      <view id="audio" class="scroll-view-item_H audio" bindtap="{{centralairConditionMode!=0?'actioncnt':''}}">
+      <view id="audio" class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'actioncnt':''}}">
          <view class='box'>
             <image src='{{fs}}'></image>
             <text style="{{fstext==true?'color: #FEA152;':''}}">风速</text>
          </view>
       </view>
+       <view  class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'jia':''}}">
+         <view class='box'>
+            <image src="{{jia}}"></image>
+            <text style="{{jiatext==true?'color: #FEA152;':''}}">加</text>
+         </view>
+      </view>
+       <view  class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'minus':''}}">
+         <view class='box'>
+            <image src="{{minus}}"></image>
+            <text style="{{minustext==true?'color: #FEA152;':''}}">减</text>
+         </view>
+      </view>
    </scroll-view>
-</view>
-<!--弹窗-->
-<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
-<view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">空调控制</view>
-  <view class="modal-content">
-    <view class="modal-input">
-    <view wx:if="{{index==2}}">
-          <view>请选择模式:</view>
-          <view class='label'>
-           <radio-group bindchange="checkboxChange">
-	         <label class="checkbox" wx:for="{{ConditionMode}}">
-	         <checkbox value="{{item.name}}"/>{{item.value}}
-	        </label>
-          </radio-group>
-          </view>  
-      </view>
-       <view wx:if="{{index==3}}">
-         <view>请选择风速:</view>
-           <view class='label'>
-          <radio-group bindchange="checkboxChangeWindMode">
-	        <label class="checkbox" wx:for="{{WindMode}}">
-	        <checkbox value="{{item.name}}"/>{{item.value}}
-	       </label>
-         </radio-group>
-         </view> 
-      </view>
-     </view>
-  </view>
-  <view class="modal-footer">
-    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
-    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
-  </view>
 </view>
 
 

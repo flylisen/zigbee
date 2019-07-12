@@ -10,7 +10,7 @@
            </view>
            
   </view>
-  <view class='gl'>
+<view class='gl'>
 <text class='text'>区域设备管理</text>
 </view>
     <form bindsubmit='submit'>
