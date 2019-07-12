@@ -159,8 +159,10 @@ Page({
       for (var i = 0; i < this.data.sortedDevs.length; i++) {
         if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
           var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+          var tmp2 = 'arr1[' + i + '].diOnoffStatu';
           this.setData({
-            [tmp]: value
+            [tmp]: value,
+            [tmp2]:value
           })
         }
       }
@@ -343,9 +345,17 @@ Page({
         //设备开关状态发生改变
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+            var tmp ='sortedDevs[' + i + '].diOnoffStatu';
+            var tmp1 ='arr1[' + i + '].diOnoffStatu';
+            var tmp2 = 'arr2[' + i + '].diOnoffStatu';
+            var tmp3 = 'arr3[' + i + '].diOnoffStatu';
+            var tmp4 = 'arr4[' + i + '].diOnoffStatu';
             curPage.setData({
-              [tmp]: value
+              [tmp]: value,
+              [tmp1]: value,
+              [tmp2]: value,
+              [tmp3]: value,
+              [tmp4]: value,
             })
           }
         }
@@ -360,13 +370,31 @@ Page({
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
+            var tmp1 = 'arr1[' + i + '].diOnlineStatu';
+            var tmp2 = 'arr2[' + i + '].diOnlineStatu';
+            var tmp3 = 'arr3[' + i + '].diOnlineStatu';
+            var tmp4 = 'arr4[' + i + '].diOnlineStatu';
+            var tmp5 = 'arr5[' + i + '].diOnlineStatu';
+            var tmp6 = 'arr6[' + i + '].diOnlineStatu';
             if (curPage.data.sortedDevs[i].diOnlineStatu == 0) {
               curPage.setData({
-                [tmp]: 1
+                [tmp]: 1,
+                [tmp1]: 1,
+                [tmp2]: 1,
+                [tmp3]: 1,
+                [tmp4]: 1,
+                [tmp5]: 1,
+                [tmp6]: 1 
               })
             } else {
               curPage.setData({
-                [tmp]: 0
+                [tmp]: 0,
+                [tmp1]: 0,
+                [tmp2]: 0,
+                [tmp3]: 0,
+                [tmp4]: 0,
+                [tmp5]: 0,
+                [tmp6]: 0,
               })
             }
 
@@ -377,10 +405,34 @@ Page({
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diShowName';
+            var tmp1 = 'arr1[' + i + '].diShowName';
+            var tmp2 = 'arr2[' + i + '].diShowName';
+            var tmp3 = 'arr3[' + i + '].diShowName';
+            var tmp4 = 'arr4[' + i + '].diShowName';
+            var tmp5 = 'arr5[' + i + '].diShowName';
+            var tmp6 = 'arr6[' + i + '].diShowName';
             var dname = 'sortedDevs[' + i + '].diName';
+            var dname1 = 'arr1[' + i + '].diName';
+            var dname2 = 'arr2[' + i + '].diName';
+            var dname3 = 'arr3[' + i + '].diName';
+            var dname4 = 'arr4[' + i + '].diName';
+            var dname5 = 'arr5[' + i + '].diName';
+            var dname6 = 'arr6[' + i + '].diName';
             curPage.setData({
               [dname]: value,
-              [tmp]: showname
+              [dname1]: value,
+              [dname2]: value,
+              [dname3]: value,
+              [dname4]: value,
+              [dname5]: value,
+              [dname6]: value,
+              [tmp]: showname,
+              [tmp1]: showname,
+              [tmp2]: showname,
+              [tmp3]: showname,
+              [tmp4]: showname,
+              [tmp5]: showname,
+              [tmp6]: showname,
             })
           }
         }

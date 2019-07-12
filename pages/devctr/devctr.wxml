@@ -18,7 +18,8 @@
         <view class='category'>
           <swiper current='{{currentTab}}' style="height: {{winHeight?winHeight+'px':'auto'}}" vertical="{{true}}">
             <swiper-item id='0' catchtouchmove="stopTouchMove">
-             <scroll-view style="height:100%" scroll-y="true">
+<!--所有设备-->
+<scroll-view style="height:100%" scroll-y="true">
   <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{sortedDevs}}" wx:key="name">
@@ -379,13 +380,14 @@
   </view>
 </view>
  </scroll-view>
-            </swiper-item>
-            <swiper-item id='1' catchtouchmove="stopTouchMove"> 
-              <scroll-view style="height:100%" scroll-y="true">
+ </swiper-item>
+ <!--开关-->
+<swiper-item id='1' catchtouchmove="stopTouchMove"> 
+ <scroll-view style="height:100%" scroll-y="true">
   <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr1}}" wx:key="name">
-      <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      <image  src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
       <!--开关-->
   <view  bindtap='changTap' data-tp="{{item}}" id="{{index}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
         <view class="weui-grid__icon">
@@ -406,14 +408,16 @@
 </view>
 </view>
 </scroll-view>
-          </swiper-item>
-            <swiper-item id='2' catchtouchmove="stopTouchMove">
-           <scroll-view style="height:100%" scroll-y="true">
+</swiper-item>
+<!--灯-->
+<swiper-item id='2' catchtouchmove="stopTouchMove">
+<scroll-view style="height:100%" scroll-y="true">
   <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr2}}" wx:key="name">
-      <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
-    <!--灯-->
+       <view wx:if="{{(item.diDeviceid==528)||(item.diDeviceid==544&&item.diZonetype==255)}}">
+      <image  src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      </view>
         <view wx:if="{{item.diDeviceid==528}}" bindtap='xia' data-deng="{{item}}" id="{{index}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{index==ins||item.diOnoffStatu>=1?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" mode="scaleToFill"/>
@@ -448,16 +452,18 @@
 </view>
 </view>
 </view>
-              </scroll-view>
-            </swiper-item>
-            <swiper-item id='3' catchtouchmove="stopTouchMove">
-               <scroll-view style="height:100%" scroll-y="true">
+</scroll-view>
+</swiper-item>
+<swiper-item id='3' catchtouchmove="stopTouchMove">
+<!--窗帘--->
+<scroll-view style="height:100%" scroll-y="true">
  <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr3}}" wx:key="name">
+      <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
-        <!--窗帘-->
-        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+      </view>
+        <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -475,16 +481,18 @@
     </view>
   </view>
 </view>
-        </scroll-view>
-            </swiper-item>
-             <swiper-item id='4' catchtouchmove="stopTouchMove">
-               <scroll-view style="height:100%">
-               <view class="container1">
+</scroll-view>
+</swiper-item>
+<!--空调--->
+ <swiper-item id='4' catchtouchmove="stopTouchMove">
+ <scroll-view style="height:100%">
+ <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr4}}" wx:key="name">
+      <view wx:if="{{item.diDeviceid == 769 && item.diZonetype ==1}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
-       <!--空调-->
-        <view  id="{{index}}" bindtap='kongtiao' data-kongtiao="{{item}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+      </view>
+        <view wx:if="{{item.diDeviceid == 769 && item.diZonetype ==1}}" id="{{index}}" bindtap='kongtiao' data-kongtiao="{{item}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
          </view>
@@ -502,14 +510,17 @@
     </view>
   </view>
 </view>
-              </scroll-view>
-            </swiper-item>
-             <swiper-item id='5' catchtouchmove="stopTouchMove">
-               <scroll-view style="height:100%">
-                 <view class="container1">
+</scroll-view>
+</swiper-item>
+<!--传感器-->
+<swiper-item id='5' catchtouchmove="stopTouchMove">
+<scroll-view style="height:100%">
+<view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr5}}" wx:key="name">
+      <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==13)||(item.diDeviceid==1026&&item.diZonetype==42)||(item.diDeviceid==1026&&item.diZonetype==32769)||(item.diDeviceid==1026&&item.diZonetype==21)||(item.diDeviceid==770&&item.diZonetype==0)||(item.diDeviceid==1026&&item.diZonetype==40)||(item.diDeviceid==1026&&item.diZonetype==43)}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      </view>
         <!--人体传感器-->
          <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==13}}" id="{{index}}" bindtap='device' data-device="{{item}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
@@ -625,14 +636,17 @@
     </view>
   </view>
 </view>
-            </scroll-view>
-            </swiper-item>
-             <swiper-item id='6' catchtouchmove="stopTouchMove">
-               <scroll-view style="height:100%">
-               <view class="container1">
+</scroll-view>
+</swiper-item>
+<!--其他设备-->
+<swiper-item id='6' catchtouchmove="stopTouchMove">
+<scroll-view style="height:100%">
+<view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr6}}" wx:key="name">
+       <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==44)||(item.diDeviceid==1026&&item.diZonetype==277)||(item.diDeviceid==4&&item.diZonetype==0)||(item.diDeviceid==353&&item.diZonetype==0)||(item.diDeviceid==83&&item.diZonetype==258)||(item.diDeviceid==10&&item.diZonetype==255)||(item.diDeviceid==1027&&item.diZonetype==549)||(item.diDeviceid==771&&item.diZonetype==255)||(item.diDeviceid==9&&item.diZonetype==255)||(item.diDeviceid==337&&item.diZonetype==0)}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      </view>
          <!--紧急按钮-->
           <view wx:if="{{item.diDeviceid==1026&&item.diZonetype==44}}" id="{{index}}" bindtap='device' data-device="{{item}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
@@ -796,9 +810,9 @@
     </view>
   </view>
 </view>
-              </scroll-view>
-            </swiper-item>
-          </swiper>
-        </view>
-      </view>
-    </view>
+</scroll-view>
+</swiper-item>
+</swiper>
+</view>
+</view>
+</view>

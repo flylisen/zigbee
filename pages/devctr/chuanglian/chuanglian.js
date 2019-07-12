@@ -21,7 +21,6 @@ Page({
     ktest:false,
     tztest:false,
     gtext:false,
-    bjtp:'',
   },
   
   /**
@@ -35,16 +34,7 @@ Page({
     sign = app.globalData.sign;
     var deviceuid = decodeURIComponent(options.deviceuid);
     Industrys = JSON.parse(deviceuid);
-    var bjtp;
-    if (Industrys.diOnoffStatu==0){
-      bjtp ='/images/chuanglian/clg.jpg';  
-    } else if (Industrys.diOnoffStatu ==1){
-      bjtp = '/images/chuanglian/clk.jpg';    
-    } else if (Industrys.diOnoffStatu == 2){
-      bjtp ='/images/chuanglian/cltz.jpg';
-    }
     this.setData({
-      bjtp:bjtp,
       diDeviceid: Industrys.diDeviceid,
       diZonetype: Industrys.diZonetype,
       diOnoffStatu: Industrys.diOnoffStatu
@@ -73,8 +63,7 @@ Page({
         if (res.data.code == 1) {
           this.setData({
             k: '/images/chuanglian/kwdj.png',
-            ktest: false,
-            bjtp:'/images/chuanglian/clk.jpg'
+            ktest: false
           })
         }
       },
@@ -102,7 +91,6 @@ Page({
         this.setData({
           tz: '/images/chuanglian/tzwdj.png',
           tztest: false,
-          bjtp :'/images/chuanglian/cltz.jpg'
         })
       }
     },
@@ -130,7 +118,6 @@ Page({
           this.setData({
             g: '/images/chuanglian/gwdj.png',
             gtext: false,
-            bjtp :'/images/chuanglian/clg.jpg'
           })
         }
       },
