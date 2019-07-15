@@ -1,44 +1,55 @@
 /**index.wxss**/
-.setting1{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top:170rpx;
+
+.setting1 image{
+width: 360rpx;
+height: 250rpx;
 }
-.count{
-  margin-top:200rpx；
-  
+.setting1{
+position: absolute;
+margin-top: 100rpx;
+margin-left:25rpx;
+}
+.setting1 text{
+ position: absolute;
+z-index: 1;
+width: 200rpx;
+color: white;
+margin-left: -330rpx;
+margin-top: 180rpx;
+}
+.setting2 text{
+ position: absolute;
+z-index: 1;
+width: 200rpx;
+color: white;
+margin-left: -330rpx;
+margin-top: 330rpx;
+}
+.setting3 text{
+ position: absolute;
+z-index: 1;
+width: 200rpx;
+color: white;
+margin-left: -290rpx;
+margin-top: 600rpx;
 }
 .setting2{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top:170rpx;
+position: absolute;
+margin-top: 370rpx;
+margin-left: 25rpx;
+}
+.setting2 image{
+width: 360rpx;
+height: 400rpx;
 }
 .setting3{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top:170rpx;
+position: absolute;
+margin-top: 100rpx;
+margin-left: 410rpx;
 }
-.background-image{
-  position: absolute;
-  width: 85%;
-  height: 25%;
-  
-}
-.btnImg{
-  position: relative;
-  margin-top: 15rpx;
-}
-.btnImg1{
-   position: relative;
-  margin-top: 15rpx;
-  margin-left:90rpx;
-  font-size: 20px;
+.setting3 image{
+width: 320rpx;
+height: 670rpx;
 }
 .bj{
 width: 100%;

@@ -36,13 +36,6 @@ margin-top:30rpx;
  margin-top:-20rpx;
  margin-left:40rpx;
 }
-.xz{
-position: absolute;
-width: 60rpx;
-height: 60rpx;
-margin-left:150rpx;
-margin-top:-330rpx;
-}
 .pz{
 position:absolute;
 margin-left: 270rpx;

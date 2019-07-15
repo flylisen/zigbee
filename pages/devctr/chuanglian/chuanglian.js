@@ -21,6 +21,8 @@ Page({
     ktest:false,
     tztest:false,
     gtext:false,
+    loadFlag:'',
+    imageHeight:'',
   },
   
   /**
@@ -45,6 +47,13 @@ Page({
       })
     }
   },
+  bindload: function (res) {
+    this.setData({
+      loadFlag: true,
+      imageHeight: res.detail.height
+
+    })
+  }, 
   chuangliank: utils.throttle(function(e){
       this.setData({
         k: '/images/chuanglian/kdj.png',

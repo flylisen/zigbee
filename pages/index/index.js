@@ -7,11 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    background1:'/images/areasettingwdj.png',
-    background2: '/images/areasettingwdj.png',
-    background3: '/images/areasettingwdj.png',
+    loadFlag:'',
+    imageHeight:'',
   },
+  bindload: function (res) {
+    this.setData({
+      loadFlag: true,
+      imageHeight: res.detail.height
 
+    })
+  }, 
   /**
    * 生命周期函数--监听页面加载
    */
@@ -19,9 +24,6 @@ Page({
    
   },
   control1: function (event){
-      this.setData({
-        background1: '/images/areasettingdj.png'
-      })
     if (!this.pageLoading) {
       this.pageLoading = !0;
       wx.navigateTo({
@@ -30,9 +32,6 @@ Page({
     }
   },
   control2: function (event) {
-    this.setData({
-      background2: '/images/areasettingdj.png'
-    })
     if (!this.pageLoading) {
       this.pageLoading = !0;
       wx.navigateTo({
@@ -41,9 +40,6 @@ Page({
     }
   },
   control3: function (event) {
-    this.setData({
-      background3: '/images/areasettingdj.png'
-    })
     if (!this.pageLoading) {
       this.pageLoading = !0;
       wx.navigateTo({
@@ -73,11 +69,6 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    this.setData({
-      background1:'/images/areasettingwdj.png' ,
-      background2:'/images/areasettingwdj.png' ,
-      background3:'/images/areasettingwdj.png' ,
-    })
   },
 
   /**

@@ -4,6 +4,9 @@
       <image src="{{pz}}" class="pztb" bindtap='pz' mode="widthFix"></image>
      </view>
 </view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
   <view class="content">
       <view class='left'  style="height: {{winHeight?winHeight+'px':'auto'}}">
         <view class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>所有设备</view>

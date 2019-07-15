@@ -9,6 +9,11 @@ page{
    margin-left: -40px;
    font-size: 32px;
 }
+.scroll-view-item_H1 .box image{
+width: 50rpx;
+height: 25rpx;
+
+}
 .test2{
    position: absolute;
    z-index: 1;

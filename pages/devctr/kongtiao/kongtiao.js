@@ -42,6 +42,8 @@ Page({
     ],
     centralairConditionMode:'',
     centralairConditionWindMode:'',
+    loadFlag: '', 
+    imageHeight:''
   },
   checkboxChange: function (e) {
     this.data.centralairConditionWindMode='';
@@ -50,6 +52,13 @@ Page({
   checkboxChangeWindMode: function (e) {
     this.data.centralairConditionMode = '';
     this.data.centralairConditionWindMode = e.detail.value;
+  },
+  bindload: function (res) {
+    this.setData({
+      loadFlag: true,
+      imageHeight: res.detail.height
+
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -53,7 +53,7 @@
       </view>
       <view id="audio" class="scroll-view-item_H audio">
         <view wx:if="{{airAllState.lockedState==-1&&centralairConditionMode!=0}}" class='box'>
-              <image src='../../../images/devctr/wzdj.png' style='width:20%; height:20%' mode="widthFix"></image>
+              <image src='../../../images/devctr/wzdj.png' style='width:30%; height:30%' mode="widthFix"></image>
                <text class='ztcolor'>未知</text>
               </view>
               <view wx:else class='box'>
@@ -68,41 +68,41 @@
    <scroll-view class="scroll-view_H" scroll-x="true">
       <view id="local" class="scroll-view-item_H1 local">
         <view wx:if="{{centralairConditionWindMode==5&&centralairConditionMode!=0}}" class='box'>
-              <image style='width:30%; height:30%' src='../../../images/devctr/zddj.png' mode="widthFix"></image>
+              <image src='../../../images/devctr/zddj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class='ztcolor'>自动</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:30%; height:30%' src='../../../images/devctr/zdwdj.png' mode="widthFix"></image>
+               <image src='../../../images/devctr/zdwdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class>自动</text>
               </view>
       </view>
       <view id="img" class="scroll-view-item_H1 img">
        <view wx:if="{{centralairConditionWindMode==1&&centralairConditionMode!=0}}" class='box'>
-          <image style='width:10%; height:10%' src='../../../images/devctr/dsdj.png' mode="widthFix"></image>
+          <image src='../../../images/devctr/dsdj.png'style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class='ztcolor'>低速</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:10%; height:10%' src='../../../images/devctr/dswdj.png' mode="widthFix"></image>
+               <image  src='../../../images/devctr/dswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class>低速</text>
               </view>
       </view>
       <view id="audio" class="scroll-view-item_H1 audio">
        <view wx:if="{{centralairConditionWindMode==2&&centralairConditionMode!=0}}" class='box'>
-        <image style='width:30%; height:30%' src='../../../images/devctr/zsdj.png' mode="widthFix"></image>
+        <image src='../../../images/devctr/zsdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class='ztcolor'>中速</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:20%; height:20%' src='../../../images/devctr/zswdj.png' mode="widthFix"></image>
+               <image src='../../../images/devctr/zswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class>中速</text>
               </view>
       </view>
       <view id="audio" class="scroll-view-item_H1 audio">
         <view wx:if="{{centralairConditionWindMode==3&&centralairConditionMode!=0}}" class='box'>
-        <image style='width:30%; height:30%' src='../../../images/devctr/gsdj.png' mode="widthFix"></image>
+        <image src='../../../images/devctr/gsdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class='ztcolor'>高速</text>
               </view>
               <view wx:else class='box'>
-               <image style='width:30%; height:30%' src='../../../images/devctr/gswdj.png' mode="widthFix"></image>
+               <image src='../../../images/devctr/gswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
                <text class>高速</text>
               </view>
       </view>

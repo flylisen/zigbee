@@ -18,6 +18,7 @@ Page({
     rommid: '',
     hidden:false,
     pz: '/images/pzwdj.png',
+    bjtp:'/images/scenesctr/scenewdj.png',
   },
   pz:function(){
     if (!this.pageLoading) {
@@ -78,7 +79,8 @@ Page({
   chang:function(event){
     var ins = event.currentTarget.id;//获得下标
       this.setData({
-        ins:ins
+        ins:ins,
+        bjtp:'/images/scenesctr/scenebj.png'
       })
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
@@ -101,7 +103,11 @@ Page({
           title: '提示',
           content: '触发场景失败'
         })
-      } 
+      }else{
+        this.setData({
+          bjtp:'/images/scenesctr/scenewdj.png'
+        })
+      }
     },
       (err) => {
         console.log(err.errMsg)

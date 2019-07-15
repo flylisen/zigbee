@@ -1,19 +1,14 @@
 <!--index.wxml-->
-     <image class='bj' src='/images/bj.png' mode="widthFix"></image> 
-<view class='count'>
+<image class='bj' src='/images/bj.jpg' mode="widthFix"></image> 
 <view class='setting1'  bindtap='control1'>
-      <image src="{{background1}}" mode="scaleToFill" class="background-image"></image>
-      <image class='btnImg' src='/images/areactr.png' style="width:80px;height:60px;"></image>
-      <text class='btnImg1'>区域控制</text>
+   <image src="/images/qyubj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+   <text>区域控制</text>
  </view>
  <view class='setting2' bindtap='control2'>
-  <image src="{{background2}}" mode="scaleToFill" class="background-image"></image>
-   <image class='btnImg' src='/images/scenesctr.png' style="width:80px;height:60px;"></image>
-      <text class='btnImg1'>场景控制</text>
+ <image src="/images/cjbj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+ <text>场景控制</text>
  </view>
  <view class='setting3'  bindtap='control3'>
- <image src="{{background3}}" mode="scaleToFill" class="background-image"></image>
-      <image class='btnImg' src='/images/devctr.png' style="width:80px;height:60px;"></image>
-      <text class='btnImg1'>设备控制</text>
- </view>
+<image src="/images/sbebj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+<text>设备控制</text>
  </view>
