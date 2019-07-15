@@ -16,7 +16,6 @@ margin-left: -500rpx;
   margin-left: 590rpx;
 margin-top: -65rpx;
 }
-
 .tp{
   width: 140rpx;
 }
@@ -49,6 +48,6 @@ margin-top: -65rpx;
 /* .info:not(:nth-child(3n)){
     margin-right: 20rpx;
 } */
-.tp{
+.tp1{
    position: relative;
 }

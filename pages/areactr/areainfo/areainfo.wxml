@@ -8,7 +8,26 @@
               <text>{{aiNames}}设备控制</text>
            </view>
 </view>
-<view class="container1">
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
+<view class="content">
+      <view class='left'>
+        <view class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>灯光</view>
+        <view wx:if ="{{sortedDevs1.length>0}}">
+        <view class="{{flag==1?'select':'normal'}}" id='1' bindtap='switchNav'>窗帘</view>
+        </view>
+            <view wx:if ="{{sortedDevs2.length>0}}">
+        <view class="{{flag==2?'select':'normal'}}" id='2' bindtap='switchNav'>空调</view>
+        </view>
+      </view>
+      <view class='right'>
+        <view class='category'>
+          <swiper current='{{currentTab}}' style="height: {{winHeight?winHeight+'px':'auto'}}" vertical="{{true}}">
+            <swiper-item id='0' catchtouchmove="stopTouchMove">
+            <scroll-view scroll-y="true" style="height:100%">
+              <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{sortedDevs}}" wx:key="name">
      <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
@@ -44,22 +63,6 @@
           <text class="weui-grid__label2"  wx:else style="{{index==ins||item.diOnoffStatu>=1?'color: #FEA152':''}}">{{item.diShowName}}</text>
           </view>
        </view>
-        <!--窗帘-->
-        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
-         <view class="weui-grid__icon">
-          <image class="image1" src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
-        </view>
-        <view wx:if="{{item.diOnlineStatu==0}}">
-         <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">离线</text>
-          </view>
-          <view wx:else>
-          <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
-          </view>
-           <view class="showname">
-          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">窗帘</text>
-          <text class="weui-grid__label2" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
-          </view>
-         </view>
         <!--色温灯-->
          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon" bindtap="sewendeng" id="{{index}}" data-sewendeng="{{item}}">
@@ -76,6 +79,44 @@
           <text class="weui-grid__label2" wx:else style="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'color: #FEA152':''}}">{{item.diShowName}}</text>
            </view>
        </view>
+        </view>
+  </view>
+</view>
+</scroll-view>
+            </swiper-item>
+            <swiper-item id='1' catchtouchmove="stopTouchMove">
+              <view class="container1">
+  <view class="weui-grids">
+    <view class="weui-grid" wx:for="{{sortedDevs1}}" wx:key="name">
+     <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      
+        <!--窗帘-->
+        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-chuanglian="{{item}}" bindtap='chuanglian' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+         <view class="weui-grid__icon">
+          <image class="image1" src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+           <view class="showname">
+          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">窗帘</text>
+          <text class="weui-grid__label2" wx:else  style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+          </view>
+         </view>
+        
+        </view>
+  </view>
+</view>
+            </swiper-item>
+            <swiper-item id='2' catchtouchmove="stopTouchMove">
+              <view class="container1">
+  <view class="weui-grids">
+    <view class="weui-grid" wx:for="{{sortedDevs2}}" wx:key="name">
+     <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      
        <!--空调-->
         <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" bindtap='kongtiao' data-kongtiao="{{item}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
@@ -95,7 +136,8 @@
         </view>
   </view>
 </view>
-</view>
-<view>
-    <loading hidden="{{hidden}}">加载中</loading>
-</view>
+            </swiper-item>
+          </swiper>
+        </view>
+      </view>
+    </view>

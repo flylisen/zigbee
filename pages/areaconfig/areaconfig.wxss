@@ -11,9 +11,14 @@ view h1{
 .h1{
 margin-left: -410rpx;
 }
+.scbj{
+position:absolute;
+margin-left: 470rpx;
+margin-top: -64rpx;
+}
 .tpbj{
   position: absolute;
-  margin-left: 580rpx;
+  margin-left: 590rpx;
   margin-top: -64rpx;
 }
 .tp{
@@ -47,6 +52,10 @@ margin-left: -410rpx;
 /* .info:not(:nth-child(3n)){
     margin-right: 20rpx;
 } */
-.tp{
-   position: relative;
+.xztp{
+position: absolute;
+width: 60rpx;
+height: 60rpx;
+margin-left: 266rpx;
+margin-top: 16rpx;
 }

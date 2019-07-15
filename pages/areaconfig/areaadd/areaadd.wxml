@@ -9,7 +9,7 @@
         <text class='header'>区域名称：</text>
         <input placeholder='区域名称' name="areaname" maxlength='8'></input>
       </view>
-      <view class='top-text'>区域所选类型</view>
+      <view class='top-text'>区域所属类型</view>
 
 <!-- 下拉框 -->
 

@@ -27,26 +27,6 @@ Page({
     })
     }
   },
-  go: function () {
-    this.setData({
-      showModal: false
-    });
-    if (!this.pageLoading) {
-      this.pageLoading = !0;
-    wx.redirectTo({
-      url: '../areactr/areactr',
-    }, 2000)
-    }
-  },
-  //跳转到区域配置页面
-  scenesctr: function () {
-    if (!this.pageLoading) {
-      this.pageLoading = !0;
-    wx.navigateTo({
-      url: '../areaconfig/areaconfig'
-    })
-    }
-  },
   /**
    * 生命周期函数--监听页面加载
    */

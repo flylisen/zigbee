@@ -14,6 +14,8 @@ Page({
    */
   data: {
     sortedDevs: '',
+    sortedDevs1:'',
+    sortedDevs2:'',
     aiNames: '',
     showModal: false,
     chuanglians: '',
@@ -23,6 +25,25 @@ Page({
     ins: -1,
     line: 1,
     deng: false,
+    flag: 0,
+    currentTab: 0
+  },
+  switchNav: function (e) {
+    var page = this;
+    var id = e.target.id;
+    if (this.data.currentTab == id) {
+      return false;
+    } else {
+      page.setData({
+        currentTab: id
+      });
+    }
+    page.setData({
+      flag: id
+    });
+  },
+  catchTouchMove: function (res) {
+    return false
   },
 
   /**
@@ -63,15 +84,40 @@ Page({
           sortResult.push(tmp[key][j]);
         }
       }
-      sortResult.forEach((item) => {
-        if (item.showname != null) {
-          //这里需要截取的内容
-          item.diShowName = item.diShowName.substring(0, 3)
+      var arr3 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域灯光设备
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
+          arr3.push(sortResult[i]);
         }
-      })
+      };
+      var arr4 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域窗帘设备
+        if ((sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1)) {
+          arr4.push(sortResult[i]);
+        }
+      };
+      var arr5 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域空调设备
+        if ((sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1)) {
+          arr5.push(sortResult[i]);
+        }
+      };
+      console.log(arr3.length)
+      console.log(arr4)
+      console.log(arr5.length)
       that.setData({
-        sortedDevs: sortResult,
+        sortedDevs: arr3,
+        sortedDevs1:arr4,
+        sortedDevs2:arr5,
         hidden: true
+      });
+      wx.getSystemInfo({
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            winHeight: res.windowHeight
+          });
+        }
       });
     },
       (err) => {

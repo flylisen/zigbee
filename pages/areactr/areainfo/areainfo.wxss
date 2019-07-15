@@ -26,7 +26,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 26rpx 0;
+  padding: 26rpx 18rpx;
   box-sizing: border-box;
 }
 .bj{
@@ -39,13 +39,13 @@
 .wen{
     position: absolute;
     z-index: 1;
-    margin-left:30rpx;
+    margin-left:5rpx;
 
 }
 .wen1{
     position: absolute;
     z-index: 1;
-    margin-left:20rpx;
+    margin-left:5rpx;
 
 }
 .hover{
@@ -53,7 +53,6 @@
 }
 .weui-grids {
   position: relative;
-  overflow: hidden;
 }
 .weui-grids:before {
   content: " ";
@@ -163,7 +162,7 @@ switch{
 position:absolute;
 color:rgb(133, 123, 123);
 font-size:20rpx;
-margin-left:110rpx;
+margin-left:84rpx;
 margin-top:-60rpx;
 white-space: nowrap;
 }
@@ -179,4 +178,34 @@ white-space: nowrap;
 }
 .bt{
   margin-top:20rpx;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  font-family: "Microsoft YaHei"
+}
+.left {
+  width: 20%;
+  font-size: 30rpx;
+  background-color: #F4F4F4;
+  margin-top: 40rpx;
+}
+.left view {
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+}
+.select {
+  background-color: #ffffff;
+  border-left: 2px solid #FEA152;
+  font-weight: bold;
+  color: #FEA152;
+}
+.normal {
+  background-color: #F4F4F4;
+  border-bottom: 1px solid #f2f2f2;
+}
+.right {
+  width: 80%;
+  margin: 0px;
 }

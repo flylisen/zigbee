@@ -67,7 +67,7 @@
     </block> 
     </view>
     <button class='button1' form-type='submit'>删除设备</button>
-    <button class='button2' bindtap='delete'>删除区域</button>   
+    <!-- <button class='button2' bindtap='delete'>删除区域</button>    -->
     </form>
     </view>
     <view>
