@@ -9,16 +9,16 @@ view h1{
   justify-content: center;
 }
 .h1{
-margin-left: -410rpx;
+margin-left: -435rpx;
 }
 .scbj{
 position:absolute;
-margin-left: 470rpx;
+margin-left: 460rpx;
 margin-top: -64rpx;
 }
 .tpbj{
   position: absolute;
-  margin-left: 590rpx;
+  margin-left: 580rpx;
   margin-top: -64rpx;
 }
 .tp{
@@ -31,8 +31,8 @@ margin-top: -64rpx;
     width: 100%; 
     margin: 0 auto;
     position: relative;
-    left: 40rpx;
-  margin-top: 30rpx;
+    left: 28rpx;
+  margin-top: 20rpx;
 }
 .areaname{
   position: absolute;

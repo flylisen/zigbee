@@ -9,11 +9,11 @@ view h1{
   justify-content: center;
 }
 .h1{
-margin-left: -500rpx;
+margin-left: -525rpx;
 }
 .tpbj{
   position: absolute; 
-  margin-left: 590rpx;
+  margin-left: 582rpx;
 margin-top: -65rpx;
 }
 .tp{
@@ -26,8 +26,8 @@ margin-top: -65rpx;
     width: 100%; 
     margin: 0 auto;
     position: relative;
-    left: 40rpx;
-  margin-top: 20rpx;
+    left: 28rpx;
+  margin-top: 10rpx;
   overflow-x:hidden;
 }
 .areaname{
