@@ -54,7 +54,7 @@
          <image src='/images/devctr/airwdj.png' class='tp' wx:else></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>空调</view>
-           <view wx:else class='zt'>{{item.deviceName}}</view>
+           <view wx:else class='zt'>{{item.diShowName}}</view>
    </view>
 <view class="link_child" wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
@@ -62,7 +62,7 @@
          <image src='/images/devctr/swwdj.png' class='tp' wx:else></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>色温灯</view>
-           <view wx:else class='zt'>{{item.deviceName}}</view>
+           <view wx:else class='zt'>{{item.diShowName}}</view>
    </view>
     </block> 
     </view>
