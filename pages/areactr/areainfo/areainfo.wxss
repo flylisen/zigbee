@@ -5,7 +5,7 @@
 .view1{
   display:flex;
  margin-left: 24rpx;
- margin-top: 40rpx;
+ margin-top: 20rpx;
 }
 .text{
   margin-top:20px;
@@ -26,7 +26,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 26rpx 18rpx;
+  padding: 10rpx 18rpx;
   box-sizing: border-box;
 }
 .bj{
@@ -188,7 +188,7 @@ white-space: nowrap;
   width: 20%;
   font-size: 30rpx;
   background-color: #F4F4F4;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 .left view {
 text-align: center;
