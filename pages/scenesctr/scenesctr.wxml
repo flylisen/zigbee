@@ -8,7 +8,7 @@
         <view class="link">
         <block  wx:for="{{scenes}}" wx:for-item="item">
         <view bindtap='chang' data-id="{{item}}" class="link_child" id="{{index}}">
-                <image src="{{bjtp}}" class='bjtp'></image>
+                <image src="{{ins==index?'/images/scenesctr/scenebj.png':'/images/scenesctr/scenewdj.png'}}" class='bjtp'></image>
                 <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:if="{{item.siShowName==''}}">场景</view>
                 <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:else>{{item.siShowName}}</view>
          </view>

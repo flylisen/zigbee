@@ -18,7 +18,6 @@ Page({
     rommid: '',
     hidden:false,
     pz: '/images/pzwdj.png',
-    bjtp:'/images/scenesctr/scenewdj.png',
   },
   pz:function(){
     if (!this.pageLoading) {
@@ -80,7 +79,6 @@ Page({
     var ins = event.currentTarget.id;//获得下标
       this.setData({
         ins:ins,
-        bjtp:'/images/scenesctr/scenebj.png'
       })
     var id = event.currentTarget.dataset['id'];
     var siSceneId=id.siSceneId
@@ -105,7 +103,7 @@ Page({
         })
       }else{
         this.setData({
-          bjtp:'/images/scenesctr/scenewdj.png'
+           ins:-1
         })
       }
     },
