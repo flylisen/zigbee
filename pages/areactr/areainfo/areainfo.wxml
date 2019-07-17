@@ -14,12 +14,21 @@
 </view>
 <view class="content">
       <view class='left'>
-        <view class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>灯光</view>
-        <view wx:if ="{{sortedDevs1.length>0}}">
-        <view class="{{flag==1?'select':'normal'}}" id='1' bindtap='switchNav'>窗帘</view>
+        <view id='0' bindtap='switchNav' class="switchNav1">
+              <image src="{{flag==0?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" id='0' bindtap='switchNav'></image>
+              <text class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>开关</text>
         </view>
-            <view wx:if ="{{sortedDevs2.length>0}}">
-        <view class="{{flag==2?'select':'normal'}}" id='2' bindtap='switchNav'>空调</view>
+        <view wx:if ="{{sortedDevs1.length>0}}">
+        <view id='1' bindtap='switchNav' class="switchNav">
+             <image src="{{flag==1?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" id='1' bindtap='switchNav'></image>
+              <text class="{{flag==1?'select':'normal'}}" id='1' bindtap='switchNav'>窗帘</text>
+        </view>
+        </view>
+        <view wx:if ="{{sortedDevs2.length>0}}">
+        <view id='2' bindtap='switchNav' class="switchNav">
+              <image src="{{flag==2?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" id='2' bindtap='switchNav'></image>
+              <text class="{{flag==2?'select':'normal'}}" id='2' bindtap='switchNav'>空调</text>
+        </view>
         </view>
       </view>
       <view class='right'>

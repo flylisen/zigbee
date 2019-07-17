@@ -188,16 +188,36 @@ white-space: nowrap;
   width: 20%;
   font-size: 30rpx;
   background-color: #F4F4F4;
-  margin-top: 40rpx;
+  margin-top: 10rpx;
 }
 .left view {
+text-align: center;
+height: 80px;
+line-height: 30px;
+margin-left: 40rpx;
+}
+.switchNav image{
+width: 70rpx;
+height: 70rpx;
+display:block;
+margin-top: 20rpx;
+margin-left: -40rpx;
+}
+.switchNav text{
   text-align: center;
-  height: 45px;
-  line-height: 45px;
+ margin-left: -80rpx;
+}
+.switchNav1 image{
+width: 70rpx;
+height: 70rpx;
+display:block;
+margin-top: 20rpx;
+}
+.switchNav1 text{
+  text-align: center;
+margin-left: -40rpx;
 }
 .select {
-  background-color: #ffffff;
-  border-left: 2px solid #FEA152;
   font-weight: bold;
   color: #FEA152;
 }

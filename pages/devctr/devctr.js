@@ -17,7 +17,6 @@ Page({
     rommid: '',
     hidden: false,
     pz: '/images/pzwdj.png',
-    winHeight:'',
      arr1:'',//开关
      arr2:'',//灯
      arr3:'',//窗帘
@@ -25,7 +24,7 @@ Page({
      arr5:'',//传感器
      arr6:'',//其他设备
   },
-  switchNav: function (e) {
+  switchNav:function (e) {
     var page = this;
     var id = e.target.id;
     if (this.data.currentTab == id) {
@@ -67,13 +66,6 @@ Page({
     that.setData({
       rommid
     })
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          winHeight: res.windowHeight
-        });
-      }
-    });
     timestamp = app.globalData.timestamp;
     token = app.globalData.token;
     sign = app.globalData.sign;

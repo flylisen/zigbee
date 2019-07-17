@@ -8,18 +8,39 @@
     <loading hidden="{{hidden}}">加载中</loading>
 </view>
   <view class="content">
-      <view class='left'  style="height: {{winHeight?winHeight+'px':'auto'}}">
-        <view class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>所有设备</view>
-        <view class="{{flag==1?'select':'normal'}}" id='1' bindtap='switchNav'>开关</view>
-        <view class="{{flag==2?'select':'normal'}}" id='2' bindtap='switchNav'>灯</view>
-        <view class="{{flag==3?'select':'normal'}}" id='3' bindtap='switchNav'>窗帘</view>
-        <view class="{{flag==4?'select':'normal'}}" id='4' bindtap='switchNav'>空调</view>
-        <view class="{{flag==5?'select':'normal'}}" id='5' bindtap='switchNav'>传感器</view>
-        <view class="{{flag==6?'select':'normal'}}" id='6' bindtap='switchNav'>其他设备</view>
+      <view class='left'  style="height: 1350rpx;">
+        <view id='0' bindtap='switchNav' class="switchNav">
+              <image src="{{flag==0?'/images/devctr/sysbdj.png':'/images/devctr/sysbwdj.png'}}" id='0' bindtap='switchNav'></image>
+              <text class="{{flag==0?'select':'normal'}}" id='0' bindtap='switchNav'>所有设备</text>
+        </view>
+        <view id='1' bindtap='switchNav' class="switchNav">
+             <image src="{{flag==1?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" id='1' bindtap='switchNav'></image>
+              <text class="{{flag==1?'select':'normal'}}" id='1' bindtap='switchNav'>开关</text>
+        </view>
+        <view id='2' bindtap='switchNav' class="switchNav">
+              <image src="{{flag==2?'/images/devctr/dengdj.png':'/images/devctr/dengwdj.png'}}" id='2' bindtap='switchNav'></image>
+              <text class="{{flag==2?'select':'normal'}}" id='2' bindtap='switchNav'>灯</text>
+        </view>
+        <view  id='3' bindtap='switchNav' class="switchNav">
+             <image src="{{flag==3?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" id='3' bindtap='switchNav'></image>
+              <text class="{{flag==3?'select':'normal'}}" id='3' bindtap='switchNav'>窗帘</text>
+        </view>
+        <view id='4' bindtap='switchNav' class="switchNav">
+              <image src="{{flag==4?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" id='4' bindtap='switchNav'></image>
+              <text class="{{flag==4?'select':'normal'}}" id='4' bindtap='switchNav'>空调</text>
+        </view>
+        <view id='5' bindtap='switchNav'class="switchNav">
+              <image src="{{flag==5?'/images/devctr/cgqdj.png':'/images/devctr/cgqwdj.png'}}" id='5' bindtap='switchNav'></image>
+              <text class="{{flag==5?'select':'normal'}}" id='5' bindtap='switchNav'>传感器</text>
+        </view>
+        <view id='6' bindtap='switchNav' class="switchNav">
+              <image src="{{flag==6?'/images/devctr/qtsbdj.png':'/images/devctr/qtsbwdj.png'}}" id='6' bindtap='switchNav'></image>
+              <text class="{{flag==6?'select':'normal'}}" id='6' bindtap='switchNav'>其他设备</text>
+        </view>
       </view>
       <view class='right'>
         <view class='category'>
-          <swiper current='{{currentTab}}' style="height: {{winHeight?winHeight+'px':'auto'}}" vertical="{{true}}">
+          <swiper current='{{currentTab}}' style="height:1350rpx" vertical="{{true}}">
             <swiper-item id='0' catchtouchmove="stopTouchMove">
 <!--所有设备-->
 <scroll-view style="height:100%" scroll-y="true">
