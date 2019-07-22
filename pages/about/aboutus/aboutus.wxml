@@ -1,4 +1,6 @@
 <!--pages/about/aboutus/aboutus.wxml-->
+<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'>
 <view class='guide'>
 小程序简介
 </view>
@@ -12,4 +14,5 @@
                   <view class="navigator">
                    <text class="navigator-text">地址：广州市番禺区洛溪新城恒达工业园A2栋4层</text>
                  </view>
+</view>
 </view>

@@ -1,4 +1,6 @@
 <!--pages/romm/romm.wxml-->
+<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class="container">
 <image class='background-image' src='/images/rommsettring.jpg' mode="scaleToFill"></image>
  <view class="login-from"> 
@@ -13,5 +15,6 @@
   <button class="loginBtn" size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button> 
  </view> 
  </view> 
+</view>
 </view>
 

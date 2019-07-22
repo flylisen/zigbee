@@ -1,14 +1,18 @@
-.imagesize{
-display:flex;                   
-justify-content: center;
-margin-top:250rpx;
-width: 100%;
-height: 100%;
 
+.banner{
+    width:750rpx;
+    height:500rpx;
+    position: relative;
+    margin-left: 110rpx;
+margin-top: 270rpx;
 }
-.imagesize image{
-width: 500rpx;
+.pic{
+display: block;
+width: 550rpx;
 height: 500rpx;
+position: absolute;
+top: 0;
+left: 0;
 }
 .window_view{
    margin-top: 20px;
@@ -43,4 +47,12 @@ text {
    margin-top: 5rpx;
    font: 20;
    color: #999999;
+}
+ .log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
 }

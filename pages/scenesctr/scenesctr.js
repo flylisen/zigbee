@@ -7,6 +7,7 @@ var token;
 var sign;
 var rommid;
 const utils = require('../../utils/util.js')
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -14,8 +15,9 @@ Page({
    */
   data: {
     scenes:'',
-    ins:-1,
     rommid: '',
+    choseImg:'/images/scenesctr/scenebj.png',
+    unchoseImg:'/images/scenesctr/scenewdj.png',
     hidden:false,
     pz: '/images/pzwdj.png',
   },
@@ -29,11 +31,20 @@ Page({
         url: '../scenesconfig/scenesconfig'
       })
     }
+    logs: []
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     var that = this;
     username = app.globalData.username;
     pwd = app.globalData.pwd;
@@ -64,10 +75,18 @@ Page({
           sceness.push(scenes[i]);
         }
       }
+      sceness.forEach((r) => {  //array是后台返回的数据
+        r.upshow = false;   //r = array[0]的所有数据，这样直接 r.新属性 = 属性值 即可
+      })
+      that.setData({ //这里划重点 需要重新setData 下才能js 和 wxml 同步，wxml才能渲染新数据
+        sceness: that.data.scenes
+      })
+      console.log(sceness);
       this.setData({
         scenes: sceness,
         hidden: true
       })
+
     },
       (err) => {
         console.log(err.errMsg)
@@ -76,11 +95,14 @@ Page({
   },
   //触发场景
   chang:function(event){
-    var ins = event.currentTarget.id;//获得下标
-      this.setData({
-        ins:ins,
-      })
+    let index = event.currentTarget.dataset.index;  //当前点击列表的index
+    let scenes = this.data.scenes;
     var id = event.currentTarget.dataset['id'];
+    var that = this;
+    var up = "scenes[" + index + "].upshow";
+     that.setData({
+        [up]:true
+    })
     var siSceneId=id.siSceneId
     var that = this;
     let url = app.globalData.URL + 'triggerScene?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
@@ -101,10 +123,6 @@ Page({
           title: '提示',
           content: '触发场景失败'
         })
-      }else{
-        this.setData({
-           ins:-1
-        })
       }
     },
       (err) => {
@@ -124,12 +142,24 @@ Page({
    */
   onShow: function () {
     this.pageLoading = !1;
+    this.hide()
     //回调
     app.globalData.callback = function (res) {
       console.log('当前页面在scenesctr');
     }
   },
-
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    },5);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

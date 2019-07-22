@@ -6,6 +6,8 @@ var timestamp;
 var token;
 var sign;
 var rommid;
+const utils = require('../../utils/util.js');
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -14,7 +16,8 @@ Page({
   data: {
     showModal: false,
     tp: '/images/pzwdj.png',
-    hidden: false
+    hidden: false,
+    logs: []
   },
   bindAdd: function () {
     if (!this.pageLoading) {
@@ -32,6 +35,14 @@ Page({
    */
   onLoad: function (options) {
     console.log('onLoad')
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     var that = this;
     username = app.globalData.username;  //网关账号 
     pwd = app.globalData.pwd;  //网关密码 
@@ -101,13 +112,25 @@ Page({
    */
   onShow: function () {
     this.pageLoading = !1;
+    this.hide()
     //回调
     app.globalData.callback = function (res) {
       console.log('接收到服务器信息', res);
       console.log('当前页面在areactr');
     }
   },
-
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 5);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

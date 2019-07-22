@@ -1,4 +1,6 @@
 <!--pages/devconfig/kaiguanguan/kaiguanguan.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='imagesize'>
     <image src='../../../images/kaiguanguan/kg.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==2}}"></image>
     <image src='../../../images/kaiguanguan/sq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==42}}"></image>
@@ -77,4 +79,5 @@
       <button class='btn' form-type='submit' hover-class='btn-hover'>确定</button>
      </form>
       <button bindtap='qingjingsc' class='btn2' hover-class='btn2-hover'>删除</button>
+</view>
 </view>

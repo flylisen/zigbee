@@ -1,4 +1,6 @@
 <!--pages/devctr/dengcolor/dengcolor.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='imagesizes'>
 <color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
 </view>
@@ -11,6 +13,7 @@
 <view class="section">
   <view>亮度</view>
   <slider show-value max='255' min="1" blockSize="20" step="5" value="" bindchange="listenerSlider"></slider>
+</view>
 </view>
 
 

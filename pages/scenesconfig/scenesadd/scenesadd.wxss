@@ -91,7 +91,8 @@ page{
 }
 .navigator-text3{
    flex: 1;
-  margin-left: 400rpx;
+  margin-left: 380rpx;
+
 }
 .navigator-arrow {
   padding-right: 26rpx;
@@ -159,4 +160,12 @@ page{
 }
 .switch{
   margin-left: 70rpx;
+}
+ .log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
 }

@@ -1,4 +1,6 @@
 <!--pages/about/idea/idea.wxml-->
+<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'>
 <view class='guide'>
 如何联系我们反馈问题？
 </view>
@@ -9,4 +11,5 @@
                  <view class="navigator">
                     <text class="navigator-text">联系我们：020 - 6682 3969</text>
                  </view>
+</view>
 </view>

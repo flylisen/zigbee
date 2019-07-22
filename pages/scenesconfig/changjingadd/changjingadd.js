@@ -10,6 +10,7 @@ var tp;
 var name = [];
 var showname = [];
 const utils = require('../../../utils/util.js')
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -60,6 +61,7 @@ Page({
     siName: '',
     temSet: 0,
     sceneMembers: '',
+    logs: [],
   },
   kindToggle: function (e) {
     var ins = e.currentTarget.id;//获得下标
@@ -72,6 +74,12 @@ Page({
         ins: ins,
       })
     }
+  },
+  kindToggles: function () {
+    wx.showModal({
+      title: '提示',
+      content: '请选择你要控制的设备'
+    })
   },
   kindToggle2: function (e) {
     var ins2 = e.currentTarget.id;//获得下标
@@ -217,6 +225,12 @@ Page({
             arr3.push(sortResult[i]);
           }
         }
+        arr3.forEach((r) => {  //array是后台返回的数据
+          r.upshow = false;   //r = array[0]的所有数据，这样直接 r.新属性 = 属性值 即可
+        })
+        that.setData({ //这里划重点 需要重新setData 下才能js 和 wxml 同步，wxml才能渲染新数据
+          arr3: that.data.sortedDevs
+        })
         that.setData({
           sortedDevs: arr3,
           hidden: true
@@ -284,20 +298,30 @@ Page({
   //开关事件
   changTap: function (e) {
     var that = this;
-    var tp = e.currentTarget.dataset['tp'];
-    temSet = '';
-    if (e.detail.value == true) {
-      temSet = 1;
-    } else {
-      temSet = 0;
-    }
-    this.setData({
-      temSet: temSet
-    })
-    that.chufa(tp);
+    var sortedDevs = this.data.sortedDevs;
+    let index = e.currentTarget.dataset.index;  //当前点击列表的index
+    var up = "sortedDevs[" + index + "].upshow";
+      var tp = e.currentTarget.dataset['tp'];
+      var temSet = '';
+      if (e.detail.value == true) {
+        temSet = 1;
+        that.setData({
+          [up]: true
+        })
+      } else {
+        temSet = 0;
+        that.setData({
+          [up]: false
+        })
+      }
+      this.setData({
+        temSet: temSet
+      })
+      that.chufa(tp);
   },
   chufa: function (tp) {
     var that = this;
+    var temSet = this.data.temSet;
     for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
       if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
         if (tp.diDeviceid == 2) {//开关
@@ -484,7 +508,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.hide()
     console.log('当前新增场景');
+  },
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 10);
   },
   /**
    * 生命周期函数--监听页面隐藏

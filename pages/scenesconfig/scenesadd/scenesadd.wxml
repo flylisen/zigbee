@@ -1,3 +1,5 @@
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='imagesize'>
     <image src='/images/scenesadd/cj.png'  style='width:30%; height:30%' mode='widthFix'></image>
 </view>
@@ -27,7 +29,7 @@
        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
         <!--开关-->
         <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==2}}" id="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle">
+          <view wx:if="{{item.diDeviceid==2}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">开关</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -35,22 +37,24 @@
             <view class="navigator-box {{index==ins? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
-                  <view wx:if="{{temSet==0}}" class="navigator-text3">
-                   <text>关</text>
-                   </view>
-                  <view wx:if="{{temSet==1}}" class="navigator-text3">
-                   <text>开</text>
-                   </view>
+                 <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
                    <view class="switch">
-                   <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                   <switch bindchange='changTap' class="navigator-text2" data-index="{{index}}" data-tp="{{item}}">
+                    </switch>
                   </view>
                  </view>
+
             </view>
           </view>
         </view>
         <!--窗帘-->
         <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle2">
+          <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle2':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">窗帘</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -58,14 +62,14 @@
             <view class="navigator-box {{index==ins2? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
-                   <view wx:if="{{temSet==0}}" class="navigator-text3">
-                   <text>关</text>
-                   </view>
-                  <view wx:if="{{temSet==1}}" class="navigator-text3">
-                   <text>开</text>
-                   </view>
-                   <view class="switch">
-                 <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                <view class="switch">
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
                   </view>
                  </view>
                  <view class="navigator">
@@ -77,7 +81,7 @@
         </view>
          <!--彩灯-->
          <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==528}}" id="{{index}}" class="kind-list-item-hd {{index==ins3? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle3">
+          <view wx:if="{{item.diDeviceid==528}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins3? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle3':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -85,13 +89,15 @@
             <view class="navigator-box {{index==ins3? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
-                   <view wx:if="{{temSet==0}}" class="navigator-text3">
-                   <text>关</text>
-                   </view>
-                  <view wx:if="{{temSet==1}}" class="navigator-text3">
-                   <text>开</text>
-                   </view>
-                 <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                <view class="switch">
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
+                  </view>
                  </view>
                  <view class="navigator">
                      <text class="navigator-text">亮度</text>
@@ -110,7 +116,7 @@
         </view>
             <!--空调-->
          <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle4">
+          <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle4':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">空调</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -141,7 +147,7 @@
         </view>
         <!--色温灯-->
       <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" id="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="kindToggle5">
+          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle5':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -149,14 +155,14 @@
             <view class="navigator-box {{index==ins5? 'navigator-box-show': ''}}">
                  <view class="navigator">
                  <text class="navigator-text">开关</text>
-                   <view wx:if="{{temSet==0}}" class="navigator-text3">
-                   <text>关</text>
-                   </view>
-                  <view wx:if="{{temSet==1}}" class="navigator-text3">
-                   <text>开</text>
-                   </view>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
                   <view class="switch">
-                 <switch bindchange='changTap' class="navigator-text2" id="{{index}}" data-tp="{{item}}"></switch>
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
                  </view>
                  </view>
                  <view class="navigator">
@@ -176,6 +182,8 @@
 <view>
     <loading hidden="{{hidden}}">加载中</loading>
 </view>
+</view>
+
 
 
 

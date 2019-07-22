@@ -5,11 +5,11 @@ var pwd;
 var timestamp;
 var token;
 var sign;
-var temSet;
 var tp;
 var name = [];
 var showname = [];
 const utils = require('../../../utils/util.js')
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -61,9 +61,10 @@ Page({
     ins5:-1,
     hidden:false,
     temSet:0,
+    logs: [],
   },
   kindToggle: function (e) {
-    var ins = e.currentTarget.id;//获得下标
+    var ins = e.currentTarget.dataset.index;//获得下标
     if(this.data.ins==ins){
       this.setData({
         ins:-1,
@@ -74,8 +75,14 @@ Page({
       })
     }
   },
+  kindToggles:function(){
+    wx.showModal({
+      title: '提示',
+      content: '请选择你要控制的设备'
+    })
+  },
   kindToggle2: function (e) {
-    var ins2 = e.currentTarget.id;//获得下标
+    var ins2 = e.currentTarget.dataset.index;//获得下标
     if (this.data.ins2 == ins2) {
       this.setData({
         ins2: -1,
@@ -87,7 +94,7 @@ Page({
     }
   },
   kindToggle3: function (e) {
-    var ins3 = e.currentTarget.id;//获得下标
+    var ins3 = e.currentTarget.dataset.index;//获得下标
     if (this.data.ins3 == ins3) {
       this.setData({
         ins3: -1,
@@ -99,7 +106,7 @@ Page({
     }
   },
   kindToggle4: function (e) {
-    var ins4 = e.currentTarget.id;//获得下标
+    var ins4 = e.currentTarget.dataset.index;//获得下标
     if (this.data.ins4 == ins4) {
       this.setData({
         ins4: -1,
@@ -111,7 +118,7 @@ Page({
     }
   },
   kindToggle5: function (e) {
-    var ins5 = e.currentTarget.id;//获得下标
+    var ins5 = e.currentTarget.dataset.index;//获得下标
     if (this.data.ins5 == ins5) {
       this.setData({
         ins5: -1,
@@ -176,6 +183,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     var that = this;
     username = app.globalData.username;
     pwd = app.globalData.pwd;
@@ -213,6 +228,12 @@ Page({
           arr3.push(sortResult[i]);
         }
       }
+      arr3.forEach((r) => {  //array是后台返回的数据
+        r.upshow = false;   //r = array[0]的所有数据，这样直接 r.新属性 = 属性值 即可
+      })
+      that.setData({ //这里划重点 需要重新setData 下才能js 和 wxml 同步，wxml才能渲染新数据
+        arr3: that.data.sortedDevs
+      })
       that.setData({
         sortedDevs: arr3,
         hidden:true
@@ -224,10 +245,10 @@ Page({
     )
   },
   chooseTap: function(e) {//单击选中或取消按钮
-    let index = e.currentTarget.dataset.index;  //当前点击列表的index
+      let index = e.currentTarget.dataset.index;  //当前点击列表的index
       let infoArray = this.data.sortedDevs;
       let arr = [];
-     infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
+      infoArray[index].isSelect = !infoArray[index].isSelect;  //选中变为未选中，未选中变为选中
         for (var i = 0; i < infoArray.length; i++) { //获取选中信息
           if (infoArray[i].isSelect) {
             arr.push(infoArray[i]);
@@ -238,61 +259,34 @@ Page({
           arry:arr
         })
     this.data.sceneMemberArray = arr;
-    console.log(arr); 
-  },
-  /**
-    * 空调弹窗
-    */
-  kongtiao: function (event) {
-    tp = event.currentTarget.dataset['kongtiao'];
-    this.setData({
-      showModal: true,
-      diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype,
-      index:1
-    })
-  },
-  /**
-   * 灯弹窗
-   */
-  dengxia: function (event) {
-    tp = event.currentTarget.dataset['deng'];
-    this.setData({
-      showModal: true,
-      diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype,
-      index: 2
-    })
-  },
-  /**
-   * 色温灯
-   */
-  sewendeng: function (event) {
-    tp = event.currentTarget.dataset['sewendeng'];
-    this.setData({
-      showModal: true,
-      diDeviceid: tp.diDeviceid,
-      diZonetype: tp.diZonetype,
-      index:3
-    })
   },
   //开关事件
   changTap: function (e) {
-    var that = this;
-    var tp = e.currentTarget.dataset['tp'];
-    temSet = '';
-    if (e.detail.value == true) {
-      temSet = 1;
-    } else {
-      temSet = 0;
-    }
-    this.setData({
-      temSet:temSet
-    })
-    that.chufa(tp);
+    var that=this;
+    var temSet = '';
+    let index = e.currentTarget.dataset.index;
+    var sortedDevs = this.data.sortedDevs;
+    var up = "sortedDevs[" + index + "].upshow";
+     var tp = e.currentTarget.dataset['tp'];
+      if (e.detail.value == true) {
+        temSet = 1;
+        that.setData({
+          [up]: true
+        })
+      } else {
+        temSet = 0;
+        that.setData({
+          [up]: false
+        })
+      }
+      this.setData({
+        temSet: temSet,
+      })
+      that.chufa(tp);
   },
   chufa: function (tp) {
     var that = this;
+    var temSet = this.data.temSet;
     for (var i = 0; i < that.data.sceneMemberArray.length; i++) {
       if (that.data.sceneMemberArray[i].diUuid == tp.diUuid) {
         if (tp.diDeviceid == 2) {//开关
@@ -489,7 +483,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+     this.hide()
       console.log('当前新增场景');
+  },
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 10);
+  },
+  onHide() {
+    this.setData({
+      tp: '/images/xzwdj.png'
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏

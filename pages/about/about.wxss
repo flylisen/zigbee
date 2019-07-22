@@ -5,7 +5,14 @@
   height: 340rpx;
   background-color:#FEA152;
 }
-
+.log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
+}
 .head {
   display: flex;
   flex-direction: column;

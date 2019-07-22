@@ -1,4 +1,6 @@
 <!--pages/areaconfig/areaadd/areaadd.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='main'>
   <view class="v1">
    <image src='/images/areactr/areaadd.png' style="width:70px;height:70px;"></image>
@@ -89,4 +91,5 @@
 </view>
 <view>
     <loading hidden="{{hidden}}">加载中</loading>
+</view>
 </view>

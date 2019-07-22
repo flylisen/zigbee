@@ -1,4 +1,6 @@
 <!--pages/areactr/areactr.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='main'>
 <view class='viewh1'> 
      <h1 class="h1">全部区域</h1>
@@ -18,4 +20,5 @@
 </view>
 <view>
     <loading hidden="{{hidden}}">加载中</loading>
+</view>
 </view>

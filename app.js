@@ -17,7 +17,7 @@ App({
     URL: 'https://dev.rishuncloud.com:8443/',
     gwId: -1,  
     localSocket: {},
-    callback: function () { }
+    callback: function () {}
   },
   /**  
   * 

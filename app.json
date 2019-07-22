@@ -3,7 +3,6 @@
     "pages/romm/romm",
     "pages/login/login",
     "pages/index/index",
-    "pages/config/config",
     "pages/areactr/areactr",
     "pages/scenesctr/scenesctr",
     "pages/devctr/devctr",

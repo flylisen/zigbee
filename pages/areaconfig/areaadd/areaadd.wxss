@@ -244,3 +244,11 @@ margin-top:40rpx;
   margin-top: 50rpx;
   margin-left:50rpx;
 }
+ .log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
+}

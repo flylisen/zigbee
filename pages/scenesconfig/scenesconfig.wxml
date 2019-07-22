@@ -1,4 +1,6 @@
 <!--pages/scenesconfig/scenesconfig.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='viewh1'>
      <text class="text">场景配置列表</text>
       <view class="bjibj">
@@ -28,6 +30,7 @@
 </view>
 <view>
     <loading hidden="{{hidden}}">加载中</loading>
+</view>
 </view>
 
         

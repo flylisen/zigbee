@@ -1,10 +1,13 @@
 <!--pages/devctr/sewendeng/sewendeng.wxml-->
-<view class='count'>
-<image src='../../../images/devctr/sewendeng.png' style="width:70px;height:70px;"></image>
-  <view wx:if="{{diNames==''}}">
-               <text>名称 :色温（CCT）灯</text>
-           </view>
-           <view wx:else>
-        <text>名称 :{{diNames}}</text>
-        </view>
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
+<view class='imagesizes'>
+<color-picker class="color-picker" colorData="{{colorData}}" rpxRatio="{{rpxRatio}}" bindchangecolor="onChangeColor"></color-picker>
+</view>
+<view class='imagesize'>
+  <image src="{{diOnoffStatu>0?'../../../images/devctr/dengdk.png':'../../../images/devctr/dengwdk.png'}}" bindtap="kg" style='width:40%; height:40%'  mode='widthFix'></image>
+</view>
+<view class='imagesize'>
+        <text style="{{diOnoffStatu>0?'color: #FEA152':' color:rgb(133, 123, 123);'}}">开关</text>
+</view>
 </view>

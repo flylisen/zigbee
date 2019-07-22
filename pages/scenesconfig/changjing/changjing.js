@@ -9,6 +9,7 @@ var sign;
 var siName=[];
 var siShowName=[];
 const utils = require('../../../utils/util.js')
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -32,6 +33,7 @@ Page({
     uidarry:[],
     sceneMembers:[],
     hidden: false,
+    logs: []
   },
   radioChange: function (e) {
     this.data.sceneVisible = e.detail.value
@@ -40,6 +42,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     username = app.globalData.username;
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
@@ -307,9 +317,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.hide()
   },
-
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 10);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

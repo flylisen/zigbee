@@ -87,9 +87,15 @@ text {
    margin-top: 5rpx;
    font: 20;
 }
-.window_view{
-
+.log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
 }
+.log-item {
+  margin: 10rpx;
+}
+
 
 
 

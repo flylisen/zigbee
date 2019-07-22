@@ -1,4 +1,6 @@
 <!--pages/areaconfig/areainfo/areainfo.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='main'>
  <view class='view1'>
    <image wx:if="{{atImg.length>0}}" src='/images/areactr/{{atImg}}' style="width:100px;height:100px;"></image>
@@ -72,4 +74,5 @@
     </view>
     <view>
     <loading hidden="{{hidden}}">加载中</loading>
+</view>
 </view>

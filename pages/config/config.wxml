@@ -1,9 +1,0 @@
-<!--pages/config/config.wxml-->
-<view class="container">
-  <navigator url='/pages/areaconfig/areaconfig'hover-class="none">
-  <image src='../../images/config/quyupeizhi.png'></image><text>区域配置</text></navigator>
-  <navigator url='/pages/scenesconfig/scenesconfig'hover-class="none" >
-   <image src='../../images/config/changjingpeizhi.png'></image><text>场景配置</text></navigator>
-  <navigator url='/pages/devconfig/devconfig'hover-class="none">
-  <image src='../../images/config/shebeipeizhi.png'></image><text>设备配置</text></navigator>
-</view>

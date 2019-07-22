@@ -1,29 +1,32 @@
-//index.js
-//获取应用实例
+//xx.js
+const util = require('../../utils/util.js')
 const app = getApp()
+//把winHeight设为常量，不要放在data里（一般来说不用于渲染的数据都不能放在data里）
+const winHeight = wx.getSystemInfoSync().windowHeight
+
 Page({
-  
-  /**
-   * 页面的初始数据
-   */
   data: {
-    loadFlag:'',
-    imageHeight:'',
+    logs: [],
+    loadFlag: '',
+    imageHeight: ''
   },
   bindload: function (res) {
     this.setData({
       loadFlag: true,
       imageHeight: res.detail.height
-
     })
   }, 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-   
+  onLoad: function () {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
   },
-  control1: function (event){
+  control1: function (event) {
     if (!this.pageLoading) {
       this.pageLoading = !0;
       wx.navigateTo({
@@ -45,57 +48,26 @@ Page({
       wx.navigateTo({
         url: '../devctr/devctr'
       })
-    }    
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
- 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
+}
+},   
   onShow: function () {
+    this.hide()
     this.pageLoading = !1;
     //回调
-    app.globalData.callback= function (res) {
+    app.globalData.callback = function (res) {
       console.log('当前页面在index');
     }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 10);
   }
 })

@@ -44,4 +44,12 @@ margin-top: 17rpx;
 .pztb{
 width:140rpx;
 }
+ .log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
+}
 

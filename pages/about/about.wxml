@@ -1,3 +1,6 @@
+
+<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'>
 <view class="bg">
   <view class="head">
     <view class='tp'>
@@ -36,3 +39,4 @@
   <view>
   <button bindtap='logout' class='logout'>退出登录</button>
   </view>
+   </view>

@@ -211,6 +211,7 @@ Page({
     this.setData({
       ins: ins
     })
+    console.log(event.currentTarget.dataset['deng']);
     if (event.currentTarget.dataset['deng'].diOnlineStatu > 0) {
       var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
       if (!this.pageLoading) {
@@ -335,6 +336,7 @@ Page({
       }
       if (nodeType == 4) {
         //设备开关状态发生改变
+        console.log("设备开关状态发生改变"+new Date);
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp ='sortedDevs[' + i + '].diOnoffStatu';
@@ -359,6 +361,7 @@ Page({
         }
       } else if (nodeType == 2) {
         //判断设备是否在线
+        console.log("设备在线状态发生改变"+new Date);
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
           if (uuid == curPage.data.sortedDevs[i].diUuid) {
             var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
@@ -454,7 +457,6 @@ Page({
       }
     }
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */

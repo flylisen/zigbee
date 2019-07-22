@@ -1,4 +1,6 @@
 <!--pages/scenesctr/scenesctr.wxml-->
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
 <view class='viewh1'>
      <text class='text'>全部场景</text>
      <view wx:if="{{rommid == 'RS@xcx12'}}" class="pz">
@@ -7,8 +9,8 @@
 </view>
         <view class="link">
         <block  wx:for="{{scenes}}" wx:for-item="item">
-        <view bindtap='chang' data-id="{{item}}" class="link_child" id="{{index}}">
-                <image src="{{ins==index?'/images/scenesctr/scenebj.png':'/images/scenesctr/scenewdj.png'}}" class='bjtp'></image>
+        <view bindtap='chang' data-id="{{item}}" class="link_child" data-index="{{index}}">
+                <image src="{{item.upshow?choseImg:unchoseImg}}" class='bjtp'></image>
                 <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:if="{{item.siShowName==''}}">场景</view>
                 <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:else>{{item.siShowName}}</view>
          </view>
@@ -16,6 +18,7 @@
 </view>
 <view>
     <loading hidden="{{hidden}}">加载中</loading>
+</view>
 </view>
 
 

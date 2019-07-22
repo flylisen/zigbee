@@ -1,8 +1,12 @@
-<!--index.wxml-->
-<image class='bj' src='/images/bj.jpg' mode="widthFix"></image> 
+<!--wxml-->
+<!--蒙版（渐出淡去效果）-->
+<view style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<image class='bj' src='/images/bj.jpg' mode="widthFix"></image>
+<!--正式内容（渐入加深效果）-->
+ <view class="container log-list" style='opacity: {{1-opacity}};'> 
 <view class='setting1'  bindtap='control1'>
-   <image src="/images/qyubj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
-   <text>区域控制</text>
+<image src="/images/qyubj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+<text>区域控制</text>
  </view>
  <view class='setting2' bindtap='control2'>
  <image src="/images/cjbj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
@@ -11,4 +15,5 @@
  <view class='setting3'  bindtap='control3'>
 <image src="/images/sbebj.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
 <text>设备控制</text>
+ </view>
  </view>

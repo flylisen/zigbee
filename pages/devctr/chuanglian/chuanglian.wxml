@@ -1,7 +1,9 @@
-<view class='imagesize' wx:if="{{diDeviceid==514&&diZonetype==2}}" >
-       <image src="/images/chuanglian/clg.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload" wx:if="{{diOnoffStatu==0}}"></image>
-       <image src="/images/chuanglian/clk.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload" wx:if="{{diOnoffStatu==1}}"></image>
-       <image src="/images/chuanglian/cltz.jpg" style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload" wx:if="{{diOnoffStatu==2}}"></image> 
+ <view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
+<view style='opacity: {{1-opacity}};'> 
+<view class="banner">
+  <image class="pic" src="/images/chuanglian/clg.jpg" animation="{{diOnoffStatu==0?showpic:hidepic}}"/>
+  <image class="pic" src="/images/chuanglian/clk.jpg" animation="{{diOnoffStatu==1?showpic:hidepic}}"/>
+  <image class="pic" src="/images/chuanglian/cltz.jpg" animation="{{diOnoffStatu==2?showpic:hidepic}}"/>
 </view>
 <view class="window_view" wx:if="{{diDeviceid==514&&diZonetype==2}}">
    <scroll-view class="scroll-view_H" scroll-x="true">
@@ -24,4 +26,5 @@
          </view>
       </view>
    </scroll-view>
+</view>
 </view>

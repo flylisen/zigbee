@@ -5,6 +5,8 @@ var pwd;
 var timestamp;
 var token;
 var sign;
+const utils = require('../../../utils/util.js');
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -12,13 +14,22 @@ Page({
    */
   data: {
     diNames: '',
-    chuanglians: '',
+    diOnoffStatu: '',
+    logs: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     username = app.globalData.username;
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
@@ -28,7 +39,7 @@ Page({
     sewendengs = JSON.parse(sewendeng);
     this.setData({
       diNames: sewendengs.diShowName,
-      chuanglians: sewendengs.diOnlineStatu
+      diOnoffStatu: sewendengs.diOnoffStatu
     });
     //获取色温灯的色温值、开关值
     var that = this;
@@ -40,7 +51,7 @@ Page({
       key: "bq6wqzasjwtkl0i21pi9fbeq4",
       bindid: username,
       bindstr: pwd,
-      ver: '2',
+      ver: '1',
       devs: [{ deviceuid: sewendengs.diDeviceuid }]
     };
     app.wxRequest('POST', url, data, (res) => {
@@ -51,7 +62,36 @@ Page({
       }
     )
   },
-
+  //打开
+  kg: function (e) {
+    let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    var value;
+    if (sewendengs.diOnoffStatu == 0) {
+      value = 1;
+      sewendengs.diOnoffStatu = 1;
+    } else {
+      value = 0;
+      sewendengs.diOnoffStatu = 0;
+    }
+    var diOnoffStatu = this.data.diOnoffStatu;
+    this.setData({
+      diOnoffStatu: value
+    })
+    let data = {
+      bindid: username,
+      bindstr: pwd,
+      ctrType: 0,
+      devs: [{ deviceuid: sewendengs.deviceuid, uuid: sewendengs.diUuid, value: value }],
+      var: "2.0"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data)
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -63,9 +103,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.hide()
   },
-
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 5);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

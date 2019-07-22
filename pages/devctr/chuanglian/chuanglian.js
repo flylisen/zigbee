@@ -6,6 +6,7 @@ var timestamp;
 var token;
 var sign;
 const utils = require('../../../utils/util.js');
+const winHeight = wx.getSystemInfoSync().windowHeight
 Page({
 
   /**
@@ -23,12 +24,24 @@ Page({
     gtext:false,
     loadFlag:'',
     imageHeight:'',
+    setTime: '',
+    showpic: null,
+    hidepic: null,
+    logs: []
   },
   
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      winH: wx.getSystemInfoSync().windowHeight,
+      opacity: 1,
+      //这个是微信官方给的获取logs的方法 看了收益匪浅
+      logs: (wx.getStorageSync('logs') || []).map(log => {
+        return util.formatTime(new Date(log))
+      })
+    })
     username = app.globalData.username;
     pwd = app.globalData.pwd;
     timestamp = app.globalData.timestamp;
@@ -46,6 +59,23 @@ Page({
         title: '窗帘'
       })
     }
+    var _this=this;
+    var animation= wx.createAnimation({}) //创建一个动画实例
+    _this.setData({
+      //创建一个计时器
+        setTime:setInterval(function(){
+           //淡入
+            animation.opacity(1).step({
+                  duration:1500
+            }) //描述动画
+            _this.setData({
+                showpic:animation.export()
+            }) //输出动画
+          //淡出
+            animation.opacity(0).step({duration:1500})
+            _this.setData({hidepic:animation.export()})
+      },4000)
+    })
   },
   bindload: function (res) {
     this.setData({
@@ -148,6 +178,7 @@ Page({
    */
   onShow: function () {
     //回调
+    this.hide()
     app.globalData.callback = function (res) {
       var nodeType;
       var uuid;
@@ -176,7 +207,18 @@ Page({
       }
     }
   },
-
+  //核心方法，线程与setData
+  hide: function () {
+    var vm = this
+    var interval = setInterval(function () {
+      if (vm.data.winH > 0) {
+        //清除interval 如果不清除interval会一直往上加
+        clearInterval(interval)
+        vm.setData({ winH: vm.data.winH - 5, opacity: vm.data.winH / winHeight })
+        vm.hide()
+      }
+    }, 5);
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
