@@ -1,0 +1,147 @@
+<view class='main'>
+<view style='text-align:center;margin-top:100rpx;' class="picture-2">
+       <image style='width:70%; height:70%' class="infoImage"  src="../../../../images/devctr/kongtionbj.png" mode='widthFix'>
+         <view wx:if="{{centralairConditionMode!=0}}">
+          <text class='text'>{{wendu/100}}℃</text>
+          <text class='test2'>当前房间温度:{{localTemperature/100}}℃</text>
+          </view>
+       </image>
+</view>
+<!--模式-->
+  <view class="window_view2">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H2 local">
+             <view wx:if="{{centralairConditionMode==3}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../../images/devctr/cooldj.png' mode="widthFix"></image>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:25%; height:25%' src='../../../../images/devctr/coolwdj.png' mode="widthFix"></image>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H2 img">
+          <view wx:if="{{centralairConditionMode==4}}" class='box'>
+              <image style='width:25%; height:25%' src='../../../../images/devctr/hotdj.png' mode="widthFix"></image>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../../images/devctr/hotwdj.png' mode="widthFix"></image>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<!--锁定-->
+<view>
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H local">
+             <view wx:if="{{airAllState.lockedState==0&&centralairConditionMode!=0}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../../images/devctr/sddj.png' mode="widthFix"></image>
+               <text class='ztcolor'>锁定</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../../images/devctr/sdwdj.png' mode="widthFix"></image>
+               <text>锁定</text>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H img">
+          <view wx:if="{{airAllState.lockedState==1&&centralairConditionMode!=0}}" class='box'>
+              <image style='width:20%; height:20%' src='../../../../images/devctr/jsdj.png' mode="widthFix"></image>
+               <text class='ztcolor'>解锁</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../../images/devctr/jswdj.png' mode="widthFix"></image>
+               <text>解锁</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H audio">
+        <view wx:if="{{airAllState.lockedState==-1&&centralairConditionMode!=0}}" class='box'>
+              <image src='../../../../images/devctr/wzdj.png' style='width:30%; height:30%' mode="widthFix"></image>
+               <text class='ztcolor'>未知</text>
+              </view>
+              <view wx:else class='box'>
+               <image style='width:20%; height:20%' src='../../../../images/devctr/wzwdj.png' mode="widthFix"></image>
+               <text>未知</text>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<!--风速-->
+<view>
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H1 local">
+        <view wx:if="{{centralairConditionWindMode==5&&centralairConditionMode!=0}}" class='box'>
+              <image src='../../../../images/devctr/zddj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class='ztcolor'>自动</text>
+              </view>
+              <view wx:else class='box'>
+               <image src='../../../../images/devctr/zdwdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class>自动</text>
+              </view>
+      </view>
+      <view id="img" class="scroll-view-item_H1 img">
+       <view wx:if="{{centralairConditionWindMode==1&&centralairConditionMode!=0}}" class='box'>
+          <image src='../../../../images/devctr/dsdj.png'style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class='ztcolor'>低速</text>
+              </view>
+              <view wx:else class='box'>
+               <image  src='../../../../images/devctr/dswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class>低速</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H1 audio">
+       <view wx:if="{{centralairConditionWindMode==2&&centralairConditionMode!=0}}" class='box'>
+        <image src='../../../../images/devctr/zsdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class='ztcolor'>中速</text>
+              </view>
+              <view wx:else class='box'>
+               <image src='../../../../images/devctr/zswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class>中速</text>
+              </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H1 audio">
+        <view wx:if="{{centralairConditionWindMode==3&&centralairConditionMode!=0}}" class='box'>
+        <image src='../../../../images/devctr/gsdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class='ztcolor'>高速</text>
+              </view>
+              <view wx:else class='box'>
+               <image src='../../../../images/devctr/gswdj.png' style="height:{{loadeFlag?1:imageheight}}px;" bindload="bindload"></image>
+               <text class>高速</text>
+              </view>
+      </view>
+   </scroll-view>
+</view>
+<view class="window_view">
+   <scroll-view class="scroll-view_H" scroll-x="true">
+      <view id="local" class="scroll-view-item_H3 local" bindtap="{{centralairConditionMode!=0?'tongfeng':''}}">
+         <view class='box'>
+            <image src='{{ms}}'></image>
+            <text style="{{mstext==true?'color: #FEA152;':''}}">模式</text>
+         </view>
+      </view>
+      <view id="img" class="scroll-view-item_H3 img" bindtap='kaiguanguan'>
+         <view class='box'>
+            <image src="{{centralairConditionMode!=0?'../../../../images/devctr/kgdj.png':'../../../../images/devctr/kgwdj.png'}}"></image>
+            <text style="{{centralairConditionMode!=0?'color: #FEA152;':''}}">开关</text>
+         </view>
+      </view>
+      <view id="audio" class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'actioncnt':''}}">
+         <view class='box'>
+            <image src='{{fs}}'></image>
+            <text style="{{fstext==true?'color: #FEA152;':''}}">风速</text>
+         </view>
+      </view>
+       <view  class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'jia':''}}">
+         <view class='box'>
+            <image src="{{jia}}"></image>
+            <text style="{{jiatext==true?'color: #FEA152;':''}}">加</text>
+         </view>
+      </view>
+       <view  class="scroll-view-item_H3 audio" bindtap="{{centralairConditionMode!=0?'minus':''}}">
+         <view class='box'>
+            <image src="{{minus}}"></image>
+            <text style="{{minustext==true?'color: #FEA152;':''}}">减</text>
+         </view>
+      </view>
+   </scroll-view>
+</view>
+</view>
+
+

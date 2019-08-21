@@ -1,12 +1,10 @@
 
-<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
-<view style='opacity: {{1-opacity}};'>
 <view class="bg">
   <view class="head">
     <view class='tp'>
-      <image src="../../images/about/user.png" class="headIcon"></image> 
+      <image src="{{avatarUrl}}" class="headIcon"></image> 
     </view>
-    <text>用户名:{{username}}</text>
+    <text>用户名:{{nickName}}</text>
   </view>
 </view>
 <view class="index">
@@ -36,7 +34,6 @@
         </view>
     </view>
   </view>
-  <view>
+  <view class="btn">
   <button bindtap='logout' class='logout'>退出登录</button>
   </view>
-   </view>

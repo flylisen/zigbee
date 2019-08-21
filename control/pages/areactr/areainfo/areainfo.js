@@ -1,0 +1,448 @@
+// pages/areaconfig/areainfo/areainfo.js
+var Industrys;
+var app = getApp();
+var username;
+var pwd;
+var timestamp;
+var token;
+var sign;
+const utils = require('../../../utils/util.js')
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    sortedDevs: '',
+    sortedDevs1:'',
+    sortedDevs2:'',
+    aiNames: '',
+    showModal: false,
+    chuanglians: '',
+    sortedDevs: '',
+    switch: '',
+    hidden: false,
+    ins: -1,
+    line: 1,
+    deng: false,
+    flag: 0,
+    currentTab: 0
+  },
+  switchNav: function (e) {
+    var page = this;
+    var id = e.target.id;
+    if (this.data.currentTab == id) {
+      return false;
+    } else {
+      page.setData({
+        currentTab: id
+      });
+    }
+    page.setData({
+      flag: id
+    });
+  },
+  catchTouchMove: function (res) {
+    return false
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var aiid = decodeURIComponent(options.aiid);
+    Industrys = JSON.parse(aiid);
+    this.setData({
+      aiNames: Industrys.aiName
+    })
+    var that = this;
+    username = app.globalData.username;  //网关账号 
+    pwd = app.globalData.pwd;  //网关密码 
+    timestamp = app.globalData.timestamp;
+    token = app.globalData.token;
+    sign = app.globalData.sign;
+    let url = app.globalData.URL + 'getAreaDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+    let data = {
+      actCode: "108",
+      bindid: username,
+      areaId: Industrys.aiId,
+      ver: "2"
+    };
+    app.wxRequest('POST', url, data, (res) => {
+      console.log(res.data);
+      var tmp = {};
+      for (var index in res.data.devs) {
+        var tag = res.data.devs[index].diDeviceid + res.data.devs[index].diZonetype + '';
+        if (tmp[tag] == null || tmp[tag] == undefined) {
+          tmp[tag] = new Array();
+        }
+        tmp[tag].push(res.data.devs[index]);
+      };
+      var sortResult = [];
+      for (var key in tmp) {
+        for (var j = 0; j < tmp[key].length; j++) {
+          sortResult.push(tmp[key][j]);
+        }
+      }
+      var arr3 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域灯光设备
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
+          arr3.push(sortResult[i]);
+        }
+      };
+      var arr4 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域窗帘设备
+        if ((sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1)) {
+          arr4.push(sortResult[i]);
+        }
+      };
+      var arr5 = [];
+      for (var i = 0; i < sortResult.length; i++) {   //显示区域空调设备
+        if ((sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1)) {
+          arr5.push(sortResult[i]);
+        }
+      };
+      console.log(arr3.length)
+      console.log(arr4)
+      console.log(arr5.length)
+      that.setData({
+        sortedDevs: arr3,
+        sortedDevs1:arr4,
+        sortedDevs2:arr5,
+        hidden: true
+      });
+      wx.getSystemInfo({
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            winHeight: res.windowHeight
+          });
+        }
+      });
+    },
+      (err) => {
+        console.log(err.errMsg)
+      }
+    )
+  },
+  //设备的开关
+  changTap: function (e) {
+    var ins = e.currentTarget.id;//获得下标
+    var tp = e.currentTarget.dataset['tp'];
+    var value;
+    if (tp.diOnoffStatu == 0) {
+      value = 1;
+    } else {
+      value = 0;
+    }
+    this.setData({
+      ins: ins
+    })
+    if (tp.diOnlineStatu == 0) {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    } else {
+      for (var i = 0; i < this.data.sortedDevs.length; i++) {
+        if (tp.diUuid == this.data.sortedDevs[i].diUuid) {
+          console.log('找到匹配', i);
+          var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+          this.setData({
+            [tmp]: value
+          })
+        }
+      }
+      this.setData({
+        ins: -1
+      })
+      let url = app.globalData.URL + 'ctrDev?timestamp=' + timestamp + '&token=' + token + '&sign=' + sign;
+      let data = {
+        bindid: username,
+        bindstr: pwd,
+        ctrType: 0,
+        devs: [{ deviceuid: tp.deviceuid, uuid: tp.diUuid, value: value }],
+        var: "2.0"
+      };
+      app.wxRequest('POST', url, data, (res) => {
+        console.log(res.data)
+        if (res.data.code != 1) {
+          this.setData({
+            ins: -1
+          })
+        }
+      },
+        (err) => {
+          console.log(err.errMsg)
+        }
+      )
+    }
+  },
+  device: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['device'].diOnlineStatu > 0) {
+      var device = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['device']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: '../../devctr/kaiguanguan/kaiguanguan?kaiguanguan=' + device
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
+  xia: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['deng'].diOnlineStatu > 0) {
+      var deng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['deng']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: '../../devctr/dengcolor/dengcolor?deng=' + deng
+        })
+      }
+      this.setData({
+        deng: false
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
+  kongtiao: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['kongtiao'].diOnlineStatu > 0) {
+      var kongtiao = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['kongtiao']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: '../../devctr/kongtiao/kongtiao?kongtiao=' + kongtiao
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
+  sewendeng: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['sewendeng'].diOnlineStatu > 0) {
+      var sewendeng = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['sewendeng']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: '../../devctr/sewendeng/sewendeng?sewendeng=' + sewendeng
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
+  //窗帘
+  chuanglian: utils.throttle(function (event) {
+    var ins = event.currentTarget.id;//获得下标
+    this.setData({
+      ins: ins
+    })
+    if (event.currentTarget.dataset['chuanglian'].diOnlineStatu > 0) {
+      var deviceuid = encodeURIComponent(JSON.stringify(event.currentTarget.dataset['chuanglian']));//函数可把字符串作为 URI
+      if (!this.pageLoading) {
+        this.pageLoading = !0;
+        wx.navigateTo({
+          url: '../../devctr/chuanglian/chuanglian?deviceuid=' + deviceuid
+        })
+      }
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '设备不在线'
+      })
+      this.setData({
+        ins: -1
+      })
+    }
+  }, 1000),
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.pageLoading = !1;
+    var pages = getCurrentPages()    //获取加载的页面
+    var currentPage = pages[pages.length - 1]    //获取当前页面的对象
+    var options = currentPage.options
+    this.onLoad(options);
+    //回调
+    app.globalData.callback = function (res) {
+      console.log('接收到服务器信息', res);
+      var nodeType;
+      var uuid;
+      var value;
+      var showname;
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割 
+      nodeType = strs[0].split('=')[1];
+      uuid = strs[1].split('=')[1];
+      value = strs[2].split('=')[1];
+      showname = strs[3].split('=')[1];
+      console.log('nodeType', nodeType);
+      console.log('uuid', uuid);
+      console.log('value', value);
+      console.log('showname', showname);
+      //找到当前页面的page
+      var pageArray = getCurrentPages();
+      var curPage;
+      for (var j = 0; j < pageArray.length; j++) {
+        if (pageArray[j].route == 'control/pages/areactr/areainfo/areainfo') {
+          curPage = pageArray[j];
+        }
+      }
+      console.log('curPage', curPage);
+      if (nodeType == 4) {
+        //设备开关状态发生改变
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
+            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
+            curPage.setData({
+              [tmp]: value
+            })
+          }
+        }
+      } else if (nodeType == 1) {
+        //设备新入网
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
+      } else if (nodeType == 2) {
+        //判断设备是否在线
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
+            var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
+            curPage.setData({
+              [tmp]: 1
+            })
+          }
+        }
+      } else if (nodeType == 5) {
+        //修改名称
+        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
+          if (uuid == curPage.data.sortedDevs[i].diUuid) {
+            console.log('i=' + i);
+            var tmp = 'sortedDevs[' + i + '].diShowName';
+            var dname = 'sortedDevs[' + i + '].diName';
+            curPage.setData({
+              [dname]: value,
+              [tmp]: showname
+            })
+          }
+        }
+      } else if (nodeType == 3) {
+        //删除设备
+        if (getCurrentPages().length != 0) {
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
+        }
+      } else if (nodeType == 6) {
+        var that = this;
+        let url = app.globalData.URL + 'getSensorAttrValue';
+        let data = {
+          actCode: "110",
+          bindid: username,
+          bindstr: pwd,
+          uuid: uuid,
+          ver: "2.0"
+        };
+        app.wxRequest('POST', url, data, (res) => {
+          console.log(res.data)
+        },
+          (err) => {
+            console.log(err.errMsg)
+          }
+        )
+      }
+      console.log('当前页面在区域设备控制');
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+    this.setData({
+      ins: -1,
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
+})

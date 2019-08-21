@@ -6,6 +6,9 @@
   align-items: center;
   margin-top: 20rpx;
 }
+.main{
+  overflow-x:hidden;
+}
 .navigator-text {
   flex: 1;
 }
@@ -22,12 +25,4 @@
   border-bottom: 1px rgb(238, 235, 235) solid;
   font-size: 36rpx;
   padding: 30rpx;
-}
-.log-list {
-  display: flex;
-  flex-direction: column;
-  padding: 40rpx;
-}
-.log-item {
-  margin: 10rpx;
 }

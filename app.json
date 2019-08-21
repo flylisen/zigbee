@@ -1,36 +1,58 @@
 {
   "pages": [
-    "pages/romm/romm",
+    "pages/appid/appid",
     "pages/login/login",
     "pages/index/index",
-    "pages/areactr/areactr",
-    "pages/scenesctr/scenesctr",
-    "pages/devctr/devctr",
-    "pages/areaconfig/areaconfig",
-    "pages/areaconfig/areaadd/areaadd",
-    "pages/areaconfig/areainfo/areainfo",
-    "pages/devconfig/devconfig",
-    "pages/scenesconfig/scenesconfig",
     "pages/about/about",
-    "pages/about/guide/guide",
-    "pages/about/idea/idea",
     "pages/about/aboutus/aboutus",
-    "pages/devconfig/kaiguanguan/kaiguanguan",
-    "pages/devctr/dengcolor/dengcolor",
-    "pages/devctr/kongtiao/kongtiao",
-    "pages/scenesconfig/scenesadd/scenesadd",
-    "pages/devctr/sewendeng/sewendeng",
-    "pages/devctr/kaiguanguan/kaiguanguan",
-    "pages/devctr/chuanglian/chuanglian",
-    "pages/areactr/areainfo/areainfo",
-    "pages/scenesconfig/changjing/changjing",
-    "pages/scenesconfig/changjingadd/changjingadd"
+    "pages/about/guide/guide",
+    "pages/about/idea/idea"
       ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "white",
     "navigationBarTitleText": "日顺智慧控制",
     "navigationBarTextStyle": "black"
+  },
+  "subpackages":[
+      {
+          "root":"control",
+          "name":"control",
+          "pages":[
+            "pages/devctr/devctr",
+            "pages/devctr/dengcolor/dengcolor",
+            "pages/devctr/kongtiao/kongtiao",
+            "pages/devctr/sewendeng/sewendeng",
+            "pages/devctr/kaiguanguan/kaiguanguan",
+            "pages/devctr/chuanglian/chuanglian",
+            "pages/scenesctr/scenesctr",
+            "pages/areactr/areactr",
+            "pages/areactr/areainfo/areainfo"
+          ]
+      },
+      {
+        "root":"configure",
+        "name":"configure",
+        "pages":[
+              "pages/areaconfig/areaconfig",
+              "pages/areaconfig/areaadd/areaadd",
+              "pages/areaconfig/areainfo/areainfo",
+              "pages/devconfig/devconfig",
+              "pages/devconfig/kaiguanguan/kaiguanguan",
+              "pages/scenesconfig/scenesconfig",
+              "pages/scenesconfig/scenesadd/scenesadd",
+              "pages/scenesconfig/changjing/changjing",
+              "pages/scenesconfig/changjingadd/changjingadd"
+        ]
+      }
+  ],
+  "preloadRule": {
+      "pages/index/index": {
+        "network": "all",
+        "packages": [
+          "control"
+        ]
+      }
   },
   "tabBar": {
     "color": "#666",

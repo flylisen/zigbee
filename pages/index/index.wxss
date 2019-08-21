@@ -1,12 +1,4 @@
-.log-list {
-  display: flex;
-  flex-direction: column;
-margin-left: -380rpx;
-margin-top: -120rpx;
-}
-.log-item {
-  margin: 10rpx;
-}
+
 .setting1 image{
 width: 360rpx;
 height: 250rpx;
@@ -52,7 +44,7 @@ height: 400rpx;
 .setting3{
 position: absolute;
 margin-top: 100rpx;
-margin-left: 380rpx;
+margin-left: 407rpx;
 }
 .setting3 image{
 width: 320rpx;

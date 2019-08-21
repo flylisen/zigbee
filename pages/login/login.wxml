@@ -1,5 +1,4 @@
-<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
-<view style='opacity: {{1-opacity}};'> 
+
 <view class="container">
 <image class='background-image' src='/images/loginsettring.jpg' mode="scaleToFill"></image> 
  <view class="login-from"> 
@@ -17,9 +16,8 @@
   <image class="keyImage1" bindtap="pass"  src="{{tp}}"></image> 
  </view> 
  <!--按钮-->
- <view class="loginBtnView"> 
-  <button class="loginBtn"  size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button> 
- </view> 
- </view> 
-</view>
+<view class="loginBtnView">
+<button class="loginBtn"  size="{{primarySize}}" loading="{{loading}}" plain="{{plain}}" disabled="{{disabled}}" bindtap="login">登录</button> 
+</view> 
+</view> 
 </view>

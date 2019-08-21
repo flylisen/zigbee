@@ -1,0 +1,37 @@
+<!--pages/scenesconfig/scenesconfig.wxml-->
+<view class='viewh1'>
+     <text class="text">场景配置列表</text>
+      <view class="bjibj">
+          <image src="{{bji}}" bindtap='binddji' class="tp" mode="widthFix"></image>
+      </view>
+    <view class="sxan">
+     <image src="{{sx}}" bindtap='sxym' class="tp" mode="widthFix"></image>
+    </view>
+      <view class="scbj">
+     <image src="{{sc}}" bindtap='bindsc' class="tp" mode="widthFix"></image>
+    </view>
+     <view class="tpbj">
+     <image src="{{tp}}" bindtap='bindAdd' class="tp" mode="widthFix"></image>
+    </view>
+</view>
+        <view class="link">
+        <block  wx:for="{{scenes}}" wx:for-item="item">
+        <view bindtap='changjing' data-changjings="{{item}}" class="link_child" id="{{index}}">
+                <view wx:if="{{xz==true}}">
+                <image src="/images/sc.png" class='xztp' catchtap="deletes" data-changjings="{{item}}"></image>
+                </view>
+                <view wx:if="{{bj==true}}">
+                    <image src="/images/bji.png" class='bjitp' catchtap="changjingadd" data-changjings="{{item}}"></image>
+                </view>
+                <image src="/images/scenesctr/scenebj.jpg" class='bjtp'></image>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:if="{{item.siShowName==''}}">场景</view>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:else>{{item.siShowName}}</view>
+         </view>
+       </block>
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
+
+        
+        

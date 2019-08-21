@@ -1,0 +1,188 @@
+
+<view class='imagesize'>
+    <image src='/images/scenesadd/cj.jpg'  style='width:30%; height:30%' mode='widthFix'></image>
+</view>
+<view>
+ <form bindsubmit='submit'>
+       <view class="name">
+      <text class='text'>显示名称</text>
+      </view>
+      <input type="text" class="input" name="showName" maxlength='10'></input>
+    <view class="name">
+     <text class='text'>内存名称</text>
+     </view>
+     <input type="text" class="input" name="areaname" maxlength='10'></input>
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{items}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />
+            {{item.value}}
+        </label>
+        </radio-group>
+      <view class="name">
+     <text class='text'>添加设备</text>
+     </view>
+<view class="index">
+  <view class="index-bd">
+    <view class="kind-list">
+      <block wx:for-items="{{sortedDevs}}"  wx:key="{{index}}">
+       <image src="{{item.isSelect?choseImg:unchoseImg}}" class="kind-list-img" bindtap="chooseTap"  data-index="{{index}}"></image>
+        <!--开关-->
+        <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==2}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">开关</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                 <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                   <view class="switch">
+                   <switch bindchange='changTap' class="navigator-text2" data-index="{{index}}" data-tp="{{item}}">
+                    </switch>
+                  </view>
+                 </view>
+
+            </view>
+          </view>
+        </view>
+        <!--窗帘-->
+        <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle2':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">窗帘</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins2? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins2? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                <view class="switch">
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
+                  </view>
+                 </view>
+                 <view class="navigator">
+                     <text class="navigator-text">开关程度</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="kgcd"></input>
+                 </view>
+            </view>
+          </view>
+        </view>
+         <!--彩灯-->
+         <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==528}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins3? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle3':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins3? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins3? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                <view class="switch">
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
+                  </view>
+                 </view>
+                 <view class="navigator">
+                     <text class="navigator-text">亮度</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="ld"></input>
+                 </view>
+                  <view class="navigator">
+                     <text class="navigator-text">色调</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="sd"></input>
+                 </view>
+                  <view class="navigator">
+                     <text class="navigator-text">饱和度</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="bhd"></input>
+                 </view>
+            </view>
+          </view>
+        </view>
+            <!--空调-->
+         <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle4':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">空调</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins4? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins4? 'navigator-box-show': ''}}">
+                <view class="navigator">
+                     <text class="navigator-text">温度</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="wd"></input>
+                 </view>
+                 <view class="navigator">
+                    <text class="navigator-text">模式</text>
+                     <radio-group bindchange="checkboxChange">
+	                   <label class="checkbox" wx:for="{{ConditionMode}}">
+	                  <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+	                  </label>
+                    </radio-group> 
+                 </view>
+                  <view class="navigator">
+                   <text class="navigator-text">风速</text>
+                    <radio-group bindchange="checkboxChangeWindMode">
+	                  <label class="checkbox1" wx:for="{{WindMode}}">
+	                  <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+	                 </label>
+                    </radio-group> 
+                 </view>
+            </view>
+          </view>
+        </view>
+        <!--色温灯-->
+      <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle5':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins5? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins5? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                  <view class="switch">
+                 <switch bindchange='changTap'  class="navigator-text2" data-index="{{index}}" data-tp="{{item}}"></switch>
+                 </view>
+                 </view>
+                 <view class="navigator">
+                     <text class="navigator-text">温度</text>
+                    <input type="text" style=' background-color:#F8F8F8;' type="digit" bindinput="dengwd"></input>
+                 </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+      <button class='btn' form-type='submit'>确定</button>
+    </form>
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
+
+
+
+
+

@@ -1,0 +1,24 @@
+<!--pages/scenesctr/scenesctr.wxml-->
+<view class='viewh1'>
+     <text class='text'>全部场景</text>
+      <view class="sxan">
+     <image src="{{sx}}" bindtap='sxym' class="tp" mode="widthFix"></image>
+      </view>
+     <view wx:if="{{rommid == 'RS@xcx12'}}" class="pz">
+       <image src="{{pz}}" class="pztb" bindtap='pz' mode="widthFix"></image>
+     </view>
+</view>
+        <view class="link">
+        <block  wx:for="{{scenes}}" wx:for-item="item">
+        <view bindtap='chang' data-id="{{item}}" class="link_child" data-index="{{index}}">
+                <image src="{{item.upshow?choseImg:unchoseImg}}" class='bjtp'></image>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:if="{{item.siShowName==''}}">场景</view>
+                <view class="{{item.siShowName.length>4?'showtext1':'showtext2'}}" wx:else>{{item.siShowName}}</view>
+         </view>
+       </block>
+</view>
+<view>
+    <loading hidden="{{hidden}}">加载中</loading>
+</view>
+
+

@@ -17,7 +17,10 @@ App({
     URL: 'https://dev.rishuncloud.com:8443/',
     gwId: -1,  
     localSocket: {},
-    callback: function () {}
+    callback: function () {},
+    jsonstr:'',
+    rstatus:'',
+    hoteid:'',
   },
   /**  
   * 
@@ -58,6 +61,16 @@ App({
     let that = this;
     that.globalData.rommid = roomid;
   },
+  devss: function (jsonstr){
+    let that = this;
+    that.globalData.jsonstr = jsonstr;
+  },
+  //获取酒店的ID和用户的入住状态
+  hotel: function (rstatus, hoteid){
+    let that = this;
+    that.globalData.rstatus = rstatus;
+    that.globalData.hoteid = hoteid;
+  },
   //获取timestamp(时间戳)，token(令牌)，sign（签名）
   safety: function (timestamp,token,sign){
     let that = this;
@@ -93,6 +106,15 @@ App({
     })
     that.globalData.localSocket.onMessage(function (res) {
       that.hideLoad()
+      var strs = new Array();
+      strs = res.data.split(","); //字符分割
+      nodeType = strs[0].split('=')[1];
+      if (nodeType==301){
+        wx.closeSocket();
+        wx.reLaunch({
+          url: '/pages/appid/appid'
+        }); 
+      }
       that.globalData.callback(res)
     })
     that.globalData.localSocket.onError(function (res) {

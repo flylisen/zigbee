@@ -1,6 +1,5 @@
 <!--pages/about/idea/idea.wxml-->
-<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
-<view style='opacity: {{1-opacity}};'>
+<view class='main'>
 <view class='guide'>
 如何联系我们反馈问题？
 </view>

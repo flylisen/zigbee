@@ -1,0 +1,141 @@
+
+<view class='imagesize'>
+    <image src='../../../../images/facility/sq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==42}}"></image>
+     <image src='../../../../images/facility/jj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==44}}"></image>
+    <image src='../../../../images/facility/af.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==277}}"></image>   
+    <image src='../../../../images/facility/rt.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==13}}"></image>
+      <image src='../../../../images/facility/yht.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==32769}}"></image>
+      <image src='../../../../images/facility/mc.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==21}}"></image>
+      <image src='../../../../images/facility/wsd.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==770&&diZonetype==0}}"></image>
+      <image src='../../../../images/facility/qj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==4&&diZonetype==0}}"></image>
+       <image src='../../../../images/facility/hwb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==353&&diZonetype==0}}"></image>
+        <image src='../../../../images/facility/ew.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==40}}"></image>
+        <image src='../../../../images/facility/sb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==83&&diZonetype==258}}"></image>
+        <image src='../../../../images/facility/ms.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==10&&diZonetype==255}}"></image>
+        <image src='../../../../images/facility/sg.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1027&&diZonetype==549}}"></image>
+        <image src='../../../../images/facility/clq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==43}}"></image>
+        <image src='../../../../images/facility/xf.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==771&&diZonetype==255}}"></image>
+        <image src='../../../../images/facility/cz.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
+        <image src='../../../../images/facility/pa.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
+</view>
+<view class='imagesize1'>
+    <view wx:if="{{diNames==''}}">
+                    <view wx:if="{{diDeviceid==1026&&diZonetype==42}}"><text>水浸传感器</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==44}}"><text>紧急按钮</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==277}}"><text>安防遥控器</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==13}}"><text>人体传感器</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==32769}}"><text>一氧化碳传感器</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==21}}"><text>门磁传感器</text></view>
+                    <view wx:elif="{{diDeviceid==770&&diZonetype==0}}"><text>温湿度传感器</text></view>
+                    <view wx:elif="{{diDeviceid==4&&diZonetype==0}}"><text>情景开关</text></view>
+                    <view wx:elif="{{diDeviceid==353&&diZonetype==0}}"><text>红外宝</text></view>
+                    <view wx:elif="{{diDeviceid==1026&&diZonetype==40}}"><text>烟雾传感器</text></view>
+                    <view wx:elif="{{diDeviceid==83&&diZonetype==258}}"><text>水表</text></view>
+                    <view wx:elif="{{diDeviceid==10&&diZonetype==255}}"><text>门锁</text></view>
+                    <view wx:elif="{{diDeviceid==1027&&diZonetype==549}}"><text>声光报警器</text></view>
+                     <view wx:elif="{{diDeviceid==1026&&diZonetype==43}}"><text>可燃气体传感器</text></view>
+                    <view wx:elif="{{diDeviceid==771&&diZonetype==255}}"><text>新风面板</text></view>
+                    <view wx:elif="{{diDeviceid==9&&diZonetype==255}}"><text>插座</text></view>
+                     <view wx:elif="{{diDeviceid==337&&diZonetype==0}}"><text>PA中继器</text></view>
+           </view>
+           <view wx:else>
+              <text>名称 :{{diNames}}</text>
+           </view>
+</view>
+<image class='ico' src='../../../../images/facility/bj.png' mode='scaleToFill'></image>
+<view class='root-view'>
+     <!--状态-->
+    <view class='imgbox'>
+        <view wx:if="{{chuanglians>=0}}">
+           <text class='txt'>状态</text>
+           <view class='dq'>
+           <text class='txt1'>正常</text>
+           </view>
+           </view>
+            <view wx:else>
+            <text class='txt'>状态</text>
+             <view class='dq'>
+            <text class='txt1'>异常</text>
+            </view>      
+           </view>
+</view>
+    <view wx:for="{{points}}" wx:for-item="item">
+      <view class='border'>
+          <view class='border2'></view>
+      </view>   
+            <view class='imgbox'>
+        <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='0'}}">
+                <text class='txt'>门磁检测</text>
+                <view class='dq'>
+                <text class='txt2'>关门</text>
+                </view>
+         </view>
+         <view wx:if="{{item.spAttrType==101&&item.spAttrValue=='1'}}">
+                <text class='txt'>门磁检测</text>
+                <view class='dq'>
+                <text class='txt2'>开门</text>
+                </view>
+         </view>
+         <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='1'}}">
+                    <text class='txt'>人体红外检测</text>
+                    <view class='dq'>
+                    <text>有人</text>
+                    </view>
+         </view>
+          <view wx:if="{{item.spAttrType==102&&item.spAttrValue=='0'}}">
+                    <text class='txt'>人体红外检测</text>
+                    <view class='dq'>
+                    <text>无人</text>
+                    </view> 
+          </view>
+           <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='1'}}">
+                    <text class='txt'>烟雾检测</text>
+                     <view class='dq'>
+                    <text>有泄露</text>
+                    </view> 
+          </view>
+          <view wx:if="{{item.spAttrType==103&&item.spAttrValue=='0'}}">
+                    <text class='txt'>烟雾检测</text>
+                     <view class='dq'>
+                    <text>无泄露</text>
+                    </view> 
+          </view>
+          <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='0'}}">
+                    <text class='txt'>防拆</text>
+                    <view class='dq'>
+                    <text>未拆除</text>
+                    </view> 
+          </view>
+          <view wx:if="{{item.spAttrType==501&&item.spAttrValue=='1'}}">
+                    <text class='txt'>防拆</text>
+                    <view class='dq'>
+                    <text>拆除</text>
+                    </view> 
+          </view>
+          <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='0'}}">
+                    <text class='txt'>电量</text>
+                    <view class='dq'>
+                    <text>电池电压正常</text>
+                    </view>
+          </view>
+          <view wx:if="{{item.spAttrType==301&&item.spAttrValue=='1'}}">
+                    <text class='txt'>电量</text>
+                     <view class='dq'>
+                    <text class='txt2'>电池电压低</text>
+                    </view>
+          </view>
+          <view wx:if="{{item.spAttrType==203}}">
+                    <text class='txt'>温度</text>
+                     <view class='dq'>
+                    <text class='txt2'>{{item.spAttrValue/100}}℃</text>
+                    </view>
+          </view>
+          <view wx:if="{{item.spAttrType==204}}">
+                    <text class='txt'>湿度</text>
+                     <view class='dq'>
+                    <text class='txt2'>{{item.spAttrValue/100}}℃</text>
+                    </view>
+          </view>
+       </view>
+    </view>  
+</view>

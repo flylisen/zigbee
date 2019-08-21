@@ -1,6 +1,5 @@
 <!--pages/about/guide/guide.wxml-->
-<view  style='height: {{winH}}rpx;opacity: {{opacity}};'></view>
-<view style='opacity: {{1-opacity}};'>
+<view class='main'>
 <view class='guide'>
 如何使用小程序？
 </view>

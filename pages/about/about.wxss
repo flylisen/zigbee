@@ -24,6 +24,7 @@
  .headIcon{
  width:70px;
  height:70px;
+ border-radius: 50%;
  margin-top:70rpx;
 } 
 .head text{
@@ -174,7 +175,7 @@
   margin-top: 47rpx;
   transition: opacity .3s;
   margin-left:40rpx;
-margin-right:40rpx
+  margin-right:40rpx
 }
 .kind-list-item-hd1 {
   display: flex;
@@ -185,7 +186,7 @@ margin-right:40rpx
   margin-top: 46rpx;
   transition: opacity .3s;
   margin-left:40rpx;
-margin-right:40rpx
+  margin-right:40rpx
 }
 .kind-list-item-hd-show {
   opacity: .2;
@@ -202,4 +203,7 @@ margin-right:40rpx
 }
 .arrows{
   padding: 0 0 20rpx 0;
+}
+.btn{
+  margin-top: -130rpx;
 }

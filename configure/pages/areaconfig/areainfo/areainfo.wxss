@@ -1,0 +1,166 @@
+/* pages/areaconfig/areainfo/areainfo.wxss */
+.main{
+  overflow-x:hidden;
+}
+.title{
+  color: black;
+  font-size: 30px;
+}
+input{
+  border: 1px solid black;
+  width: 300px;
+  height: 40px;
+  margin: 20px 0px;
+}
+.button1{
+  color: red;
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  /* background: orange; */
+  border: 1px solid red;
+  margin-top: 20rpx;
+  width: 89%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:none;
+}
+.button2{
+  color: orange;
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  /* background: red; */
+  border: 1px solid orange;
+  margin-top: 40rpx;
+  width: 89%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+.flex-wrp_one{
+ display: flex;
+ flex-flow: row wrap; 
+align-content: space-around;
+}
+.flex-wrp_one view{
+  padding: 15px;
+}
+.con-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.se-img {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.person {
+  width: 616rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+}
+
+.person image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 30rpx 0 40rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 17rpx;
+}
+
+.address {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.tag {
+  position: absolute;
+  right: 30rpx;
+  top: 16rpx;
+  width: 110rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  background: #6B7AF8;
+  color: #ffffff;
+  font-size: 24rpx;
+  text-align: center;
+}
+.view1{
+  display:flex;
+margin-top:20px;
+justify-content:space-around;
+flex-direction:column;
+align-items:center;
+}
+.text{
+   margin-left: 56rpx;
+}
+.gl{
+  margin-top: 20rpx;
+}
+.link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 750rpx; 
+    margin: 0 auto;
+    position: relative;
+    left: 30rpx;
+    margin-top:20rpx;
+    margin-left:80rpx;
+}  
+.link_child {
+width:240rpx;
+margin-top:-20rpx;
+}
+.tp{
+   position: absolute;
+   z-index: 1;
+  margin-left:-200rpx;
+  margin-top:40rpx;
+  width:70rpx;
+  height:70rpx;
+}
+.zt{
+ position:absolute;
+z-index:1;
+margin-left:-50rpx;
+font-size:12px;
+margin-top:-126rpx;
+color:#999999; 
+width: 150rpx;
+}
+.bj{
+width:240rpx;
+height:240rpx;
+margin-left:-90rpx;
+}
+.dj{
+width:45rpx;
+height:45rpx;
+margin-left:-90rpx;
+position:absolute;
+margin-top:40rpx;
+}

@@ -1,0 +1,246 @@
+/* pages/areaconfig/areaadd/areaadd.wxss */
+.main{
+  overflow-x:hidden;
+}
+.v1{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20rpx;
+  }
+.title{
+  color: black;
+  font-size: 30px;
+}
+.header{
+  margin-left: 50rpx;
+}
+input{
+  border: 1px solid black;
+  width: 89%;
+  height: 40px;
+  margin: 40rpx 20rpx;
+  padding-left: 25rpx;
+}
+.button1{
+  color: white;
+  border-radius: 50rpx;
+  padding:0rpx 100rpx;
+  background: orange;
+  margin-top: 20rpx;
+  width: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.flex-wrp_one{
+ display: flex;
+ flex-flow: row wrap; 
+align-content: space-around;
+}
+.flex-wrp_one view{
+  padding: 15px;
+}
+.con-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 30rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.se-img {
+  width: 100rpx;
+  height: 100rpx;
+  margin-right: 20rpx;
+}
+
+.person {
+  width: 616rpx;
+  height: 180rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #ffffff;
+}
+
+.person image {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 0 30rpx 0 40rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 17rpx;
+}
+
+.address {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.tag {
+  position: absolute;
+  right: 30rpx;
+  top: 16rpx;
+  width: 110rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  background: #6B7AF8;
+  color: #ffffff;
+  font-size: 24rpx;
+  text-align: center;
+}
+.top{
+width: 100vw;
+
+height: 80rpx;
+
+padding: 0 20rpx;
+
+line-height: 80rpx;
+
+font-size: 34rpx;
+
+border-bottom: 1px solid #000;
+
+}
+.top-text{
+float: left;
+margin-left: 50rpx;
+}
+.top-selected{
+
+width: 50%;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+border: 1px solid #ccc;
+
+padding: 0 5rpx;
+
+font-size: 30rpx;
+margin-left:326rpx;
+}
+.select_box {
+
+background-color: #fff;
+
+padding: 0 20rpx;
+
+width: 50%;
+
+position: relative;
+
+right: 0;
+
+z-index: 1;
+
+text-align: left;
+
+animation: myfirst 0.5s;
+
+font-size: 30rpx;
+
+margin-left:290rpx;
+
+}
+.select_one {
+
+padding-left: 20rpx;
+
+width: 98%;
+
+height: 60rpx;
+
+position: relative;
+
+line-height: 60rpx;
+
+border: 1px solid #ccc;
+margin-left: 16rpx;
+
+}
+/* 下拉过度效果 */
+@keyframes myfirst {
+
+from {
+
+    height: 0rpx;
+
+}
+to {
+
+    height: 210rpx;
+
+}}
+.text{
+   margin-left: 30px;
+}
+.gl{
+  margin-top: 20rpx;
+}
+.link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 750rpx; 
+    margin: 0 auto;
+    position: relative;
+    left: 30rpx;
+    margin-top:20rpx;
+    margin-left:80rpx;
+}  
+.link_child {
+width:240rpx;
+margin-top:-20rpx;
+}
+.tp{
+   position: absolute;
+   z-index: 1;
+  margin-left:-200rpx;
+  margin-top:40rpx;
+  width:70rpx;
+  height:70rpx;
+}
+.zt{
+ position:absolute;
+z-index:1;
+margin-left:-50rpx;
+font-size:12px;
+margin-top:-126rpx;
+color:#999999; 
+width: 150rpx;
+}
+.bj{
+width:240rpx;
+height:240rpx;
+margin-left:-90rpx;
+}
+.dj{
+width:45rpx;
+height:45rpx;
+margin-left:-90rpx;
+position:absolute;
+margin-top:40rpx;
+}
+.device{
+  margin-top: 50rpx;
+  margin-left:50rpx;
+}

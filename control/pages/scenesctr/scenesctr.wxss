@@ -1,0 +1,59 @@
+/* pages/scenesctr/scenesctr.wxss */
+.viewh1{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+.text{
+  margin-top:20rpx;
+  font-size: 36rpx;
+  margin-left: -480rpx;
+}
+.link {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 700rpx; 
+    margin: 0 auto;
+    left: 5rpx;
+}  
+.link_child {
+width:270rpx;
+margin-left:80rpx;
+margin-top:30rpx;
+}
+.bjtp{
+  width:350rpx;
+  height:350rpx;
+  margin-left:-80rpx;
+}
+.showtext1{
+  width:200rpx;
+  margin-top:-20rpx;
+}
+.showtext2{
+ width:200rpx;
+ margin-top:-20rpx;
+ margin-left:40rpx;
+}
+.pz{
+position:absolute;
+margin-left: 270rpx;
+margin-top: 17rpx;
+}
+.pztb{
+width:140rpx;
+height:auto;
+}
+.tp{
+  width:140rpx;
+  height:auto;
+}
+.sxan{
+position: absolute;
+width: 60rpx;
+height: 60rpx;
+margin-left: 90rpx;
+margin-top: 10rpx;
+}
+
