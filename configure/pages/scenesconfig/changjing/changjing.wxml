@@ -44,7 +44,23 @@
            <view wx:if="{{item.deviceName==''}}" style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">开关</view>
            <view wx:else style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">{{item.deviceName}}</view>
    </view>
-   <view class="link_child" wx:if="{{item.deviceid==514&&item.zonetype==2}}">
+       <view class="link_child" wx:if="{{item.deviceid==337}}">
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/padj.png' class='tp' wx:if="{{item.status> 0}}" ></image>
+         <image src='/images/devctr/pawdj.png' class='tp' wx:else ></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">PA中继器</view>
+           <view wx:else style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">{{item.deviceName}}</view>
+   </view>
+ <view class="link_child" wx:if="{{item.deviceid==9}}">
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/czdj.png' class='tp' wx:if="{{item.status> 0}}" ></image>
+         <image src='/images/devctr/czwdj.png' class='tp' wx:else ></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
+           <view wx:if="{{item.deviceName==''}}" style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">插座</view>
+           <view wx:else style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">{{item.deviceName}}</view>
+   </view>
+   <view class="link_child" wx:if="{{item.deviceid==514}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
          <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.status> 0}}"></image>
          <image src='/images/devctr/clwdj.png' class='tp' wx:else></image>
@@ -60,7 +76,7 @@
            <view wx:if="{{item.deviceName==''}}"style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">灯</view>
            <view wx:else style="{{item.status>0?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">{{item.deviceName}}</view>
    </view>
-    <view class="link_child" wx:if="{{item.deviceid==769&&item.zonetype==1}}">
+    <view class="link_child" wx:if="{{item.deviceid==769}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
          <image src='/images/devctr/airdj.png' class='tp' wx:if="{{item.thermostatMode>0&&item.thermostatControlType==1}}"></image>
          <image src='/images/devctr/airwdj.png' class='tp' wx:else></image>
@@ -68,7 +84,7 @@
            <view wx:if="{{item.deviceName==''}}" style="{{item.thermostatMode>0&&item.thermostatControlType==1?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">空调</view>
            <view wx:else style="{{item.thermostatMode>0&&item.thermostatControlType==1?'color: #FEA152':''}}" class="{{item.deviceName.length>6?'zt1':'zt2'}}">{{item.deviceName}}</view>
    </view>
-   <view class="link_child" wx:if="{{item.deviceid==544&&item.zonetype==255}}">
+   <view class="link_child" wx:if="{{item.deviceid==544}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
          <image src='/images/devctr/swdj.png' class='tp' wx:if="{{item.status> 0}}"></image>
          <image src='/images/devctr/swwdj.png' class='tp' wx:else></image>

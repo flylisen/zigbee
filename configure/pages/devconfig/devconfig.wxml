@@ -1,4 +1,4 @@
-﻿  <!--pages/devconfig/devconfig.wxml-->
+  <!--pages/devconfig/devconfig.wxml-->
   <view class='viewh1'>
      <text class='bt'>设备配置</text>
     <view class="pz">
@@ -37,6 +37,10 @@
         <view id='6' bindtap='switchNav' class="switchNav" wx:if="{{arr6.length!=0}}">
               <image src="{{flag==6?'/images/devctr/qtsbdj.png':'/images/devctr/qtsbwdj.png'}}" id='6' bindtap='switchNav'></image>
               <text class="{{flag==6?'select':'normal'}}" id='6' bindtap='switchNav'>其他设备</text>
+        </view>
+        <view id='7' bindtap='switchNav' class="switchNav" wx:if="{{arr7.length!=0}}">
+              <image src="{{flag==7?'/images/devctr/czdj.png':'/images/devctr/czwdj.png'}}" id='7' bindtap='switchNav'></image>
+              <text class="{{flag==7?'select':'normal'}}" id='7' bindtap='switchNav'>插座</text>
         </view>
       </view>
       <view class='right'>
@@ -82,7 +86,7 @@
           </view>
        </view>
         <!--窗帘-->
-        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view  wx:if="{{item.diDeviceid==514}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -98,7 +102,7 @@
           </view>
          </view>
         <!--色温灯-->
-         <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' id="{{index}}"  class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+         <view wx:if="{{item.diDeviceid==544}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' id="{{index}}"  class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{(switch==true&&index==ins)||(item.diOnoffStatu>=1)?'/images/devctr/swdj.png':'/images/devctr/swwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -114,7 +118,7 @@
            </view>
        </view>
        <!--空调-->
-        <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view  wx:if="{{item.diDeviceid==769}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
          </view>
@@ -226,7 +230,7 @@
           </view>
          </view>
         <!--温湿度传感器-->
-        <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==770}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/wsddj.png':'/images/devctr/wsdwdj.png'}}" mode="scaleToFill" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'/>
         </view>
@@ -242,7 +246,7 @@
           </view>
          </view>
          <!--情景开关--->
-          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==4}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/qjkgdj.png':'/images/devctr/qjkgwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -258,7 +262,7 @@
           </view>
          </view>
          <!--红外宝-->
-        <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==353}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/hwbdj.png':'/images/devctr/hwbwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -290,7 +294,7 @@
           </view>
          </view>
          <!--水表-->
-         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+         <view wx:if="{{item.diDeviceid==83}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/sbdj.png':'/images/devctr/sbwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -306,7 +310,7 @@
           </view>
          </view>
          <!--门锁-->
-        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==10}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/msodj.png':'/images/devctr/msowdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -322,7 +326,7 @@
           </view>
          </view>
          <!--声光报警器-->
-          <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==1027}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/sgdj.png':'/images/devctr/sgwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -354,7 +358,7 @@
           </view>
          </view>
          <!--新风面板-->
-          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==771}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/xfdj.png':'/images/devctr/xfwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -370,7 +374,7 @@
           </view>
          </view>
          <!--开关/插座-->
-        <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==9}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/czdj.png':'/images/devctr/czwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -386,7 +390,7 @@
           </view>
          </view>
          <!--PA中继器-->
-          <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==337}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -412,7 +416,9 @@
   <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr1}}" wx:key="name">
+      <view wx:if="{{(item.diDeviceid==2)||(item.diDeviceid==337)}}">
       <image  src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      </view>
       <!--开关-->
     <view wx:if="{{item.diDeviceid==2}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' id="{{index}}" class="{{item.diShowName.length>=4?'wen1':'wen'}}">
         <view class="weui-grid__icon">
@@ -429,6 +435,22 @@
           <text class="weui-grid__label2" wx:else style="{{index==ins?'color: #FEA152':''}}">{{item.diShowName}}</text>
         </view>
       </view>
+      <!--PA中继器-->
+          <view wx:if="{{item.diDeviceid==337}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+         <view class="weui-grid__icon">
+        <image class="image1" src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill"/>
+        </view>
+        <view wx:if="{{item.diOnlineStatu==0}}">
+         <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">离线</text>
+          </view>
+          <view wx:else>
+          <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
+          </view>
+           <view class="showname">
+          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">PA中继器</text>
+          <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
+          </view>
+         </view>
 </view>
 </view>
 </view>
@@ -440,7 +462,7 @@
   <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr2}}" wx:key="name">
-       <view wx:if="{{(item.diDeviceid==528)||(item.diDeviceid==544&&item.diZonetype==255)}}">
+       <view wx:if="{{(item.diDeviceid==528)||(item.diDeviceid==544)}}">
       <image  src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
       </view>
        <!--灯-->
@@ -486,11 +508,9 @@
  <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr3}}" wx:key="name">
-      <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
-      </view>
         <!--窗帘-->
-        <view  wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==514}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/cldj.png':'/images/devctr/clwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -516,11 +536,9 @@
  <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr4}}" wx:key="name">
-      <view wx:if="{{item.diDeviceid == 769 && item.diZonetype ==1}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
-      </view>
        <!--空调-->
-        <view  wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view  wx:if="{{item.diDeviceid==769}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
           <image class="image1" src="{{ins==index?'/images/devctr/airdj.png':'/images/devctr/airwdj.png'}}" mode="scaleToFill"/>
          </view>
@@ -546,7 +564,7 @@
 <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr5}}" wx:key="name">
-      <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==13)||(item.diDeviceid==1026&&item.diZonetype==42)||(item.diDeviceid==1026&&item.diZonetype==32769)||(item.diDeviceid==1026&&item.diZonetype==21)||(item.diDeviceid==770&&item.diZonetype==0)||(item.diDeviceid==1026&&item.diZonetype==40)||(item.diDeviceid==1026&&item.diZonetype==43)}}">
+      <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==13)||(item.diDeviceid==1026&&item.diZonetype==42)||(item.diDeviceid==1026&&item.diZonetype==32769)||(item.diDeviceid==1026&&item.diZonetype==21)||(item.diDeviceid==770)||(item.diDeviceid==1026&&item.diZonetype==40)||(item.diDeviceid==1026&&item.diZonetype==43)}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
       </view>
         <!--人体传感器-->
@@ -614,7 +632,7 @@
           </view>
          </view>
         <!--温湿度传感器-->
-        <view wx:if="{{item.diDeviceid==770&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==770}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/wsddj.png':'/images/devctr/wsdwdj.png'}}" mode="scaleToFill" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan'/>
         </view>
@@ -646,7 +664,7 @@
           </view>
          </view>
          <!--声光报警器-->
-          <view wx:if="{{item.diDeviceid==1027&&item.diZonetype==549}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==1027}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/sgdj.png':'/images/devctr/sgwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -677,22 +695,6 @@
           <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
           </view>
          </view>
-         <!--PA中继器-->
-          <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
-         <view class="weui-grid__icon">
-        <image class="image1" src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill"/>
-        </view>
-        <view wx:if="{{item.diOnlineStatu==0}}">
-         <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">离线</text>
-          </view>
-          <view wx:else>
-          <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
-          </view>
-           <view class="showname">
-          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">PA中继器</text>
-          <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
-          </view>
-         </view>
     </view>
   </view>
 </view>
@@ -704,7 +706,7 @@
 <view class="container1">
   <view class="weui-grids">
     <view class="weui-grid" wx:for="{{arr6}}" wx:key="name">
-       <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==44)||(item.diDeviceid==1026&&item.diZonetype==277)||(item.diDeviceid==4&&item.diZonetype==0)||(item.diDeviceid==353&&item.diZonetype==0)||(item.diDeviceid==83&&item.diZonetype==258)||(item.diDeviceid==10&&item.diZonetype==255)||(item.diDeviceid==1027&&item.diZonetype==549)||(item.diDeviceid==771&&item.diZonetype==255)||(item.diDeviceid==9&&item.diZonetype==255)||(item.diDeviceid==337&&item.diZonetype==0)}}">
+       <view wx:if="{{(item.diDeviceid==1026&&item.diZonetype==44)||(item.diDeviceid==1026&&item.diZonetype==277)||(item.diDeviceid==4)||(item.diDeviceid==353)||(item.diDeviceid==83)||(item.diDeviceid==10)||(item.diDeviceid==1027)||(item.diDeviceid==771)}}">
       <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
       </view>
          <!--紧急按钮-->
@@ -740,7 +742,7 @@
           </view>
          </view>
          <!--情景开关--->
-          <view wx:if="{{item.diDeviceid==4&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==4}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/qjkgdj.png':'/images/devctr/qjkgwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -756,7 +758,7 @@
           </view>
          </view>
          <!--红外宝-->
-        <view wx:if="{{item.diDeviceid==353&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==353}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/hwbdj.png':'/images/devctr/hwbwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -772,7 +774,7 @@
           </view>
          </view>
          <!--水表-->
-         <view wx:if="{{item.diDeviceid==83&&item.diZonetype==258}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+         <view wx:if="{{item.diDeviceid==83}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/sbdj.png':'/images/devctr/sbwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -788,7 +790,7 @@
           </view>
          </view>
          <!--门锁-->
-        <view wx:if="{{item.diDeviceid==10&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+        <view wx:if="{{item.diDeviceid==10}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/msodj.png':'/images/devctr/msowdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -804,7 +806,7 @@
           </view>
          </view>
          <!--新风面板-->
-          <view wx:if="{{item.diDeviceid==771&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+          <view wx:if="{{item.diDeviceid==771}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/xfdj.png':'/images/devctr/xfwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -819,8 +821,19 @@
           <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
           </view>
          </view>
-         <!--开关/插座-->
-        <view wx:if="{{item.diDeviceid==9&&item.diZonetype==255}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
+    </view>
+  </view>
+</view>
+</scroll-view>
+</swiper-item>
+<swiper-item id='7' catchtouchmove="stopTouchMove">
+<!--插座--->
+<scroll-view style="height:100%" scroll-y="true">
+ <view class="container1">
+  <view class="weui-grids">
+    <view class="weui-grid" wx:for="{{arr7}}" wx:key="name">
+      <image src="{{index==ins?'/images/devctr/bjdj.png':'/images/devctr/bjwdj.png'}}" class='bj'></image>
+      <view wx:if="{{item.diDeviceid==9}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
          <view class="weui-grid__icon">
         <image class="image1" src="{{ins==index?'/images/devctr/czdj.png':'/images/devctr/czwdj.png'}}" mode="scaleToFill"/>
         </view>
@@ -831,23 +844,7 @@
           <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
           </view>
            <view class="showname">
-          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">开关/插座</text>
-          <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
-          </view>
-         </view>
-         <!--PA中继器-->
-          <view wx:if="{{item.diDeviceid==337&&item.diZonetype==0}}" id="{{index}}" data-kaiguanguan="{{item}}" bindtap='kaiguanguan' class="{{item.diShowName.length>=4?'wen1':'wen'}}">
-         <view class="weui-grid__icon">
-        <image class="image1" src="{{ins==index?'/images/devctr/padj.png':'/images/devctr/pawdj.png'}}" mode="scaleToFill"/>
-        </view>
-        <view wx:if="{{item.diOnlineStatu==0}}">
-         <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">离线</text>
-          </view>
-          <view wx:else>
-          <text class="weui-grid__label1" style="{{ins==index?'color: #FEA152':''}}">在线</text>
-          </view>
-           <view class="showname">
-          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">PA中继器</text>
+          <text class="weui-grid__label2" wx:if="{{item.diShowName==''}}" style="{{ins==index?'color: #FEA152':''}}">插座</text>
           <text class="weui-grid__label2" wx:else style="{{ins==index?'color: #FEA152':''}}">{{item.diShowName}}</text>
           </view>
          </view>

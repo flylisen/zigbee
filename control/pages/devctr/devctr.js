@@ -23,6 +23,7 @@ Page({
      arr4:'',//空调
      arr5:'',//传感器
      arr6:'',//其他设备
+     arr7:'',//插座
      statu:'',
   },
   switchNav:function (e) {
@@ -96,19 +97,22 @@ Page({
       var arr4=[];//空调
       var arr5=[];//传感器
       var arr6=[];//其他设备
+      var arr7=[];//插座
       for (var i in sortResult){
-        if (sortResult[i].diDeviceid==2){
+        if (sortResult[i].diDeviceid == 2 || (sortResult[i].diDeviceid == 337)){
           arr1.push(sortResult[i]);
-        } else if ((sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)){
+        } else if ((sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544)){
           arr2.push(sortResult[i]);
-        } else if ((sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype ==1)){
+        } else if ((sortResult[i].diDeviceid == 514)){
           arr3.push(sortResult[i]);
-        }else if (sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype ==1) {
+        }else if (sortResult[i].diDeviceid == 769) {
           arr4.push(sortResult[i]);
-        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 13) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 42) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 32769) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 21) || (sortResult[i].diDeviceid == 770 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 40) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype ==43)){
+        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 13) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 42) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 32769) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 21) || (sortResult[i].diDeviceid == 770) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 40) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype ==43)){
           arr5.push(sortResult[i]);
-        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 44) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 277) || (sortResult[i].diDeviceid == 4 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 353 && sortResult[i].diZonetype == 0) || (sortResult[i].diDeviceid == 83 && sortResult[i].diZonetype == 258) || (sortResult[i].diDeviceid == 10 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 1027 && sortResult[i].diZonetype == 549) || (sortResult[i].diDeviceid == 771 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 9 && sortResult[i].diZonetype == 255) || (sortResult[i].diDeviceid == 337&& sortResult[i].diZonetype == 0)) {
+        } else if ((sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 44) || (sortResult[i].diDeviceid == 1026 && sortResult[i].diZonetype == 277) || (sortResult[i].diDeviceid == 4) || (sortResult[i].diDeviceid == 353) || (sortResult[i].diDeviceid == 83) || (sortResult[i].diDeviceid == 10) || (sortResult[i].diDeviceid == 1027 && sortResult[i].diZonetype == 549) || (sortResult[i].diDeviceid == 771)) {
           arr6.push(sortResult[i]);
+        } else if (sortResult[i].diDeviceid == 9){
+          arr7.push(sortResult[i]);
         }
       }
       that.setData({
@@ -116,9 +120,10 @@ Page({
         arr1:arr1,
         arr2:arr2,
         arr3:arr3,
-        arr4: arr4,
+        arr4:arr4,
         arr5:arr5,
         arr6:arr6,
+        arr7:arr7,
         hidden: true,
       });
     },
@@ -163,6 +168,14 @@ Page({
             var tmp1 = 'arr1[' + i + '].diOnoffStatu';
             this.setData({
               [tmp1]: value
+            })
+          }
+        }
+        for (var i = 0; i < this.data.arr7.length; i++) {
+          if (tp.diUuid == this.data.arr7[i].diUuid) {
+            var tmp7 = 'arr7[' + i + '].diOnoffStatu';
+            this.setData({
+              [tmp7]: value
             })
           }
         }
@@ -389,6 +402,14 @@ Page({
             })
           }
         }
+        for (var i = 0; i < curPage.data.arr7.length; i++) {
+          if (uuid == curPage.data.arr7[i].diUuid) {
+            var tmp7 = 'arr7[' + i + '].diOnoffStatu';
+            curPage.setData({
+              [tmp7]: value
+            })
+          }
+        }
       } else if (nodeType == 1) {
         //设备新入网
         if (getCurrentPages().length != 0) {
@@ -500,6 +521,21 @@ Page({
             }
           }
         }
+        for (var i = 0; i < curPage.data.arr7.length; i++) {
+          if (uuid == curPage.data.arr7[i].diUuid) {
+            var tmp7 = 'arr7[' + i + '].diOnlineStatu';
+            console.log(curPage.data.arr7[i].diOnlineStatu);
+            if (curPage.data.arr7[i].diOnlineStatu == 0) {
+              curPage.setData({
+                [tmp7]: 0
+              })
+            } else {
+              curPage.setData({
+                [tmp7]: 1
+              })
+            }
+          }
+        }
       } else if (nodeType == 5) {
         //修改名称
         for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
@@ -570,6 +606,16 @@ Page({
             curPage.setData({
               [dname6]: value,
               [tmp6]: showname
+            })
+          }
+        }
+        for (var i = 0; i < curPage.data.arr7.length; i++) {
+          if (uuid == curPage.data.arr7[i].diUuid) {
+            var tmp7 = 'arr7[' + i + '].diShowName';
+            var dname7 = 'arr7[' + i + '].diName';
+            curPage.setData({
+              [dname7]: value,
+              [tmp7]: showname
             })
           }
         }

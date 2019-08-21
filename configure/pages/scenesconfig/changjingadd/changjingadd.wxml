@@ -38,9 +38,59 @@
             </view>
           </view>
         </view>
+                <!--PA中继器-->
+          <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==337}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle6':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">PA中继器</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins6? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins6? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                 <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                   <view class="switch">
+                   <switch bindchange='changTap' class="navigator-text2" data-index="{{index}}" data-tp="{{item}}">
+                    </switch>
+                  </view>
+                 </view>
+
+            </view>
+          </view>
+        </view>
+        <!--插座-->
+        <view class="kind-list-item">
+          <view wx:if="{{item.diDeviceid==9}}" data-index="{{index}}" class="kind-list-item-hd {{index==ins? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle7':'kindToggles'}}">
+             <view class="kind-list-text" wx:if="{{item.diShowName==''}}">插座</view>
+             <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
+          </view>
+          <view class="kind-list-item-bd {{index==ins7? 'kind-list-item-bd-show' : ''}}">
+            <view class="navigator-box {{index==ins7? 'navigator-box-show': ''}}">
+                 <view class="navigator">
+                 <text class="navigator-text">开关</text>
+                 <view wx:if="{{item.upshow}}" class="navigator-text3">
+                    开
+                </view>
+                <view wx:else class="navigator-text3">
+                    关
+                </view>
+                   <view class="switch">
+                   <switch bindchange='changTap' class="navigator-text2" data-index="{{index}}" data-tp="{{item}}">
+                    </switch>
+                  </view>
+                 </view>
+
+            </view>
+          </view>
+        </view>
         <!--窗帘-->
         <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}" id="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle2':'kindToggles'}}">
+          <view wx:if="{{item.diDeviceid==514}}" id="{{index}}" class="kind-list-item-hd {{index==ins2? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle2':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">窗帘</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -102,7 +152,7 @@
         </view>
             <!--空调-->
          <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}" id="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle4':'kindToggles'}}">
+          <view wx:if="{{item.diDeviceid==769}}" id="{{index}}" class="kind-list-item-hd {{index==ins4? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle4':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">空调</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>
@@ -133,7 +183,7 @@
         </view>
         <!--色温灯-->
       <view class="kind-list-item">
-          <view wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}" id="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle5':'kindToggles'}}">
+          <view wx:if="{{item.diDeviceid==544}}" id="{{index}}" class="kind-list-item-hd {{index==ins5? 'kind-list-item-hd-show' : ''}}" bindtap="{{item.isSelect?'kindToggle5':'kindToggles'}}">
              <view class="kind-list-text" wx:if="{{item.diShowName==''}}">灯</view>
              <view class="kind-list-text" wx:else>{{item.diShowName}}</view>
           </view>

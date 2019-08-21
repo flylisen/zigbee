@@ -58,6 +58,8 @@ Page({
     ins3:-1,
     ins4:-1,
     ins5:-1,
+    ins6:-1,
+    ins7:-1,
     hidden:false,
     temSet:0,
     logs: [],
@@ -125,6 +127,30 @@ Page({
      } else {
       this.setData({
         ins5: ins5,
+      })
+    }
+  },
+  kindToggle6: function (e) {
+    var ins6 = e.currentTarget.dataset.index;//获得下标
+    if (this.data.ins6 == ins6) {
+      this.setData({
+        ins6: -1,
+      })
+    } else {
+      this.setData({
+        ins6: ins6,
+      })
+    }
+  },
+  kindToggle7: function (e) {
+    var ins7 = e.currentTarget.dataset.index;//获得下标
+    if (this.data.ins7 == ins7) {
+      this.setData({
+        ins7: -1,
+      })
+    } else {
+      this.setData({
+        ins7: ins7,
       })
     }
   },
@@ -215,7 +241,7 @@ Page({
       });
       var arr3 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示场景添加设备
-        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1) || (sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 514) || (sortResult[i].diDeviceid == 769) || (sortResult[i].diDeviceid == 544) || (sortResult[i].diDeviceid == 337) || (sortResult[i].diDeviceid ==9)) {
           arr3.push(sortResult[i]);
         }
       }
@@ -286,7 +312,13 @@ Page({
         if (tp.diDeviceid ==514){//窗帘
           that.data.sceneMemberArray[i].status = temSet;
         }
-        if (tp.diDeviceid=528){//灯
+        if (tp.diDeviceid==528){//灯
+          that.data.sceneMemberArray[i].status = temSet;
+        }
+        if (tp.diDeviceid == 337) {//PA中继器
+           that.data.sceneMemberArray[i].status = temSet;
+        }
+        if (tp.diDeviceid ==9) {//插座
           that.data.sceneMemberArray[i].status = temSet;
         }
       }

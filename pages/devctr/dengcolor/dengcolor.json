@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "设备详情",
-  "navigationBarBackgroundColor": "#FEA152",
-  "usingComponents": {
-    "color-picker": "../../../components/color-picker/color-picker"
-  },
-  "navigationBarTextStyle": "white"
-}
