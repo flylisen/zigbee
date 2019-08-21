@@ -33,52 +33,60 @@
 <view class='device'>添加设备</view>
    <view class="link">
    <block  wx:for="{{sortedDevs}}" wx:for-item="item" wx:key="item.diDeviceuid">
+   <!-- 开关 -->
        <view class="link_child" wx:if="{{item.diDeviceid==2}}">
        <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/dengwdj.png' class='tp' wx:else ></image>
+         <image src='/images/devctr/dengwdj.png' class='tp'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap"  data-index="{{index}}"></image>
                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>开关</view>
                 <view wx:else class='zt'>{{item.diShowName}}</view>
 </view>
-<view class="link_child" wx:if="{{item.diDeviceid==514&&item.diZonetype==1}}">
+<!-- 插座 -->
+<view class="link_child" wx:if="{{item.diDeviceid==9}}">
 <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/clwdj.png' class='tp' wx:else ></image>
+         <image src='/images/devctr/czwdj.png' class='tp' ></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
-              <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>浴帘</view>
+              <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>插座</view>
               <view wx:else class='zt'>{{item.diShowName}}</view>
 </view>
-<view class="link_child" wx:if="{{item.diDeviceid==514&&item.diZonetype==2}}">
+<!-- 窗帘 -->
+<view class="link_child" wx:if="{{item.diDeviceid==514}}">
 <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/cldj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/clwdj.png' class='tp' wx:else></image>
+         <image src='/images/devctr/clwdj.png' class='tp'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>窗帘</view>
                 <view wx:else class='zt'>{{item.diShowName}}</view>
          </view>
+         <!-- rgb灯 -->
 <view class="link_child" wx:if="{{item.diDeviceid==528}}">
 <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/dengdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/dengwdj.png' class='tp' wx:else></image>
+         <image src='/images/devctr/dengwdj.png' class='tp'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>  
                 <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>RGBW灯</view>
                 <view wx:else class='zt'>{{item.diShowName}}</view>
          </view>
-<view class="link_child" wx:if="{{item.diDeviceid==769&&item.diZonetype==1}}">
+         <!-- 空调 -->
+<view class="link_child" wx:if="{{item.diDeviceid==769}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/airdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/airwdj.png' class='tp' wx:else></image>
+         <image src='/images/devctr/airwdj.png' class='tp'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>空调</view>
            <view wx:else class='zt'>{{item.diShowName}}</view>
    </view>
-<view class="link_child" wx:if="{{item.diDeviceid==544&&item.diZonetype==255}}">
+   <!-- 色温灯 -->
+<view class="link_child" wx:if="{{item.diDeviceid==544}}">
          <image src='/images/changjing/bj.png' class='bj'></image>
-         <image src='/images/devctr/swdj.png' class='tp' wx:if="{{item.diOnoffStatu> 0}}"></image>
-         <image src='/images/devctr/swwdj.png' class='tp' wx:else></image>
+         <image src='/images/devctr/swwdj.png' class='tp'></image>
         <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
            <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>色温灯</view>
+           <view wx:else class='zt'>{{item.diShowName}}</view>
+   </view>
+   <!-- PA中继器 -->
+   <view class="link_child" wx:if="{{item.diDeviceid==337}}">
+         <image src='/images/changjing/bj.png' class='bj'></image>
+         <image src='/images/devctr/pawdj.png' class='tp'></image>
+        <image src="{{item.isSelect?choseImg:unchoseImg}}" class="dj" bindtap="chooseTap" data-index="{{index}}"></image>
+           <view wx:if="{{item.diShowName==''||item.diShowName==null}}" class='zt'>中继器</view>
            <view wx:else class='zt'>{{item.diShowName}}</view>
    </view>
     </block> 

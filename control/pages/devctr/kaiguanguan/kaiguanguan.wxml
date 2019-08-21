@@ -6,17 +6,17 @@
     <image src='../../../../images/facility/rt.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==13}}"></image>
       <image src='../../../../images/facility/yht.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==32769}}"></image>
       <image src='../../../../images/facility/mc.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==21}}"></image>
-      <image src='../../../../images/facility/wsd.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==770&&diZonetype==0}}"></image>
-      <image src='../../../../images/facility/qj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==4&&diZonetype==0}}"></image>
-       <image src='../../../../images/facility/hwb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==353&&diZonetype==0}}"></image>
+      <image src='../../../../images/facility/wsd.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==770}}"></image>
+      <image src='../../../../images/facility/qj.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==4}}"></image>
+       <image src='../../../../images/facility/hwb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==353}}"></image>
         <image src='../../../../images/facility/ew.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==40}}"></image>
-        <image src='../../../../images/facility/sb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==83&&diZonetype==258}}"></image>
-        <image src='../../../../images/facility/ms.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==10&&diZonetype==255}}"></image>
+        <image src='../../../../images/facility/sb.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==83}}"></image>
+        <image src='../../../../images/facility/ms.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==10}}"></image>
         <image src='../../../../images/facility/sg.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1027&&diZonetype==549}}"></image>
         <image src='../../../../images/facility/clq.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==1026&&diZonetype==43}}"></image>
-        <image src='../../../../images/facility/xf.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==771&&diZonetype==255}}"></image>
-        <image src='../../../../images/facility/cz.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==9&&diZonetype==255}}"></image>
-        <image src='../../../../images/facility/pa.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==337&&diZonetype==0}}"></image>
+        <image src='../../../../images/facility/xf.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==771}}"></image>
+        <image src='../../../../images/facility/cz.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==9}}"></image>
+        <image src='../../../../images/facility/pa.png'  style='width:30%; height:30%' mode='widthFix' wx:if="{{diDeviceid==337}}"></image>
 </view>
 <view class='imagesize1'>
     <view wx:if="{{diNames==''}}">
@@ -26,17 +26,17 @@
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==13}}"><text>人体传感器</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==32769}}"><text>一氧化碳传感器</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==21}}"><text>门磁传感器</text></view>
-                    <view wx:elif="{{diDeviceid==770&&diZonetype==0}}"><text>温湿度传感器</text></view>
-                    <view wx:elif="{{diDeviceid==4&&diZonetype==0}}"><text>情景开关</text></view>
-                    <view wx:elif="{{diDeviceid==353&&diZonetype==0}}"><text>红外宝</text></view>
+                    <view wx:elif="{{diDeviceid==770}}"><text>温湿度传感器</text></view>
+                    <view wx:elif="{{diDeviceid==4}}"><text>情景开关</text></view>
+                    <view wx:elif="{{diDeviceid==353}}"><text>红外宝</text></view>
                     <view wx:elif="{{diDeviceid==1026&&diZonetype==40}}"><text>烟雾传感器</text></view>
-                    <view wx:elif="{{diDeviceid==83&&diZonetype==258}}"><text>水表</text></view>
-                    <view wx:elif="{{diDeviceid==10&&diZonetype==255}}"><text>门锁</text></view>
+                    <view wx:elif="{{diDeviceid==83}}"><text>水表</text></view>
+                    <view wx:elif="{{diDeviceid==10}}"><text>门锁</text></view>
                     <view wx:elif="{{diDeviceid==1027&&diZonetype==549}}"><text>声光报警器</text></view>
                      <view wx:elif="{{diDeviceid==1026&&diZonetype==43}}"><text>可燃气体传感器</text></view>
-                    <view wx:elif="{{diDeviceid==771&&diZonetype==255}}"><text>新风面板</text></view>
-                    <view wx:elif="{{diDeviceid==9&&diZonetype==255}}"><text>插座</text></view>
-                     <view wx:elif="{{diDeviceid==337&&diZonetype==0}}"><text>PA中继器</text></view>
+                    <view wx:elif="{{diDeviceid==771}}"><text>新风面板</text></view>
+                    <view wx:elif="{{diDeviceid==9}}"><text>插座</text></view>
+                     <view wx:elif="{{diDeviceid==337}}"><text>PA中继器</text></view>
            </view>
            <view wx:else>
               <text>名称 :{{diNames}}</text>

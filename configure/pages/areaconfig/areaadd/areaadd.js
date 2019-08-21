@@ -147,10 +147,13 @@ Page({
       };
       var arr3 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示区域添加设备
-        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1) || (sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 514) || (sortResult[i].diDeviceid == 528) 
+        || (sortResult[i].diDeviceid == 9) || (sortResult[i].diDeviceid == 769) || (sortResult[i].diDeviceid == 544 )
+          || (sortResult[i].diDeviceid == 337)) {
           arr3.push(sortResult[i]);
         }
       };
+      console.log(arr3);
       that.setData({
         sortedDevs: arr3,
         hidden:true
@@ -176,86 +179,8 @@ Page({
   onShow: function () {
     //回调
     app.globalData.callback = function (res) {
-      var nodeType;
-      var uuid;
-      var value;
-      var showname;
-      var strs = new Array();
-      strs = res.data.split(","); //字符分割 
-      nodeType = strs[0].split('=')[1];
-      uuid = strs[1].split('=')[1];
-      value = strs[2].split('=')[1];
-      showname = strs[3].split('=')[1];
-      //找到当前页面的page
-      var pageArray = getCurrentPages();
-      var curPage;
-      for (var j = 0; j < pageArray.length; j++) {
-        if (pageArray[j].route == 'pages/areaconfig/areaadd/areaadd') {
-          curPage = pageArray[j];
-        }
-      }
-      if (nodeType == 4) {
-        //设备开关状态发生改变
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
-            curPage.setData({
-              [tmp]: value
-            })
-          }
-        }
-      } else if (nodeType == 1) {
-        //设备新入网
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-      } else if (nodeType == 2) {
-        //判断设备是否在线
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diOnlineStatu';
-            curPage.setData({
-              [tmp]: 1
-            })
-          }
-        }
-      } else if (nodeType == 5) {
-        //修改名称
-        for (var i = 0; i < curPage.data.sortedDevs.length; i++) {
-          if (uuid == curPage.data.sortedDevs[i].diUuid) {
-            var tmp = 'sortedDevs[' + i + '].diShowName';
-            var dname = 'sortedDevs[' + i + '].diName';
-            curPage.setData({
-              [dname]: value,
-              [tmp]: showname
-            })
-          }
-        }
-      } else if (nodeType == 3) {
-        //删除设备
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onLoad()
-        }
-      } else if (nodeType == 6) {
-        var that = this;
-        let url = app.globalData.URL + 'getSensorAttrValue';
-        let data = {
-          actCode: "110",
-          bindid: username,
-          bindstr: pwd,
-          uuid: uuid,
-          ver: "2.0"
-        };
-        app.wxRequest('POST', url, data, (res) => {
-          console.log(res.data)
-        },
-          (err) => {
-            console.log(err.errMsg)
-          }
-        )
-      }
+      console.log('接收到服务器信息', res);
+      console.log('当前页面在areaadd');
     }
   },
   /**

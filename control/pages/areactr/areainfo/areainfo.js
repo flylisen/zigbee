@@ -13,9 +13,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    sortedDevs: '',
-    sortedDevs1:'',
-    sortedDevs2:'',
+    sortedDevs: '',  //灯光
+    sortedDevs1:'',  //窗帘
+    sortedDevs2:'',  //空调
+    sortedDevs3:'',  //插座
     aiNames: '',
     showModal: false,
     chuanglians: '',
@@ -86,21 +87,27 @@ Page({
       }
       var arr3 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示区域灯光设备
-        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544 && sortResult[i].diZonetype == 255)) {
+        if ((sortResult[i].diDeviceid == 2) || (sortResult[i].diDeviceid == 528) || (sortResult[i].diDeviceid == 544)) {
           arr3.push(sortResult[i]);
         }
       };
       var arr4 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示区域窗帘设备
-        if ((sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 2) || (sortResult[i].diDeviceid == 514 && sortResult[i].diZonetype == 1)) {
+        if ((sortResult[i].diDeviceid == 514)) {
           arr4.push(sortResult[i]);
         }
       };
       var arr5 = [];
       for (var i = 0; i < sortResult.length; i++) {   //显示区域空调设备
-        if ((sortResult[i].diDeviceid == 769 && sortResult[i].diZonetype == 1)) {
+        if ((sortResult[i].diDeviceid == 769)) {
           arr5.push(sortResult[i]);
         }
+      };
+        var arr6 = [];
+        for (var i = 0; i < sortResult.length; i++) {   //显示区域插座和中继器设备
+          if ((sortResult[i].diDeviceid == 9) || (sortResult[i].diDeviceid == 337)) {
+            arr6.push(sortResult[i]);
+          }
       };
       console.log(arr3.length)
       console.log(arr4)
@@ -109,6 +116,7 @@ Page({
         sortedDevs: arr3,
         sortedDevs1:arr4,
         sortedDevs2:arr5,
+        sortedDevs3:arr6,
         hidden: true
       });
       wx.getSystemInfo({
@@ -153,6 +161,14 @@ Page({
           var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
           this.setData({
             [tmp]: value
+          })
+        }
+      }
+      for (var i = 0; i < this.data.sortedDevs3.length; i++) {
+        if (tp.diUuid == this.data.sortedDevs3[i].diUuid) {
+          var tmp3 = 'sortedDevs3[' + i + '].diOnoffStatu';
+          this.setData({
+            [tmp3]: value
           })
         }
       }
@@ -349,6 +365,14 @@ Page({
             var tmp = 'sortedDevs[' + i + '].diOnoffStatu';
             curPage.setData({
               [tmp]: value
+            })
+          }
+        }
+        for (var i = 0; i < curPage.data.sortedDevs3.length; i++) {
+          if (uuid == curPage.data.sortedDevs3[i].diUuid) {
+            var tmp3 = 'sortedDevs3[' + i + '].diOnoffStatu';
+            curPage.setData({
+              [tmp3]: value
             })
           }
         }
