@@ -389,7 +389,7 @@ Page({
       var type1 = {};
       var type2 = {};
       var type3 = {};
-      if (Array[i].diDeviceid == 769 && Array[i].diZonetype == 1) { //空调
+      if (Array[i].diDeviceid == 769) { //空调
         this.data.airTempArray = [];//清空
         var funId = 0;
         var nid = 0;
@@ -444,14 +444,14 @@ Page({
           o.saturation = 0;
         }
       }
-      if (Array[i].diDeviceid == 544 && Array[i].diZonetype == 255) {//色温灯
+      if (Array[i].diDeviceid == 544) {//色温灯
         if (this.data.CCT != '') {
           o.CCT = this.data.CCT;
         } else {
           o.CCT = 0;
         }
       }
-      if (Array[i].diDeviceid == 769 && Array[i].diZonetype == 1) {
+      if (Array[i].diDeviceid == 769) {
         var type = {};
         if (this.data.airTempArray.length == 0) {
           var type = {};

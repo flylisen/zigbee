@@ -1,11 +1,11 @@
 <view class='main'>
-<view class="banner" wx:if="{{diDeviceid==514&&diZonetype==2}}">
+<view class="banner" wx:if="{{diDeviceid==514}}">
   <image class="pic" src="../../../../images/chuanglian/clg.jpg"   animation="{{diOnoffStatu==0?showpic:hidepic}}"/>
   <image class="pic" src="../../../../images/chuanglian/clk.jpg" animation="{{diOnoffStatu==1?showpic:hidepic}}"/>
   <image class="pic" src="../../../../images/chuanglian/cltz.jpg"  animation="{{diOnoffStatu==2?showpic:hidepic}}"/>
   <image class="pic" src="../../../../images/chuanglian/kb.png" animation="{{diOnoffStatu==3?showpic:hidepic}}"/>
 </view>
-<view class="window_view" wx:if="{{diDeviceid==514&&diZonetype==2}}">
+<view class="window_view" wx:if="{{diDeviceid==514}}">
    <scroll-view class="scroll-view_H" scroll-x="true">
       <view id="local" class="scroll-view-item_H local" bindtap="chuangliank">
          <view class='box'>
